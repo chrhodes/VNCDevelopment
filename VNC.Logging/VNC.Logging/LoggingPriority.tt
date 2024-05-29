@@ -1,0 +1,184 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+<#
+	int infoLevels = 5;
+	int debugLevels = 5;
+	int archLevels = 20;
+	int traceLevels = 30;
+#>
+namespace VNC
+{
+	// Some priorities have been used consistently and are named for easier use.
+	// Keep this in sync with LogNamed.tt named_methods
+
+	public enum LoggingPriority : int
+    {
+		#region  These came from EASE days
+
+		APPLICATION_START = 100,
+		APPLICATION_END = 100,
+		LOADEASE = 100,
+
+		SQL_CALL = 1002,
+
+		PAGE_LOAD = 10000,
+		FORM_LOAD = 10000,
+
+		// EVENT_HANDLER = 10001, - Use Architecture Below
+
+		STATUS = 10002,
+
+		REDIRECT_TRANSFER = 10003,
+
+		POLLING = 10004,
+
+		ERROR_TRACE = 10005,
+		ERROR_TRACE_LOW = 10015,
+
+		EASESYS_IO = 10006,
+		EASESYS_IO_MED = 10016,
+		EASESYS_IO_LOW = 10026,
+
+		UI_CONTROL = 10007,
+		UI_CONTROL_MED = 10017,
+		UI_CONTROL_LOW = 10027,
+
+		UTILITY = 10008,
+		UTILITY_MED = 10018,
+		UTILITY_LOW = 10028,
+
+		OPERATION = 10009,
+		OPERATION_LOW = 10019,
+
+		APPLICATION_SESSION = 10010,
+		APPLICATION_SESSION_LOW = 10020,
+
+		SYSTEM_CONFIG = 10011,
+		SYSTEM_CONFIG_LOW = 10021,
+
+		FILE_DIR_IO = 10012,
+		FILE_DIR_IO_LOW = 10022,
+
+		DATABASE_IO = 10013,
+		DATABASE_IO_LOW = 10023,
+
+		SECURITY = 10014,
+		SECURITY_LOW = 10024,
+
+		CLEAR_INITIALIZE = 10025,
+
+		#endregion
+
+		#region These are from Architecture visualization
+
+		CONSTRUCTOR = 9000,
+		EVENT = 9001,
+		EVENT_HANDLER = 9002,
+		APPLICATION_INITIALIZE = 9003,
+        CORE = 9004,
+        MODULE = 9005,
+        MODULE_INITIALIZE = 9006,
+
+        APPLICATION = 9007,
+        APPLICATIONSERVICES = 9008,
+        DOMAIN = 9009,
+        DOMAINSERVICES = 9010,
+
+        PERSISTENCE = 9011,
+        PERSISTENCE_LOW = 9012,
+
+		INFRASTRUCTURE = 9013,
+
+        PRESENTATION = 9014,
+        VIEW = 9015,
+        VIEW_LOW = 9016,
+        VIEWMODEL = 9017,
+        VIEWMODEL_LOW = 9018,
+
+		#endregion
+
+		#region These came from Minsk days
+
+		COMPILER = 10000,
+		DIAGNOSTIC = 10001,
+
+		TEST = 10002,
+
+		SYNTAX = 10010,
+		SYNTAX_LOW = 10020,
+		LEXER = 10011,
+		LEXER_LOW = 10021,
+		PARSER = 10012,
+		PARSER_LOW = 10022,
+		BINDER = 10013,
+		BINDER_LOW = 10023,
+		EVALUATOR = 10014,
+		TEXT = 10015,
+		TEXT_LOW = 10025,
+
+		#endregion
+	
+		DEFAULT = 10029,
+
+		// Below are the standard levels
+
+        Failure		= -10,
+        Error		= -1,
+        Warning		= 1,
+
+        Info		= 100,
+<#
+	for (int i = 1 ; i <= infoLevels ; i++)
+	{
+#>
+        Info<#= i #>		= 10<#= i #>,
+<#
+	}
+#>
+
+        Debug		= 1000,
+<#
+	for (int i = 1 ; i <= debugLevels ; i++)
+	{
+#>
+		Debug<#= i #>		= 100<#= i #>,
+<#
+	}
+#>
+
+        Arch		= 9000,
+<#
+	for (int i = 1 ; i < archLevels ; i++)
+	{
+		if (i < 10)
+		{ 
+			WriteLine(string.Format("\t\tArch{0}\t\t= 900{1},", i, i));
+		}
+		else
+		{ 
+			WriteLine(string.Format("\t\tArch{0}\t\t= 90{1},", i, i));
+		}
+	}
+#>
+
+        Trace		= 10000,
+<#
+	for (int i = 1 ; i < traceLevels ; i++)
+	{
+		if (i < 10)
+		{ 
+			WriteLine(string.Format("\t\tTrace{0}\t\t= 1000{1},", i, i));
+		}
+		else
+		{ 
+			WriteLine(string.Format("\t\tTrace{0}\t\t= 100{1},", i, i));
+		}
+	}
+#>
+		Max			= 100<#= traceLevels #>
+    }
+}

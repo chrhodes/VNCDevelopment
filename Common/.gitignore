@@ -1,0 +1,8 @@
+# Add Debug and Release Folders back in 
+# so can commit the Dlls we need to reference
+
+![Dd]ebug/
+![Rr]elease/
+
+
+

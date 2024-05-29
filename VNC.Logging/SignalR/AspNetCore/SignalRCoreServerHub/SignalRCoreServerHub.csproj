@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFrameworks>net6.0-windows</TargetFrameworks>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <FileVersion>2023.09.09A</FileVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+      <!--<PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.1.0" />-->
+      <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.1" />
+      <FrameworkReference Include="Microsoft.AspNetCore.App" Version="6.0.0" />
+  </ItemGroup>
+
+</Project>

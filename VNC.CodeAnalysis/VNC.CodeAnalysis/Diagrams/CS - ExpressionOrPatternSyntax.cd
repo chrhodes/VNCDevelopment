@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Comment CommentText="What does this class do?">
+    <Position X="9.097" Y="16.576" Height="0.75" Width="1.7" />
+  </Comment>
+  <Comment CommentText="What does this class do?">
+    <Position X="12.868" Y="13.243" Height="0.75" Width="1.7" />
+  </Comment>
+  <Comment CommentText="What does this class do?">
+    <Position X="7.472" Y="13.729" Height="0.75" Width="1.7" />
+  </Comment>
+  <Class Name="Microsoft.CodeAnalysis.CSharp.Syntax.ExpressionOrPatternSyntax">
+    <Position X="6.75" Y="16.5" Width="2" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Microsoft.CodeAnalysis.CSharp.Syntax.ExpressionSyntax">
+    <Position X="5.5" Y="13.75" Width="1.75" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Microsoft.CodeAnalysis.CSharp.Syntax.TypeSyntax">
+    <Position X="5.5" Y="11" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Microsoft.CodeAnalysis.CSharp.Syntax.PatternSyntax">
+    <Position X="11" Y="13.25" Width="1.75" />
+    <TypeIdentifier />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

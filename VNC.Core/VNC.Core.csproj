@@ -1,0 +1,90 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFrameworks>net6.0-windows;net48</TargetFrameworks>
+        <UseWPF>true</UseWPF>
+        <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+        <AssemblyName>VNC.Core</AssemblyName>
+        <RootNamespace>VNC.Core</RootNamespace>
+        <SignAssembly>true</SignAssembly>
+        <AssemblyOriginatorKeyFile>VNC.snk</AssemblyOriginatorKeyFile>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <VersionPrefix>2.1.4</VersionPrefix>
+        <VersionSuffix>Release-1</VersionSuffix>
+        <FileVersion>2023.10.30A</FileVersion>
+        <PackageVersion>2.1.4</PackageVersion>
+        <PackageLicenseFile>LICENSE</PackageLicenseFile>
+        <PackageProjectUrl>https://github.com/chrhodes/vnc</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/chrhodes/vnc</RepositoryUrl>
+        <RepositoryType>Git</RepositoryType>
+        <PackageTags>mvvm</PackageTags>
+        <PackageIcon>VNC.png</PackageIcon>
+        <Authors>Christopher Rhodes</Authors>
+        <Company>VNC</Company>
+        <Copyright>Copyright © VNC 2018-2023</Copyright>
+        <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+        <Description>Base class for a variety of needs</Description>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Compile Remove="Diagrams\NewFolder\**" />
+      <EmbeddedResource Remove="Diagrams\NewFolder\**" />
+      <None Remove="Diagrams\NewFolder\**" />
+      <Page Remove="Diagrams\NewFolder\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="Properties\AssemblyInfo.cs" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Diagrams\VNC.Core.Netcd" />
+      <None Remove="Execute-PostBuild.ps1" />
+      <None Remove="Execute-PreBuild.ps1" />
+    </ItemGroup>
+   
+    <ItemGroup>
+        <PackageReference Include="CommonServiceLocator" Version="2.0.7" />
+        <PackageReference Include="EntityFramework" Version="6.4.4" />
+        <PackageReference Include="Microsoft.DependencyValidation.Analyzers" Version="0.11.0" />
+        <PackageReference Include="Prism.Wpf" Version="8.1.97" />
+        <PackageReference Include="Unity.Interception" Version="5.11.1" />
+        <PackageReference Include="VNC.Logging" Version="2.1.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Properties\Settings.Designer.cs">
+        <DesignTimeSharedInput>True</DesignTimeSharedInput>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Settings.settings</DependentUpon>
+      </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="Properties\Settings.settings">
+        <Generator>SettingsSingleFileGenerator</Generator>
+        <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+      </None>
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Include="..\LICENSE">
+            <Pack>True</Pack>
+            <PackagePath></PackagePath>
+        </None>
+
+        <None Include="..\VNC.png">
+            <Pack>True</Pack>
+            <PackagePath></PackagePath>
+        </None>
+    </ItemGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+        <DefineConstants>TRACE;LOGGING</DefineConstants>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+        <DefineConstants>TRACE;LOGGING</DefineConstants>
+    </PropertyGroup>
+
+</Project>

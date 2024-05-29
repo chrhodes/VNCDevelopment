@@ -1,0 +1,61 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFrameworks>net6.0-windows;net48</TargetFrameworks>
+        <UseWPF>true</UseWPF>
+        <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+        <AssemblyName>VNC.WPF.Presentation.Dx</AssemblyName>
+        <RootNamespace>VNC.WPF.Presentation.Dx</RootNamespace>
+        <!--<SignAssembly>true</SignAssembly>
+        <AssemblyOriginatorKeyFile>VNC.snk</AssemblyOriginatorKeyFile>-->
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <PackageVersion>2.0.0</PackageVersion>
+        <PackageLicenseFile>LICENSE</PackageLicenseFile>
+        <PackageProjectUrl>https://github.com/chrhodes/vnc</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/chrhodes/vnc</RepositoryUrl>
+        <RepositoryType>Git</RepositoryType>
+        <PackageTags>wpf</PackageTags>
+        <PackageIcon>VNC.png</PackageIcon>
+        <Authors>Christopher Rhodes</Authors>
+        <Copyright>Copyright © VNC 2018-2023</Copyright>
+        <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+        <Description>WPF Helpers</Description>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="DevExpress.RichEdit.Export" Version="21.2.7" />
+        <PackageReference Include="DevExpress.Wpf.Core" Version="21.2.7" />
+        <PackageReference Include="DevExpress.Wpf.Core.Extensions" Version="21.2.7" />
+        <PackageReference Include="DevExpress.Wpf.Grid" Version="21.2.7" />
+        <PackageReference Include="DevExpress.Wpf.LayoutControl" Version="21.2.7" />
+        <PackageReference Include="Microsoft.DependencyValidation.Analyzers" Version="0.11.0" />
+        <PackageReference Include="VNC.Core" Version="2.1.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <!--<ProjectReference Include="..\VNC.Core\VNC.Core.csproj" />-->
+    </ItemGroup>
+
+    <ItemGroup>
+        <!-- Workaround for https://github.com/dotnet/wpf/issues/2648#issuecomment-635674683 -->
+        <Reference Include="System.Web" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Include="..\LICENSE">
+        <Pack>True</Pack>
+        <PackagePath></PackagePath>
+      </None>
+      <None Include="..\VNC.png">
+        <Pack>True</Pack>
+        <PackagePath></PackagePath>
+      </None>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Page Update="Views\ExportGridDialog.xaml">
+        <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      </Page>
+    </ItemGroup>    
+   
+</Project>
