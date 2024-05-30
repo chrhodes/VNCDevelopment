@@ -21,7 +21,7 @@
         <PackageIcon>VNC.png</PackageIcon>
         <Authors>Christopher Rhodes</Authors>
         <Company>VNC</Company>
-        <Copyright>Copyright © VNC 2018-2023</Copyright>
+        <Copyright>Copyright © VNC 2018-2024</Copyright>
         <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
         <Description>Base class for a variety of needs</Description>
     </PropertyGroup>

@@ -17,7 +17,7 @@
         <PackageTags>wpf</PackageTags>
         <PackageIcon>VNC.png</PackageIcon>
         <Authors>Christopher Rhodes</Authors>
-        <Copyright>Copyright © VNC 2018-2023</Copyright>
+        <Copyright>Copyright © VNC 2018-2024</Copyright>
         <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
         <Description>WPF Helpers</Description>
     </PropertyGroup>

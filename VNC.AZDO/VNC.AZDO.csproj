@@ -17,7 +17,7 @@
       <PackageTags>AD</PackageTags>
       <PackageIcon>VNC.png</PackageIcon>
       <Authors>Christopher Rhodes</Authors>
-      <Copyright>Copyright © VNC 2018-2022</Copyright>
+      <Copyright>Copyright © VNC 2018-2024</Copyright>
       <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
       <Description>AZDO Helpers</Description>
   </PropertyGroup>
