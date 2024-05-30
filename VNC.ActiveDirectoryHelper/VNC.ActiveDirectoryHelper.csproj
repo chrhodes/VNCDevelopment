@@ -11,8 +11,9 @@
       <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
       <PackageVersion>2.0.0</PackageVersion>
       <PackageLicenseFile>LICENSE</PackageLicenseFile>
-      <PackageProjectUrl>https://github.com/chrhodes/vnc</PackageProjectUrl>
-      <RepositoryUrl>https://github.com/chrhodes/vnc</RepositoryUrl>
+      <PackageReadmeFile>README.md</PackageReadmeFile>
+      <PackageProjectUrl>https://github.com/chrhodes/vncdevelopment</PackageProjectUrl>
+      <RepositoryUrl>https://github.com/chrhodes/vncdevelopment</RepositoryUrl>
       <RepositoryType>Git</RepositoryType>
       <PackageTags>AD</PackageTags>
       <PackageIcon>VNC.png</PackageIcon>
@@ -37,10 +38,13 @@
         <Pack>True</Pack>
         <PackagePath></PackagePath>
       </None>
-        
+      <None Include="..\README.md">
+          <Pack>True</Pack>
+          <PackagePath></PackagePath>
+      </None>        
       <None Include="..\VNC.png">
-        <Pack>True</Pack>
-        <PackagePath></PackagePath>
+          <Pack>True</Pack>
+          <PackagePath></PackagePath>
       </None>
     </ItemGroup>
 

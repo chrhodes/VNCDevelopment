@@ -14,10 +14,11 @@
         <FileVersion>2023.10.30A</FileVersion>
         <PackageVersion>2.1.4</PackageVersion>
         <PackageLicenseFile>LICENSE</PackageLicenseFile>
-        <PackageProjectUrl>https://github.com/chrhodes/vnc</PackageProjectUrl>
-        <RepositoryUrl>https://github.com/chrhodes/vnc</RepositoryUrl>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageProjectUrl>https://github.com/chrhodes/vncdevelopment</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/chrhodes/vncdevelopment</RepositoryUrl>
         <RepositoryType>Git</RepositoryType>
-        <PackageTags>mvvm</PackageTags>
+        <PackageTags></PackageTags>
         <PackageIcon>VNC.png</PackageIcon>
         <Authors>Christopher Rhodes</Authors>
         <Company>VNC</Company>
@@ -72,7 +73,10 @@
             <Pack>True</Pack>
             <PackagePath></PackagePath>
         </None>
-
+        <None Include="..\README.md">
+            <Pack>True</Pack>
+            <PackagePath></PackagePath>
+        </None>
         <None Include="..\VNC.png">
             <Pack>True</Pack>
             <PackagePath></PackagePath>
