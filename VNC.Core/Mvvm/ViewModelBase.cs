@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.CompilerServices;
+using System.Windows;
 
 namespace VNC.Core.Mvvm
 {
@@ -49,6 +50,19 @@ namespace VNC.Core.Mvvm
                 if (_logOnPropertyChanged == value)
                     return;
                 _logOnPropertyChanged = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private Visibility _developerUIMode = Visibility.Visible;
+        public Visibility DeveloperUIMode
+        {
+            get => _developerUIMode;
+            set
+            {
+                if (_developerUIMode == value)
+                    return;
+                _developerUIMode = value;
                 OnPropertyChanged();
             }
         }

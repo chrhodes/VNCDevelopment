@@ -8,11 +8,11 @@
         <RootNamespace>VNC.Core</RootNamespace>
         <SignAssembly>true</SignAssembly>
         <AssemblyOriginatorKeyFile>VNC.snk</AssemblyOriginatorKeyFile>
-        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <VersionPrefix>2.1.4</VersionPrefix>
+        <VersionPrefix>2.1.5</VersionPrefix>
         <VersionSuffix>Release-1</VersionSuffix>
-        <FileVersion>2023.10.30A</FileVersion>
-        <PackageVersion>2.1.4</PackageVersion>
+        <FileVersion>2024.06.14A</FileVersion>
+        <PackageVersion>2.1.5</PackageVersion>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageLicenseFile>LICENSE</PackageLicenseFile>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageProjectUrl>https://github.com/chrhodes/vncdevelopment</PackageProjectUrl>

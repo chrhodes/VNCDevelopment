@@ -3,52 +3,6 @@ using System.Reflection;
 
 namespace VNC.Core
 {
-    public class AssemblyInformation
-    {
-        public string Version { get; set; }
-        public string Name { get; set; }
-        public string FullName { get; set; }
-
-        public string AssemblyTitle { get; set; }
-        //public string AssemblyVersion { get; set; }
-        public string Company { get; set; }
-        public string Configuration { get; set; }
-        public string Copyright { get; set; }
-        public string Description { get; set; }
-        public string FileVersion { get; set; }
-        public string InformationalVersion { get; set; }
-        public string Product { get; set; }
-    }
-
-    public class FileInformation
-    {
-        public string FileVersion { get; set; }
-        public string FileDescription { get; set; }
-
-        public string ProductName { get; set; }
-        public string InternalName { get; set; }
-        public string ProductVersion { get; set; }
-
-        public string ProductMajorPart { get; set; }
-        public string ProductMinorPart { get; set; }
-        public string ProductBuildPart { get; set; }
-        public string ProductPrivatePart { get; set; }
-
-        public string Comments { get; set; }
-
-        public bool IsDebug { get; set; }
-        public bool IsPatched { get; set; }
-        public bool IsPreRelease { get; set; }
-        public bool IsPrivateBuild { get; set; }
-        public bool IsSpecialBuild { get; set; }
-    }
-
-    public class Information
-    {
-        public AssemblyInformation AssemblyInformation = new AssemblyInformation();
-        public FileInformation FileInformation = new FileInformation();
-        public string RuntimeVersion { get; set; }
-    }
 
     public class Common
     {
@@ -95,7 +49,7 @@ namespace VNC.Core
             information.AssemblyInformation.FileVersion = assembly.GetCustomAttribute<AssemblyFileVersionAttribute>()?.Version;
             information.AssemblyInformation.InformationalVersion = assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion;
             information.AssemblyInformation.Product = assembly.GetCustomAttribute<AssemblyProductAttribute>()?.Product;
-            // Information in FileVesionInfo
+            // Information in FileVersionInfo
             information.FileInformation.FileVersion = fileVersionInfo.FileVersion;
             information.FileInformation.FileDescription = fileVersionInfo.FileDescription;
 

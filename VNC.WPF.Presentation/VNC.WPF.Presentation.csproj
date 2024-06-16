@@ -3,13 +3,16 @@
     <PropertyGroup>
         <TargetFrameworks>net6.0-windows;net48</TargetFrameworks>
         <UseWPF>true</UseWPF>
-        <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+        <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
         <AssemblyName>VNC.WPF.Presentation</AssemblyName>
         <RootNamespace>VNC.WPF.Presentation</RootNamespace>
         <!--<SignAssembly>true</SignAssembly>
         <AssemblyOriginatorKeyFile>VNC.snk</AssemblyOriginatorKeyFile>-->
+        <VersionPrefix>2.1.0</VersionPrefix>
+        <VersionSuffix>Release</VersionSuffix>
+        <FileVersion>2024.06.14A</FileVersion>
+        <PackageVersion>2.1.0</PackageVersion>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <PackageVersion>2.0.0</PackageVersion>
         <PackageLicenseFile>LICENSE</PackageLicenseFile>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageProjectUrl>https://github.com/chrhodes/vncdevelopment</PackageProjectUrl>
@@ -24,13 +27,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="VNC.Core" Version="2.1.2" />
+        <!--<PackageReference Include="VNC.Core" Version="2.1.5" />-->
+        <ProjectReference Include="..\VNC.Core\VNC.Core.csproj" />
+        <!--<ProjectReference Include="..\..\vnc\VNC.Logging\VNC.Logging\VNC.Logging.csproj" />-->
     </ItemGroup>
-
-    <!--<ItemGroup>
-      <ProjectReference Include="..\VNC.Core\VNC.Core.csproj" />
-    </ItemGroup>-->
-
+    
     <ItemGroup>
         <None Include="..\LICENSE">
             <Pack>True</Pack>
@@ -45,7 +46,8 @@
             <PackagePath></PackagePath>
         </None>
     </ItemGroup>
-    
+
+   
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
         <DefineConstants>TRACE;LOGGING</DefineConstants>
     </PropertyGroup>
