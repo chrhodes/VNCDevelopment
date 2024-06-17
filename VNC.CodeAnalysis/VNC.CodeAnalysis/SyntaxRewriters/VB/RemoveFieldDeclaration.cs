@@ -33,21 +33,21 @@ namespace VNC.CodeAnalysis.SyntaxRewriters.VB
             switch (_declarationLocation)
             {
                 case SyntaxNode.FieldDeclarationLocation.Class:
-                    if (parent.Kind() != SyntaxKind.ClassBlock)
+                    if (!parent.IsKind(SyntaxKind.ClassBlock))
                     {
                         return node;
                     }
                     break;
 
                 case SyntaxNode.FieldDeclarationLocation.Module:
-                    if (parent.Kind() != SyntaxKind.ModuleBlock)
+                    if (!parent.IsKind(SyntaxKind.ModuleBlock))
                     {
                         return node;
                     }
                     break;
 
                 case SyntaxNode.FieldDeclarationLocation.Structure:
-                    if (parent.Kind() != SyntaxKind.StructureBlock)
+                    if (!parent.IsKind(SyntaxKind.StructureBlock))
                     {
                         return node;
                     }

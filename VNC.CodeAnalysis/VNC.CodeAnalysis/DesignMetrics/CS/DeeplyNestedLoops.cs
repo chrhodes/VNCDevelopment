@@ -25,7 +25,7 @@ namespace VNC.CodeAnalysis.DesignMetrics.CS
 
             var results = tree.GetRoot()
                 .DescendantNodes()
-                .Where(t => loopTypes.Any(l => t.Kind() == l))// 3
+                .Where(t => loopTypes.Any(l => t.IsKind(l)))// 3
                 .Select(t => new
                 {
                     // 4
@@ -34,7 +34,7 @@ namespace VNC.CodeAnalysis.DesignMetrics.CS
                 .Identifier.ValueText,
                     Nesting = 1 + t.Ancestors()
                 .Count(z => loopTypes
-                .Any(l => z.Kind() == l))
+                .Any(l => z.IsKind(l)))
                 })// 5
                 .ToLookup(t => t.Method)
                 .ToDictionary(t => t.Key,

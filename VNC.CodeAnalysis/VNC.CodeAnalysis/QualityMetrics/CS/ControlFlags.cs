@@ -23,7 +23,7 @@ namespace VNC.CodeAnalysis.QualityMetrics.CS
             var tree = CSharpSyntaxTree.ParseText(sourceCode);
 
             var bools = tree.GetRoot().DescendantNodes()
-            .Where(t => t.Kind() == SyntaxKind.VariableDeclaration
+            .Where(t => t.IsKind(SyntaxKind.VariableDeclaration)
                 && t.ToFullString().Trim().StartsWith("bool"))
             .Select(t =>
                 new
@@ -31,7 +31,7 @@ namespace VNC.CodeAnalysis.QualityMetrics.CS
                     VariableName = t.ToFullString().Trim().Split(' ')[1],
                     Class = t.Ancestors()
                        .Where
-                       (x => x.Kind() == SyntaxKind.ClassDeclaration)
+                       (x => x.IsKind(SyntaxKind.ClassDeclaration))
                        .Cast<ClassDeclarationSyntax>()
                        .First().Identifier.ValueText
                 })
@@ -43,7 +43,7 @@ namespace VNC.CodeAnalysis.QualityMetrics.CS
             }
 
             var results = tree.GetRoot().DescendantNodes()
-            .Where(t => t.Kind() == SyntaxKind.IfStatement)
+            .Where(t => t.IsKind(SyntaxKind.IfStatement))
             .Cast<IfStatementSyntax>()
             .Select(ifs =>
                new

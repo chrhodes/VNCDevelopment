@@ -2,7 +2,7 @@
 
   <PropertyGroup>
         <TargetFrameworks>net6.0-windows;net48</TargetFrameworks>
-      <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+      <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
       <AssemblyName>VNC.CodeAnalysis</AssemblyName>
       <RootNamespace>VNC.CodeAnalysis</RootNamespace> 
       <!--<SignAssembly>true</SignAssembly>
@@ -24,7 +24,7 @@
   </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Crc32C.NET" Version="1.0.5" />
+        <PackageReference Include="Crc32.NET" Version="1.2.0" />
         <PackageReference Include="Microsoft.Build" Version="17.2.0" ExcludeAssets="runtime" />
         <PackageReference Include="Microsoft.Build.Framework" Version="17.2.0" ExcludeAssets="runtime" />
         <PackageReference Include="Microsoft.Build.Locator" Version="1.4.1" />
@@ -39,7 +39,7 @@
         <PackageReference Include="Microsoft.CodeAnalysis.VisualBasic.Features" Version="4.2.0" />
         <PackageReference Include="Microsoft.CodeAnalysis.VisualBasic.Workspaces" Version="4.2.0" />
         <PackageReference Include="Microsoft.CodeAnalysis.Workspaces.MSBuild" Version="4.2.0" />
-        <PackageReference Include="VNC.Core" Version="2.1.2" />
+        <PackageReference Include="VNC.Core" Version="2.1.5" />
     </ItemGroup>
     
     <!--<ItemGroup>
@@ -61,6 +61,7 @@
         </None>
     </ItemGroup>
 
+   
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
         <DefineConstants>TRACE;LOGGING</DefineConstants>
     </PropertyGroup>

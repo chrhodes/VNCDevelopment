@@ -16,7 +16,7 @@ namespace VNC.CodeAnalysis.QualityMetrics.CS
             var tree = CSharpSyntaxTree.ParseText(sourceCode);
 
             var results = tree.GetRoot().DescendantNodes()
-            .Where(t => t.Kind() == SyntaxKind.MethodDeclaration)
+            .Where(t => t.IsKind(SyntaxKind.MethodDeclaration))
             .Cast<MethodDeclarationSyntax>()    // 1 - Get Methods
             .Select(t =>
                new
@@ -24,9 +24,9 @@ namespace VNC.CodeAnalysis.QualityMetrics.CS
                    MethodName = t.Identifier.ValueText,
                    //Returns = t.Body.Statements.Where(n => n.Kind() == SyntaxKind.ReturnStatement),
                    //Returns1 = t.Body.ChildNodes().Where(n => n.Kind() == SyntaxKind.ReturnStatement),
-                   Returns2 = t.Body.DescendantNodes().Where(n => n.Kind() == SyntaxKind.ReturnStatement),
+                   Returns2 = t.Body.DescendantNodes().Where(n => n.IsKind(SyntaxKind.ReturnStatement)),
                    ReturnCount = t.Body.DescendantTokens()
-                    .Count(st => st.Kind() == SyntaxKind.ReturnKeyword) // 2 - Return
+                    .Count(st => st.IsKind(SyntaxKind.ReturnKeyword)) // 2 - Return
                })
             .Where(t => t.ReturnCount > 1);
 

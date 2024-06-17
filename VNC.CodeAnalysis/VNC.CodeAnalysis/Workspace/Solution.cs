@@ -1,8 +1,8 @@
-﻿
-using Microsoft.CodeAnalysis.MSBuild;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.MSBuild;
 
 namespace VNC.CodeAnalysis.Workspace
 {

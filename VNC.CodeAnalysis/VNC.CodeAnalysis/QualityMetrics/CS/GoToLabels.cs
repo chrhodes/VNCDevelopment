@@ -16,7 +16,7 @@ namespace VNC.CodeAnalysis.QualityMetrics.CS
             var tree = CSharpSyntaxTree.ParseText(sourceCode);
 
             var results = tree.GetRoot().DescendantNodes()
-            .Where(t => t.Kind() == SyntaxKind.MethodDeclaration)
+            .Where(t => t.IsKind(SyntaxKind.MethodDeclaration))
             .Cast<MethodDeclarationSyntax>()
             .Select(mds =>
                 new
@@ -24,8 +24,8 @@ namespace VNC.CodeAnalysis.QualityMetrics.CS
                     ClassName = mds.Ancestors().OfType<ClassDeclarationSyntax>().First().Identifier.ValueText,
                     MethodName = mds.Identifier.ValueText,
                     MethodLine = tree.GetLineSpan(mds.Span).StartLinePosition.Line + 1, // Lines start at 0
-                    GoTos = mds.Body.DescendantNodes().Where(n => n.Kind() == SyntaxKind.GotoStatement 
-                                                                || n.Kind() == SyntaxKind.GotoCaseStatement),
+                    GoTos = mds.Body.DescendantNodes().Where(n => n.IsKind(SyntaxKind.GotoStatement) 
+                                                                || n.IsKind(SyntaxKind.GotoCaseStatement)),
                     HasGoto = CSharpSyntaxTree.ParseText(mds.ToString())
                         .GetRoot()
                         .DescendantTokens()

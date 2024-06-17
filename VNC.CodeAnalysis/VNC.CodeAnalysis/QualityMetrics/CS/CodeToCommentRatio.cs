@@ -16,7 +16,7 @@ namespace VNC.CodeAnalysis.QualityMetrics.CS
             var tree = CSharpSyntaxTree.ParseText(sourceCode);
 
             var results = tree.GetRoot().DescendantNodes()
-            .Where(t => t.Kind() == SyntaxKind.ClassDeclaration)
+            .Where(t => t.IsKind(SyntaxKind.ClassDeclaration))
             .Cast<ClassDeclarationSyntax>()
             .Select(t =>
                new
@@ -35,7 +35,7 @@ namespace VNC.CodeAnalysis.QualityMetrics.CS
                                Name = m.Identifier.ValueText,
                                Lines = m.Body.Statements.Count,
                                Comments = m.Body.DescendantTrivia()
-                                .Count(b => b.Kind() == SyntaxKind.SingleLineCommentTrivia
+                                .Count(b => b.IsKind(SyntaxKind.SingleLineCommentTrivia)
                                 || b.Kind() == SyntaxKind.MultiLineCommentTrivia)
                            }
                        )

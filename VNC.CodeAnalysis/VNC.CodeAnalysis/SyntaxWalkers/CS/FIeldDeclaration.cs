@@ -16,7 +16,7 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.CS
 
             // Verify we have the correct context for the Field Declaration
 
-            var parent = node.Parent;
+           Microsoft.CodeAnalysis.SyntaxNode parent = node.Parent;
 
             switch (_declarationLocation)
             {

@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
+using Microsoft.Build.Locator;
+
 namespace VNC.CodeAnalysis.Workspace
 {
     public class Project

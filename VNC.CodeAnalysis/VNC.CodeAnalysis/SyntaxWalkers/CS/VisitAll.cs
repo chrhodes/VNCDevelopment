@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using Crc32C;
+using Force.Crc32;
 
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -31,7 +31,7 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.CS
         {
             tabs++;
 
-            if (node.Kind() != SyntaxKind.CompilationUnit)
+            if (!node.IsKind(SyntaxKind.CompilationUnit))
             {
                 var indents = new String(' ', tabs * tabWidth);
 

@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.VisualBasic;
-using Crc32C;
+
+using Force.Crc32;
 
 namespace VNC.CodeAnalysis.SyntaxWalkers.VB
 {
