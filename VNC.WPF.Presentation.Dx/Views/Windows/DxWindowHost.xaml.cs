@@ -1,4 +1,6 @@
 ﻿using System;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -9,27 +11,21 @@ using VNC.Core.Presentation;
 namespace VNC.WPF.Presentation.Dx.Views
 {
 
-    public partial class DxWindowHost : DXWindow
+    public partial class DxWindowHost : DXWindow, INotifyPropertyChanged
     {
-        public string LoadTimeInfo { get; set; }
 
+        #region Constructors, Initialization, and Load
+        
         public DxWindowHost()
         {
             long startTicks = Log.CONSTRUCTOR("Enter", Common.LOG_CATEGORY);
-            //try
-            //{
-            //    var bootstrapper = new Application.Bootstrapper();
-            //    bootstrapper.Run();
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show(ex.ToString());
-            //}
 
             InitializeComponent();
 
             this.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
             this.VerticalAlignment = System.Windows.VerticalAlignment.Center;
+
+            spSizeInfo.DataContext = this;
 
             Log.CONSTRUCTOR("Exit", Common.LOG_CATEGORY, startTicks);
         }
@@ -38,15 +34,6 @@ namespace VNC.WPF.Presentation.Dx.Views
         public DxWindowHost(string title, string userControlFullyQualifiedName)
         {
             long startTicks = Log.CONSTRUCTOR("Enter", Common.LOG_CATEGORY);
-            //try
-            //{
-            //    //var bootstrapper = new Application.Bootstrapper();
-            //    //bootstrapper.Run();
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show(ex.ToString());
-            //}
 
             try
             {
@@ -55,6 +42,7 @@ namespace VNC.WPF.Presentation.Dx.Views
                 this.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
                 this.VerticalAlignment = System.Windows.VerticalAlignment.Center;
                 this.Title = title;
+
                 LoadUserControl(userControlFullyQualifiedName);
             }
             catch (Exception ex)
@@ -65,29 +53,116 @@ namespace VNC.WPF.Presentation.Dx.Views
             Log.CONSTRUCTOR("Exit", Common.LOG_CATEGORY, startTicks);
         }
 
+        #endregion
+
+        #region Enums (None)
+
+
+        #endregion
+
+        #region Structures (None)
+
+
+        #endregion
+
+        #region Fields and Properties (None)
+
+        private Visibility _developerUIMode = Visibility.Visible;
+        public Visibility DeveloperUIMode
+        {
+            get => _developerUIMode;
+            set
+            {
+                if (_developerUIMode == value)
+                    return;
+                _developerUIMode = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string _loadTime;
+        public string LoadTime
+        {
+            get => _loadTime;
+            set
+            {
+                if (_loadTime == value)
+                {
+                    return;
+                }
+
+                _loadTime = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private System.Windows.Size _windowSize;
+        public System.Windows.Size WindowSize
+        {
+            get => _windowSize;
+            set
+            {
+                if (_windowSize == value)
+                    return;
+                _windowSize = value;
+                OnPropertyChanged();
+            }
+        }
+
+        #endregion
+
+        #region Event Handlers
+
+        private void OnClosing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            long startTicks = Log.EVENT_HANDLER("Enter", Common.LOG_CATEGORY);
+
+            this.Hide();
+            e.Cancel = true;
+
+            Log.EVENT_HANDLER("Exit", Common.LOG_CATEGORY, startTicks);
+        }
+
+        private void thisControl_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            var newSize = e.NewSize;
+            var previousSize = e.PreviousSize;
+            WindowSize = newSize;
+        }
+
+        #endregion
+
+        #region Commands (None)
+
+        #endregion
+
+        #region Public Methods (None)
+
+
+        #endregion
+
+        #region Protected Methods (None)
+
+
+        #endregion
+
+        #region Private Methods (None)
+
+
+        #endregion
+
+
+
         internal void LoadUserControl(string userControlName)
         {
             long startTicks = Log.PRESENTATION("Enter", Common.LOG_CATEGORY);
-            //string typeName = string.Format("SupportTools_Visio.User_Interface.User_Controls.{0}",
-            //                ((Button)sender).Tag.ToString());
 
             Type ucType = Type.GetType(userControlName);
-            //Type ucType = Type.GetType(typeName);
 
             try
             {
                 var uc = Activator.CreateInstance(ucType);
                 LoadUserControl((UserControl)uc);
-
-                //if (uc.GetType().BaseType.Name == "wucDX_Base")
-                //{
-                //    //ShowUserControl((User_Interface.User_Controls.wucDX_Base)uc);
-                //    ShowUserControl((UserControl)uc);
-                //}
-                //else
-                //{
-                //    ShowUserControl((UserControl)uc);
-                //}
             }
             catch (Exception ex)
             {
@@ -96,32 +171,6 @@ namespace VNC.WPF.Presentation.Dx.Views
 
             Log.PRESENTATION("Exit", Common.LOG_CATEGORY, startTicks);
         }
-
-        //public void ShowUserControl(User_Interface.User_Controls.wucDX_Base control)
-        //{
-        //    //UnhookTitleEvent(_currentControl);
-        //    g_UserControlContainer.Children.Clear();
-
-        //    if (control != null)
-        //    {
-        //        g_UserControlContainer.Children.Add(control);
-
-        //        if (control.MinWidth > 0)
-        //        {
-        //            this.Width = control.MinWidth + Common.WINDOW_HOSTING_USER_CONTROL_WIDTH_PAD;
-        //            this.MinWidth = this.Width;
-        //        }
-
-        //        if (control.MinHeight > 0)
-        //        {
-        //            this.Height = control.MinHeight + Common.WINDOW_HOSTING_USER_CONTROL_HEIGHT_PAD;
-        //            this.MinHeight = this.Height;
-        //        }
-        //        //_currentControl = control;
-        //    }
-
-        //    //HookTitleEvent(_currentControl);
-        //}
 
         public void LoadUserControl(UserControl control)
         {
@@ -151,17 +200,6 @@ namespace VNC.WPF.Presentation.Dx.Views
             //HookTitleEvent(_currentControl);
 
             Log.PRESENTATION("Exit", Common.LOG_CATEGORY, startTicks);
-        }
-
-        private void OnClosing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            long startTicks = Log.EVENT_HANDLER("Enter", Common.LOG_CATEGORY);
-
-            this.Hide();
-            e.Cancel = true;
-
-            Log.EVENT_HANDLER("Exit", Common.LOG_CATEGORY, startTicks);
-
         }
 
         public static void DisplayUserControlInHost(
@@ -213,7 +251,7 @@ namespace VNC.WPF.Presentation.Dx.Views
         }
 
         public static void DisplayHost(
-            Window host,
+            DxWindowHost host,
             string title,
             int width, int height,
             ShowWindowMode mode,
@@ -229,12 +267,16 @@ namespace VNC.WPF.Presentation.Dx.Views
             {
                 long endTicks2 = Log.PRESENTATION("Exit", Common.LOG_CATEGORY, startTicks2);
 
-                host.Title = $"{host.GetType()} loadtime: {Log.GetDuration(startTicks2, endTicks2)}";
+                host.LoadTime = $"{Log.GetDuration(startTicks, endTicks2)}";
 
                 host.ShowDialog();
             }
             else
             {
+                long endTicks2 = Log.PRESENTATION("Exit", Common.LOG_CATEGORY, startTicks2);
+
+                host.LoadTime = $"{Log.GetDuration(startTicks, endTicks2)}";
+
                 host.Show();
             }
 
@@ -244,5 +286,39 @@ namespace VNC.WPF.Presentation.Dx.Views
 
             Log.PRESENTATION("Exit", Common.LOG_CATEGORY, startTicks);
         }
+
+        #region INotifyPropertyChanged
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        // This is the traditional approach - requires string name to be passed in
+
+        //private void OnPropertyChanged(string propertyName)
+        //{
+        //    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        //}
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+
+            long startTicks = 0;
+            //#if LOGGING
+            //            if (LogOnPropertyChanged)
+            //            {
+            //                startTicks = Log.VIEWMODEL_LOW($"Enter ({propertyName})", Common.LOG_CATEGORY);
+            //            }
+            //#endif
+            // This is the new CompilerServices attribute!
+
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            //#if LOGGING
+            //            if (LogOnPropertyChanged)
+            //            {
+            //                Log.VIEWMODEL_LOW("Exit", Common.LOG_CATEGORY, startTicks);
+            //            }
+            //#endif
+        }
+
+        #endregion
     }
 }

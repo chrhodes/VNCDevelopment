@@ -8,6 +8,7 @@ namespace VNC.Core.Mvvm
 {
     public class ViewModelBase : IViewModel, INotifyPropertyChanged
     {
+        #region Fields and Properties
 
         [Display(AutoGenerateField = false)]
         public IView View
@@ -67,6 +68,8 @@ namespace VNC.Core.Mvvm
             }
         }
 
+        #region Assembly and Runtime Information
+
         public string AssemblyVersion { get => Common.InformationApplication.AssemblyInformation.Version; }
         public string AssemblyName { get => Common.InformationApplication.AssemblyInformation.Name; }
         public string AssemblyFullName { get => Common.InformationApplication.AssemblyInformation.FullName; }
@@ -122,6 +125,10 @@ namespace VNC.Core.Mvvm
         public string IsSpecialBuildVNCCore { get => Common.InformationVNCCore.FileInformation.IsSpecialBuild.ToString(); }
 
         public string RuntimeVersion { get => Common.InformationVNCCore.RuntimeVersion; }
+
+        #endregion
+
+        #endregion
 
         #region INotifyPropertyChanged
 

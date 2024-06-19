@@ -1,36 +1,28 @@
 ﻿using System;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 
+using VNC.Core.Mvvm;
 using VNC.Core.Presentation;
 
 namespace VNC.WPF.Presentation.Views
 {
-    public partial class WindowHost : Window
+    public partial class WindowHost : Window, INotifyPropertyChanged
     {
-        public string LoadTimeInfo { get; set; }
+        #region Constructors, Initialization, and Load
 
         public WindowHost()
         {
             Int64 startTicks = Log.CONSTRUCTOR("Enter", Common.LOG_CATEGORY);
-            // TODO(crhodes)
-            // Do we need to move the bootstrapper earlier?
-            // What happens if have multiple of these?
-
-            //try
-            //{
-            //    //var bootstrapper = new Application.Bootstrapper();
-            //    //bootstrapper.Run();
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show(ex.ToString());
-            //}
 
             InitializeComponent();
 
             this.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
             this.VerticalAlignment = System.Windows.VerticalAlignment.Center;
+
+            spDeveloperInfo.DataContext = this;
 
             Log.CONSTRUCTOR("Exit", Common.LOG_CATEGORY, startTicks);
         }
@@ -39,16 +31,6 @@ namespace VNC.WPF.Presentation.Views
         public WindowHost(string title, string userControlFullyQualifiedName)
         {
             Int64 startTicks = Log.CONSTRUCTOR("Enter", Common.LOG_CATEGORY);
-
-            //try
-            //{
-            //    //var bootstrapper = new Application.Bootstrapper();
-            //    //bootstrapper.Run();
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show(ex.ToString());
-            //}
 
             try
             {
@@ -67,11 +49,95 @@ namespace VNC.WPF.Presentation.Views
             Log.CONSTRUCTOR("Exit", Common.LOG_CATEGORY, startTicks);
         }
 
+        #endregion
+
+        #region Enums (None)
+
+
+        #endregion
+
+        #region Structures (None)
+
+
+        #endregion
+
+        #region Fields and Properties
+
+        private Visibility _developerUIMode = Visibility.Visible;
+        public Visibility DeveloperUIMode
+        {
+            get => _developerUIMode;
+            set
+            {
+                if (_developerUIMode == value)
+                    return;
+                _developerUIMode = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string _loadTime;
+        public string LoadTime
+        {
+            get => _loadTime;
+            set
+            {
+                if (_loadTime == value)
+                {
+                    return;
+                }
+
+                _loadTime = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private System.Windows.Size _windowSize;
+        public System.Windows.Size WindowSize
+        {
+            get => _windowSize;
+            set
+            {
+                if (_windowSize == value)
+                    return;
+                _windowSize = value;
+                OnPropertyChanged();
+            }
+        }
+
+        #endregion
+
+        #region Event Handlers (None)
+
+        private void OnClosing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Log.EVENT_HANDLER("Enter", Common.LOG_CATEGORY);
+
+            this.Hide();
+            e.Cancel = true;
+
+            Log.EVENT_HANDLER("Exit", Common.LOG_CATEGORY);
+        }
+        private void thisControl_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            var newSize = e.NewSize;
+            var previousSize = e.PreviousSize;
+            WindowSize = newSize;
+        }
+
+        #endregion
+
+        #region Commands (None)
+
+        #endregion
+
+        #region Public Methods
+
         public void LoadUserControl(string userControlName)
         {
             long startTicks = Log.PRESENTATION("Enter", Common.LOG_CATEGORY);
 
-            Type ucType = Type.GetType(userControlName); 
+            Type ucType = Type.GetType(userControlName);
 
             try
             {
@@ -112,16 +178,6 @@ namespace VNC.WPF.Presentation.Views
 
             //HookTitleEvent(_currentControl);
             Log.PRESENTATION("Exit", Common.LOG_CATEGORY, startTicks);
-        }
-
-        private void OnClosing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            Log.EVENT_HANDLER("Enter", Common.LOG_CATEGORY);
-
-            this.Hide();
-            e.Cancel = true;
-
-            Log.EVENT_HANDLER("Exit", Common.LOG_CATEGORY);
         }
 
         public static void DisplayUserControlInHost(
@@ -169,7 +225,7 @@ namespace VNC.WPF.Presentation.Views
         }
 
         public static void DisplayHost(
-            Window host,
+            WindowHost host,
             string title,
             int width, int height,
             ShowWindowMode mode,
@@ -183,18 +239,77 @@ namespace VNC.WPF.Presentation.Views
             {
                 long endTicks2 = Log.PRESENTATION("Exit", Common.LOG_CATEGORY, startTicks);
 
-                host.Title = $"{host.GetType()} loadtime: {Log.GetDuration(startTicks, endTicks2)}";
+                //host.Title = $"{host.Title} loadtime: {Log.GetDuration(startTicks, endTicks2)}";
+
+                host.LoadTime = $"{Log.GetDuration(startTicks, endTicks2)}";
 
                 host.ShowDialog();
             }
             else
             {
+                long endTicks2 = Log.PRESENTATION("Exit", Common.LOG_CATEGORY, startTicks);
+
+                //host.Title = $"{host.Title} loadtime: {Log.GetDuration(startTicks, endTicks2)}";
+
+                host.LoadTime = $"{Log.GetDuration(startTicks, endTicks2)}";
+
                 host.Show();
             }
 
             long endTicks = Log.PRESENTATION("Exit", Common.LOG_CATEGORY, startTicks);
 
+            // TODO(crhodes)
+            // How is this usable?
+
             host.Tag = $"{host.GetType()} loadtime: {Log.GetDuration(startTicks, endTicks)}";
         }
+
+        #endregion
+
+        #region Protected Methods (None)
+
+
+        #endregion
+
+        #region Private Methods (None)
+
+
+        #endregion
+
+
+        #region INotifyPropertyChanged
+
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        // This is the traditional approach - requires string name to be passed in
+
+        //private void OnPropertyChanged(string propertyName)
+        //{
+        //    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        //}
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+
+            long startTicks = 0;
+//#if LOGGING
+//            if (LogOnPropertyChanged)
+//            {
+//                startTicks = Log.VIEWMODEL_LOW($"Enter ({propertyName})", Common.LOG_CATEGORY);
+//            }
+//#endif
+            // This is the new CompilerServices attribute!
+
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+//#if LOGGING
+//            if (LogOnPropertyChanged)
+//            {
+//                Log.VIEWMODEL_LOW("Exit", Common.LOG_CATEGORY, startTicks);
+//            }
+//#endif
+        }
+
+        #endregion
     }
 }

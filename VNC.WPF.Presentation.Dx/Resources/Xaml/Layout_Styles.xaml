@@ -41,4 +41,16 @@
         <!--<Setter Property="dxlc:LayoutControl.VerticalAlignment" Value="Top" />-->
     </Style>
 
+    <Style x:Key="ConfigurationLayoutGroup" TargetType="dxlc:LayoutGroup" >
+        <Setter Property="dxlc:LayoutGroup.Background" Value="SeaGreen" />
+        <Setter Property="dxlc:LayoutGroup.Padding" Value="5" />
+        <!--<Setter Property="dxlc:LayoutControl.VerticalAlignment" Value="Top" />-->
+    </Style>
+
+    <Style x:Key="ActionLayoutGroup" TargetType="dxlc:LayoutGroup" >
+        <Setter Property="dxlc:LayoutGroup.Background" Value="Red" />
+        <Setter Property="dxlc:LayoutGroup.Padding" Value="5" />
+        <!--<Setter Property="dxlc:LayoutControl.VerticalAlignment" Value="Top" />-->
+    </Style>
+
 </ResourceDictionary>

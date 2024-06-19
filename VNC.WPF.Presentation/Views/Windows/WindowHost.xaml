@@ -7,10 +7,27 @@
     mc:Ignorable="d"
     Title="Need Title" 
     Closing="OnClosing"
+    SizeChanged="thisControl_SizeChanged"    
     d:DesignHeight="200" d:DesignWidth="300" >
-    <Grid Name="g_UserControlContainer" >
-        <TextBlock x:Name="tbMessage" Text="User Control gets loaded here"
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Name="g_UserControlContainer" >
+
+            <TextBlock x:Name="tbMessage" Text="User Control gets loaded here"
                    HorizontalAlignment="Center" 
                    VerticalAlignment="Center" />
+        </Grid>
+        <StackPanel x:Name="spDeveloperInfo" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center"
+                    Visibility="{Binding DeveloperUIMode}">
+            <TextBlock Text="W:" />
+            <TextBlock Text="{Binding WindowSize.Width, StringFormat={}{0:0}}" Margin="2,0,0,0" />
+            <TextBlock Text="H:" Margin="10,0,0,0"/>
+            <TextBlock Text="{Binding WindowSize.Height, StringFormat={}{0:0}}" Margin="2,0,0,0" />
+            <TextBlock Text="LoadTime:" Margin="10,0,0,0" />
+            <TextBlock Text="{Binding LoadTime}" Margin="2,0,0,0" />
+        </StackPanel>
     </Grid>
 </Window>

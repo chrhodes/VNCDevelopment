@@ -8,10 +8,10 @@
         <RootNamespace>VNC.WPF.Presentation.Dx</RootNamespace>
         <!--<SignAssembly>true</SignAssembly>
         <AssemblyOriginatorKeyFile>VNC.snk</AssemblyOriginatorKeyFile>-->
-        <VersionPrefix>2.1.0</VersionPrefix>
+        <VersionPrefix>2.1.1</VersionPrefix>
         <VersionSuffix>Release</VersionSuffix>
-        <FileVersion>2024.06.14A</FileVersion>        
-        <PackageVersion>2.1.0</PackageVersion>
+        <FileVersion>2024.06.19A</FileVersion>        
+        <PackageVersion>2.1.1</PackageVersion>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>        
         <PackageLicenseFile>LICENSE</PackageLicenseFile>
         <PackageReadmeFile>README.md</PackageReadmeFile>

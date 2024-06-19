@@ -8,10 +8,10 @@
         <RootNamespace>VNC.WPF.Presentation</RootNamespace>
         <!--<SignAssembly>true</SignAssembly>
         <AssemblyOriginatorKeyFile>VNC.snk</AssemblyOriginatorKeyFile>-->
-        <VersionPrefix>2.1.0</VersionPrefix>
+        <VersionPrefix>2.1.1</VersionPrefix>
         <VersionSuffix>Release</VersionSuffix>
-        <FileVersion>2024.06.14A</FileVersion>
-        <PackageVersion>2.1.0</PackageVersion>
+        <FileVersion>2024.06.19A</FileVersion>
+        <PackageVersion>2.1.1</PackageVersion>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageLicenseFile>LICENSE</PackageLicenseFile>
         <PackageReadmeFile>README.md</PackageReadmeFile>
@@ -29,7 +29,7 @@
     <ItemGroup>
         <!--<PackageReference Include="VNC.Core" Version="2.1.5" />-->
         <ProjectReference Include="..\VNC.Core\VNC.Core.csproj" />
-        <!--<ProjectReference Include="..\..\vnc\VNC.Logging\VNC.Logging\VNC.Logging.csproj" />-->
+        <!--<ProjectReference Include="..\..\VNCDevelopment\VNC.Logging\VNC.Logging\VNC.Logging.csproj" />-->
     </ItemGroup>
     
     <ItemGroup>
@@ -46,7 +46,6 @@
             <PackagePath></PackagePath>
         </None>
     </ItemGroup>
-
    
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
         <DefineConstants>TRACE;LOGGING</DefineConstants>
