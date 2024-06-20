@@ -160,7 +160,7 @@ namespace VNC.WPF.Presentation.Dx.Views
 
         #endregion
 
-        #region Public Methods (None)
+        #region Public Methods
 
         public void LoadUserControl(string userControlName)
         {
@@ -211,8 +211,7 @@ namespace VNC.WPF.Presentation.Dx.Views
             Log.PRESENTATION("Exit", Common.LOG_CATEGORY, startTicks);
         }
 
-        public static void DisplayUserControlInHost(
-            ref DxThemedWindowHost host,
+        public void DisplayUserControlInHost(
             string title,
             int width, int height,
             ShowWindowMode mode,
@@ -220,23 +219,17 @@ namespace VNC.WPF.Presentation.Dx.Views
         {
             long startTicks = Log.PRESENTATION("Enter", Common.LOG_CATEGORY);
 
-            if (host is null)
+            if (!(userControl is null))
             {
-                host = new DxThemedWindowHost();
-
-                if (!(userControl is null))
-                {
-                    host.LoadUserControl(userControl);
-                }
+                LoadUserControl(userControl);
             }
 
-            DisplayHost(host, title, width, height, mode, startTicks);
+            DisplayHost(title, width, height, mode, startTicks);
 
             Log.PRESENTATION("Exit", Common.LOG_CATEGORY, startTicks);
         }
 
-        public static void DisplayUserControlInHost(
-            ref DxThemedWindowHost host,
+        public void DisplayUserControlInHost(
             string title,
             int width, int height,
             ShowWindowMode mode,
@@ -244,23 +237,17 @@ namespace VNC.WPF.Presentation.Dx.Views
         {
             long startTicks = Log.PRESENTATION("Enter", Common.LOG_CATEGORY);
 
-            if (host is null)
+            if (!(viewModel.View is null))
             {
-                host = new DxThemedWindowHost();
-
-                if (!(viewModel.View is null))
-                {
-                    host.LoadUserControl((UserControl)viewModel.View);
-                }
+                LoadUserControl((UserControl)viewModel.View);
             }
 
-            DisplayHost(host, title, width, height, mode, startTicks);
+            DisplayHost(title, width, height, mode, startTicks);
 
             Log.PRESENTATION("Exit", Common.LOG_CATEGORY, startTicks);
         }
 
-        public static void DisplayUserControlInHost(
-            ref DxThemedWindowHost host,
+        public void DisplayUserControlInHost(
             string title,
             int width, int height,
             ShowWindowMode mode,
@@ -268,47 +255,41 @@ namespace VNC.WPF.Presentation.Dx.Views
         {
             long startTicks = Log.PRESENTATION("Enter", Common.LOG_CATEGORY);
 
-            if (host is null)
+            if (!(userControlName is null))
             {
-                host = new DxThemedWindowHost();
-
-                if (!(userControlName is null))
-                {
-                    host.LoadUserControl(userControlName);
-                }
+                LoadUserControl(userControlName);
             }
 
-            DisplayHost(host, title, width, height, mode, startTicks);
+            DisplayHost(title, width, height, mode, startTicks);
 
             Log.PRESENTATION("Exit", Common.LOG_CATEGORY, startTicks);
         }
 
-        public static void DisplayHost(
-            DxThemedWindowHost host,
+        public void DisplayHost(
             string title,
             int width, int height,
             ShowWindowMode mode,
             long startTicks)
         {
-            host.Title = title;
-            host.Width = width;
-            host.Height = height;
+            Title = title;
+            Width = width;
+            Height = height;
 
             if (mode == ShowWindowMode.Modal_ShowDialog)
             {
                 long endTicks2 = Log.PRESENTATION("Exit", Common.LOG_CATEGORY, startTicks);
 
-                host.LoadTime = $"{Log.GetDuration(startTicks, endTicks2)}";
+                LoadTime = $"{Log.GetDuration(startTicks, endTicks2)}";
 
-                host.ShowDialog();
+                ShowDialog();
             }
             else
             {
                 long endTicks2 = Log.PRESENTATION("Exit", Common.LOG_CATEGORY, startTicks);
 
-                host.LoadTime = $"{Log.GetDuration(startTicks, endTicks2)}";
+                LoadTime = $"{Log.GetDuration(startTicks, endTicks2)}";
 
-                host.Show();
+                Show();
             }
 
             long endTicks = Log.PRESENTATION("Exit", Common.LOG_CATEGORY, startTicks);
@@ -316,7 +297,7 @@ namespace VNC.WPF.Presentation.Dx.Views
             // TODO(crhodes)
             // How is this usable?
 
-            host.Tag = $"{host.GetType()} loadtime: {Log.GetDuration(startTicks, endTicks)}";
+            Tag = $"{GetType()} loadtime: {Log.GetDuration(startTicks, endTicks)}";
         }
 
         #endregion

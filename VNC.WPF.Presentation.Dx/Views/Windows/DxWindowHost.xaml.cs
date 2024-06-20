@@ -136,24 +136,9 @@ namespace VNC.WPF.Presentation.Dx.Views
 
         #endregion
 
-        #region Public Methods (None)
+        #region Public Methods
 
-
-        #endregion
-
-        #region Protected Methods (None)
-
-
-        #endregion
-
-        #region Private Methods (None)
-
-
-        #endregion
-
-
-
-        internal void LoadUserControl(string userControlName)
+        public void LoadUserControl(string userControlName)
         {
             long startTicks = Log.PRESENTATION("Enter", Common.LOG_CATEGORY);
 
@@ -202,8 +187,8 @@ namespace VNC.WPF.Presentation.Dx.Views
             Log.PRESENTATION("Exit", Common.LOG_CATEGORY, startTicks);
         }
 
-        public static void DisplayUserControlInHost(
-            ref DxWindowHost host,
+        public void DisplayUserControlInHost(
+
             string title,
             int width, int height,
             ShowWindowMode mode,
@@ -211,23 +196,17 @@ namespace VNC.WPF.Presentation.Dx.Views
         {
             long startTicks = Log.PRESENTATION("Enter", Common.LOG_CATEGORY);
 
-            if (host is null)
+            if (!(userControl is null))
             {
-                host = new DxWindowHost();
-
-                if (!(userControl is null))
-                {
-                    host.LoadUserControl(userControl);
-                }
+                LoadUserControl(userControl);
             }
 
-            DisplayHost(host, title, width, height, mode, startTicks);
+            DisplayHost( title, width, height, mode, startTicks);
 
             Log.PRESENTATION("Exit", Common.LOG_CATEGORY, startTicks);
         }
 
-        public static void DisplayUserControlInHost(
-            ref DxWindowHost host,
+        public void DisplayUserControlInHost(
             string title,
             int width, int height,
             ShowWindowMode mode,
@@ -235,23 +214,17 @@ namespace VNC.WPF.Presentation.Dx.Views
         {
             long startTicks = Log.PRESENTATION("Enter", Common.LOG_CATEGORY);
 
-            if (host is null)
+            if (!(userControlName is null))
             {
-                host = new DxWindowHost();
-
-                if (!(userControlName is null))
-                {
-                    host.LoadUserControl(userControlName);
-                }
+                LoadUserControl(userControlName);
             }
 
-            DisplayHost(host, title, width, height, mode, startTicks);
+            DisplayHost(title, width, height, mode, startTicks);
 
             Log.PRESENTATION("Exit", Common.LOG_CATEGORY, startTicks);
         }
 
-        public static void DisplayHost(
-            DxWindowHost host,
+        public void DisplayHost(
             string title,
             int width, int height,
             ShowWindowMode mode,
@@ -259,33 +232,45 @@ namespace VNC.WPF.Presentation.Dx.Views
         {
             long startTicks = Log.PRESENTATION("Enter", Common.LOG_CATEGORY);
 
-            host.Title = title;
-            host.Width = width;
-            host.Height = height;
+            Title = title;
+            Width = width;
+            Height = height;
 
             if (mode == ShowWindowMode.Modal_ShowDialog)
             {
                 long endTicks2 = Log.PRESENTATION("Exit", Common.LOG_CATEGORY, startTicks2);
 
-                host.LoadTime = $"{Log.GetDuration(startTicks, endTicks2)}";
+                LoadTime = $"{Log.GetDuration(startTicks, endTicks2)}";
 
-                host.ShowDialog();
+                ShowDialog();
             }
             else
             {
                 long endTicks2 = Log.PRESENTATION("Exit", Common.LOG_CATEGORY, startTicks2);
 
-                host.LoadTime = $"{Log.GetDuration(startTicks, endTicks2)}";
+                LoadTime = $"{Log.GetDuration(startTicks, endTicks2)}";
 
-                host.Show();
+                Show();
             }
 
             long endTicks = Log.PRESENTATION("Exit", Common.LOG_CATEGORY, startTicks2);
 
-            host.Tag = $"{host.GetType()} loadtime: {Log.GetDuration(startTicks2, endTicks)}";
+            Tag = $"{GetType()} loadtime: {Log.GetDuration(startTicks2, endTicks)}";
 
             Log.PRESENTATION("Exit", Common.LOG_CATEGORY, startTicks);
         }
+
+        #endregion
+
+        #region Protected Methods (None)
+
+
+        #endregion
+
+        #region Private Methods (None)
+
+
+        #endregion
 
         #region INotifyPropertyChanged
 

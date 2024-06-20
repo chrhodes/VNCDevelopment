@@ -107,7 +107,7 @@ namespace VNC.WPF.Presentation.Views
 
         #endregion
 
-        #region Event Handlers (None)
+        #region Event Handlers
 
         private void OnClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
@@ -180,8 +180,7 @@ namespace VNC.WPF.Presentation.Views
             Log.PRESENTATION("Exit", Common.LOG_CATEGORY, startTicks);
         }
 
-        public static void DisplayUserControlInHost(
-            ref WindowHost host,
+        public void DisplayUserControlInHost(
             string title,
             int width, int height,
             ShowWindowMode mode,
@@ -189,21 +188,20 @@ namespace VNC.WPF.Presentation.Views
         {
             long startTicks = Log.PRESENTATION("Enter", Common.LOG_CATEGORY);
 
-            if (host is null)
-            {
-                host = new WindowHost();
+            //if (host is null)
+            //{
+            //    host = new WindowHost();
 
                 if (!(userControl is null))
                 {
-                    host.LoadUserControl(userControl);
+                    LoadUserControl(userControl);
                 }
-            }
+            //}
 
-            DisplayHost(host, title, width, height, mode, startTicks);
+            DisplayHost(title, width, height, mode, startTicks);
         }
 
-        public static void DisplayUserControlInHost(
-            ref WindowHost host,
+        public void DisplayUserControlInHost(
             string title,
             int width, int height,
             ShowWindowMode mode,
@@ -211,29 +209,28 @@ namespace VNC.WPF.Presentation.Views
         {
             long startTicks = Log.PRESENTATION("Enter", Common.LOG_CATEGORY);
 
-            if (host is null)
-            {
-                host = new WindowHost();
+            //if (host is null)
+            //{
+            //    host = new WindowHost();
 
                 if (!(userControlName is null))
                 {
-                    host.LoadUserControl(userControlName);
+                    LoadUserControl(userControlName);
                 }
-            }
+            //}
 
-            DisplayHost(host, title, width, height, mode, startTicks);
+            DisplayHost(title, width, height, mode, startTicks);
         }
 
-        public static void DisplayHost(
-            WindowHost host,
+        public void DisplayHost(
             string title,
             int width, int height,
             ShowWindowMode mode,
             long startTicks)
         {
-            host.Title = title;
-            host.Width = width;
-            host.Height = height;
+            Title = title;
+            Width = width;
+            Height = height;
 
             if (mode == ShowWindowMode.Modal_ShowDialog)
             {
@@ -241,9 +238,9 @@ namespace VNC.WPF.Presentation.Views
 
                 //host.Title = $"{host.Title} loadtime: {Log.GetDuration(startTicks, endTicks2)}";
 
-                host.LoadTime = $"{Log.GetDuration(startTicks, endTicks2)}";
+                LoadTime = $"{Log.GetDuration(startTicks, endTicks2)}";
 
-                host.ShowDialog();
+                ShowDialog();
             }
             else
             {
@@ -251,9 +248,9 @@ namespace VNC.WPF.Presentation.Views
 
                 //host.Title = $"{host.Title} loadtime: {Log.GetDuration(startTicks, endTicks2)}";
 
-                host.LoadTime = $"{Log.GetDuration(startTicks, endTicks2)}";
+                LoadTime = $"{Log.GetDuration(startTicks, endTicks2)}";
 
-                host.Show();
+                Show();
             }
 
             long endTicks = Log.PRESENTATION("Exit", Common.LOG_CATEGORY, startTicks);
@@ -261,7 +258,7 @@ namespace VNC.WPF.Presentation.Views
             // TODO(crhodes)
             // How is this usable?
 
-            host.Tag = $"{host.GetType()} loadtime: {Log.GetDuration(startTicks, endTicks)}";
+            Tag = $"{GetType()} loadtime: {Log.GetDuration(startTicks, endTicks)}";
         }
 
         #endregion
