@@ -91,7 +91,7 @@ namespace VNC.WPF.Presentation.Dx.Views
 
         #region Fields and Properties
 
-        private Visibility _developerUIMode = Visibility.Visible;
+        private Visibility _developerUIMode = Visibility.Collapsed;
         public Visibility DeveloperUIMode
         {
             get => _developerUIMode;
