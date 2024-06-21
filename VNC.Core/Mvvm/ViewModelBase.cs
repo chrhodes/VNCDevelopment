@@ -55,19 +55,6 @@ namespace VNC.Core.Mvvm
             }
         }
 
-        private Visibility _developerUIMode = Visibility.Visible;
-        public Visibility DeveloperUIMode
-        {
-            get => _developerUIMode;
-            set
-            {
-                if (_developerUIMode == value)
-                    return;
-                _developerUIMode = value;
-                OnPropertyChanged();
-            }
-        }
-
         #region Assembly and Runtime Information
 
         public string AssemblyVersion { get => Common.InformationApplication.AssemblyInformation.Version; }
