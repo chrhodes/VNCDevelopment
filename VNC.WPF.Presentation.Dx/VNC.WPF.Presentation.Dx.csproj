@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>net6.0-windows;net48</TargetFrameworks>
+        <TargetFrameworks>net6.0-windows;net481</TargetFrameworks>
         <UseWPF>true</UseWPF>
         <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
         <AssemblyName>VNC.WPF.Presentation.Dx</AssemblyName>
@@ -10,7 +10,7 @@
         <AssemblyOriginatorKeyFile>VNC.snk</AssemblyOriginatorKeyFile>-->
         <VersionPrefix>2.1.1</VersionPrefix>
         <VersionSuffix>Release</VersionSuffix>
-        <FileVersion>2024.06.19A</FileVersion>        
+        <FileVersion>2024.06.22A</FileVersion>        
         <PackageVersion>2.1.1</PackageVersion>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>        
         <PackageLicenseFile>LICENSE</PackageLicenseFile>
@@ -24,6 +24,7 @@
         <Copyright>Copyright © VNC 2018-2024</Copyright>
         <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
         <Description>WPF Helpers</Description>
+        <SatelliteResourceLanguages>en-US</SatelliteResourceLanguages>
     </PropertyGroup>
 
     <ItemGroup>
