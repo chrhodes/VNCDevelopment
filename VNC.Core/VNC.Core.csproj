@@ -9,7 +9,7 @@
         <SignAssembly>true</SignAssembly>
         <AssemblyOriginatorKeyFile>VNC.snk</AssemblyOriginatorKeyFile>
         <VersionPrefix>2.1.6</VersionPrefix>
-        <VersionSuffix>Development-1</VersionSuffix>
+        <VersionSuffix>Release</VersionSuffix>
         <FileVersion>2024.06.19A</FileVersion>
         <PackageVersion>2.1.6</PackageVersion>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
@@ -34,11 +34,7 @@
         <PackageReference Include="Prism.Wpf" Version="8.1.97" />
         <PackageReference Include="Unity.Interception" Version="5.11.1" />
     </ItemGroup>
-
-    <ItemGroup>
-        <PackageReference Include="VNC.Logging" Version="2.1.0" />        
-    </ItemGroup>
-    
+   
     <!--Are these needed-->
     <ItemGroup>
       <Compile Update="Properties\Settings.Designer.cs">
@@ -78,5 +74,23 @@
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
         <DefineConstants>TRACE;LOGGING</DefineConstants>
     </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net6.0-windows|AnyCPU'">
+        <!-- Uncoment next line to switch to ProjectReference(s) -->
+        <!-- <DefineConstants>$(DefineConstants);VNCPROJECTREF</DefineConstants> -->
+    </PropertyGroup>
+
+    <Choose>
+        <When Condition="'$(DefineConstants.Contains(VNCPROJECTREF))'">
+            <ItemGroup>
+                <ProjectReference Include="..\VNC.Logging\VNC.Logging.csproj" />
+            </ItemGroup>
+        </When>
+        <When Condition="'!$(DefineConstants.Contains(VNCPROJECTREF))'">
+            <ItemGroup>
+                <PackageReference Include="VNC.Logging" Version="2.1.0" />
+            </ItemGroup>
+        </When>
+    </Choose>    
 
 </Project>

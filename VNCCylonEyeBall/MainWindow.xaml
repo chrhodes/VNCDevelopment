@@ -4,8 +4,6 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VNCCylonEyeBall"
-            xmlns:vncmvvm="clr-namespace:VNC.Core.Mvvm;assembly=VNC.Core"
-            xmlns:vncwpfv="clr-namespace:VNC.WPF.Presentation.Views;assembly=VNC.WPF.Presentation"
         mc:Ignorable="d"
         Title="MainWindow" Height="1024" Width="1024">
     <Grid>

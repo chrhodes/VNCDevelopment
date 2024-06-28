@@ -23,7 +23,6 @@
 
     <ItemGroup>
         <PackageReference Include="Microsoft.SqlServer.SqlManagementObjects" Version="161.46041.41" />
-        <PackageReference Include="VNC.Core" Version="2.0.0" />
     </ItemGroup>
 
     <!--<ItemGroup>
@@ -49,5 +48,23 @@
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
         <DefineConstants>TRACE;LOGGING</DefineConstants>
     </PropertyGroup>
-    
+
+    <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net6.0-windows|AnyCPU'">
+        <!-- Uncoment next line to switch to ProjectReference(s) -->
+        <!-- <DefineConstants>$(DefineConstants);VNCPROJECTREF</DefineConstants> -->
+    </PropertyGroup>
+
+    <Choose>
+        <When Condition="'$(DefineConstants.Contains(VNCPROJECTREF))'">
+            <ItemGroup>
+                <ProjectReference Include="..\VNC.Core\VNC.Core.csproj" />
+            </ItemGroup>
+        </When>
+        <When Condition="'!$(DefineConstants.Contains(VNCPROJECTREF))'">
+            <ItemGroup>
+                <PackageReference Include="VNC.Core" Version="2.1.6" />
+            </ItemGroup>
+        </When>
+    </Choose>
+
 </Project>

@@ -26,12 +26,7 @@
     <ItemGroup>
         <PackageReference Include="System.DirectoryServices" Version="5.0.0" />
         <PackageReference Include="System.DirectoryServices.AccountManagement" Version="5.0.0" />
-        <PackageReference Include="VNC.Core" Version="2.0.0" />
     </ItemGroup>
-
-    <!--<ItemGroup>
-      <ProjectReference Include="..\VNC.Core\VNC.Core.csproj" />
-    </ItemGroup>-->
     
     <ItemGroup>
       <None Include="..\LICENSE">
@@ -59,5 +54,23 @@
     <!--<Target Name="PostBuild" AfterTargets="PostBuildEvent">
       <Exec Command="PowerShell -ExecutionPolicy Unrestricted -file $(ProjectDir)Execute-PostBuild.ps1 $(ConfigurationName) $(PlatformName) $(TargetName) $(OutputPath) -V" />
     </Target>-->
-    
+
+    <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net6.0-windows|AnyCPU'">
+        <!-- Uncoment next line to switch to ProjectReference(s) -->
+        <!-- <DefineConstants>$(DefineConstants);VNCPROJECTREF</DefineConstants> -->
+    </PropertyGroup>
+
+    <Choose>
+        <When Condition="'$(DefineConstants.Contains(VNCPROJECTREF))'">
+            <ItemGroup>
+                <ProjectReference Include="..\VNC.Core\VNC.Core.csproj" />
+            </ItemGroup>
+        </When>
+        <When Condition="'!$(DefineConstants.Contains(VNCPROJECTREF))'">
+            <ItemGroup>
+                <PackageReference Include="VNC.Core" Version="2.1.6" />
+            </ItemGroup>
+        </When>
+    </Choose>
+
 </Project>
