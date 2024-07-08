@@ -1,20 +1,26 @@
 ﻿namespace VNC.WPF.Presentation
 {
-    public class Common
+    public class Common : VNC.Core.Common
     {
+        public new const string LOG_CATEGORY = "VNCPresentation";
 
-        public const string LOG_CATEGORY = "VNCPresentation";
+        public const int DEFAULT_WINDOW_WIDTH_XLARGE = 1800;
+        public const int DEFAULT_WINDOW_HEIGHT_XLARGE = 1200;
 
-        internal const int DEFAULT_WINDOW_LARGE_WIDTH = 1800;
-        internal const int DEFAULT_WINDOW_LARGE_HEIGHT = 1200;
+        public const int DEFAULT_WINDOW_WIDTH_LARGE = 1350;
+        public const int DEFAULT_WINDOW_HEIGHT_LARGE = 900;
 
-        internal const int DEFAULT_WINDOW_WIDTH = 900;
-        internal const int DEFAULT_WINDOW_HEIGHT = 600;
+        public const int DEFAULT_WINDOW_WIDTH = 900;
+        public const int DEFAULT_WINDOW_HEIGHT = 600;
 
-        internal const int DEFAULT_WINDOW_SMALL_WIDTH = 450;
-        internal const int DEFAULT_WINDOW_SMALL_HEIGHT = 300;
+        public const int DEFAULT_WINDOW_WIDTH_SMALL = 450;
+        public const int DEFAULT_WINDOW_HEIGHT_SMALL = 300;
 
-        internal const int WINDOW_HOSTING_USER_CONTROL_WIDTH_PAD = 30;
-        internal const int WINDOW_HOSTING_USER_CONTROL_HEIGHT_PAD = 75;
+        // These values are added to the dimensions of a hosting window if the
+        // hosted User_Control specifies values for MinWidth/MinHeight.
+        // They have not been thought through but do seem to "work".
+
+        public const int WINDOW_HOSTING_USER_CONTROL_WIDTH_PAD = 30;
+        public const int WINDOW_HOSTING_USER_CONTROL_HEIGHT_PAD = 75;
     }
 }

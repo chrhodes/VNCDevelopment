@@ -10,29 +10,20 @@ using Prism.Events;
 using Prism.Services.Dialogs;
 
 using VNC.Core.Events;
-using VNC.Core.Services;
 
 namespace VNC.Core.Mvvm
 {
     public abstract class DetailViewModelBase : EventViewModelBase, IDetailViewModel
     {
-        private string _title;
-        private int _id;
-
-        private bool _hasChanges;
-
-        public ICommand SaveCommand { get; }
-
-        public ICommand DeleteCommand { get; }
-
-        public ICommand CloseDetailViewCommand { get; }
+        #region Constructors, Initialization, and Load
 
         public DetailViewModelBase(
             IEventAggregator eventAggregator,
             IDialogService dialogService) : base(eventAggregator, dialogService)
         {
 #if LOGGING
-            long startTicks = Log.CONSTRUCTOR("Enter", Common.LOG_CATEGORY);
+            Int64 startTicks = 0;
+            if (Common.VNCCoreLogging.Constructor) startTicks = Log.CONSTRUCTOR("Enter", Common.LOG_CATEGORY);
 #endif
             SaveCommand = new DelegateCommand(
                 SaveExecute, SaveCanExecute);
@@ -43,66 +34,25 @@ namespace VNC.Core.Mvvm
             CloseDetailViewCommand = new DelegateCommand(
                 CloseDetailViewExecute);
 #if LOGGING
-            Log.CONSTRUCTOR("Exit", Common.LOG_CATEGORY, startTicks);
+            if (Common.VNCCoreLogging.Constructor) Log.CONSTRUCTOR("Exit", Common.LOG_CATEGORY, startTicks);
 #endif
         }
 
-        protected virtual void PublishAfterCollectionSavedEvent()
-        {
-#if LOGGING
-            long startTicks = Log.EVENT("Enter", Common.LOG_CATEGORY);
-#endif
+        #endregion
 
-            EventAggregator.GetEvent<AfterCollectionSavedEvent>()
-                .Publish(new AfterCollectionSavedEventArgs
-                {
-                    ViewModelName = this.GetType().Name
-                });
-#if LOGGING
-            Log.EVENT("Exit", Common.LOG_CATEGORY, startTicks);
-#endif
-        }
+        #region Enums (none)
 
-        protected virtual void CloseDetailViewExecute()
-        {
-#if LOGGING
-            long startTicks = Log.VIEWMODEL("Enter", Common.LOG_CATEGORY);
-#endif
 
-            if (HasChanges)
-            {
-                var result = MessageBox.Show(
-                    "You've made changes.  Close this item?", "Question",MessageBoxButton.OKCancel);
+        #endregion
 
-                if (result == MessageBoxResult.Cancel)
-                {
-                    return;
-                }
-            }
+        #region Structures (none)
 
-            PublishAfterDetailClosedEvent();
-#if LOGGING
-            Log.VIEWMODEL("Exit", Common.LOG_CATEGORY, startTicks);
-#endif
-        }
 
-        private void PublishAfterDetailClosedEvent()
-        {
-#if LOGGING
-            long startTicks = Log.EVENT("Enter", Common.LOG_CATEGORY);
-#endif
+        #endregion
 
-            EventAggregator.GetEvent<AfterDetailClosedEvent>()
-                .Publish(new AfterDetailClosedEventArgs
-                {
-                    Id = this.Id,
-                    ViewModelName = this.GetType().Name
-                });
-#if LOGGING
-            Log.EVENT("Exit", Common.LOG_CATEGORY, startTicks);
-#endif
-        }
+        #region Fields and Properties
 
+        private int _id;
         public int Id
         {
             get { return _id; }
@@ -114,7 +64,8 @@ namespace VNC.Core.Mvvm
                 OnPropertyChanged();
             }
         }
-     
+
+        private string _title;
         public string Title
         {
             get { return _title; }
@@ -127,6 +78,7 @@ namespace VNC.Core.Mvvm
             }
         }
 
+        private bool _hasChanges;
         public bool HasChanges
         {
             get { return _hasChanges; }
@@ -141,61 +93,148 @@ namespace VNC.Core.Mvvm
             }
         }
 
-        public abstract Task LoadAsync(int id);
+        public ICommand SaveCommand { get; }
 
-        protected abstract bool DeleteCanExecute();
+        public ICommand DeleteCommand { get; }
 
-        protected abstract void DeleteExecute();
+        public ICommand CloseDetailViewCommand { get; }
 
-        protected abstract bool SaveCanExecute();
+        #endregion
 
-        protected abstract void SaveExecute();
+        #region Event Handlers
+
+        protected virtual void CloseDetailViewExecute()
+        {
+#if LOGGING
+            Int64 startTicks = 0;
+            if (Common.VNCCoreLogging.EventHandler) startTicks = Log.EVENT_HANDLER("Enter", Common.LOG_CATEGORY);
+#endif
+
+            if (HasChanges)
+            {
+                var result = MessageBox.Show(
+                    "You've made changes.  Close this item?", "Question", MessageBoxButton.OKCancel);
+
+                if (result == MessageBoxResult.Cancel)
+                {
+                    return;
+                }
+            }
+
+            PublishAfterDetailClosedEvent();
+#if LOGGING
+            if (Common.VNCCoreLogging.EventHandler) Log.EVENT_HANDLER("Exit", Common.LOG_CATEGORY, startTicks);
+#endif
+        }
+
+        #endregion
+
+        #region Commands (none)
+
+
+
+        #endregion
+
+        #region Event (publish)
+
+        protected virtual void PublishAfterCollectionSavedEvent()
+        {
+#if LOGGING
+            Int64 startTicks = 0;
+            if (Common.VNCCoreLogging.Event) startTicks = Log.EVENT("Enter", Common.LOG_CATEGORY);
+#endif
+
+            EventAggregator.GetEvent<AfterCollectionSavedEvent>()
+                .Publish(new AfterCollectionSavedEventArgs
+                {
+                    ViewModelName = this.GetType().Name
+                });
+#if LOGGING
+            if (Common.VNCCoreLogging.Event) Log.EVENT("Exit", Common.LOG_CATEGORY, startTicks);
+#endif
+        }
+
+        protected virtual void PublishAfterDetailClosedEvent()
+        {
+#if LOGGING
+            Int64 startTicks = 0;
+            if (Common.VNCCoreLogging.Event) startTicks = Log.EVENT("Enter", Common.LOG_CATEGORY);
+#endif
+
+            EventAggregator.GetEvent<AfterDetailClosedEvent>()
+                .Publish(new AfterDetailClosedEventArgs
+                {
+                    Id = this.Id,
+                    ViewModelName = this.GetType().Name
+                });
+#if LOGGING
+            if (Common.VNCCoreLogging.Event) Log.EVENT("Exit", Common.LOG_CATEGORY, startTicks);
+#endif
+        }
 
         protected virtual void PublishAfterDetailDeletedEvent(int modelId)
         {
 #if LOGGING
-            long startTicks = Log.EVENT("Enter", Common.LOG_CATEGORY);
+            Int64 startTicks = 0;
+            if (Common.VNCCoreLogging.Event) startTicks = Log.EVENT("Enter", Common.LOG_CATEGORY);
 #endif
 
             EventAggregator.GetEvent<AfterDetailDeletedEvent>()
-                .Publish
-                (
-                    new AfterDetailDeletedEventArgs
-                    {
-                        Id = modelId,
-                        ViewModelName = this.GetType().Name
-                    }
-                );
+                .Publish(new AfterDetailDeletedEventArgs
+                {
+                    Id = modelId,
+                    ViewModelName = this.GetType().Name
+                });
 #if LOGGING
-            Log.EVENT("Exit", Common.LOG_CATEGORY, startTicks);
+            if (Common.VNCCoreLogging.Event) Log.EVENT("Exit", Common.LOG_CATEGORY, startTicks);
 #endif
         }
 
         protected virtual void PublishAfterDetailSavedEvent(int modelId, string displayMember)
         {
 #if LOGGING
-            long startTicks = Log.EVENT("Enter", Common.LOG_CATEGORY);
+            Int64 startTicks = 0;
+            if (Common.VNCCoreLogging.Event) startTicks = Log.EVENT("Enter", Common.LOG_CATEGORY);
 #endif
 
             EventAggregator.GetEvent<AfterDetailSavedEvent>()
-                .Publish
-                (
-                    new AfterDetailSavedEventArgs
-                    {
-                        Id = modelId,
-                        DisplayMember = displayMember,
-                        ViewModelName = this.GetType().Name
-                    }
-                );
+                .Publish(new AfterDetailSavedEventArgs
+                {
+                    Id = modelId,
+                    DisplayMember = displayMember,
+                    ViewModelName = this.GetType().Name
+                });
 #if LOGGING
-            Log.EVENT("Exit", Common.LOG_CATEGORY, startTicks);
+            if (Common.VNCCoreLogging.Event) Log.EVENT("Exit", Common.LOG_CATEGORY, startTicks);
 #endif
         }
+
+        #endregion
+
+        #region Public Methods
+
+        public abstract Task LoadAsync(int id);
+
+        #endregion
+
+        #region Protected Methods
+
+        // TODO(crhodes)
+        // Should these do a bit more?  Maybe publish event?
+
+        protected abstract void DeleteExecute();
+
+        protected abstract bool DeleteCanExecute();
+
+        protected abstract void SaveExecute();
+
+        protected abstract bool SaveCanExecute();
 
         protected virtual async Task SaveWithOptimisticConcurrencyAsync(Func<Task> saveFunc, Action afterSaveAction)
         {
 #if LOGGING
-            Int64 startTicks = Log.VIEWMODEL("Enter", Common.LOG_CATEGORY);
+            Int64 startTicks = 0;
+            if (Common.VNCCoreLogging.Persistence) startTicks = Log.PERSISTENCE("Enter", Common.LOG_CATEGORY);
 #endif
 
             try
@@ -238,8 +277,16 @@ namespace VNC.Core.Mvvm
 
             afterSaveAction();
 #if LOGGING
-            Log.VIEWMODEL("Exit", Common.LOG_CATEGORY, startTicks);
+            if (Common.VNCCoreLogging.Persistence) Log.PERSISTENCE("Exit", Common.LOG_CATEGORY, startTicks);
 #endif
         }
+
+        #endregion
+
+        #region Private Methods (none)
+
+
+        #endregion
+
     }
 }

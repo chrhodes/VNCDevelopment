@@ -16,7 +16,7 @@
     xmlns:prism="http://prismlibrary.com/"
     prism:ViewModelLocator.AutoWireViewModel="True"
     
-    xmlns:localc="clr-namespace:VNC.WPF.Presentation.Dx.Converters"
+    xmlns:vncconverters="clr-namespace:VNC.WPF.Presentation.Converters;assembly=VNC.WPF.Presentation"
     
     Width="300" Height="200"
 >
@@ -27,7 +27,7 @@
     </d:DesignerProperties.DesignStyle>
 
     <UserControl.Resources>
-        <localc:SelectedItemsToListOfStringConverter x:Key="SelectedItemsToListOfStringConverter" />
+        <vncconverters:SelectedItemsToListOfStringConverter x:Key="SelectedItemsToListOfStringConverter" />
     </UserControl.Resources>
 
     <Grid x:Name="LayoutRoot" Margin="5">

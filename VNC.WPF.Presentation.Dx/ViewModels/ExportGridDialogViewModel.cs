@@ -11,7 +11,25 @@ using Prism.Services.Dialogs;
 namespace VNC.Core.Presentation.ViewModels
 {
     public class ExportGridDialogViewModel : BindableBase, IDialogAware
-    {     
+    {
+        #region Constructors, Initialization, and Load
+
+
+        #endregion
+
+        #region Enums (none)
+
+
+        #endregion
+
+        #region Structures (none)
+
+
+        #endregion
+
+        #region Fields and Properties
+
+        public event Action<IDialogResult> RequestClose;
 
         private DelegateCommand<string> _closeDialogCommand;
         public DelegateCommand<string> CloseDialogCommand =>
@@ -60,6 +78,8 @@ namespace VNC.Core.Presentation.ViewModels
             }
         }
 
+        private ObservableCollection<string> FileFormats { get; set; }
+
         private List<string> _selectedFileFormats;
         public List<string> SelectedFileFormats
         {
@@ -72,8 +92,40 @@ namespace VNC.Core.Presentation.ViewModels
                 RaisePropertyChanged();
             }
         }
-        
-        public event Action<IDialogResult> RequestClose;
+
+        #endregion
+
+        #region Event Handlers (none)
+
+        public virtual void OnDialogClosed()
+        {
+
+        }
+
+        public virtual void OnDialogOpened(IDialogParameters parameters)
+        {
+            if (parameters.ContainsKey("outputfilenameandpath"))
+            {
+                OutputFileNameAndPath = parameters.GetValue<string>("outputfilenameandpath");
+            }
+
+            if (parameters.ContainsKey("gridcontrol"))
+            {
+                _activeGridControl = parameters.GetValue<GridControl>("gridcontrol");
+            }
+            else
+            {
+
+            }
+        }
+
+        #endregion
+
+        #region Commands (none)
+
+        #endregion
+
+        #region Public Methods
 
         protected virtual void CloseDialog(string parameter)
         {
@@ -113,80 +165,24 @@ namespace VNC.Core.Presentation.ViewModels
             RaiseRequestClose(new DialogResult(result));
         }
 
-        public virtual void RaiseRequestClose(IDialogResult dialogResult)
-        {
-            RequestClose?.Invoke(dialogResult);
-        }
-
         public virtual bool CanCloseDialog()
         {
             return true;
         }
 
-        public virtual void OnDialogClosed()
+        public virtual void RaiseRequestClose(IDialogResult dialogResult)
         {
-
+            RequestClose?.Invoke(dialogResult);
         }
 
-        public virtual void OnDialogOpened(IDialogParameters parameters)
-        {
-            if (parameters.ContainsKey("outputfilenameandpath"))
-            {
-                OutputFileNameAndPath = parameters.GetValue<string>("outputfilenameandpath");
-            }
+        #endregion
 
-            if (parameters.ContainsKey("gridcontrol"))
-            {
-                _activeGridControl = parameters.GetValue<GridControl>("gridcontrol");
-            }
-            else
-            {
-                
-            }
-        }
-
-        private ObservableCollection<string> FileFormats { get; set; }
-
-        #region Constructors, Initialization, and Load
+        #region Protected Methods (none)
 
 
         #endregion
 
-        #region Enums (None)
-
-
-        #endregion
-
-        #region Structures (None)
-
-
-        #endregion
-
-        #region Fields and Properties (None)
-
-
-        #endregion
-
-        #region Event Handlers (None)
-
-
-        #endregion
-
-        #region Commands (None)
-
-        #endregion
-
-        #region Public Methods (None)
-
-
-        #endregion
-
-        #region Protected Methods (None)
-
-
-        #endregion
-
-        #region Private Methods (None)
+        #region Private Methods (none)
 
 
         #endregion

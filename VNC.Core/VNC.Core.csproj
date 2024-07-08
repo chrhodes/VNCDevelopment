@@ -8,10 +8,10 @@
         <RootNamespace>VNC.Core</RootNamespace>
         <SignAssembly>true</SignAssembly>
         <AssemblyOriginatorKeyFile>VNC.snk</AssemblyOriginatorKeyFile>
-        <VersionPrefix>2.1.6</VersionPrefix>
+        <VersionPrefix>2.1.7</VersionPrefix>
         <VersionSuffix>Release</VersionSuffix>
-        <FileVersion>2024.06.19A</FileVersion>
-        <PackageVersion>2.1.6</PackageVersion>
+        <FileVersion>2024.07.03A</FileVersion>
+        <PackageVersion>2.1.7</PackageVersion>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageLicenseFile>LICENSE</PackageLicenseFile>
         <PackageReadmeFile>README.md</PackageReadmeFile>
@@ -77,7 +77,12 @@
 
     <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net6.0-windows|AnyCPU'">
         <!-- Uncoment next line to switch to ProjectReference(s) -->
-        <!-- <DefineConstants>$(DefineConstants);VNCPROJECTREF</DefineConstants> -->
+         <!--<DefineConstants>$(DefineConstants);VNCPROJECTREF</DefineConstants>--> 
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net48|AnyCPU'">
+        <!-- Uncoment next line to switch to ProjectReference(s) -->
+        <!--<DefineConstants>$(DefineConstants);VNCPROJECTREF</DefineConstants>-->
     </PropertyGroup>
 
     <Choose>

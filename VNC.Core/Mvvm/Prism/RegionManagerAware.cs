@@ -8,9 +8,6 @@ namespace VNC.Core.Mvvm.Prism
     {
         public static void SetRegionManagerAware(object viewOrViewModel, IRegionManager regionManager)
         {
-#if LOGGING
-            long startTicks = Log.PRESENTATION($"Enter", Common.LOG_CATEGORY);
-#endif
             // Want to support View and/or ViewModel first approaches so
             // Perhaps this could become an extension method on RegionManager!
 
@@ -42,9 +39,6 @@ namespace VNC.Core.Mvvm.Prism
                     isRegionManagerAwareDataContext.RegionManager = regionManager;
                 }
             }
-#if LOGGING
-            Log.PRESENTATION($"Exit", Common.LOG_CATEGORY, startTicks);
-#endif
         }
     }
 }

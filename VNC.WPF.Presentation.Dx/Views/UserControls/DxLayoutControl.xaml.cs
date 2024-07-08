@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System;
+using System.Windows.Controls;
 
 namespace VNC.WPF.Presentation.Dx.Views
 {
@@ -6,7 +7,8 @@ namespace VNC.WPF.Presentation.Dx.Views
     {
         public DxLayoutControl()
         {
-            long startTicks = Log.CONSTRUCTOR("Enter", Common.LOG_CATEGORY);
+            Int64 startTicks = 0;
+            startTicks = Log.CONSTRUCTOR("Enter", Common.LOG_CATEGORY);
 
             InitializeComponent();
 

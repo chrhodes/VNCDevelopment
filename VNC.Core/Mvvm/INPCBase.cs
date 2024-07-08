@@ -1,5 +1,5 @@
-﻿using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
 namespace VNC.Core.Mvvm
@@ -7,21 +7,6 @@ namespace VNC.Core.Mvvm
     public class INPCBase : INotifyPropertyChanged
     {
         #region INotifyPropertyChanged
-
-        private bool _logOnPropertyChanged = false;
-
-        [Display(AutoGenerateField = false)]
-        public bool LogOnPropertyChanged
-        {
-            get => _logOnPropertyChanged;
-            set
-            {
-                if (_logOnPropertyChanged == value)
-                    return;
-                _logOnPropertyChanged = value;
-                OnPropertyChanged();
-            }
-        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -34,22 +19,15 @@ namespace VNC.Core.Mvvm
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-
-            long startTicks = 0;
+            Int64 startTicks = 0;
 #if LOGGING
-            if (LogOnPropertyChanged)
-            {
-                startTicks = Log.VIEWMODEL_LOW($"Enter ({propertyName})", Common.LOG_CATEGORY);
-            }
+            if (Common.VNCCoreLogging.INPC) startTicks = Log.VIEW_LOW($"Enter ({propertyName})", Common.LOG_CATEGORY);
 #endif
             // This is the new CompilerServices attribute!
 
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 #if LOGGING
-            if (LogOnPropertyChanged)
-            {
-                Log.VIEWMODEL_LOW("Exit", Common.LOG_CATEGORY, startTicks);
-            }
+            if (Common.VNCCoreLogging.INPC) Log.VIEW_LOW("Exit", Common.LOG_CATEGORY, startTicks);
 #endif
         }
 

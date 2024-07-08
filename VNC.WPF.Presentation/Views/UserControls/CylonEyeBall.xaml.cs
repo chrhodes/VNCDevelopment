@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 
 namespace VNC.WPF.Presentation.Views
 {
@@ -9,11 +8,7 @@ namespace VNC.WPF.Presentation.Views
 
         public CylonEyeBall()
         {
-            Int64 startTicks = Log.CONSTRUCTOR("Enter", Common.LOG_CATEGORY);
-
             InitializeComponent();
-
-            Log.CONSTRUCTOR("Exit", Common.LOG_CATEGORY, startTicks);
         }
     }
 }

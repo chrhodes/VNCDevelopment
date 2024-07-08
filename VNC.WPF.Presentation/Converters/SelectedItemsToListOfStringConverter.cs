@@ -4,7 +4,7 @@ using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Markup;
 
-namespace VNC.WPF.Presentation.Dx.Converters
+namespace VNC.WPF.Presentation.Converters
 {
     public class SelectedItemsToListOfStringConverter : MarkupExtension, IValueConverter
     {

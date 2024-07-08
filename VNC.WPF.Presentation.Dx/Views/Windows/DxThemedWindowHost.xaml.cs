@@ -79,12 +79,12 @@ namespace VNC.WPF.Presentation.Dx.Views
 
         #endregion
 
-        #region Enums (None)
+        #region Enums (none)
 
 
         #endregion
 
-        #region Structures (None)
+        #region Structures (none)
 
 
         #endregion
@@ -156,7 +156,7 @@ namespace VNC.WPF.Presentation.Dx.Views
 
         #endregion
 
-        #region Commands (None)
+        #region Commands (none)
 
         #endregion
 
@@ -217,7 +217,7 @@ namespace VNC.WPF.Presentation.Dx.Views
             ShowWindowMode mode,
             UserControl userControl)
         {
-            long startTicks = Log.PRESENTATION("Enter", Common.LOG_CATEGORY);
+            Int64 startTicks = Log.PRESENTATION("Enter", Common.LOG_CATEGORY);
 
             if (!(userControl is null))
             {
@@ -235,7 +235,7 @@ namespace VNC.WPF.Presentation.Dx.Views
             ShowWindowMode mode,
             ViewModelBase viewModel)
         {
-            long startTicks = Log.PRESENTATION("Enter", Common.LOG_CATEGORY);
+            Int64 startTicks = Log.PRESENTATION("Enter", Common.LOG_CATEGORY);
 
             if (!(viewModel.View is null))
             {
@@ -253,7 +253,7 @@ namespace VNC.WPF.Presentation.Dx.Views
             ShowWindowMode mode,
             string userControlName = null)
         {
-            long startTicks = Log.PRESENTATION("Enter", Common.LOG_CATEGORY);
+            Int64 startTicks = Log.PRESENTATION("Enter", Common.LOG_CATEGORY);
 
             if (!(userControlName is null))
             {
@@ -269,7 +269,7 @@ namespace VNC.WPF.Presentation.Dx.Views
             string title,
             int width, int height,
             ShowWindowMode mode,
-            long startTicks)
+            Int64 startTicks)
         {
             Title = title;
             Width = width;
@@ -302,12 +302,12 @@ namespace VNC.WPF.Presentation.Dx.Views
 
         #endregion
 
-        #region Protected Methods (None)
+        #region Protected Methods (none)
 
 
         #endregion
 
-        #region Private Methods (None)
+        #region Private Methods (none)
 
 
         #endregion
@@ -326,7 +326,7 @@ namespace VNC.WPF.Presentation.Dx.Views
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
 
-            long startTicks = 0;
+            Int64 startTicks = 0;
             //#if LOGGING
             //            if (LogOnPropertyChanged)
             //            {

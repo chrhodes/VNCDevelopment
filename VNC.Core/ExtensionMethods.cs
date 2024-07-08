@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace VNC.Core
+﻿namespace VNC.Core
 {
     public static class ExtensionMethods
     {
@@ -19,7 +13,7 @@ namespace VNC.Core
         }
 
         /// <summary>
-        /// Surrounds string in double quotes "<string>"</string>
+        /// Surrounds string in single quotes '<string>'</string>
         /// </summary>
         /// <param name="text"></param>
         /// <returns></returns>

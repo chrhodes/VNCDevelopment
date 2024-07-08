@@ -1,5 +1,5 @@
-﻿using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
@@ -8,14 +8,29 @@ namespace VNC.Core.Mvvm
 {
     public class ViewBase : UserControl, IView, INotifyPropertyChanged
     {
+        #region Constructors, Initialization, and Load
+
         public ViewBase()
         {
+#if LOGGING
+            Int64 startTicks = 0;
+            if (Common.VNCCoreLogging.Constructor) startTicks = Log.CONSTRUCTOR("Enter/Exit", Common.LOG_CATEGORY);
+#endif
         }
 
         public ViewBase(IViewModel viewModel)
         {
+#if LOGGING
+            Int64 startTicks = 0;
+            if (Common.VNCCoreLogging.Constructor) startTicks = Log.CONSTRUCTOR("Enter", Common.LOG_CATEGORY);
+#endif
             ViewModel = viewModel;
+#if LOGGING
+            if (Common.VNCCoreLogging.Constructor) Log.CONSTRUCTOR("Exit", Common.LOG_CATEGORY, startTicks);
+#endif
         }
+
+        #endregion
 
         private IViewModel _viewModel;
 
@@ -30,22 +45,7 @@ namespace VNC.Core.Mvvm
             }
         }
 
-        private bool _logOnPropertyChanged = false;
-
-        [Display(AutoGenerateField = false)]
-        public bool LogOnPropertyChanged
-        {
-            get => _logOnPropertyChanged;
-            set
-            {
-                if (_logOnPropertyChanged == value)
-                    return;
-                _logOnPropertyChanged = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private Visibility _developerUIMode = Visibility.Visible;
+        private Visibility _developerUIMode = Common.DeveloperUIMode;
         public Visibility DeveloperUIMode
         {
             get => _developerUIMode;
@@ -71,21 +71,15 @@ namespace VNC.Core.Mvvm
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            long startTicks = 0;
+            Int64 startTicks = 0;
 #if LOGGING
-            if (LogOnPropertyChanged)
-            {
-                startTicks = Log.VIEW_LOW($"Enter ({propertyName})", Common.LOG_CATEGORY);
-            }
+            if (Common.VNCCoreLogging.INPC) startTicks = Log.VIEW_LOW($"Enter ({propertyName})", Common.LOG_CATEGORY);
 #endif
             // This is the new CompilerServices attribute!
 
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 #if LOGGING
-            if (LogOnPropertyChanged)
-            {
-                Log.VIEW_LOW("Exit", Common.LOG_CATEGORY, startTicks);
-            }
+            if (Common.VNCCoreLogging.INPC) Log.VIEW_LOW("Exit", Common.LOG_CATEGORY, startTicks);
 #endif
         }
 

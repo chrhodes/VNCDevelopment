@@ -4,10 +4,37 @@ using System.ComponentModel.DataAnnotations;
 using System.Runtime.CompilerServices;
 using System.Windows;
 
+using Prism.Events;
+
 namespace VNC.Core.Mvvm
 {
     public class ViewModelBase : IViewModel, INotifyPropertyChanged
     {
+        #region Constructors, Initialization, and Load
+
+        public ViewModelBase()
+        {
+#if LOGGING
+            Int64 startTicks = 0;
+            if (Common.VNCCoreLogging.Constructor) startTicks = Log.CONSTRUCTOR("Enter/Exit", Common.LOG_CATEGORY);
+#endif
+        }
+
+        public ViewModelBase(IView view)
+        {
+#if LOGGING
+            Int64 startTicks = 0;
+            if (Common.VNCCoreLogging.Constructor) startTicks = Log.CONSTRUCTOR("Enter", Common.LOG_CATEGORY);
+#endif
+            View = view;
+            View.ViewModel = this;
+#if LOGGING
+            if (Common.VNCCoreLogging.Constructor) Log.CONSTRUCTOR("Exit", Common.LOG_CATEGORY, startTicks);
+#endif
+        }
+
+        #endregion
+
         #region Fields and Properties
 
         [Display(AutoGenerateField = false)]
@@ -17,40 +44,27 @@ namespace VNC.Core.Mvvm
             set;
         }
 
-        public ViewModelBase()
-        {
-        }
-
-        public ViewModelBase(IView view)
-        {
-            View = view;
-            View.ViewModel = this;
-        }
-
         private bool _isBusy;
-
-        [Display(AutoGenerateField = false)]
         public bool IsBusy
         {
             get { return _isBusy; }
             set
             {
+                if (_isBusy == value) return;
                 _isBusy = value;
-                OnPropertyChanged("IsBusy");
+                OnPropertyChanged();
             }
         }
 
-        private bool _logOnPropertyChanged = false;
+        private string _message;
 
-        [Display(AutoGenerateField = false)]
-        public bool LogOnPropertyChanged
+         public string Message
         {
-            get => _logOnPropertyChanged;
+            get { return _message; }
             set
             {
-                if (_logOnPropertyChanged == value)
-                    return;
-                _logOnPropertyChanged = value;
+                if (_message == value) return;
+                _message = value;
                 OnPropertyChanged();
             }
         }
@@ -130,21 +144,15 @@ namespace VNC.Core.Mvvm
 
         protected virtual void OnPropertyChanged([CallerMemberName]string propertyName = null)
         {
-            long startTicks = 0;
+            Int64 startTicks = 0;
 #if LOGGING
-            if (LogOnPropertyChanged)
-            {
-                startTicks = Log.VIEWMODEL_LOW($"Enter ({propertyName})", Common.LOG_CATEGORY);
-            }
+            if (Common.VNCCoreLogging.ViewModel) startTicks = Log.VIEWMODEL_LOW($"Enter ({propertyName})", Common.LOG_CATEGORY);
 #endif
             // This is the new CompilerServices attribute!
 
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 #if LOGGING
-            if (LogOnPropertyChanged)
-            {
-                Log.VIEWMODEL_LOW("Exit", Common.LOG_CATEGORY, startTicks);
-            }
+            if (Common.VNCCoreLogging.ViewModel) Log.VIEWMODEL_LOW("Exit", Common.LOG_CATEGORY, startTicks);
 #endif
         }
 

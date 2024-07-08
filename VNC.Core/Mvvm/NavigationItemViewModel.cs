@@ -11,6 +11,8 @@ namespace VNC.Core.Mvvm
 {
     public class NavigationItemViewModel : EventViewModelBase
     {
+        #region Constructors, Initialization, and Load
+
         private string _displayMember;
         private string _detailViewModelName;
 
@@ -22,7 +24,8 @@ namespace VNC.Core.Mvvm
             IDialogService dialogService) : base(eventAggregator, dialogService)
         {
 #if LOGGING
-            Int64 startTicks = Log.CONSTRUCTOR($"Enter id:({id}) displayMember:({displayMember}) detailViewModelName:({detailViewModelName})", Common.LOG_CATEGORY);
+            Int64 startTicks = 0;
+            if (Common.VNCCoreLogging.Constructor) startTicks = Log.CONSTRUCTOR($"Enter id:({id}) displayMember:({displayMember}) detailViewModelName:({detailViewModelName})", Common.LOG_CATEGORY);
 #endif
             Id = id;
             DisplayMember = displayMember;
@@ -30,9 +33,13 @@ namespace VNC.Core.Mvvm
 
             OpenDetailViewCommand = new DelegateCommand(OpenDetailViewExecute);
 #if LOGGING
-            Log.CONSTRUCTOR("Exit", Common.LOG_CATEGORY, startTicks);
+            if (Common.VNCCoreLogging.Constructor) Log.CONSTRUCTOR("Exit", Common.LOG_CATEGORY, startTicks);
 #endif
         }
+
+        #endregion
+
+        #region Fields & Properties
 
         public int Id { get; set; }
 
@@ -50,41 +57,47 @@ namespace VNC.Core.Mvvm
 
         public ICommand OpenDetailViewCommand { get; }
 
+        #endregion
+
         // TODO(crhodes)
         // Maybe this should be protected virtual
 
         private void OpenDetailViewExecute()
         {
 #if LOGGING
-            Int64 startTicks = Log.EVENT_HANDLER("Enter", Common.LOG_CATEGORY);
+            Int64 startTicks = 0;
+            if (Common.VNCCoreLogging.EventHandler) startTicks = Log.EVENT_HANDLER("Enter", Common.LOG_CATEGORY);
 #endif
 
             PublishOpenDetailViewEvent();
 
 #if LOGGING
-            Log.EVENT_HANDLER("Exit", Common.LOG_CATEGORY, startTicks);
+            if (Common.VNCCoreLogging.EventHandler) Log.EVENT_HANDLER("Exit", Common.LOG_CATEGORY, startTicks);
 #endif
         }
+
+        #region Event (publish)
 
         private void PublishOpenDetailViewEvent()
         {
 #if LOGGING
-            Int64 startTicks = Log.EVENT($"Enter Id:({Id})", Common.LOG_CATEGORY);
+            Int64 startTicks = 0;
+            if (Common.VNCCoreLogging.Event) startTicks = Log.EVENT($"Enter Id:({Id})", Common.LOG_CATEGORY);
 #endif
 
-            EventAggregator.GetEvent<OpenDetailViewEvent>().Publish
-            (
-                new OpenDetailViewEventArgs
+            EventAggregator.GetEvent<OpenDetailViewEvent>()
+                .Publish(new OpenDetailViewEventArgs
                 {
                     Id = Id,
                     ViewModelName = _detailViewModelName
-                }
-            );
+                });
 
 #if LOGGING
-            Log.EVENT("Exit", Common.LOG_CATEGORY, startTicks);
+            if (Common.VNCCoreLogging.Event) Log.EVENT("Exit", Common.LOG_CATEGORY, startTicks);
 #endif
         }
+
+        #endregion
     }
 }
 
