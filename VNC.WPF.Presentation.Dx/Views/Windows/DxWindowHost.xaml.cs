@@ -268,10 +268,10 @@ namespace VNC.WPF.Presentation.Dx.Views
             string title,
             int width, int height,
             ShowWindowMode mode,
-            Int64 startTicks2)
+            Int64 startTicks)
         {
 #if LOGGING
-            Int64 startTicks = 0;
+            Int64 startTicks2 = 0;
             if (Common.VNCCoreLogging.Presentation) startTicks = Log.PRESENTATION("Enter", Common.LOG_CATEGORY);
 #endif
 
@@ -281,8 +281,10 @@ namespace VNC.WPF.Presentation.Dx.Views
 
             if (mode == ShowWindowMode.Modal_ShowDialog)
             {
+#if LOGGING
                 Int64 endTicks2 = 0;
                 if (Common.VNCCoreLogging.Presentation) endTicks2 = Log.PRESENTATION("Exit", Common.LOG_CATEGORY, startTicks);
+#endif
 
                 LoadTime = $"{Log.GetDuration(startTicks, endTicks2)}";
 
@@ -290,24 +292,28 @@ namespace VNC.WPF.Presentation.Dx.Views
             }
             else
             {
+#if LOGGING
                 Int64 endTicks2 = 0;
                 if (Common.VNCCoreLogging.Presentation) endTicks2 = Log.PRESENTATION("Exit", Common.LOG_CATEGORY, startTicks);
+#endif
 
                 LoadTime = $"{Log.GetDuration(startTicks, endTicks2)}";
 
                 Show();
             }
 
+#if LOGGING
             long endTicks = 0;
             if (Common.VNCCoreLogging.Presentation) endTicks = Log.PRESENTATION("Exit", Common.LOG_CATEGORY, startTicks);
+#endif
 
             // TODO(crhodes)
             // How is this used?
 
-            Tag = $"{GetType()} loadtime: {Log.GetDuration(startTicks2, endTicks)}";
+            Tag = $"{GetType()} loadtime: {Log.GetDuration(startTicks, endTicks)}";
 
 #if LOGGING
-            if (Common.VNCCoreLogging.Presentation) Log.PRESENTATION("Exit", Common.LOG_CATEGORY, startTicks);
+            if (Common.VNCCoreLogging.Presentation) Log.PRESENTATION("Exit", Common.LOG_CATEGORY, startTicks2);
 #endif
         }
 

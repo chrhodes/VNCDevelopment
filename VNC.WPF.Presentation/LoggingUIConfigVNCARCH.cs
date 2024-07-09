@@ -12,6 +12,8 @@ namespace VNC.WPF.Presentation
             // TODO(crhodes)
             // Need updated colors here
 
+            Info00 = new LoggingLevel { Label = "Info00", ToolTip = "Info00 / APPLICATION_START / APPLICATION_END / 100" };
+
             Arch00 = new LoggingLevel { Label = "CONSTRUCTOR", LabelColor = Color.Plum, Color = Color.Plum, ToolTip = "CONSTRUCTOR / Arch00 / 9000" };
             Arch01 = new LoggingLevel { Label = "EVENT", LabelColor = Color.FromArgb(255, 255, 0), Color = Color.FromArgb(255, 255, 0), ToolTip = "EVENT / Arch01 / 9001" };
             Arch02 = new LoggingLevel { Label = "EVENT_HANDLER", LabelColor = Color.Red, Color = Color.Red, ToolTip = "EVENT_HANDLER / Arch02 / 9002" };

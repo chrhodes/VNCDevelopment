@@ -22,7 +22,10 @@ namespace VNC.WPF.Presentation.Dx.Views
 
         public DxThemedWindowHost()
         {
-            Int64 startTicks = Log.CONSTRUCTOR("Enter", Common.LOG_CATEGORY);
+#if LOGGING
+            Int64 startTicks = 0;
+            if (Common.VNCCoreLogging.Constructor) startTicks = Log.CONSTRUCTOR("Enter", Common.LOG_CATEGORY);
+#endif
 
             InitializeComponent();
 
@@ -30,14 +33,18 @@ namespace VNC.WPF.Presentation.Dx.Views
             this.VerticalAlignment = System.Windows.VerticalAlignment.Center;
 
             spSizeInfo.DataContext = this;
-
-            Log.CONSTRUCTOR("Exit", Common.LOG_CATEGORY, startTicks);
+#if LOGGING
+            if (Common.VNCCoreLogging.Constructor) Log.CONSTRUCTOR("Exit", Common.LOG_CATEGORY, startTicks);
+#endif
         }
 
         // TODO: Maybe take size and position parameters
         public DxThemedWindowHost(string title, string userControlFullyQualifiedName)
         {
-            Int64 startTicks = Log.CONSTRUCTOR("Enter", Common.LOG_CATEGORY);
+#if LOGGING
+            Int64 startTicks = 0;
+            if (Common.VNCCoreLogging.Constructor) startTicks = Log.CONSTRUCTOR($"Enter {title} {userControlFullyQualifiedName}", Common.LOG_CATEGORY);
+#endif
 
             try
             {
@@ -53,12 +60,18 @@ namespace VNC.WPF.Presentation.Dx.Views
             {
                 MessageBox.Show(ex.ToString());
             }
-            Log.CONSTRUCTOR("Exit", Common.LOG_CATEGORY, startTicks);
+
+#if LOGGING
+            if (Common.VNCCoreLogging.Constructor) Log.CONSTRUCTOR("Exit", Common.LOG_CATEGORY, startTicks);
+#endif
         }
 
         public DxThemedWindowHost(string title, UserControl userControl)
         {
-            Int64 startTicks = Log.CONSTRUCTOR("Enter", Common.LOG_CATEGORY);
+#if LOGGING
+            Int64 startTicks = 0;
+            if (Common.VNCCoreLogging.Constructor) startTicks = Log.CONSTRUCTOR($"Enter {title} {userControl.GetType()}", Common.LOG_CATEGORY);
+#endif
 
             try
             {
@@ -74,7 +87,9 @@ namespace VNC.WPF.Presentation.Dx.Views
 
             }
 
-            Log.CONSTRUCTOR("Exit", Common.LOG_CATEGORY, startTicks);
+#if LOGGING
+            if (Common.VNCCoreLogging.Constructor) Log.CONSTRUCTOR("Exit", Common.LOG_CATEGORY, startTicks);
+#endif
         }
 
         #endregion
@@ -139,19 +154,31 @@ namespace VNC.WPF.Presentation.Dx.Views
 
         private void OnClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            Int64 startTicks = Log.EVENT_HANDLER("Enter", Common.LOG_CATEGORY);
+#if LOGGING
+            Int64 startTicks = 0;
+            if (Common.VNCCoreLogging.EventHandler) startTicks = Log.EVENT_HANDLER("Enter", Common.LOG_CATEGORY);
+#endif
 
             this.Hide();
             e.Cancel = true;
 
-            Log.EVENT_HANDLER("Exit", Common.LOG_CATEGORY, startTicks);
+#if LOGGING
+            if (Common.VNCCoreLogging.EventHandler) Log.EVENT_HANDLER("Exit", Common.LOG_CATEGORY, startTicks);
+#endif
         }
-
         private void thisControl_SizeChanged(object sender, SizeChangedEventArgs e)
         {
+#if LOGGING
+            Int64 startTicks = 0;
+            if (Common.VNCCoreLogging.EventHandler) startTicks = Log.EVENT_HANDLER("Enter", Common.LOG_CATEGORY);
+#endif
             var newSize = e.NewSize;
             var previousSize = e.PreviousSize;
             WindowSize = newSize;
+
+#if LOGGING
+            if (Common.VNCCoreLogging.EventHandler) Log.EVENT_HANDLER("Exit", Common.LOG_CATEGORY, startTicks);
+#endif
         }
 
         #endregion
@@ -164,7 +191,10 @@ namespace VNC.WPF.Presentation.Dx.Views
 
         public void LoadUserControl(string userControlName)
         {
-            Int64 startTicks = Log.PRESENTATION("Enter", Common.LOG_CATEGORY);
+#if LOGGING
+            Int64 startTicks = 0;
+            if (Common.VNCCoreLogging.Presentation) startTicks = Log.PRESENTATION("Enter", Common.LOG_CATEGORY);
+#endif
 
             Type ucType = Type.GetType(userControlName);
 
@@ -179,12 +209,17 @@ namespace VNC.WPF.Presentation.Dx.Views
                 MessageBox.Show("Incorrect Tag Name.  Cannot load type:{0}", userControlName);
             }
 
-            Log.PRESENTATION("Exit", Common.LOG_CATEGORY, startTicks);
+#if LOGGING
+            if (Common.VNCCoreLogging.Presentation) Log.PRESENTATION("Exit", Common.LOG_CATEGORY, startTicks);
+#endif
         }
 
         public void LoadUserControl(UserControl control)
         {
-            Int64 startTicks = Log.PRESENTATION("Enter", Common.LOG_CATEGORY);
+#if LOGGING
+            Int64 startTicks = 0;
+            if (Common.VNCCoreLogging.Presentation) startTicks = Log.PRESENTATION("Enter", Common.LOG_CATEGORY);
+#endif
 
             //UnhookTitleEvent(_currentControl);
             g_UserControlContainer.Children.Clear();
@@ -208,7 +243,9 @@ namespace VNC.WPF.Presentation.Dx.Views
             }
 
             //HookTitleEvent(_currentControl);
-            Log.PRESENTATION("Exit", Common.LOG_CATEGORY, startTicks);
+#if LOGGING
+            if (Common.VNCCoreLogging.Presentation) Log.PRESENTATION("Exit", Common.LOG_CATEGORY, startTicks);
+#endif
         }
 
         public void DisplayUserControlInHost(
@@ -217,7 +254,10 @@ namespace VNC.WPF.Presentation.Dx.Views
             ShowWindowMode mode,
             UserControl userControl)
         {
-            Int64 startTicks = Log.PRESENTATION("Enter", Common.LOG_CATEGORY);
+#if LOGGING
+            Int64 startTicks = 0;
+            if (Common.VNCCoreLogging.Presentation) startTicks = Log.PRESENTATION("Enter", Common.LOG_CATEGORY);
+#endif
 
             if (!(userControl is null))
             {
@@ -226,7 +266,9 @@ namespace VNC.WPF.Presentation.Dx.Views
 
             DisplayHost(title, width, height, mode, startTicks);
 
-            Log.PRESENTATION("Exit", Common.LOG_CATEGORY, startTicks);
+#if LOGGING
+            if (Common.VNCCoreLogging.Presentation) Log.PRESENTATION("Exit", Common.LOG_CATEGORY, startTicks);
+#endif
         }
 
         public void DisplayUserControlInHost(
@@ -235,7 +277,10 @@ namespace VNC.WPF.Presentation.Dx.Views
             ShowWindowMode mode,
             ViewModelBase viewModel)
         {
-            Int64 startTicks = Log.PRESENTATION("Enter", Common.LOG_CATEGORY);
+#if LOGGING
+            Int64 startTicks = 0;
+            if (Common.VNCCoreLogging.Presentation) startTicks = Log.PRESENTATION("Enter", Common.LOG_CATEGORY);
+#endif
 
             if (!(viewModel.View is null))
             {
@@ -244,7 +289,9 @@ namespace VNC.WPF.Presentation.Dx.Views
 
             DisplayHost(title, width, height, mode, startTicks);
 
-            Log.PRESENTATION("Exit", Common.LOG_CATEGORY, startTicks);
+#if LOGGING
+            if (Common.VNCCoreLogging.Presentation) Log.PRESENTATION("Exit", Common.LOG_CATEGORY, startTicks);
+#endif
         }
 
         public void DisplayUserControlInHost(
@@ -253,7 +300,10 @@ namespace VNC.WPF.Presentation.Dx.Views
             ShowWindowMode mode,
             string userControlName = null)
         {
-            Int64 startTicks = Log.PRESENTATION("Enter", Common.LOG_CATEGORY);
+#if LOGGING
+            Int64 startTicks = 0;
+            if (Common.VNCCoreLogging.Presentation) startTicks = Log.PRESENTATION("Enter", Common.LOG_CATEGORY);
+#endif
 
             if (!(userControlName is null))
             {
@@ -262,7 +312,9 @@ namespace VNC.WPF.Presentation.Dx.Views
 
             DisplayHost(title, width, height, mode, startTicks);
 
-            Log.PRESENTATION("Exit", Common.LOG_CATEGORY, startTicks);
+#if LOGGING
+            if (Common.VNCCoreLogging.Presentation) Log.PRESENTATION("Exit", Common.LOG_CATEGORY, startTicks);
+#endif
         }
 
         public void DisplayHost(
@@ -271,13 +323,21 @@ namespace VNC.WPF.Presentation.Dx.Views
             ShowWindowMode mode,
             Int64 startTicks)
         {
+#if LOGGING
+            Int64 startTicks2 = 0;
+            if (Common.VNCCoreLogging.Presentation) startTicks = Log.PRESENTATION("Enter", Common.LOG_CATEGORY);
+#endif
+
             Title = title;
             Width = width;
             Height = height;
 
             if (mode == ShowWindowMode.Modal_ShowDialog)
             {
-                long endTicks2 = Log.PRESENTATION("Exit", Common.LOG_CATEGORY, startTicks);
+#if LOGGING
+                Int64 endTicks2 = 0;
+                if (Common.VNCCoreLogging.Presentation) endTicks2 = Log.PRESENTATION("Exit", Common.LOG_CATEGORY, startTicks);
+#endif
 
                 LoadTime = $"{Log.GetDuration(startTicks, endTicks2)}";
 
@@ -285,19 +345,29 @@ namespace VNC.WPF.Presentation.Dx.Views
             }
             else
             {
-                long endTicks2 = Log.PRESENTATION("Exit", Common.LOG_CATEGORY, startTicks);
+#if LOGGING
+                Int64 endTicks2 = 0;
+                if (Common.VNCCoreLogging.Presentation) endTicks2 = Log.PRESENTATION("Exit", Common.LOG_CATEGORY, startTicks);
+#endif
 
                 LoadTime = $"{Log.GetDuration(startTicks, endTicks2)}";
 
                 Show();
             }
 
-            long endTicks = Log.PRESENTATION("Exit", Common.LOG_CATEGORY, startTicks);
+#if LOGGING
+            long endTicks = 0;
+            if (Common.VNCCoreLogging.Presentation) endTicks = Log.PRESENTATION("Exit", Common.LOG_CATEGORY, startTicks);
+#endif
 
             // TODO(crhodes)
-            // How is this usable?
+            // How is this used?
 
             Tag = $"{GetType()} loadtime: {Log.GetDuration(startTicks, endTicks)}";
+
+#if LOGGING
+            if (Common.VNCCoreLogging.Presentation) Log.PRESENTATION("Exit", Common.LOG_CATEGORY, startTicks2);
+#endif
         }
 
         #endregion
