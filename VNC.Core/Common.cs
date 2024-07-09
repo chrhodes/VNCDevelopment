@@ -217,8 +217,13 @@ namespace VNC.Core
 
         public static void InitializeLogging()
         {
+#if DEBUG
+            VNCLogging = LoadLoggingConfig("vncloggingconfig-debug.json");
+            VNCCoreLogging = LoadLoggingConfig("vnccoreloggingconfig-debug.json");
+#else
             VNCLogging = LoadLoggingConfig("vncloggingconfig.json");
             VNCCoreLogging = LoadLoggingConfig("vnccoreloggingconfig.json");
+#endif
         }
 
         public static bool DeveloperMode { get; set; } = false;

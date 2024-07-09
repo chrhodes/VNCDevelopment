@@ -11,7 +11,7 @@
         <VersionPrefix>2.1.2</VersionPrefix>
         <VersionSuffix>Release</VersionSuffix>
         <FileVersion>2024.07.03A</FileVersion>        
-        <PackageVersion>2.1.1</PackageVersion>
+        <PackageVersion>2.1.2</PackageVersion>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>        
         <PackageLicenseFile>LICENSE</PackageLicenseFile>
         <PackageReadmeFile>README.md</PackageReadmeFile>
