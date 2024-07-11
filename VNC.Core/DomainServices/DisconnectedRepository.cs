@@ -1,5 +1,7 @@
 ﻿using System;
-using System.Data.Entity;
+
+using Microsoft.EntityFrameworkCore;
+
 
 namespace VNC.Core.DomainServices
 {
