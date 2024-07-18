@@ -2,12 +2,17 @@
 
     <PropertyGroup>
         <OutputType>WinExe</OutputType>
-        <TargetFrameworks>net6.0-windows;net48</TargetFrameworks>
+        <TargetFrameworks>net8.0-windows</TargetFrameworks>
         <UseWPF>true</UseWPF>
-        <FileVersion>2023.09.15A</FileVersion>
+        <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+        <VersionPrefix>1.1.0</VersionPrefix>
+        <VersionSuffix>Release</VersionSuffix>
+        <FileVersion>2024.07.17A</FileVersion>
+        <Description>SignalR Client</Description>
+        <ImplicitUsings>disable</ImplicitUsings>
     </PropertyGroup>
 
-    <PropertyGroup Condition="'$(TargetFramework)' == 'net6.0-windows'">
+    <PropertyGroup Condition="'$(TargetFramework)' == 'net8.0-windows'">
         <Nullable>enable</Nullable>
         <ApplicationIcon>ApplicationIcon-Right-Red.ico</ApplicationIcon>
     </PropertyGroup>
@@ -16,21 +21,28 @@
         <ApplicationIcon>ApplicationIcon-Left-Blue.ico</ApplicationIcon>
     </PropertyGroup>
 
-    <ItemGroup Condition="'$(TargetFramework)' == 'net6.0-windows'">
+    <ItemGroup Condition="'$(TargetFramework)' == 'net8.0-windows'">
         <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="7.0.10" />
-        <PackageReference Include="VNC.Logging" Version="2.1.0" />
-        <PackageReference Include="VNC.Logging.TraceListeners.SignalRCoreListeners" Version="1.0.0" />
     </ItemGroup>
 
-    <ItemGroup Condition="'$(TargetFramework)' == 'net48'">
-        <PackageReference Include="Microsoft.AspNet.SignalR.Client" Version="2.4.3" />
-        <PackageReference Include="VNC.Logging" Version="2.1.0" />
-        <PackageReference Include="VNC.Logging.TraceListeners.SignalRListener" Version="1.0.0" />
-    </ItemGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-windows|AnyCPU'">
+        <!-- Uncoment next line to switch to ProjectReference(s) -->
+         <DefineConstants>$(DefineConstants);VNCPROJECTREF</DefineConstants> 
+    </PropertyGroup>
 
-    <ItemGroup>
-      <None Update="VNCSignalRClient.dll.config-net60">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </None>
-    </ItemGroup>
+    <Choose>
+        <When Condition="'$(DefineConstants.Contains(VNCPROJECTREF))'">
+            <ItemGroup>
+                <ProjectReference Include="..\..\VNC.Logging\VNC.Logging.csproj" />
+                <ProjectReference Include="..\..\VNC.Logging.TraceListeners\SignalRCoreListeners\VNC.Logging.TraceListeners.SignalRCoreListeners.csproj" />
+            </ItemGroup>
+        </When>
+        <When Condition="'!$(DefineConstants.Contains(VNCPROJECTREF))'">
+            <ItemGroup>
+                <PackageReference Include="VNC.Logging" Version="3.0.0" />
+                <PackageReference Include="VNC.Logging.TraceListeners.SignalRCoreListeners" Version="3.0.0" />                
+            </ItemGroup>
+        </When>
+    </Choose>
+
 </Project>

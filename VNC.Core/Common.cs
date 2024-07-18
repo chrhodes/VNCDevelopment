@@ -17,8 +17,8 @@ namespace VNC.Core
         public const string APPNAME = "VNCCore";
         public const string LOG_CATEGORY = "VNCCore";
 
-        public static VNCLoggingConfig VNCLogging;
-        public static VNCLoggingConfig VNCCoreLogging;
+        public static VNCLoggingConfig VNCLogging = new VNCLoggingConfig();
+        public static VNCLoggingConfig VNCCoreLogging = new VNCLoggingConfig();
 
         //public static class VNCLogging
         //{
