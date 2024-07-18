@@ -215,14 +215,22 @@ namespace VNC.Core
             return jsonOptions;
         }
 
-        public static void InitializeLogging()
+        public static void InitializeLogging(Boolean debugConfig = false)
         {
 #if DEBUG
             VNCLogging = LoadLoggingConfig("vncloggingconfig-debug.json");
             VNCCoreLogging = LoadLoggingConfig("vnccoreloggingconfig-debug.json");
 #else
-            VNCLogging = LoadLoggingConfig("vncloggingconfig.json");
-            VNCCoreLogging = LoadLoggingConfig("vnccoreloggingconfig.json");
+            if (debugConfig)
+            {
+                VNCLogging = LoadLoggingConfig("vncloggingconfig-debug.json");
+                VNCCoreLogging = LoadLoggingConfig("vnccoreloggingconfig-debug.json");
+            }
+            else
+            {
+                VNCLogging = LoadLoggingConfig("vncloggingconfig.json");
+                VNCCoreLogging = LoadLoggingConfig("vnccoreloggingconfig.json");
+            }
 #endif
         }
 

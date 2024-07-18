@@ -14,18 +14,26 @@
     xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"  
              
     xmlns:vncconverters="clr-namespace:VNC.WPF.Presentation.Converters;assembly=VNC.WPF.Presentation" 
-    
-    d:DesignHeight="450" d:DesignWidth="800">
+>
+    <!--d:DesignHeight="450" d:DesignWidth="520"-->
     <UserControl.Resources>
         <vncconverters:SystemColorToSolidColorBrushConverter x:Key="ColorToBrushConverter" />
+        <!--This needs to be in a Resource Dictionary somewhere.  
+            If App doesn't have, exception thrown
+            Put it here for now.
+        -->
+        <Style x:Key="uiLoggingFilterCheckEdit" TargetType="dxe:CheckEdit">
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="FontSize" Value="10" />
+        </Style>        
     </UserControl.Resources>
 
     <Grid x:Name="LayoutRoot" Background="White">
         
         <dxlc:LayoutGroup Orientation="Vertical" View="GroupBox" Header="VNCCore Logging Configuration">
-            
+
             <dxlc:LayoutGroup Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" >
-                
+
                 <dxe:CheckEdit x:Name="ceInfo00C"
                         Style="{StaticResource uiLoggingFilterCheckEdit}"
                         Content="{Binding LoggingUIConfig.Info00.Label}"
@@ -41,26 +49,66 @@
                         ToolTip="{Binding LoggingUIConfig.Info01.ToolTip}" 
                         IsChecked="False"
                         EditValueChanged="ceInfo01C_EditValueChanged"/>-->
+                
+            </dxlc:LayoutGroup>
+            
+            <dxlc:LayoutGroup Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" >
+
+                <!--<dxlc:LayoutGroup Orientation="Horizontal" HorizontalAlignment="Left" >
+
+                    <dxe:CheckEdit x:Name="ceDebug00C"
+                            Style="{StaticResource uiLoggingFilterCheckEdit}"
+                            Content="{Binding LoggingUIConfig.Debug00.Label}"
+                            Foreground="{Binding LoggingUIConfig.Debug00.LabelColor, Converter={StaticResource ColorToBrushConverter}}"
+                            ToolTip="{Binding LoggingUIConfig.Debug00.ToolTip}"
+                            IsChecked="False"
+                            EditValueChanged="ceDebug00C_EditValueChanged"/>
+                
+                </dxlc:LayoutGroup>-->
+                
+            </dxlc:LayoutGroup>
+
+            <dxlc:LayoutGroup Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" >
+
+                <!--Constructor-->
+                <dxe:CheckEdit x:Name="ceArch00C"
+                        Style="{StaticResource uiLoggingFilterCheckEdit}"
+                        Content="{Binding LoggingUIConfig.Arch00.Label}"
+                        Foreground="{Binding LoggingUIConfig.Arch00.LabelColor, Converter={StaticResource ColorToBrushConverter}}"
+                        ToolTip="{Binding LoggingUIConfig.Arch00.ToolTip}" 
+                        IsChecked="False"                                   
+                        EditValueChanged="ceArch00C_EditValueChanged"/>
+                <dxe:CheckEdit x:Name="ceArch03C"
+                        Style="{StaticResource uiLoggingFilterCheckEdit}"
+                        Content="{Binding LoggingUIConfig.Arch03.Label}"
+                        Foreground="{Binding LoggingUIConfig.Arch03.LabelColor, Converter={StaticResource ColorToBrushConverter}}"
+                        ToolTip="{Binding LoggingUIConfig.Arch03.ToolTip}" 
+                        IsChecked="False"                                   
+                        EditValueChanged="ceArch03C_EditValueChanged"/>
+
+                <dxe:CheckEdit x:Name="ceArch05C"
+                        Style="{StaticResource uiLoggingFilterCheckEdit}"
+                        Content="{Binding LoggingUIConfig.Arch05.Label}"
+                        Foreground="{Binding LoggingUIConfig.Arch05.LabelColor, Converter={StaticResource ColorToBrushConverter}}"
+                        ToolTip="{Binding LoggingUIConfig.Arch05.ToolTip}" 
+                        IsChecked="False"                                   
+                        EditValueChanged="ceArch05C_EditValueChanged"/>
+
+                <dxe:CheckEdit x:Name="ceArch06C"
+                       Style="{StaticResource uiLoggingFilterCheckEdit}"
+                       Content="{Binding LoggingUIConfig.Arch06.Label}"
+                       Foreground="{Binding LoggingUIConfig.Arch06.LabelColor, Converter={StaticResource ColorToBrushConverter}}"
+                       ToolTip="{Binding LoggingUIConfig.Arch06.ToolTip}" 
+                       IsChecked="False"                                   
+                       EditValueChanged="ceArch06C_EditValueChanged"/>
 
             </dxlc:LayoutGroup>
 
-            <!--<dxlc:LayoutGroup Orientation="Horizontal" HorizontalAlignment="Left" >
+            <dxlc:LayoutGroup Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Top" >
 
-                <dxe:CheckEdit x:Name="ceDebug00C"
-                        Style="{StaticResource uiLoggingFilterCheckEdit}"
-                        Content="{Binding LoggingUIConfig.Debug00.Label}"
-                        Foreground="{Binding LoggingUIConfig.Debug00.LabelColor, Converter={StaticResource ColorToBrushConverter}}"
-                        ToolTip="{Binding LoggingUIConfig.Debug00.ToolTip}"
-                        IsChecked="False"
-                        EditValueChanged="ceDebug00C_EditValueChanged"/>
-                
-            </dxlc:LayoutGroup>-->
-
-            <dxlc:LayoutGroup Orientation="Horizontal" HorizontalAlignment="Stretch" >
-
-                <dxlc:LayoutGroup Header="CORE" Orientation="Vertical" HorizontalAlignment="Stretch" 
+                <dxlc:LayoutGroup Header="CORE" Orientation="Vertical" VerticalAlignment="Stretch" 
                     View="GroupBox" 
-                    Width="155" 
+                    Width="120" 
                     Background="#FF707070">
 
                     <dxe:CheckEdit x:Name="ceArch01C"
@@ -79,13 +127,13 @@
                         IsChecked="False"                                   
                         EditValueChanged="ceArch02C_EditValueChanged"/>
 
-                    <dxe:CheckEdit x:Name="ceArch03C"
+                    <!--<dxe:CheckEdit x:Name="ceArch03C"
                         Style="{StaticResource uiLoggingFilterCheckEdit}"
                         Content="{Binding LoggingUIConfig.Arch03.Label}"
                         Foreground="{Binding LoggingUIConfig.Arch03.LabelColor, Converter={StaticResource ColorToBrushConverter}}"
                         ToolTip="{Binding LoggingUIConfig.Arch03.ToolTip}" 
                         IsChecked="False"                                   
-                        EditValueChanged="ceArch03C_EditValueChanged"/>
+                        EditValueChanged="ceArch03C_EditValueChanged"/>-->
 
                     <dxe:CheckEdit x:Name="ceArch04C"
                         Style="{StaticResource uiLoggingFilterCheckEdit}"
@@ -95,15 +143,15 @@
                         IsChecked="False"                                   
                         EditValueChanged="ceArch04C_EditValueChanged"/>
 
-                    <dxe:CheckEdit x:Name="ceArch05C"
+                    <!--<dxe:CheckEdit x:Name="ceArch05C"
                         Style="{StaticResource uiLoggingFilterCheckEdit}"
                         Content="{Binding LoggingUIConfig.Arch05.Label}"
                         Foreground="{Binding LoggingUIConfig.Arch05.LabelColor, Converter={StaticResource ColorToBrushConverter}}"
                         ToolTip="{Binding LoggingUIConfig.Arch05.ToolTip}" 
                         IsChecked="False"                                   
-                        EditValueChanged="ceArch05C_EditValueChanged"/>
+                        EditValueChanged="ceArch05C_EditValueChanged"/>-->
 
-                    <dxe:CheckEdit x:Name="ceArch06C"
+                    <!--<dxe:CheckEdit x:Name="ceArch06C"
                         Style="{StaticResource uiLoggingFilterCheckEdit}"
                         Content="{Binding LoggingUIConfig.Arch06.Label}"
                         Foreground="{Binding LoggingUIConfig.Arch06.LabelColor, Converter={StaticResource ColorToBrushConverter}}"
@@ -117,15 +165,15 @@
                         Foreground="{Binding LoggingUIConfig.Arch00.LabelColor, Converter={StaticResource ColorToBrushConverter}}"
                         ToolTip="{Binding LoggingUIConfig.Arch00.ToolTip}" 
                         IsChecked="False"                                   
-                        EditValueChanged="ceArch00C_EditValueChanged"/>
+                        EditValueChanged="ceArch00C_EditValueChanged"/>-->
 
                 </dxlc:LayoutGroup>
 
-                <dxlc:LayoutGroup Orientation="Vertical" HorizontalAlignment="Left">
+                <dxlc:LayoutGroup Orientation="Vertical" VerticalAlignment="Stretch">
 
                     <dxlc:LayoutGroup Orientation="Horizontal" HorizontalAlignment="Stretch" >
 
-                        <dxlc:LayoutGroup Header="PRESENTATION" Orientation="Horizontal" HorizontalAlignment="Left"  
+                        <dxlc:LayoutGroup Header="PRESENTATION" Orientation="Horizontal" VerticalAlignment="Stretch"  
                             View="GroupBox"
                             Background="#FF00DCDC">
 
@@ -187,7 +235,7 @@
 
                         </dxlc:LayoutGroup>
 
-                        <dxlc:LayoutGroup Header="PERSISTENCE" Orientation="Vertical" HorizontalAlignment="Left"   
+                        <dxlc:LayoutGroup Header="PERSISTENCE" Orientation="Vertical" VerticalAlignment="Stretch"   
                             View="GroupBox"
                             Background="#FFA073E1">
 
@@ -209,10 +257,9 @@
 
                         </dxlc:LayoutGroup>
 
-                        <dxlc:LayoutGroup Header="INFRASTRUCTURE" Orientation="Vertical" HorizontalAlignment="Left"   
+                        <dxlc:LayoutGroup Header="INFRASTRUCTURE" Orientation="Vertical" VerticalAlignment="Stretch" 
                             View="GroupBox"
                             Background="#FFF0F0F0">
-
 
                             <dxe:CheckEdit x:Name="ceArch13C" 
                                 Style="{StaticResource uiLoggingFilterCheckEdit}"
@@ -226,7 +273,7 @@
 
                     </dxlc:LayoutGroup>
 
-                    <dxlc:LayoutGroup Header="APPLICATION" Orientation="Horizontal" HorizontalAlignment="Stretch"  
+                    <dxlc:LayoutGroup Header="APPLICATION" Orientation="Horizontal" VerticalAlignment="Center"  
                         View="GroupBox"
                         Background="#FF64F064">
 
@@ -248,7 +295,7 @@
 
                     </dxlc:LayoutGroup>
 
-                    <dxlc:LayoutGroup Header="DOMAIN" Orientation="Horizontal" HorizontalAlignment="Stretch"
+                    <dxlc:LayoutGroup Header="DOMAIN" Orientation="Horizontal" VerticalAlignment="Center"
                         View="GroupBox"                       
                         Background="#FFFFB400">
 
