@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
@@ -16,6 +17,10 @@ namespace VNC.Core.Mvvm
             Int64 startTicks = 0;
             if (Common.VNCCoreLogging.Constructor) startTicks = Log.CONSTRUCTOR("Enter/Exit", Common.LOG_CATEGORY);
 #endif
+            this.DataContextChanged += UserControl_DataContextChanged;
+#if LOGGING
+            if (Common.VNCCoreLogging.Constructor) Log.CONSTRUCTOR("Exit", Common.LOG_CATEGORY, startTicks);
+#endif
         }
 
         public ViewBase(IViewModel viewModel)
@@ -25,12 +30,33 @@ namespace VNC.Core.Mvvm
             if (Common.VNCCoreLogging.Constructor) startTicks = Log.CONSTRUCTOR("Enter", Common.LOG_CATEGORY);
 #endif
             ViewModel = viewModel;
+
+            this.DataContextChanged += UserControl_DataContextChanged;
 #if LOGGING
             if (Common.VNCCoreLogging.Constructor) Log.CONSTRUCTOR("Exit", Common.LOG_CATEGORY, startTicks);
 #endif
         }
 
         #endregion
+
+        #region Fields and Properties
+
+        private string _viewType;
+
+        public string ViewType
+        {
+            get => _viewType;
+            set
+            {
+                if (_viewType == value)
+                {
+                    return;
+                }
+
+                _viewType = value;
+                OnPropertyChanged();
+            }
+        }
 
         private IViewModel _viewModel;
 
@@ -42,6 +68,23 @@ namespace VNC.Core.Mvvm
             {
                 _viewModel = value;
                 DataContext = _viewModel;
+            }
+        }
+
+        private string _viewModelType;
+
+        public string ViewModelType
+        {
+            get => _viewModelType;
+            set
+            {
+                if (_viewModelType == value)
+                {
+                    return;
+                }
+
+                _viewModelType = value;
+                OnPropertyChanged();
             }
         }
 
@@ -57,6 +100,18 @@ namespace VNC.Core.Mvvm
                 OnPropertyChanged();
             }
         }
+
+        #endregion
+
+        #region Event Handlers (none)
+
+        private void UserControl_DataContextChanged(object sender, System.Windows.DependencyPropertyChangedEventArgs e)
+        {
+            var dc = DataContext is null ? "null" : DataContext.GetType().ToString().Split('.').Last();
+            ViewModelType = dc;
+        }
+
+        #endregion
 
         #region INotifyPropertyChanged
 

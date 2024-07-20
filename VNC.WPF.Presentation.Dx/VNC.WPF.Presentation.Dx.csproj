@@ -11,7 +11,7 @@
         <VersionPrefix>3.0.0</VersionPrefix>
         <VersionSuffix>development</VersionSuffix>
         <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>        
-        <FileVersion>2024.07.18A</FileVersion>
+        <FileVersion>2024.07.20A</FileVersion>
         <Description>WPF Helpers DevExpress</Description>
     </PropertyGroup>
 
