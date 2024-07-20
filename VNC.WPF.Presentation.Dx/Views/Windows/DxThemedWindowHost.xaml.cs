@@ -275,16 +275,16 @@ namespace VNC.WPF.Presentation.Dx.Views
             string title,
             int width, int height,
             ShowWindowMode mode,
-            ViewModelBase viewModel)
+            string userControlName = null)
         {
 #if LOGGING
             Int64 startTicks = 0;
             if (Common.VNCCoreLogging.Presentation) startTicks = Log.PRESENTATION("Enter", Common.LOG_CATEGORY);
 #endif
 
-            if (!(viewModel.View is null))
+            if (!(userControlName is null))
             {
-                LoadUserControl((UserControl)viewModel.View);
+                LoadUserControl(userControlName);
             }
 
             DisplayHost(title, width, height, mode, startTicks);
@@ -298,16 +298,16 @@ namespace VNC.WPF.Presentation.Dx.Views
             string title,
             int width, int height,
             ShowWindowMode mode,
-            string userControlName = null)
+            ViewModelBase viewModel)
         {
 #if LOGGING
             Int64 startTicks = 0;
             if (Common.VNCCoreLogging.Presentation) startTicks = Log.PRESENTATION("Enter", Common.LOG_CATEGORY);
 #endif
 
-            if (!(userControlName is null))
+            if (!(viewModel.View is null))
             {
-                LoadUserControl(userControlName);
+                LoadUserControl((UserControl)viewModel.View);
             }
 
             DisplayHost(title, width, height, mode, startTicks);

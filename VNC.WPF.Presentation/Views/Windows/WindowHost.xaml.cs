@@ -4,6 +4,7 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 
+using VNC.Core.Mvvm;
 using VNC.Core.Presentation;
 
 namespace VNC.WPF.Presentation.Views
@@ -215,7 +216,7 @@ namespace VNC.WPF.Presentation.Views
             string title,
             int width, int height,
             ShowWindowMode mode,
-            System.Windows.Controls.UserControl userControl)
+            UserControl userControl)
         {
 #if LOGGING
             Int64 startTicks = 0;
@@ -260,6 +261,29 @@ namespace VNC.WPF.Presentation.Views
             //}
 
             DisplayHost(title, width, height, mode, startTicks);
+#if LOGGING
+            if (Common.VNCCoreLogging.Presentation) Log.PRESENTATION("Exit", Common.LOG_CATEGORY, startTicks);
+#endif
+        }
+
+        public void DisplayUserControlInHost(
+            string title,
+            int width, int height,
+            ShowWindowMode mode,
+            ViewModelBase viewModel)
+        {
+#if LOGGING
+            Int64 startTicks = 0;
+            if (Common.VNCCoreLogging.Presentation) startTicks = Log.PRESENTATION("Enter", Common.LOG_CATEGORY);
+#endif
+
+            if (!(viewModel.View is null))
+            {
+                LoadUserControl((UserControl)viewModel.View);
+            }
+
+            DisplayHost(title, width, height, mode, startTicks);
+
 #if LOGGING
             if (Common.VNCCoreLogging.Presentation) Log.PRESENTATION("Exit", Common.LOG_CATEGORY, startTicks);
 #endif
