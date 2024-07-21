@@ -95,13 +95,29 @@ namespace VNC.Core.Mvvm
 
         #region Protected Methods
 
+        public virtual void PublishDeveloperMode(Boolean developerMode)
+        {
+#if LOGGING
+            Int64 startTicks = 0;
+            if (Common.VNCCoreLogging.Event) startTicks = Log.EVENT("Enter", Common.LOG_CATEGORY);
+#endif
+            var evt = EventAggregator.GetEvent<DeveloperModeEvent>();
+            evt.Publish(developerMode);
+            //EventAggregator.GetEvent<DeveloperModeEvent>().Publish(developerMode);
+#if LOGGING
+            if (Common.VNCCoreLogging.Event) Log.EVENT("Exit", Common.LOG_CATEGORY, startTicks);
+#endif
+        }
+
         public virtual void PublishStatusMessage(string message)
         {
 #if LOGGING
             Int64 startTicks = 0;
             if (Common.VNCCoreLogging.Event) startTicks = Log.EVENT("Enter", Common.LOG_CATEGORY);
 #endif
-            EventAggregator.GetEvent<StatusMessageEvent>().Publish(Message);
+            var evt = EventAggregator.GetEvent<StatusMessageEvent>();
+            evt.Publish(Message);
+            //EventAggregator.GetEvent<StatusMessageEvent>().Publish(Message);
 #if LOGGING
             if (Common.VNCCoreLogging.Event) Log.EVENT("Exit", Common.LOG_CATEGORY, startTicks);
 #endif

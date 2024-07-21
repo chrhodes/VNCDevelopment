@@ -21,7 +21,7 @@
                    HorizontalAlignment="Center" 
                    VerticalAlignment="Center" />
         </Grid>
-        <StackPanel x:Name="spSizeInfo" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center"
+        <StackPanel x:Name="spDeveloperInfo" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center"
                     Visibility="{Binding DeveloperUIMode}">
             <TextBlock Text="W:" />
             <TextBlock Text="{Binding NewSize.Width, StringFormat={}{0:0}}" />

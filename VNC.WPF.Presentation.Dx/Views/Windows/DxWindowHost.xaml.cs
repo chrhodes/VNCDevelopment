@@ -6,29 +6,46 @@ using System.Windows.Controls;
 
 using DevExpress.Xpf.Core;
 
+using Prism.Commands;
+using Prism.Events;
+using Prism.Services.Dialogs;
+
+using Prism.Events;
+
 using VNC.Core.Presentation;
+using VNC.Core.Events;
 
 namespace VNC.WPF.Presentation.Dx.Views
 {
 
     public partial class DxWindowHost : DXWindow, INotifyPropertyChanged
     {
-
         #region Constructors, Initialization, and Load
-        
-        public DxWindowHost()
+
+        public readonly IEventAggregator EventAggregator;
+        public readonly IDialogService DialogService;
+
+        public DxWindowHost(
+            IEventAggregator eventAggregator)
         {
 #if LOGGING
             Int64 startTicks = 0;
             if (Common.VNCCoreLogging.Constructor) startTicks = Log.CONSTRUCTOR("Enter", Common.LOG_CATEGORY);
 #endif
 
-            InitializeComponent();
+            EventAggregator = eventAggregator;
+            //DialogService = dialogService;
 
-            this.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
-            this.VerticalAlignment = System.Windows.VerticalAlignment.Center;
-
-            spSizeInfo.DataContext = this;
+            try
+            {
+                InitializeComponent();
+                InitializeWindow();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+                Log.Error(ex, Common.LOG_CATEGORY);
+            }          
 
 #if LOGGING
             if (Common.VNCCoreLogging.Constructor) Log.CONSTRUCTOR("Exit", Common.LOG_CATEGORY, startTicks);
@@ -36,19 +53,22 @@ namespace VNC.WPF.Presentation.Dx.Views
         }
 
         // TODO: Maybe take size and position parameters
-        public DxWindowHost(string title, string userControlFullyQualifiedName)
+        public DxWindowHost(
+            IEventAggregator eventAggregator,
+            string title, 
+            string userControlFullyQualifiedName)
         {
 #if LOGGING
             Int64 startTicks = 0;
             if (Common.VNCCoreLogging.Constructor) startTicks = Log.CONSTRUCTOR($"Enter {title} {userControlFullyQualifiedName}", Common.LOG_CATEGORY);
 #endif
+            EventAggregator = eventAggregator;
 
             try
             {
                 InitializeComponent();
+                InitializeWindow();
 
-                this.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
-                this.VerticalAlignment = System.Windows.VerticalAlignment.Center;
                 this.Title = title;
 
                 LoadUserControl(userControlFullyQualifiedName);
@@ -56,11 +76,54 @@ namespace VNC.WPF.Presentation.Dx.Views
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
+                Log.Error(ex, Common.LOG_CATEGORY);
             }
 
 #if LOGGING
             if (Common.VNCCoreLogging.Constructor) Log.CONSTRUCTOR("Exit", Common.LOG_CATEGORY, startTicks);
 #endif
+        }
+
+        public DxWindowHost(
+            IEventAggregator eventAggregator,
+            string title,
+            UserControl userControl)
+        {
+#if LOGGING
+            Int64 startTicks = 0;
+            if (Common.VNCCoreLogging.Constructor) startTicks = Log.CONSTRUCTOR($"Enter {title} {userControl.GetType()}", Common.LOG_CATEGORY);
+#endif
+            EventAggregator = eventAggregator;
+            //DialogService = dialogService;
+
+            try
+            {
+                InitializeComponent();
+                InitializeWindow();
+
+                this.Title = title;
+
+                LoadUserControl(userControl);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+                Log.Error(ex, Common.LOG_CATEGORY);
+            }
+
+#if LOGGING
+            if (Common.VNCCoreLogging.Constructor) Log.CONSTRUCTOR("Exit", Common.LOG_CATEGORY, startTicks);
+#endif
+        }
+
+        private void InitializeWindow()
+        {
+            spDeveloperInfo.DataContext = this;
+            this.HorizontalAlignment = HorizontalAlignment.Center;
+            this.VerticalAlignment = VerticalAlignment.Center;
+
+            EventAggregator.GetEvent<DeveloperModeEvent>()
+                .Subscribe(DeveloperMode);
         }
 
         #endregion
@@ -77,7 +140,7 @@ namespace VNC.WPF.Presentation.Dx.Views
 
         #region Fields and Properties
 
-        private Visibility _developerUIMode = Visibility.Collapsed;
+        private Visibility _developerUIMode = Common.DeveloperUIMode;
         public Visibility DeveloperUIMode
         {
             get => _developerUIMode;
@@ -122,6 +185,23 @@ namespace VNC.WPF.Presentation.Dx.Views
         #endregion
 
         #region Event Handlers
+
+        private void DeveloperMode(Boolean developerMode)
+        {
+            Int64 startTicks = 0;
+            if (Common.VNCLogging.EventHandler) startTicks = Log.EVENT_HANDLER("Enter", Common.LOG_CATEGORY);
+
+            if (developerMode)
+            {
+                DeveloperUIMode = Visibility.Visible;
+            }
+            else
+            {
+                DeveloperUIMode = Visibility.Collapsed;
+            }
+
+            if (Common.VNCLogging.EventHandler) Log.EVENT_HANDLER("Exit", Common.LOG_CATEGORY, startTicks);
+        }
 
         private void OnClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {

@@ -103,7 +103,7 @@ namespace VNC.Core.Mvvm
 
         #endregion
 
-        #region Event Handlers (none)
+        #region Event Handlers
 
         private void UserControl_DataContextChanged(object sender, System.Windows.DependencyPropertyChangedEventArgs e)
         {

@@ -14,7 +14,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0" Name="g_UserControlContainer" >
+        <Grid Grid.Row="0" Name="g_UserControlContainer" VerticalAlignment="Top" >
 
             <TextBlock x:Name="tbMessage" Text="User Control gets loaded here"
                    HorizontalAlignment="Center" 

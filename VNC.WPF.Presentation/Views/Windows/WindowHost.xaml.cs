@@ -4,6 +4,11 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 
+using Prism.Commands;
+using Prism.Events;
+using Prism.Services.Dialogs;
+
+using VNC.Core.Events;
 using VNC.Core.Mvvm;
 using VNC.Core.Presentation;
 
@@ -13,19 +18,29 @@ namespace VNC.WPF.Presentation.Views
     {
         #region Constructors, Initialization, and Load
 
-        public WindowHost()
+        public readonly IEventAggregator EventAggregator;
+        public readonly IDialogService DialogService;
+
+        public WindowHost(
+            IEventAggregator eventAggregator)
         {
 #if LOGGING
             Int64 startTicks = 0;
             if (Common.VNCCoreLogging.Constructor) startTicks = Log.CONSTRUCTOR("Enter", Common.LOG_CATEGORY);
 #endif
+            EventAggregator = eventAggregator;
+            //DialogService = dialogService;
 
-            InitializeComponent();
-
-            this.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
-            this.VerticalAlignment = System.Windows.VerticalAlignment.Center;
-
-            spDeveloperInfo.DataContext = this;
+            try
+            {
+                InitializeComponent();
+                InitializeWindow();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+                Log.Error(ex, Common.LOG_CATEGORY);
+            }
 
 #if LOGGING
             if (Common.VNCCoreLogging.Constructor) Log.CONSTRUCTOR("Exit", Common.LOG_CATEGORY, startTicks);
@@ -33,30 +48,79 @@ namespace VNC.WPF.Presentation.Views
         }
 
         // TODO: Maybe take size and position parameters
-        public WindowHost(string title, string userControlFullyQualifiedName)
+        public WindowHost(
+            IEventAggregator eventAggregator,
+            string title,
+            string userControlFullyQualifiedName)
         {
 #if LOGGING
             Int64 startTicks = 0;
             if (Common.VNCCoreLogging.Constructor) startTicks = Log.CONSTRUCTOR($"Enter {title} {userControlFullyQualifiedName}", Common.LOG_CATEGORY);
 #endif
+            EventAggregator = eventAggregator;
+            //DialogService = dialogService;
 
             try
             {
                 InitializeComponent();
+                InitializeWindow();
 
-                this.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
-                this.VerticalAlignment = System.Windows.VerticalAlignment.Center;
                 this.Title = title;
+
                 LoadUserControl(userControlFullyQualifiedName);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
+                Log.Error(ex, Common.LOG_CATEGORY);
             }
 
 #if LOGGING
             if (Common.VNCCoreLogging.Constructor) Log.CONSTRUCTOR("Exit", Common.LOG_CATEGORY, startTicks);
 #endif
+        }
+
+        public WindowHost(
+            IEventAggregator eventAggregator,
+            string title,
+            UserControl userControl)
+        {
+#if LOGGING
+            Int64 startTicks = 0;
+            if (Common.VNCCoreLogging.Constructor) startTicks = Log.CONSTRUCTOR($"Enter {title} {userControl.GetType()}", Common.LOG_CATEGORY);
+#endif
+            EventAggregator = eventAggregator;
+            //DialogService = dialogService;
+
+            try
+            {
+                InitializeComponent();
+                InitializeWindow();
+
+                this.Title = title;
+                LoadUserControl(userControl);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+                Log.Error(ex, Common.LOG_CATEGORY);
+            }
+
+#if LOGGING
+            if (Common.VNCCoreLogging.Constructor) Log.CONSTRUCTOR("Exit", Common.LOG_CATEGORY, startTicks);
+#endif
+        }
+
+        private void InitializeWindow()
+        {
+            spDeveloperInfo.DataContext = this;
+            this.HorizontalAlignment = HorizontalAlignment.Center;
+            this.VerticalAlignment = VerticalAlignment.Center;
+
+            var evt = EventAggregator.GetEvent<DeveloperModeEvent>();
+            evt.Subscribe(DeveloperMode);
+            //EventAggregator.GetEvent<DeveloperModeEvent>()
+            //    .Subscribe(DeveloperMode);
         }
 
         #endregion
@@ -73,7 +137,7 @@ namespace VNC.WPF.Presentation.Views
 
         #region Fields and Properties
 
-        private Visibility _developerUIMode = Visibility.Collapsed;
+        private Visibility _developerUIMode = Common.DeveloperUIMode;
         public Visibility DeveloperUIMode
         {
             get => _developerUIMode;
@@ -102,8 +166,8 @@ namespace VNC.WPF.Presentation.Views
             }
         }
 
-        private System.Windows.Size _windowSize;
-        public System.Windows.Size WindowSize
+        private Size _windowSize;
+        public Size WindowSize
         {
             get => _windowSize;
             set
@@ -119,13 +183,29 @@ namespace VNC.WPF.Presentation.Views
 
         #region Event Handlers
 
+        private void DeveloperMode(Boolean developerMode)
+        {
+            Int64 startTicks = 0;
+            if (Common.VNCLogging.EventHandler) startTicks = Log.EVENT_HANDLER("Enter", Common.LOG_CATEGORY);
+
+            if (developerMode)
+            {
+                DeveloperUIMode = Visibility.Visible;
+            }
+            else
+            {
+                DeveloperUIMode = Visibility.Collapsed;
+            }
+
+            if (Common.VNCLogging.EventHandler) Log.EVENT_HANDLER("Exit", Common.LOG_CATEGORY, startTicks);
+        }
+
         private void OnClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
 #if LOGGING
             Int64 startTicks = 0;
             if (Common.VNCCoreLogging.EventHandler) startTicks = Log.EVENT_HANDLER("Enter", Common.LOG_CATEGORY);
 #endif
-
             this.Hide();
             e.Cancel = true;
 
@@ -133,6 +213,7 @@ namespace VNC.WPF.Presentation.Views
             if (Common.VNCCoreLogging.EventHandler) Log.EVENT_HANDLER("Exit", Common.LOG_CATEGORY, startTicks);
 #endif
         }
+
         private void thisControl_SizeChanged(object sender, SizeChangedEventArgs e)
         {
 #if LOGGING
