@@ -15,7 +15,7 @@ namespace VNC.Core.Mvvm
         {
 #if LOGGING
             Int64 startTicks = 0;
-            if (Common.VNCCoreLogging.Constructor) startTicks = Log.CONSTRUCTOR("Enter/Exit", Common.LOG_CATEGORY);
+            if (Common.VNCCoreLogging.Constructor) startTicks = Log.CONSTRUCTOR("Enter", Common.LOG_CATEGORY);
 #endif
             this.DataContextChanged += UserControl_DataContextChanged;
 #if LOGGING
@@ -27,7 +27,7 @@ namespace VNC.Core.Mvvm
         {
 #if LOGGING
             Int64 startTicks = 0;
-            if (Common.VNCCoreLogging.Constructor) startTicks = Log.CONSTRUCTOR("Enter", Common.LOG_CATEGORY);
+            if (Common.VNCCoreLogging.Constructor) startTicks = Log.CONSTRUCTOR($"Enter viewModel({viewModel.GetType()})", Common.LOG_CATEGORY);
 #endif
             ViewModel = viewModel;
 

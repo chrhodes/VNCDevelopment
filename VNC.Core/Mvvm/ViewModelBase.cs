@@ -2,9 +2,6 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.CompilerServices;
-using System.Windows;
-
-using Prism.Events;
 
 namespace VNC.Core.Mvvm
 {
@@ -16,7 +13,11 @@ namespace VNC.Core.Mvvm
         {
 #if LOGGING
             Int64 startTicks = 0;
-            if (Common.VNCCoreLogging.Constructor) startTicks = Log.CONSTRUCTOR("Enter/Exit", Common.LOG_CATEGORY);
+            if (Common.VNCCoreLogging.Constructor) startTicks = Log.CONSTRUCTOR("Enter", Common.LOG_CATEGORY);
+#endif
+
+#if LOGGING
+            if (Common.VNCCoreLogging.Constructor) Log.CONSTRUCTOR("Exit", Common.LOG_CATEGORY, startTicks);
 #endif
         }
 
@@ -24,7 +25,7 @@ namespace VNC.Core.Mvvm
         {
 #if LOGGING
             Int64 startTicks = 0;
-            if (Common.VNCCoreLogging.Constructor) startTicks = Log.CONSTRUCTOR("Enter", Common.LOG_CATEGORY);
+            if (Common.VNCCoreLogging.Constructor) startTicks = Log.CONSTRUCTOR($"Enter view({view.GetType()})", Common.LOG_CATEGORY);
 #endif
             View = view;
             View.ViewModel = this;
