@@ -6,11 +6,13 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:VNC.WPF.Presentation.Views"
     mc:Ignorable="d"
-    d:DesignHeight="300"
-    d:DesignWidth="300">
-
-    <Grid>
-        <Button Click="Button_Click">Boom Three</Button>
-    </Grid>
+    
+    d:DesignWidth="300" d:DesignHeight="300"
+>
+    <DockPanel Background="LightCoral" Margin="5">
+        <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Center" FontSize="20" Text="UIThree"  />
+        <TextBlock DockPanel.Dock="Bottom" HorizontalAlignment="Center" Text="{Binding Message}" />
+        <Button Click="Button_Click" Margin="10">Three Boom</Button>
+    </DockPanel>
     
 </UserControl>

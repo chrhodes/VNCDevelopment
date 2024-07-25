@@ -3,9 +3,9 @@ using System.Windows;
 
 namespace VNC.WPF.Presentation.Views
 {
-    public partial class UIThree
+    public partial class UIFive
     {
-        public UIThree()
+        public UIFive()
         {
             Int64 startTicks = 0;
             if (Common.VNCLogging.Constructor) startTicks = Log.CONSTRUCTOR("Enter", Common.LOG_CATEGORY);
@@ -15,11 +15,11 @@ namespace VNC.WPF.Presentation.Views
             if (Common.VNCLogging.Constructor) Log.CONSTRUCTOR("Exit", Common.LOG_CATEGORY, startTicks);
         }
 
-        public string Message { get; set; } = "UIThree";
+        public string Message { get; set; } = "UIFive";
 
         private void Button_Click(object sender, RoutedEventArgs e)
-        {           
-            MessageBox.Show("Three Booms");
+        {
+            MessageBox.Show("Five Booms");
         }
     }
 }
