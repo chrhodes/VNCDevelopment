@@ -42,7 +42,10 @@ namespace VNC.Core.Mvvm
 
         #region Event Handlers
 
-        public void AfterDetailSaved(ObservableCollection<NavigationItemViewModel> items,
+        // TODO(crhodes)
+        // Maybe these should go in NavigationItemViewModelBase
+
+        public virtual void AfterDetailSaved(ObservableCollection<NavigationItemViewModel> items,
             AfterDetailSavedEventArgs args)
         {
 #if LOGGING
@@ -67,14 +70,13 @@ namespace VNC.Core.Mvvm
 #endif
         }
 
-        public void AfterDetailDeleted(ObservableCollection<NavigationItemViewModel> items,
+        public virtual void AfterDetailDeleted(ObservableCollection<NavigationItemViewModel> items,
             AfterDetailDeletedEventArgs args)
         {
 #if LOGGING
             Int64 startTicks = 0;
             if (Common.VNCCoreLogging.EventHandler) startTicks = Log.EVENT_HANDLER($"Enter Id:({args.Id})", Common.LOG_CATEGORY);
 #endif
-
             var lookupItem = items.SingleOrDefault(f => f.Id == args.Id);
 
             if (lookupItem != null)
@@ -93,7 +95,7 @@ namespace VNC.Core.Mvvm
 
         #endregion
 
-        #region Protected Methods
+        #region Public Methods
 
         public virtual void PublishDeveloperMode(Boolean developerMode)
         {
@@ -116,8 +118,8 @@ namespace VNC.Core.Mvvm
             if (Common.VNCCoreLogging.Event) startTicks = Log.EVENT("Enter", Common.LOG_CATEGORY);
 #endif
             var evt = EventAggregator.GetEvent<StatusMessageEvent>();
-            evt.Publish(Message);
-            //EventAggregator.GetEvent<StatusMessageEvent>().Publish(Message);
+            evt.Publish(message);
+            //EventAggregator.GetEvent<StatusMessageEvent>().Publish(message);
 #if LOGGING
             if (Common.VNCCoreLogging.Event) Log.EVENT("Exit", Common.LOG_CATEGORY, startTicks);
 #endif

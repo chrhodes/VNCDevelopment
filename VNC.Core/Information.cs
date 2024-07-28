@@ -2,8 +2,8 @@
 {
     public class Information
     {
-        public AssemblyInformation AssemblyInformation = new AssemblyInformation();
-        public FileInformation FileInformation = new FileInformation();
+        public AssemblyInformation AssemblyInformation { get; set; } = new AssemblyInformation();
+        public FileInformation FileInformation { get; set; } = new FileInformation();
         public string RuntimeVersion { get; set; }
     }
 }

@@ -11,6 +11,8 @@ namespace VNC.Core
 {
     public class Common
     {
+        // TODO(crhodes)
+        // Not sure we need to initialize these
         public static Information InformationApplication = new Information();
         public static Information InformationVNCCore = new Information();
 
@@ -165,9 +167,9 @@ namespace VNC.Core
 
         public static Information GetInformation(Assembly assembly, FileVersionInfo fileVersionInfo)
         {
-            Information information = new Information();
-
             AssemblyName assemblyName = assembly.GetName();
+
+            Information information = new Information();
 
             PopulateInformation(assembly, fileVersionInfo, information, assemblyName);
 
