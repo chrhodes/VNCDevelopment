@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows.Input;
 
 using Prism.Commands;
@@ -31,7 +33,7 @@ namespace VNC.Core.Mvvm
             DisplayMember = displayMember;
             _detailViewModelName = detailViewModelName;
 
-            OpenDetailViewCommand = new DelegateCommand(OpenDetailViewExecute);
+            OpenDetailViewCommand = new DelegateCommand(OpenDetailView);
 #if LOGGING
             if (Common.VNCCoreLogging.Constructor) Log.CONSTRUCTOR("Exit", Common.LOG_CATEGORY, startTicks);
 #endif
@@ -59,24 +61,26 @@ namespace VNC.Core.Mvvm
 
         #endregion
 
+        #region Event Handlers
+
         // TODO(crhodes)
         // Maybe this should be protected virtual
 
-        private void OpenDetailViewExecute()
+        private void OpenDetailView()
         {
 #if LOGGING
             Int64 startTicks = 0;
             if (Common.VNCCoreLogging.EventHandler) startTicks = Log.EVENT_HANDLER("Enter", Common.LOG_CATEGORY);
 #endif
-
             PublishOpenDetailViewEvent();
-
 #if LOGGING
             if (Common.VNCCoreLogging.EventHandler) Log.EVENT_HANDLER("Exit", Common.LOG_CATEGORY, startTicks);
 #endif
         }
 
-        #region Event (publish)
+        #endregion
+
+        #region Private Methods
 
         private void PublishOpenDetailViewEvent()
         {

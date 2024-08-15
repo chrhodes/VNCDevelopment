@@ -42,51 +42,53 @@ namespace VNC.Core.Mvvm
 
         #region Event Handlers
 
-        // TODO(crhodes)
-        // Maybe these should go in NavigationItemViewModelBase
+//        // TODO(crhodes)
+//        // Maybe these should go in NavigationItemViewModelBase
+//        // That didn't work
+//        // Put them in CombinedNavigationViewModel and CatNavigationViewModel
 
-        public virtual void AfterDetailSaved(ObservableCollection<NavigationItemViewModel> items,
-            AfterDetailSavedEventArgs args)
-        {
-#if LOGGING
-            Int64 startTicks = 0;
-            if (Common.VNCCoreLogging.EventHandler) startTicks = Log.EVENT_HANDLER($"Enter Id:({args.Id})", Common.LOG_CATEGORY);
-#endif
+//        public virtual void AfterDetailSaved(ObservableCollection<NavigationItemViewModel> items,
+//            AfterDetailSavedEventArgs args)
+//        {
+//#if LOGGING
+//            Int64 startTicks = 0;
+//            if (Common.VNCCoreLogging.EventHandler) startTicks = Log.EVENT_HANDLER($"Enter Id:({args.Id})", Common.LOG_CATEGORY);
+//#endif
 
-            var lookupItem = items.SingleOrDefault(l => l.Id == args.Id);
+//            var lookupItem = items.SingleOrDefault(l => l.Id == args.Id);
 
-            if (lookupItem == null)
-            {
-                items.Add(new NavigationItemViewModel(args.Id, args.DisplayMember,
-                    args.ViewModelName,
-                    EventAggregator, DialogService));
-            }
-            else
-            {
-                lookupItem.DisplayMember = args.DisplayMember;
-            }
-#if LOGGING
-            if (Common.VNCCoreLogging.EventHandler) Log.EVENT_HANDLER("Exit", Common.LOG_CATEGORY, startTicks);
-#endif
-        }
+//            if (lookupItem == null)
+//            {
+//                items.Add(new NavigationItemViewModel(args.Id, args.DisplayMember,
+//                    args.ViewModelName,
+//                    EventAggregator, DialogService));
+//            }
+//            else
+//            {
+//                lookupItem.DisplayMember = args.DisplayMember;
+//            }
+//#if LOGGING
+//            if (Common.VNCCoreLogging.EventHandler) Log.EVENT_HANDLER("Exit", Common.LOG_CATEGORY, startTicks);
+//#endif
+//        }
 
-        public virtual void AfterDetailDeleted(ObservableCollection<NavigationItemViewModel> items,
-            AfterDetailDeletedEventArgs args)
-        {
-#if LOGGING
-            Int64 startTicks = 0;
-            if (Common.VNCCoreLogging.EventHandler) startTicks = Log.EVENT_HANDLER($"Enter Id:({args.Id})", Common.LOG_CATEGORY);
-#endif
-            var lookupItem = items.SingleOrDefault(f => f.Id == args.Id);
+//        public virtual void AfterDetailDeleted(ObservableCollection<NavigationItemViewModel> items,
+//            AfterDetailDeletedEventArgs args)
+//        {
+//#if LOGGING
+//            Int64 startTicks = 0;
+//            if (Common.VNCCoreLogging.EventHandler) startTicks = Log.EVENT_HANDLER($"Enter Id:({args.Id})", Common.LOG_CATEGORY);
+//#endif
+//            var lookupItem = items.SingleOrDefault(f => f.Id == args.Id);
 
-            if (lookupItem != null)
-            {
-                items.Remove(lookupItem);
-            }
-#if LOGGING
-            if (Common.VNCCoreLogging.EventHandler) Log.EVENT_HANDLER("Exit", Common.LOG_CATEGORY, startTicks);
-#endif
-        }
+//            if (lookupItem != null)
+//            {
+//                items.Remove(lookupItem);
+//            }
+//#if LOGGING
+//            if (Common.VNCCoreLogging.EventHandler) Log.EVENT_HANDLER("Exit", Common.LOG_CATEGORY, startTicks);
+//#endif
+//        }
 
         #endregion
 

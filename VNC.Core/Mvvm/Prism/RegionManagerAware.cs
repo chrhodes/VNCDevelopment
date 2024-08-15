@@ -11,9 +11,9 @@ namespace VNC.Core.Mvvm.Prism
             // Want to support View and/or ViewModel first approaches so
             // Perhaps this could become an extension method on RegionManager!
 
-            var viewModelIsRegionManagerAware = viewOrViewModel as IRegionManagerAware;
-
             // ViewModel first approach
+
+            var viewModelIsRegionManagerAware = viewOrViewModel as IRegionManagerAware;
 
             // Check if supports IRegionManagerAware
 
@@ -30,13 +30,13 @@ namespace VNC.Core.Mvvm.Prism
 
             if (viewIsRegionManagerAware != null)
             {
-                // Verify the View implements the IRegionManagerAware interface
+                // Verify the View's DataContext implements the IRegionManagerAware interface
 
-                var isRegionManagerAwareDataContext = viewIsRegionManagerAware.DataContext as IRegionManagerAware;
+                var isDataContextRegionManagerAware = viewIsRegionManagerAware.DataContext as IRegionManagerAware;
 
-                if (isRegionManagerAwareDataContext != null)
+                if (isDataContextRegionManagerAware != null)
                 {
-                    isRegionManagerAwareDataContext.RegionManager = regionManager;
+                    isDataContextRegionManagerAware.RegionManager = regionManager;
                 }
             }
         }
