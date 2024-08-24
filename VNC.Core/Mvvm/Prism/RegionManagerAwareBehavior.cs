@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Specialized;
+using System.Linq;
 using System.Windows;
 using Prism.Regions;
 
@@ -18,6 +19,10 @@ namespace VNC.Core.Mvvm.Prism
             if (Common.VNCLogging.Presentation) startTicks = Log.PRESENTATION($"Enter", Common.LOG_CATEGORY);
 #endif
             // Attach to all regions.  But, can also pick and choose
+
+
+            if (Region.ActiveViews.Count() > 0)
+            if (Common.VNCLogging.Presentation) Log.PRESENTATION($"Region.ActiveViews {Region.ActiveViews.Count()} {Region.ActiveViews.First()}", Common.LOG_CATEGORY);
 
             Region.ActiveViews.CollectionChanged += ActiveViews_CollectionChanged;
 
