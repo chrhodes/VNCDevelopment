@@ -36,6 +36,8 @@ namespace VNC.Core.Mvvm.Prism
             {
                 foreach (var item in e.NewItems)
                 {
+                    if (Common.VNCLogging.Presentation) startTicks = Log.PRESENTATION($"{item.GetType()}", Common.LOG_CATEGORY);
+
                     IRegionManager regionManager = Region.RegionManager;
 
                     FrameworkElement element = item as FrameworkElement;
@@ -58,6 +60,8 @@ namespace VNC.Core.Mvvm.Prism
             {
                 foreach (var item in e.OldItems)
                 {
+                    if (Common.VNCLogging.Presentation) startTicks = Log.PRESENTATION($"{item.GetType()}", Common.LOG_CATEGORY);
+
                     InvokeOnRegionManagerAwareElement(item, x => x.RegionManager = null);
                 }
             }
@@ -71,19 +75,21 @@ namespace VNC.Core.Mvvm.Prism
         {
 #if LOGGING
             Int64 startTicks = 0;
-            if (Common.VNCLogging.Presentation) startTicks = Log.PRESENTATION($"Enter", Common.LOG_CATEGORY);
+            if (Common.VNCLogging.Presentation) startTicks = Log.PRESENTATION($"Enter {item.GetType()}", Common.LOG_CATEGORY);
 #endif
 
             // Want to support View and/or ViewModel first approaches
-
-            var rmAwareItem = item as IRegionManagerAware;
 
             // ViewModel first approach
 
             // Check if supports IRegionManagerAware
 
+            var rmAwareItem = item as IRegionManagerAware;
+
             if (rmAwareItem != null)
             {
+                if (Common.VNCLogging.Presentation) startTicks = Log.PRESENTATION($"VM rmAware", Common.LOG_CATEGORY);
+
                 invocation(rmAwareItem);
             }
 
@@ -101,7 +107,8 @@ namespace VNC.Core.Mvvm.Prism
                 {
                     var frameworkElementParent = frameworkElement.Parent as FrameworkElement;
 
-                    // If a view does not have a DataContext, i.e. a ViewModel, it will inherit DataContext of parent view
+                    // If a view does not have a DataContext, i.e. a ViewModel,
+                    // it will inherit DataContext of parent view
                     // Avoid setting RegionManager of parent view
 
                     if (frameworkElementParent != null)
@@ -119,6 +126,8 @@ namespace VNC.Core.Mvvm.Prism
                             }
                         }
                     }
+
+                    if (Common.VNCLogging.Presentation) startTicks = Log.PRESENTATION($"V rmAwareDataContext", Common.LOG_CATEGORY);
 
                     invocation(rmAwareDataContext);
                 }

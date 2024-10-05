@@ -107,8 +107,8 @@ namespace VNC.Core.Mvvm
 
         private void UserControl_DataContextChanged(object sender, System.Windows.DependencyPropertyChangedEventArgs e)
         {
-            var dc = DataContext is null ? "null" : DataContext.GetType().ToString().Split('.').Last();
-            ViewModelType = dc;
+            var dcType = DataContext is null ? "null" : DataContext.GetType().ToString().Split('.').Last();
+            ViewModelType = dcType;
         }
 
         #endregion

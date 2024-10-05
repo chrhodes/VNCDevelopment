@@ -4,6 +4,8 @@ using System.Globalization;
 using System.Linq;
 using System.Windows;
 
+using CommonServiceLocator;
+
 using Prism.Common;
 using Prism.Ioc;
 using Prism.Ioc.Internals;
@@ -12,7 +14,8 @@ using Prism.Regions;
 namespace VNC.Core.Mvvm.Prism
 {
     /// <summary>
-    /// Implementation of <see cref="IRegionNavigationContentLoader"/> that relies on a <see cref="IContainerProvider"/>
+    /// Implementation of <see cref="IRegionNavigationContentLoader"/> 
+    /// that relies on a <see cref="IContainerProvider"/>
     /// to create new views when necessary.
     /// </summary>
     public class ScopedRegionNavigationContentLoaderP8 : IRegionNavigationContentLoader
@@ -57,12 +60,16 @@ namespace VNC.Core.Mvvm.Prism
                 candidates.Where(
                     v =>
                     {
-                        if (v is INavigationAware navigationAware && !navigationAware.IsNavigationTarget(navigationContext))
+                        var navigationAware = v as INavigationAware;
+
+                        if (navigationAware != null && !navigationAware.IsNavigationTarget(navigationContext))
                         {
                             return false;
                         }
 
-                        if (!(v is FrameworkElement frameworkElement))
+                        var frameworkElement = v as FrameworkElement;
+
+                        if (frameworkElement == null)
                         {
                             return true;
                         }
@@ -125,22 +132,22 @@ namespace VNC.Core.Mvvm.Prism
         /// <returns>An instance of an item to put into the <see cref="IRegion"/>.</returns>
         protected virtual object CreateNewRegionItem(string candidateTargetContract)
         {
+            object newRegionItem;
             try
             {
-                var newRegionItem = _container.Resolve<object>(candidateTargetContract);
-                //MvvmHelpers.AutowireViewModel(newRegionItem);
-                return newRegionItem;
+                newRegionItem = _container.Resolve<object>(candidateTargetContract);
             }
-            catch (ContainerResolutionException)
-            {
-                throw;
-            }
-            catch (Exception e)
+            catch (ActivationException e)
             {
                 throw new InvalidOperationException(
                     string.Format(CultureInfo.CurrentCulture, "Cannot create navigation target", candidateTargetContract),
                     e);
             }
+
+            // NOTE(crhodes)
+            // This was in Prism Code for RegionNavigationContentLoader
+            //MvvmHelpers.AutowireViewModel(newRegionItem);
+            return newRegionItem;
         }
 
         /// <summary>

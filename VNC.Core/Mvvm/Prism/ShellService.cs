@@ -36,6 +36,7 @@ namespace VNC.Core.Mvvm.Prism
 
         public void ShowShell(string uri)
         {
+            throw new NotImplementedException();
             // NOTE(crhodes)
             // If ShellService was defined in PAEF1, we would do this
 
@@ -45,29 +46,27 @@ namespace VNC.Core.Mvvm.Prism
             //RegionManager.SetRegionManager(shell, scopedRegion);
 
             // Ugh looking more problematic to do in VNC.Core
-            // Don't know aobut ReigonNames
+            // Don't know about RegionNames
 
             //scopedRegion.RequestNavigate(RegionNames.ContentRegion, uri);
             //shell.Show();
         }
 
-        public void ShowShell(object view, string regionName, string uri)
+        public void ShowShell(object shell, string regionName, string uri)
         {
             // NOTE(crhodes)
             // If ShellService was defined in PAEF1, we would do this
 
             //var shell = _container.Resolve<Shell>();
 
-            //var scopedRegion = _regionManager.CreateRegionManager();
-            //RegionManager.SetRegionManager(shell, scopedRegion);
+            // Instead we pass in the shell to which we want to navigate
 
-            // Ugh looking more problematic to do in VNC.Core
-            // Don't know aobut ReigonNames
+            var scopedRegion = _regionManager.CreateRegionManager();
+            RegionManager.SetRegionManager((System.Windows.DependencyObject)shell, scopedRegion);
 
-            //scopedRegion.RequestNavigate(RegionNames.ContentRegion, uri);
-            //shell.Show();
+            scopedRegion.RequestNavigate(regionName, uri);
+
+            ((System.Windows.Window)shell).Show();
         }
-
-
     }
 }

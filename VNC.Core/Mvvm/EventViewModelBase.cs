@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.ObjectModel;
-using System.Linq;
 
-using Prism.Commands;
 using Prism.Events;
 using Prism.Services.Dialogs;
 

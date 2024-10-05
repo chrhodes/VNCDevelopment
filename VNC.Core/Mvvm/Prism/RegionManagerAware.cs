@@ -13,9 +13,9 @@ namespace VNC.Core.Mvvm.Prism
 
             // ViewModel first approach
 
-            var viewModelIsRegionManagerAware = viewOrViewModel as IRegionManagerAware;
-
             // Check if supports IRegionManagerAware
+
+            var viewModelIsRegionManagerAware = viewOrViewModel as IRegionManagerAware;
 
             if (viewModelIsRegionManagerAware != null)
             {
@@ -32,11 +32,11 @@ namespace VNC.Core.Mvvm.Prism
             {
                 // Verify the View's DataContext implements the IRegionManagerAware interface
 
-                var isDataContextRegionManagerAware = viewIsRegionManagerAware.DataContext as IRegionManagerAware;
+                var viewDataContextIsRegionManagerAware = viewIsRegionManagerAware.DataContext as IRegionManagerAware;
 
-                if (isDataContextRegionManagerAware != null)
+                if (viewDataContextIsRegionManagerAware != null)
                 {
-                    isDataContextRegionManagerAware.RegionManager = regionManager;
+                    viewDataContextIsRegionManagerAware.RegionManager = regionManager;
                 }
             }
         }
