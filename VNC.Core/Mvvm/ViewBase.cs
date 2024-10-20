@@ -7,7 +7,7 @@ using System.Windows.Controls;
 
 namespace VNC.Core.Mvvm
 {
-    public class ViewBase : UserControl, IView, INotifyPropertyChanged
+    public class ViewBase : UserControl, IView, INotifyPropertyChanged, IViewSize
     {
         #region Constructors, Initialization, and Load
 
@@ -88,6 +88,19 @@ namespace VNC.Core.Mvvm
             }
         }
 
+        private Size _windowSize;
+        public Size WindowSize
+        {
+            get => _windowSize;
+            set
+            {
+                if (_windowSize == value)
+                    return;
+                _windowSize = value;
+                OnPropertyChanged();
+            }
+        }
+
         private Visibility _developerUIMode = Common.DeveloperUIMode;
         public Visibility DeveloperUIMode
         {
@@ -105,7 +118,22 @@ namespace VNC.Core.Mvvm
 
         #region Event Handlers
 
-        private void UserControl_DataContextChanged(object sender, System.Windows.DependencyPropertyChangedEventArgs e)
+        public void thisControl_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+#if LOGGING
+            Int64 startTicks = 0;
+            if (Common.VNCCoreLogging.EventHandler) startTicks = Log.EVENT_HANDLER("Enter", Common.LOG_CATEGORY);
+#endif
+            var newSize = e.NewSize;
+            var previousSize = e.PreviousSize;
+            WindowSize = newSize;
+
+#if LOGGING
+            if (Common.VNCCoreLogging.EventHandler) Log.EVENT_HANDLER("Exit", Common.LOG_CATEGORY, startTicks);
+#endif
+        }
+
+        private void UserControl_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             var dcType = DataContext is null ? "null" : DataContext.GetType().ToString().Split('.').Last();
             ViewModelType = dcType;
