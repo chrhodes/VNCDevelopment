@@ -35,14 +35,14 @@ namespace VNC.Core.Xaml.Transitions
         #region Dependency Properties AngleRotateTo
 
         public static readonly DependencyProperty AngleRotateToProperty = DependencyProperty.RegisterAttached("AngleRotateTo",
-            typeof(double), typeof(Rotate3D), new FrameworkPropertyMetadata((double)0, new PropertyChangedCallback(AngleRotateToInvalidated)));
+            typeof(Double), typeof(Rotate3D), new FrameworkPropertyMetadata((Double)0, new PropertyChangedCallback(AngleRotateToInvalidated)));
 
-        public static double GetAngleRotateTo(DependencyObject d)
+        public static Double GetAngleRotateTo(DependencyObject d)
         {
-            return (double)(d.GetValue(Rotate3D.AngleRotateToProperty));
+            return (Double)(d.GetValue(Rotate3D.AngleRotateToProperty));
         }
 
-        public static void SetAngleRotateTo(DependencyObject d, double value)
+        public static void SetAngleRotateTo(DependencyObject d, Double value)
         {
             d.SetValue(Rotate3D.AngleRotateToProperty, value);
         }
@@ -57,14 +57,14 @@ namespace VNC.Core.Xaml.Transitions
         #region Dependency Properties AngleRotateFrom
 
         public static readonly DependencyProperty AngleRotateFromProperty = DependencyProperty.RegisterAttached("AngleRotateFrom",
-            typeof(double), typeof(Rotate3D), new FrameworkPropertyMetadata((double)0, new PropertyChangedCallback(AngleRotateFromInvalidated)));
+            typeof(Double), typeof(Rotate3D), new FrameworkPropertyMetadata((Double)0, new PropertyChangedCallback(AngleRotateFromInvalidated)));
 
-        public static double GetAngleRotateFrom(DependencyObject d)
+        public static Double GetAngleRotateFrom(DependencyObject d)
         {
-            return (double)(d.GetValue(Rotate3D.AngleRotateFromProperty));
+            return (Double)(d.GetValue(Rotate3D.AngleRotateFromProperty));
         }
 
-        public static void SetAngleRotateFrom(DependencyObject d, double value)
+        public static void SetAngleRotateFrom(DependencyObject d, Double value)
         {
             d.SetValue(Rotate3D.AngleRotateFromProperty, value);
         }
@@ -123,14 +123,14 @@ namespace VNC.Core.Xaml.Transitions
         #region Dependency Properties ScaleX
 
         public static readonly DependencyProperty ScaleXProperty = DependencyProperty.RegisterAttached("ScaleX",
-            typeof(double), typeof(Rotate3D), new FrameworkPropertyMetadata((double)1.0, new PropertyChangedCallback(ScaleXInvalidated)));
+            typeof(Double), typeof(Rotate3D), new FrameworkPropertyMetadata((Double)1.0, new PropertyChangedCallback(ScaleXInvalidated)));
 
-        public static double GetScaleX(DependencyObject d)
+        public static Double GetScaleX(DependencyObject d)
         {
-            return (double)(d.GetValue(Rotate3D.ScaleXProperty));
+            return (Double)(d.GetValue(Rotate3D.ScaleXProperty));
         }
 
-        public static void SetScaleX(DependencyObject d, double value)
+        public static void SetScaleX(DependencyObject d, Double value)
         {
             d.SetValue(Rotate3D.ScaleXProperty, value);
         }
@@ -145,14 +145,14 @@ namespace VNC.Core.Xaml.Transitions
         #region Dependency Properties ScaleY
 
         public static readonly DependencyProperty ScaleYProperty = DependencyProperty.RegisterAttached("ScaleY",
-            typeof(double), typeof(Rotate3D), new FrameworkPropertyMetadata((double)1.0, new PropertyChangedCallback(ScaleYInvalidated)));
+            typeof(Double), typeof(Rotate3D), new FrameworkPropertyMetadata((Double)1.0, new PropertyChangedCallback(ScaleYInvalidated)));
 
-        public static double GetScaleY(DependencyObject d)
+        public static Double GetScaleY(DependencyObject d)
         {
-            return (double)(d.GetValue(Rotate3D.ScaleYProperty));
+            return (Double)(d.GetValue(Rotate3D.ScaleYProperty));
         }
 
-        public static void SetScaleY(DependencyObject d, double value)
+        public static void SetScaleY(DependencyObject d, Double value)
         {
             d.SetValue(Rotate3D.ScaleYProperty, value);
         }
@@ -167,14 +167,14 @@ namespace VNC.Core.Xaml.Transitions
         #region Dependency Properties TranslateX
 
         public static readonly DependencyProperty TranslateXProperty = DependencyProperty.RegisterAttached("TranslateX",
-            typeof(double), typeof(Rotate3D), new FrameworkPropertyMetadata((double)0.0, new PropertyChangedCallback(TranslateXInvalidated)));
+            typeof(Double), typeof(Rotate3D), new FrameworkPropertyMetadata((Double)0.0, new PropertyChangedCallback(TranslateXInvalidated)));
 
-        public static double GetTranslateX(DependencyObject d)
+        public static Double GetTranslateX(DependencyObject d)
         {
-            return (double)(d.GetValue(Rotate3D.TranslateXProperty));
+            return (Double)(d.GetValue(Rotate3D.TranslateXProperty));
         }
 
-        public static void SetTranslateX(DependencyObject d, double value)
+        public static void SetTranslateX(DependencyObject d, Double value)
         {
             d.SetValue(Rotate3D.TranslateXProperty, value);
         }
@@ -189,14 +189,14 @@ namespace VNC.Core.Xaml.Transitions
         #region Dependency Properties TranslateY
 
         public static readonly DependencyProperty TranslateYProperty = DependencyProperty.RegisterAttached("TranslateY",
-            typeof(double), typeof(Rotate3D), new FrameworkPropertyMetadata((double)0.0, new PropertyChangedCallback(TranslateYInvalidated)));
+            typeof(Double), typeof(Rotate3D), new FrameworkPropertyMetadata((Double)0.0, new PropertyChangedCallback(TranslateYInvalidated)));
 
-        public static double GetTranslateY(DependencyObject d)
+        public static Double GetTranslateY(DependencyObject d)
         {
-            return (double)(d.GetValue(Rotate3D.TranslateYProperty));
+            return (Double)(d.GetValue(Rotate3D.TranslateYProperty));
         }
 
-        public static void SetTranslateY(DependencyObject d, double value)
+        public static void SetTranslateY(DependencyObject d, Double value)
         {
             d.SetValue(Rotate3D.TranslateYProperty, value);
         }
@@ -211,14 +211,14 @@ namespace VNC.Core.Xaml.Transitions
         #region Dependency Properties ScaleXBack
 
         public static readonly DependencyProperty ScaleXBackProperty = DependencyProperty.RegisterAttached("ScaleXBack",
-            typeof(double), typeof(Rotate3D), new FrameworkPropertyMetadata((double)1.0, new PropertyChangedCallback(ScaleXBackInvalidated)));
+            typeof(Double), typeof(Rotate3D), new FrameworkPropertyMetadata((Double)1.0, new PropertyChangedCallback(ScaleXBackInvalidated)));
 
-        public static double GetScaleXBack(DependencyObject d)
+        public static Double GetScaleXBack(DependencyObject d)
         {
-            return (double)(d.GetValue(Rotate3D.ScaleXBackProperty));
+            return (Double)(d.GetValue(Rotate3D.ScaleXBackProperty));
         }
 
-        public static void SetScaleXBack(DependencyObject d, double value)
+        public static void SetScaleXBack(DependencyObject d, Double value)
         {
             d.SetValue(Rotate3D.ScaleXBackProperty, value);
         }
@@ -233,14 +233,14 @@ namespace VNC.Core.Xaml.Transitions
         #region Dependency Properties ScaleYBack
 
         public static readonly DependencyProperty ScaleYBackProperty = DependencyProperty.RegisterAttached("ScaleYBack",
-            typeof(double), typeof(Rotate3D), new FrameworkPropertyMetadata((double)1.0, new PropertyChangedCallback(ScaleYBackInvalidated)));
+            typeof(Double), typeof(Rotate3D), new FrameworkPropertyMetadata((Double)1.0, new PropertyChangedCallback(ScaleYBackInvalidated)));
 
-        public static double GetScaleYBack(DependencyObject d)
+        public static Double GetScaleYBack(DependencyObject d)
         {
-            return (double)(d.GetValue(Rotate3D.ScaleYBackProperty));
+            return (Double)(d.GetValue(Rotate3D.ScaleYBackProperty));
         }
 
-        public static void SetScaleYBack(DependencyObject d, double value)
+        public static void SetScaleYBack(DependencyObject d, Double value)
         {
             d.SetValue(Rotate3D.ScaleYBackProperty, value);
         }
@@ -255,14 +255,14 @@ namespace VNC.Core.Xaml.Transitions
         #region Dependency Properties TranslateXBackBack
 
         public static readonly DependencyProperty TranslateXBackProperty = DependencyProperty.RegisterAttached("TranslateXBack",
-            typeof(double), typeof(Rotate3D), new FrameworkPropertyMetadata((double)0.0, new PropertyChangedCallback(TranslateXBackInvalidated)));
+            typeof(Double), typeof(Rotate3D), new FrameworkPropertyMetadata((Double)0.0, new PropertyChangedCallback(TranslateXBackInvalidated)));
 
-        public static double GetTranslateXBack(DependencyObject d)
+        public static Double GetTranslateXBack(DependencyObject d)
         {
-            return (double)(d.GetValue(Rotate3D.TranslateXBackProperty));
+            return (Double)(d.GetValue(Rotate3D.TranslateXBackProperty));
         }
 
-        public static void SetTranslateXBack(DependencyObject d, double value)
+        public static void SetTranslateXBack(DependencyObject d, Double value)
         {
             d.SetValue(Rotate3D.TranslateXBackProperty, value);
         }
@@ -277,14 +277,14 @@ namespace VNC.Core.Xaml.Transitions
         #region Dependency Properties TranslateYBack
 
         public static readonly DependencyProperty TranslateYBackProperty = DependencyProperty.RegisterAttached("TranslateYBack",
-            typeof(double), typeof(Rotate3D), new FrameworkPropertyMetadata((double)0.0, new PropertyChangedCallback(TranslateYBackInvalidated)));
+            typeof(Double), typeof(Rotate3D), new FrameworkPropertyMetadata((Double)0.0, new PropertyChangedCallback(TranslateYBackInvalidated)));
 
-        public static double GetTranslateYBack(DependencyObject d)
+        public static Double GetTranslateYBack(DependencyObject d)
         {
-            return (double)(d.GetValue(Rotate3D.TranslateYBackProperty));
+            return (Double)(d.GetValue(Rotate3D.TranslateYBackProperty));
         }
 
-        public static void SetTranslateYBack(DependencyObject d, double value)
+        public static void SetTranslateYBack(DependencyObject d, Double value)
         {
             d.SetValue(Rotate3D.TranslateYBackProperty, value);
         }
@@ -299,14 +299,14 @@ namespace VNC.Core.Xaml.Transitions
         #region Dependency Properties ScaleXTo
 
         public static readonly DependencyProperty ScaleXToProperty = DependencyProperty.RegisterAttached("ScaleXTo",
-            typeof(double), typeof(Rotate3D), new FrameworkPropertyMetadata((double)1.0, new PropertyChangedCallback(ScaleXToInvalidated)));
+            typeof(Double), typeof(Rotate3D), new FrameworkPropertyMetadata((Double)1.0, new PropertyChangedCallback(ScaleXToInvalidated)));
 
-        public static double GetScaleXTo(DependencyObject d)
+        public static Double GetScaleXTo(DependencyObject d)
         {
-            return (double)(d.GetValue(Rotate3D.ScaleXToProperty));
+            return (Double)(d.GetValue(Rotate3D.ScaleXToProperty));
         }
 
-        public static void SetScaleXTo(DependencyObject d, double value)
+        public static void SetScaleXTo(DependencyObject d, Double value)
         {
             d.SetValue(Rotate3D.ScaleXToProperty, value);
         }
@@ -321,14 +321,14 @@ namespace VNC.Core.Xaml.Transitions
         #region Dependency Properties ScaleYTo
 
         public static readonly DependencyProperty ScaleYToProperty = DependencyProperty.RegisterAttached("ScaleYTo",
-            typeof(double), typeof(Rotate3D), new FrameworkPropertyMetadata((double)1.0, new PropertyChangedCallback(ScaleYToInvalidated)));
+            typeof(Double), typeof(Rotate3D), new FrameworkPropertyMetadata((Double)1.0, new PropertyChangedCallback(ScaleYToInvalidated)));
 
-        public static double GetScaleYTo(DependencyObject d)
+        public static Double GetScaleYTo(DependencyObject d)
         {
-            return (double)(d.GetValue(Rotate3D.ScaleYToProperty));
+            return (Double)(d.GetValue(Rotate3D.ScaleYToProperty));
         }
 
-        public static void SetScaleYTo(DependencyObject d, double value)
+        public static void SetScaleYTo(DependencyObject d, Double value)
         {
             d.SetValue(Rotate3D.ScaleYToProperty, value);
         }
@@ -343,14 +343,14 @@ namespace VNC.Core.Xaml.Transitions
         #region Dependency Properties TranslateXTo
 
         public static readonly DependencyProperty TranslateXToProperty = DependencyProperty.RegisterAttached("TranslateXTo",
-            typeof(double), typeof(Rotate3D), new FrameworkPropertyMetadata((double)1.0, new PropertyChangedCallback(TranslateXToInvalidated)));
+            typeof(Double), typeof(Rotate3D), new FrameworkPropertyMetadata((Double)1.0, new PropertyChangedCallback(TranslateXToInvalidated)));
 
-        public static double GetTranslateXTo(DependencyObject d)
+        public static Double GetTranslateXTo(DependencyObject d)
         {
-            return (double)(d.GetValue(Rotate3D.TranslateXToProperty));
+            return (Double)(d.GetValue(Rotate3D.TranslateXToProperty));
         }
 
-        public static void SetTranslateXTo(DependencyObject d, double value)
+        public static void SetTranslateXTo(DependencyObject d, Double value)
         {
             d.SetValue(Rotate3D.TranslateXToProperty, value);
         }
@@ -365,14 +365,14 @@ namespace VNC.Core.Xaml.Transitions
         #region Dependency Properties DurationTime
 
         public static readonly DependencyProperty DurationTimeProperty = DependencyProperty.RegisterAttached("DurationTime",
-            typeof(double), typeof(Rotate3D), new FrameworkPropertyMetadata((double)0.0, new PropertyChangedCallback(DurationTimeInvalidated)));
+            typeof(Double), typeof(Rotate3D), new FrameworkPropertyMetadata((Double)0.0, new PropertyChangedCallback(DurationTimeInvalidated)));
 
-        public static double GetDurationTime(DependencyObject d)
+        public static Double GetDurationTime(DependencyObject d)
         {
-            return (double)(d.GetValue(Rotate3D.DurationTimeProperty));
+            return (Double)(d.GetValue(Rotate3D.DurationTimeProperty));
         }
 
-        public static void SetDurationTime(DependencyObject d, double value)
+        public static void SetDurationTime(DependencyObject d, Double value)
         {
             d.SetValue(Rotate3D.DurationTimeProperty, value);
         }
@@ -431,49 +431,49 @@ namespace VNC.Core.Xaml.Transitions
             // elementbinding doesn't work in Beta bits. So create the animation in code for now
             ParallelTimeline pt = s.Children[0] as ParallelTimeline;
             pt.Children.Clear();
-            //double from = (double)this.GetValue(Rotate3D.AngleRotateFromProperty);
-            double to = (double)this.GetValue(Rotate3D.AngleRotateToProperty);
-            double duration = (double)this.GetValue(Rotate3D.DurationTimeProperty);
+            //Double from = (Double)this.GetValue(Rotate3D.AngleRotateFromProperty);
+            Double to = (Double)this.GetValue(Rotate3D.AngleRotateToProperty);
+            Double duration = (Double)this.GetValue(Rotate3D.DurationTimeProperty);
             pt.Children.Add(new DoubleAnimation(to, new Duration(TimeSpan.FromSeconds(duration)),FillBehavior.HoldEnd));
 
             this.BeginStoryboard(s);
         }
 
-        public void AnimateScaleXTo(double to)
+        public void AnimateScaleXTo(Double to)
         {
             Storyboard s = (Storyboard)this.FindResource("ScaleXStoryboard");
 
             // elementbinding doesn't work in Beta bits. So create the animation in code for now
             ParallelTimeline pt = s.Children[0] as ParallelTimeline;
             pt.Children.Clear();
-            double duration = (double)this.GetValue(Rotate3D.DurationTimeProperty);
+            Double duration = (Double)this.GetValue(Rotate3D.DurationTimeProperty);
             pt.Children.Add(new DoubleAnimation(to, new Duration(TimeSpan.FromSeconds(duration)), FillBehavior.HoldEnd));
 
             this.BeginStoryboard(s);
         }
 
-        public void AnimateScaleYTo(double to)
+        public void AnimateScaleYTo(Double to)
         {
             Storyboard s = (Storyboard)this.FindResource("ScaleYStoryboard");
 
             // elementbinding doesn't work in Beta bits. So create the animation in code for now
             ParallelTimeline pt = s.Children[0] as ParallelTimeline;
             pt.Children.Clear();
-            double duration = (double)this.GetValue(Rotate3D.DurationTimeProperty);
+            Double duration = (Double)this.GetValue(Rotate3D.DurationTimeProperty);
             pt.Children.Add(new DoubleAnimation(to, new Duration(TimeSpan.FromSeconds(duration)), FillBehavior.HoldEnd));
 
             this.BeginStoryboard(s);
         }
 
 
-        public void AnimateTranslateXTo(double to)
+        public void AnimateTranslateXTo(Double to)
         {
             Storyboard s = (Storyboard)this.FindResource("TranslateXStoryboard");
 
             // elementbinding doesn't work in Beta bits. So create the animation in code for now
             ParallelTimeline pt = s.Children[0] as ParallelTimeline;
             pt.Children.Clear();
-            double duration = (double)this.GetValue(Rotate3D.DurationTimeProperty);
+            Double duration = (Double)this.GetValue(Rotate3D.DurationTimeProperty);
             pt.Children.Add(new DoubleAnimation(to, new Duration(TimeSpan.FromSeconds(duration)), FillBehavior.HoldEnd));
 
             this.BeginStoryboard(s);

@@ -3,7 +3,7 @@
     public static class ExtensionMethods
     {
         /// <summary>
-        /// Surrounds string in double quotes "<string>"</string>
+        /// Surrounds string in Double quotes "<string>"</string>
         /// </summary>
         /// <param name="text"></param>
         /// <returns></returns>

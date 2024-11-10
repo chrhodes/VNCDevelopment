@@ -43,14 +43,14 @@ namespace VNC.Core.Xaml.Transitions
         #region Dependency Properties ScaleX
 
         public static readonly DependencyProperty ScaleXProperty = DependencyProperty.RegisterAttached("ScaleX",
-            typeof(double), typeof(Flip3D), new FrameworkPropertyMetadata((double)1.0, new PropertyChangedCallback(ScaleXInvalidated)));
+            typeof(Double), typeof(Flip3D), new FrameworkPropertyMetadata((Double)1.0, new PropertyChangedCallback(ScaleXInvalidated)));
 
-        public static double GetScaleX(DependencyObject d)
+        public static Double GetScaleX(DependencyObject d)
         {
-            return (double)(d.GetValue(Flip3D.ScaleXProperty));
+            return (Double)(d.GetValue(Flip3D.ScaleXProperty));
         }
 
-        public static void SetScaleX(DependencyObject d, double value)
+        public static void SetScaleX(DependencyObject d, Double value)
         {
             d.SetValue(Flip3D.ScaleXProperty, value);
         }
@@ -65,14 +65,14 @@ namespace VNC.Core.Xaml.Transitions
         #region Dependency Properties ScaleY
 
         public static readonly DependencyProperty ScaleYProperty = DependencyProperty.RegisterAttached("ScaleY",
-            typeof(double), typeof(Flip3D), new FrameworkPropertyMetadata((double)1.0, new PropertyChangedCallback(ScaleYInvalidated)));
+            typeof(Double), typeof(Flip3D), new FrameworkPropertyMetadata((Double)1.0, new PropertyChangedCallback(ScaleYInvalidated)));
 
-        public static double GetScaleY(DependencyObject d)
+        public static Double GetScaleY(DependencyObject d)
         {
-            return (double)(d.GetValue(Flip3D.ScaleYProperty));
+            return (Double)(d.GetValue(Flip3D.ScaleYProperty));
         }
 
-        public static void SetScaleY(DependencyObject d, double value)
+        public static void SetScaleY(DependencyObject d, Double value)
         {
             d.SetValue(Flip3D.ScaleYProperty, value);
         }
@@ -87,14 +87,14 @@ namespace VNC.Core.Xaml.Transitions
         #region Dependency Properties TranslateX
 
         public static readonly DependencyProperty TranslateXProperty = DependencyProperty.RegisterAttached("TranslateX",
-            typeof(double), typeof(Flip3D), new FrameworkPropertyMetadata((double)0.0, new PropertyChangedCallback(TranslateXInvalidated)));
+            typeof(Double), typeof(Flip3D), new FrameworkPropertyMetadata((Double)0.0, new PropertyChangedCallback(TranslateXInvalidated)));
 
-        public static double GetTranslateX(DependencyObject d)
+        public static Double GetTranslateX(DependencyObject d)
         {
-            return (double)(d.GetValue(Flip3D.TranslateXProperty));
+            return (Double)(d.GetValue(Flip3D.TranslateXProperty));
         }
 
-        public static void SetTranslateX(DependencyObject d, double value)
+        public static void SetTranslateX(DependencyObject d, Double value)
         {
             d.SetValue(Flip3D.TranslateXProperty, value);
         }
@@ -109,14 +109,14 @@ namespace VNC.Core.Xaml.Transitions
         #region Dependency Properties TranslateY
 
         public static readonly DependencyProperty TranslateYProperty = DependencyProperty.RegisterAttached("TranslateY",
-            typeof(double), typeof(Flip3D), new FrameworkPropertyMetadata((double)0.0, new PropertyChangedCallback(TranslateYInvalidated)));
+            typeof(Double), typeof(Flip3D), new FrameworkPropertyMetadata((Double)0.0, new PropertyChangedCallback(TranslateYInvalidated)));
 
-        public static double GetTranslateY(DependencyObject d)
+        public static Double GetTranslateY(DependencyObject d)
         {
-            return (double)(d.GetValue(Flip3D.TranslateYProperty));
+            return (Double)(d.GetValue(Flip3D.TranslateYProperty));
         }
 
-        public static void SetTranslateY(DependencyObject d, double value)
+        public static void SetTranslateY(DependencyObject d, Double value)
         {
             d.SetValue(Flip3D.TranslateYProperty, value);
         }
