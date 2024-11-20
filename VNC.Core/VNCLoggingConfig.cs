@@ -41,5 +41,11 @@ namespace VNC.Core
         public Boolean ViewLow { get; set; }
         public Boolean ViewModel { get; set; }
         public Boolean ViewModelLow { get; set; }
+
+        public Boolean Trace00 { get; set; }
+        public Boolean Trace01 { get; set; }
+        public Boolean Trace02 { get; set; }
+        public Boolean Trace03 { get; set; }
+        public Boolean Trace04 { get; set; }
     }
 }
