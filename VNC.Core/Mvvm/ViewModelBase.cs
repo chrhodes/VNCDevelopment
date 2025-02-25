@@ -70,6 +70,20 @@ namespace VNC.Core.Mvvm
             }
         }
 
+        private string _title = "ViewModelBase.Title";
+
+        public string Title
+        {
+            get => _title;
+            set
+            {
+                if (_title == value)
+                    return;
+                _title = value;
+                OnPropertyChanged();
+            }
+        }
+
         #endregion
 
         #region INotifyPropertyChanged
