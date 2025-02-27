@@ -7,7 +7,7 @@ using System.Windows.Controls;
 
 namespace VNC.Core.Mvvm
 {
-    public class ViewBase : UserControl, IView, INotifyPropertyChanged, IViewSize
+    public class ViewBase : UserControl, IView, INotifyPropertyChanged, IViewSize, IInstanceCountV
     {
         #region Constructors, Initialization, and Load
 
@@ -181,6 +181,26 @@ namespace VNC.Core.Mvvm
 #if LOGGING
             if (Common.VNCCoreLogging.INPC) Log.VIEW_LOW("Exit", Common.LOG_CATEGORY, startTicks);
 #endif
+        }
+
+        #endregion
+
+        #region IInstanceCount
+
+        private static int _instanceCountV;
+
+        public int InstanceCountV
+        {
+            get => _instanceCountV;
+            set => _instanceCountV = value;
+        }
+
+        private static int _instanceCountVP;
+
+        public int InstanceCountVP
+        {
+            get => _instanceCountVP;
+            set => _instanceCountVP = value;
         }
 
         #endregion
