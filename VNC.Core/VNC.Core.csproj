@@ -11,7 +11,7 @@
         <VersionPrefix>3.0.0</VersionPrefix>
         <VersionSuffix>Development</VersionSuffix>
         <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
-        <FileVersion>2025.02.24A</FileVersion>
+        <FileVersion>2025.02.26A</FileVersion>
         <Description>Base class for a variety of needs</Description>        
     </PropertyGroup>
     

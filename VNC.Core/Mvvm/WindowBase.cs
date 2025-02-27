@@ -7,35 +7,35 @@ using System.Windows.Controls;
 
 namespace VNC.Core.Mvvm
 {
-    public class ViewBase : UserControl, IView, INotifyPropertyChanged, IViewSize
+    public class WindowBase : Window, IViewSize
     {
         #region Constructors, Initialization, and Load
 
-        public ViewBase()
-        {
-#if LOGGING
-            Int64 startTicks = 0;
-            if (Common.VNCCoreLogging.Constructor) startTicks = Log.CONSTRUCTOR("Enter", Common.LOG_CATEGORY);
-#endif
-            this.DataContextChanged += UserControl_DataContextChanged;
-#if LOGGING
-            if (Common.VNCCoreLogging.Constructor) Log.CONSTRUCTOR("Exit", Common.LOG_CATEGORY, startTicks);
-#endif
-        }
+//        public WindowBase()
+//        {
+//#if LOGGING
+//            Int64 startTicks = 0;
+//            if (Common.VNCCoreLogging.Constructor) startTicks = Log.CONSTRUCTOR("Enter", Common.LOG_CATEGORY);
+//#endif
+//            this.DataContextChanged += UserControl_DataContextChanged;
+//#if LOGGING
+//            if (Common.VNCCoreLogging.Constructor) Log.CONSTRUCTOR("Exit", Common.LOG_CATEGORY, startTicks);
+//#endif
+//        }
 
-        public ViewBase(IViewModel viewModel)
-        {
-#if LOGGING
-            Int64 startTicks = 0;
-            if (Common.VNCCoreLogging.Constructor) startTicks = Log.CONSTRUCTOR($"Enter viewModel({viewModel.GetType()})", Common.LOG_CATEGORY);
-#endif
-            ViewModel = viewModel;
+//        public WindowBase(IViewModel viewModel)
+//        {
+//#if LOGGING
+//            Int64 startTicks = 0;
+//            if (Common.VNCCoreLogging.Constructor) startTicks = Log.CONSTRUCTOR($"Enter viewModel({viewModel.GetType()})", Common.LOG_CATEGORY);
+//#endif
+//            ViewModel = viewModel;
 
-            this.DataContextChanged += UserControl_DataContextChanged;
-#if LOGGING
-            if (Common.VNCCoreLogging.Constructor) Log.CONSTRUCTOR("Exit", Common.LOG_CATEGORY, startTicks);
-#endif
-        }
+//            this.DataContextChanged += UserControl_DataContextChanged;
+//#if LOGGING
+//            if (Common.VNCCoreLogging.Constructor) Log.CONSTRUCTOR("Exit", Common.LOG_CATEGORY, startTicks);
+//#endif
+//        }
 
         #endregion
 
