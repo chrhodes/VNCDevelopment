@@ -156,7 +156,11 @@ namespace VNC.Core
 
         public static bool DeveloperMode { get; set; } = false;
 
-        public static Visibility DeveloperUIMode { get; set; } = Visibility.Visible;
+        public static Visibility DeveloperUIMode 
+        { 
+            get; 
+            set; 
+        } = Visibility.Visible;
 
         private static void SetInformation(Information information, Assembly assembly, FileVersionInfo fileVersionInfo)
         {
