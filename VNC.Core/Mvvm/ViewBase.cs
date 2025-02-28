@@ -118,19 +118,6 @@ namespace VNC.Core.Mvvm
             }
         }
 
-        private Visibility _developerUIMode = Common.DeveloperUIMode;
-        public Visibility DeveloperUIMode
-        {
-            get => _developerUIMode;
-            set
-            {
-                if (_developerUIMode == value)
-                    return;
-                _developerUIMode = value;
-                OnPropertyChanged();
-            }
-        }
-
         #endregion
 
         #region Event Handlers
