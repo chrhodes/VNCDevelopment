@@ -28,7 +28,15 @@
         </Style>
     </UserControl.Resources>
     
-    <Grid x:Name="LayoutRoot" Background="White">
+    <DockPanel x:Name="LayoutRoot" Background="White">
+        
+        <dxe:CheckEdit x:Name="ceEnabled" DockPanel.Dock="Bottom"
+                        Style="{StaticResource uiLoggingFilterCheckEdit}"
+                        Content="Enable Logging"
+                        Foreground="{Binding LoggingUIConfig.Arch00.LabelColor, Converter={StaticResource ColorToBrushConverter}}"
+                        ToolTip="Enable/Disable all Logging}" 
+                        IsChecked="True"                                   
+                        EditValueChanged="ceEnabled_EditValueChanged"/>
         
         <dxlc:LayoutGroup Orientation="Vertical" View="GroupBox" Header="VNC Logging Configuration">
 
@@ -130,6 +138,7 @@
 
             <dxlc:LayoutGroup Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Top">
 
+                <!--Core-->
                 <dxlc:LayoutGroup Header="CORE" Orientation="Vertical" VerticalAlignment="Stretch"
                     View="GroupBox" 
                     Width="145" 
@@ -180,8 +189,9 @@
 
                     <dxlc:LayoutGroup Orientation="Horizontal" VerticalAlignment="Stretch">
 
-                        <dxlc:LayoutGroup Header="PRESENTATION" Orientation="Horizontal" VerticalAlignment="Stretch"  
-                            View="GroupBox"
+                        <!--Presentation-->
+                        <dxlc:LayoutGroup View="GroupBox" Header="PRESENTATION" 
+                            Orientation="Horizontal" VerticalAlignment="Stretch" HorizontalAlignment="Left"                            
                             Background="#FF00DCDC">
 
                             <dxlc:LayoutGroup Orientation="Vertical" View="Group" HorizontalAlignment="Left">
@@ -270,8 +280,9 @@
 
                         </dxlc:LayoutGroup>
 
-                        <dxlc:LayoutGroup Header="PERSISTENCE" Orientation="Vertical" VerticalAlignment="Stretch"
-                            View="GroupBox"
+                        <!--Persistence-->
+                        <dxlc:LayoutGroup View="GroupBox" Header="PERSISTENCE"
+                            Orientation="Vertical" VerticalAlignment="Stretch" HorizontalAlignment="Left"                            
                             Background="#FFA073E1">
 
                             <dxe:CheckEdit x:Name="ceArch15C" 
@@ -292,8 +303,9 @@
 
                         </dxlc:LayoutGroup>
 
-                        <dxlc:LayoutGroup Header="INFRASTRUCTURE" Orientation="Vertical" VerticalAlignment="Stretch"   
-                            View="GroupBox"
+                        <!--Infrastructure-->
+                        <dxlc:LayoutGroup View="GroupBox" Header="INFRASTRUCTURE"
+                            Orientation="Vertical" VerticalAlignment="Stretch"  HorizontalAlignment="Left"                            
                             Background="#FFF0F0F0">
 
                             <dxe:CheckEdit x:Name="ceArch14C" 
@@ -417,6 +429,6 @@
 
         </dxlc:LayoutGroup>
         
-    </Grid>
+    </DockPanel>
     
 </UserControl>

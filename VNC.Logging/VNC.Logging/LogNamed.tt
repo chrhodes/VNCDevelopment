@@ -86,6 +86,7 @@ namespace VNC
 
             "EVENT",
             "EVENT_HANDLER",
+            "EVENT_HANDLER_LOW",
             "APPLICATION_INITIALIZE",
             "APPLICATION_INITIALIZE_LOW",
             "CORE",

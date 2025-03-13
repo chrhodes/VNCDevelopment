@@ -344,5 +344,10 @@ namespace VNC.WPF.Presentation.Dx.Views
 
             if (Common.VNCLogging.EventHandler) Log.EVENT_HANDLER("Exit", Common.LOG_CATEGORY, startTicks);
         }
+
+        private void ceEnabled_EditValueChanged(object sender, DevExpress.Xpf.Editors.EditValueChangedEventArgs e)
+        {
+            Common.VNCCoreLogging.Enable = (Boolean)ceEnabled.IsChecked;
+        }
     }
 }
