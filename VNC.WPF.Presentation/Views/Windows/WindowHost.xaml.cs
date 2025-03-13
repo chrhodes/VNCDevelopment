@@ -377,8 +377,12 @@ namespace VNC.WPF.Presentation.Views
             Int64 startTicks)
         {
             Title = title;
-            Width = width;
-            Height = height;
+
+            // NOTE(crhodes)
+            // Protect ourselves in case no Width or Height set for host.
+
+            Width = width < 0 ? 600 : width;
+            Height = height < 0 ? 400 : height;
 
             // TODO(crhodes)
             // Figure out how to handle logging #if #endif

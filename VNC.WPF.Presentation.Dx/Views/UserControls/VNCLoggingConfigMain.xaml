@@ -7,8 +7,8 @@
     mc:Ignorable="d" 
                       
     xmlns:views="clr-namespace:VNC.WPF.Presentation.Dx.Views"
-    Height="390"
-    Width="1250"
+    Width="1450"
+    Height="500"
 >
     <d:DesignerProperties.DesignStyle> 
      <Style TargetType="UserControl"> 
@@ -18,9 +18,9 @@
 
     <DockPanel>
         <TextBlock Text="Put some master controls here to do quick toggling" DockPanel.Dock="Bottom" />
-        <StackPanel Orientation="Horizontal" >
-            <views:VNCLoggingConfig Width="625" Height="365" />
-            <views:VNCCoreLoggingConfig Width="625" Height="365" />
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
+            <views:VNCLoggingConfig Width="690" Height="470" Margin="5" />
+            <views:VNCCoreLoggingConfig Width="690" Height="470" Margin="5" />
         </StackPanel>
     </DockPanel>
     

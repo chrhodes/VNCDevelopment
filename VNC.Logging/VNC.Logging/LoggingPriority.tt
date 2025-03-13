@@ -7,7 +7,7 @@
 <#
 	int infoLevels = 5;
 	int debugLevels = 5;
-	int archLevels = 20;
+	int archLevels = 40;
 	int traceLevels = 30;
 #>
 namespace VNC
@@ -79,25 +79,33 @@ namespace VNC
 		EVENT = 9001,
 		EVENT_HANDLER = 9002,
 		APPLICATION_INITIALIZE = 9003,
+		APPLICATION_INITIALIZE_LOW = 9103,
         CORE = 9004,
         MODULE = 9005,
         MODULE_INITIALIZE = 9006,
+        DEVICE_INITIALIZE = 9007,
 
-        APPLICATION = 9007,
-        APPLICATIONSERVICES = 9008,
-        DOMAIN = 9009,
-        DOMAINSERVICES = 9010,
+        APPLICATION = 9010,
+        APPLICATION_LOW = 9110,
+        APPLICATIONSERVICES = 9011,
+        APPLICATIONSERVICES_LOW = 9111,
+        DOMAIN = 9012,
+        DOMAIN_LOW = 9112,
+        DOMAINSERVICES = 9013,
+        DOMAINSERVICES_LOW = 9113,
 
-        PERSISTENCE = 9011,
-        PERSISTENCE_LOW = 9012,
+		INFRASTRUCTURE = 9014,
+		INFRASTRUCTURE_LOW = 9114,
 
-		INFRASTRUCTURE = 9013,
+        PERSISTENCE = 9015,
+        PERSISTENCE_LOW = 9115,
 
-        PRESENTATION = 9014,
-        VIEW = 9015,
-        VIEW_LOW = 9016,
-        VIEWMODEL = 9017,
-        VIEWMODEL_LOW = 9018,
+        PRESENTATION = 9016,
+        PRESENTATION_LOW = 9116,
+        VIEW = 9017,
+        VIEW_LOW = 9117,
+        VIEWMODEL = 9018,
+        VIEWMODEL_LOW = 9118,
 
 		#endregion
 

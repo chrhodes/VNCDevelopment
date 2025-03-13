@@ -47,6 +47,28 @@ namespace VNC.WPF.Presentation
         public LoggingLevel Arch18 { get; set; } = new LoggingLevel { Label = "Arch18",  ToolTip = "Arch18 / 9018" };
         public LoggingLevel Arch19 { get; set; } = new LoggingLevel { Label = "Arch19",  ToolTip = "Arch19 / 9019" };
 
+        public LoggingLevel Arch100 { get; set; } = new LoggingLevel { Label = "Arch100", ToolTip = "Arch100 / 9100" };
+        public LoggingLevel Arch101 { get; set; } = new LoggingLevel { Label = "Arch101", ToolTip = "Arch101 / 9101" };
+        public LoggingLevel Arch102 { get; set; } = new LoggingLevel { Label = "Arch102", ToolTip = "Arch102 / 9102" };
+        public LoggingLevel Arch103 { get; set; } = new LoggingLevel { Label = "Arch103", ToolTip = "Arch103 / 9103" };
+        public LoggingLevel Arch104 { get; set; } = new LoggingLevel { Label = "Arch104", ToolTip = "Arch104 / 9104" };
+        public LoggingLevel Arch105 { get; set; } = new LoggingLevel { Label = "Arch105", ToolTip = "Arch105 / 9105" };
+        public LoggingLevel Arch106 { get; set; } = new LoggingLevel { Label = "Arch106", ToolTip = "Arch106 / 9106" };
+        public LoggingLevel Arch107 { get; set; } = new LoggingLevel { Label = "Arch107", ToolTip = "Arch107 / 9107" };
+        public LoggingLevel Arch108 { get; set; } = new LoggingLevel { Label = "Arch108", ToolTip = "Arch108 / 9108" };
+        public LoggingLevel Arch109 { get; set; } = new LoggingLevel { Label = "Arch109", ToolTip = "Arch109 / 9109" };
+
+        public LoggingLevel Arch110 { get; set; } = new LoggingLevel { Label = "Arch110", ToolTip = "Arch110 / 9110" };
+        public LoggingLevel Arch111 { get; set; } = new LoggingLevel { Label = "Arch111", ToolTip = "Arch111 / 9111" };
+        public LoggingLevel Arch112 { get; set; } = new LoggingLevel { Label = "Arch112", ToolTip = "Arch112 / 9112" };
+        public LoggingLevel Arch113 { get; set; } = new LoggingLevel { Label = "Arch113", ToolTip = "Arch113 / 9113" };
+        public LoggingLevel Arch114 { get; set; } = new LoggingLevel { Label = "Arch114", ToolTip = "Arch114 / 9114" };
+        public LoggingLevel Arch115 { get; set; } = new LoggingLevel { Label = "Arch115", ToolTip = "Arch115 / 9115" };
+        public LoggingLevel Arch116 { get; set; } = new LoggingLevel { Label = "Arch116", ToolTip = "Arch116 / 9116" };
+        public LoggingLevel Arch117 { get; set; } = new LoggingLevel { Label = "Arch117", ToolTip = "Arch117 / 9117" };
+        public LoggingLevel Arch118 { get; set; } = new LoggingLevel { Label = "Arch118", ToolTip = "Arch118 / 9118" };
+        public LoggingLevel Arch119 { get; set; } = new LoggingLevel { Label = "Arch119", ToolTip = "Arch119 / 9119" };
+
         public LoggingLevel Trace00 { get; set; } = new LoggingLevel { Label = "Trace00",  ToolTip = "Trace00 / 10000" };
         public LoggingLevel Trace01 { get; set; } = new LoggingLevel { Label = "Trace01",  ToolTip = "Trace01 / 10001" };
         public LoggingLevel Trace02 { get; set; } = new LoggingLevel { Label = "Trace02",  ToolTip = "Trace02 / 10002" };

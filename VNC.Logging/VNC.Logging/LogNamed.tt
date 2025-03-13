@@ -87,19 +87,26 @@ namespace VNC
             "EVENT",
             "EVENT_HANDLER",
             "APPLICATION_INITIALIZE",
+            "APPLICATION_INITIALIZE_LOW",
             "CORE",
             "MODULE",
             "MODULE_INITIALIZE",
+            "DEVICE_INITIALIZE",
 
             "APPLICATION",
+            "APPLICATION_LOW",
             "APPLICATIONSERVICES",
+            "APPLICATIONSERVICES_LOW",
             "DOMAIN",
+            "DOMAIN_LOW",
             "DOMAINSERVICES",
+            "DOMAINSERVICES_LOW",
 
             "PERSISTENCE",
             "PERSISTENCE_LOW",
 
             "INFRASTRUCTURE",
+            "INFRASTRUCTURE_LOW",
 
             "PRESENTATION",
             "VIEW",
