@@ -19,18 +19,18 @@ namespace VNC.Core.DomainServices
         Task<IEnumerable<TEntity>> AllIncludeAsync(params Expression<Func<TEntity,
             object>>[] includeProperties);
  
-        TEntity FindById(int entityId);
+        TEntity FindById(Int32 entityId);
 
-        Task<TEntity> FindByIdAsync(int entityId);
+        Task<TEntity> FindByIdAsync(Int32 entityId);
 
-        IEnumerable<TEntity> FindBy(Expression<Func<TEntity, bool>> predicate);
+        IEnumerable<TEntity> FindBy(Expression<Func<TEntity, Boolean>> predicate);
 
-        Task<IEnumerable<TEntity>> FindByAsync(Expression<Func<TEntity, bool>> predicate);
+        Task<IEnumerable<TEntity>> FindByAsync(Expression<Func<TEntity, Boolean>> predicate);
 
-        IEnumerable<TEntity> FindByInclude(Expression<Func<TEntity, bool>> predicate, 
+        IEnumerable<TEntity> FindByInclude(Expression<Func<TEntity, Boolean>> predicate, 
             params Expression<Func<TEntity, object>>[] includeProperties);
 
-        Task<IEnumerable<TEntity>> FindByIncludeAsync(Expression<Func<TEntity, bool>> predicate,
+        Task<IEnumerable<TEntity>> FindByIncludeAsync(Expression<Func<TEntity, Boolean>> predicate,
             params Expression<Func<TEntity, object>>[] includeProperties);
 
         #endregion
@@ -45,7 +45,7 @@ namespace VNC.Core.DomainServices
 
         #region Update
 
-        bool HasChanges();
+        Boolean HasChanges();
 
         void Update();
 

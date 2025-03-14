@@ -30,9 +30,9 @@ namespace VNC.WPF.Presentation.Converters
             if (rgb.Length != 6)
                 throw new ArgumentException("Invalid rgb value given");
 
-            int red = 0;
-            int green = 0;
-            int blue = 0;
+            Int32 red = 0;
+            Int32 green = 0;
+            Int32 blue = 0;
 
             red = System.Convert.ToInt32(rgb.Substring(0, 2), 16);
             green = System.Convert.ToInt32(rgb.Substring(2, 2), 16);

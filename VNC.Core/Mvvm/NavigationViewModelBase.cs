@@ -55,7 +55,7 @@ namespace VNC.Core.Mvvm
 
         #region IConfirmNavigationRequest
 
-        public virtual void ConfirmNavigationRequest(NavigationContext navigationContext, Action<bool> continuationCallback)
+        public virtual void ConfirmNavigationRequest(NavigationContext navigationContext, Action<Boolean> continuationCallback)
         {
             Int64 startTicks = 0;
             if (Common.VNCLogging.EventHandler) startTicks = Log.EVENT_HANDLER($"Enter {navigationContext.Uri}", Common.LOG_CATEGORY);
@@ -69,7 +69,7 @@ namespace VNC.Core.Mvvm
 
         #region INavigationAware
 
-        public virtual bool IsNavigationTarget(NavigationContext navigationContext)
+        public virtual Boolean IsNavigationTarget(NavigationContext navigationContext)
         {
             Int64 startTicks = 0;
             if (Common.VNCLogging.EventHandler) startTicks = Log.EVENT_HANDLER($"Enter {navigationContext.Uri}", Common.LOG_CATEGORY);

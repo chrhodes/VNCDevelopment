@@ -11,9 +11,9 @@ namespace VNC.Core.Net
     {
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
 
-        private int _count;
+        private Int32 _count;
          
-        public int Count
+        public Int32 Count
         {
             get => _count;
             set
@@ -126,7 +126,7 @@ namespace VNC.Core.Net
         public void RecordExchangeResponse(HttpResponseMessage response, RequestResponseInfo exchange)
         {
             var statusCode = response.StatusCode;
-            var statusCode2 = (int)response.StatusCode;
+            var statusCode2 = (Int32)response.StatusCode;
 
             exchange.Response = response;
             exchange.ResponseStatusCode = statusCode2;

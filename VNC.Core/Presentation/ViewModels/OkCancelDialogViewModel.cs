@@ -45,7 +45,7 @@ namespace VNC.Core.Presentation.ViewModels
             set { SetProperty(ref _title, value); }
         }
 
-        public virtual bool CanCloseDialog()
+        public virtual Boolean CanCloseDialog()
         {
             return true;
         }

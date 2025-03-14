@@ -13,24 +13,24 @@ namespace VNC.Core.Xaml.Transitions
         {
             public MARGINS(Thickness t)
             {
-                Left = (int)t.Left;
-                Right = (int)t.Right;
-                Top = (int)t.Top;
-                Bottom = (int)t.Bottom;
+                Left = (Int32)t.Left;
+                Right = (Int32)t.Right;
+                Top = (Int32)t.Top;
+                Bottom = (Int32)t.Bottom;
             }
-            public int Left;
-            public int Right;
-            public int Top;
-            public int Bottom;
+            public Int32 Left;
+            public Int32 Right;
+            public Int32 Top;
+            public Int32 Bottom;
         }
 
         [DllImport("dwmapi.dll", PreserveSig = false)]
         static extern void DwmExtendFrameIntoClientArea(IntPtr hwnd, ref MARGINS margins);
 
         [DllImport("dwmapi.dll", PreserveSig = false)]
-        static extern bool DwmIsCompositionEnabled();
+        static extern Boolean DwmIsCompositionEnabled();
 
-        public static bool ExtendGlassFrame(Window window, Thickness margin)
+        public static Boolean ExtendGlassFrame(Window window, Thickness margin)
         {
             try
             {

@@ -1,7 +1,9 @@
-﻿namespace VNC.Core.Mvvm.Prism
+﻿using System;
+
+namespace VNC.Core.Mvvm.Prism
 {
     public interface ICreateRegionManagerScope
     {
-        bool CreateRegionManagerScope { get; }
+        Boolean CreateRegionManagerScope { get; }
     }
 }

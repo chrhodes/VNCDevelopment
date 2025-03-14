@@ -108,9 +108,9 @@ namespace VNC.Core.Mvvm.Prism
 
         // NOTE(crhodes)
         // This is new
-        private bool CreateRegionManagerScope(object view)
+        private Boolean CreateRegionManagerScope(object view)
         {
-            bool createRegionManagerScope = false;
+            Boolean createRegionManagerScope = false;
 
             var viewHasScopedRegions = view as ICreateRegionManagerScope;
 
@@ -203,7 +203,7 @@ namespace VNC.Core.Mvvm.Prism
             return region.Views.Where(v => ViewIsMatch(v.GetType(), candidateNavigationContract));
         }
 
-        private static bool ViewIsMatch(Type viewType, string navigationSegment)
+        private static Boolean ViewIsMatch(Type viewType, string navigationSegment)
         {
             var names = new[] { viewType.Name, viewType.FullName };
             return names.Any(x => x.Equals(navigationSegment, StringComparison.Ordinal));

@@ -53,8 +53,8 @@ namespace VNC.Core.Mvvm
 
         #region Fields and Properties
 
-        private int _id;
-        public int Id
+        private Int32 _id;
+        public Int32 Id
         {
             get { return _id; }
             protected set
@@ -79,8 +79,8 @@ namespace VNC.Core.Mvvm
             }
         }
 
-        private bool _hasChanges;
-        public bool HasChanges
+        private Boolean _hasChanges;
+        public Boolean HasChanges
         {
             get { return _hasChanges; }
             set
@@ -173,7 +173,7 @@ namespace VNC.Core.Mvvm
 #endif
         }
 
-        protected virtual void PublishAfterDetailDeletedEvent(int modelId)
+        protected virtual void PublishAfterDetailDeletedEvent(Int32 modelId)
         {
 #if LOGGING
             Int64 startTicks = 0;
@@ -191,7 +191,7 @@ namespace VNC.Core.Mvvm
 #endif
         }
 
-        protected virtual void PublishAfterDetailSavedEvent(int modelId, string displayMember)
+        protected virtual void PublishAfterDetailSavedEvent(Int32 modelId, string displayMember)
         {
 #if LOGGING
             Int64 startTicks = 0;
@@ -214,7 +214,7 @@ namespace VNC.Core.Mvvm
 
         #region Public Methods
 
-        public abstract Task LoadAsync(int id);
+        public abstract Task LoadAsync(Int32 id);
 
         #endregion
 
@@ -225,11 +225,11 @@ namespace VNC.Core.Mvvm
 
         protected abstract void DeleteExecute();
 
-        protected abstract bool DeleteCanExecute();
+        protected abstract Boolean DeleteCanExecute();
 
         protected abstract void SaveExecute();
 
-        protected abstract bool SaveCanExecute();
+        protected abstract Boolean SaveCanExecute();
 
         protected virtual async Task SaveWithOptimisticConcurrencyAsync(Func<Task> saveFunc, Action afterSaveAction)
         {
@@ -288,6 +288,5 @@ namespace VNC.Core.Mvvm
 
 
         #endregion
-
     }
 }

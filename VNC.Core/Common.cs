@@ -154,7 +154,7 @@ namespace VNC.Core
 #endif
         }
 
-        public static bool DeveloperMode { get; set; } = false;
+        public static Boolean DeveloperMode { get; set; } = false;
 
         public static Visibility DeveloperUIMode 
         { 
@@ -221,7 +221,7 @@ namespace VNC.Core
 
             // Runtime Information
 
-            information.RuntimeVersion = FileVersionInfo.GetVersionInfo(typeof(int).Assembly.Location).FileVersion;
+            information.RuntimeVersion = FileVersionInfo.GetVersionInfo(typeof(Int32).Assembly.Location).FileVersion;
         }
 
         public static void SetVersionInfoApplication(Assembly appAssembly, FileVersionInfo appFileVersionInfo)

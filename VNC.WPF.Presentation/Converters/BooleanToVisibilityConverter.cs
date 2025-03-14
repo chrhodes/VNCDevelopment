@@ -19,7 +19,7 @@ namespace VNC.WPF.Presentation.Converters
 
         object IValueConverter.Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return (value is bool && (bool)value) ? Visibility.Visible : Visibility.Collapsed;
+            return (value is Boolean && (Boolean)value) ? Visibility.Visible : Visibility.Collapsed;
         }
 
         object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culturee)

@@ -1,15 +1,16 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 
 namespace VNC.Core.Mvvm
 {
     public interface IDetailViewModel : IViewModel
     {
-        int Id { get; }
+        Int32 Id { get; }
 
         string Title { get; }
 
-        bool HasChanges { get; }
+        Boolean HasChanges { get; }
 
-        Task LoadAsync(int id);
+        Task LoadAsync(Int32 id);
     }
 }

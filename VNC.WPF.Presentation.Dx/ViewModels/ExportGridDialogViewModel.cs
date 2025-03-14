@@ -165,7 +165,7 @@ namespace VNC.Core.Presentation.ViewModels
             RaiseRequestClose(new DialogResult(result));
         }
 
-        public virtual bool CanCloseDialog()
+        public virtual Boolean CanCloseDialog()
         {
             return true;
         }

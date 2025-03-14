@@ -45,8 +45,8 @@ namespace VNC.Core.Mvvm
             set;
         }
 
-        private bool _isBusy;
-        public bool IsBusy
+        private Boolean _isBusy;
+        public Boolean IsBusy
         {
             get { return _isBusy; }
             set

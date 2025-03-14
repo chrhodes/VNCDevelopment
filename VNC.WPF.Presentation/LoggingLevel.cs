@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Windows;
 
 using VNC.Core.Mvvm;
@@ -55,8 +56,8 @@ namespace VNC.WPF.Presentation
             }
         }
 
-        private bool _isChecked = true;
-        public bool IsChecked
+        private Boolean _isChecked = true;
+        public Boolean IsChecked
         {
             get => _isChecked;
             set

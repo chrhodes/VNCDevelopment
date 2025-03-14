@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Media;
 
 namespace VNC.Core.Xaml
@@ -64,8 +65,8 @@ namespace VNC.Core.Xaml
 
             T foundChild = null;
 
-            int childrenCount = VisualTreeHelper.GetChildrenCount(parent);
-            for (int i = 0; i < childrenCount; i++)
+            Int32 childrenCount = VisualTreeHelper.GetChildrenCount(parent);
+            for (Int32 i = 0; i < childrenCount; i++)
             {
                 var child = VisualTreeHelper.GetChild(parent, i);
                 // If the child is not of the request child type child

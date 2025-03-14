@@ -84,9 +84,9 @@ namespace VNC.Core.Mvvm.Prism
             return view;
         }
 
-        private bool CreateRegionManagerScope(object view)
+        private Boolean CreateRegionManagerScope(object view)
         {
-            bool createRegionManagerScope = false;
+            Boolean createRegionManagerScope = false;
 
             var viewHasScopedRegions = view as ICreateRegionManagerScope;
             if (viewHasScopedRegions != null)

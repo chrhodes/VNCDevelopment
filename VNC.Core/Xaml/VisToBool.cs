@@ -7,8 +7,8 @@ namespace VNC.Core.Xaml
 {
     public class VisToBool : IValueConverter
     {
-        bool inverted = false;
-        public bool Inverted
+        Boolean inverted = false;
+        public Boolean Inverted
         {
             get { return inverted; }
             set
@@ -17,8 +17,8 @@ namespace VNC.Core.Xaml
             }
         }
 
-        bool not = false;
-        public bool Not
+        Boolean not = false;
+        public Boolean Not
         {
             get { return not; }
             set
@@ -37,10 +37,10 @@ namespace VNC.Core.Xaml
 
         private object BoolToVisibility(object value)
         {
-            if (!(value is bool))
+            if (!(value is Boolean))
                 return DependencyProperty.UnsetValue;
 
-            return ((bool)value ^ Not) ? Visibility.Visible : Visibility.Collapsed;
+            return ((Boolean)value ^ Not) ? Visibility.Visible : Visibility.Collapsed;
         }
 
         public object Convert(object value, Type targetType,

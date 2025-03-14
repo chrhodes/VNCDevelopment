@@ -1,7 +1,9 @@
-﻿namespace VNC.Core.Mvvm
+﻿using System;
+
+namespace VNC.Core.Mvvm
 {
     public interface IInstanceCountVM
     {
-        int InstanceCountVM { get; set; }
+        Int32 InstanceCountVM { get; set; }
     }
 }

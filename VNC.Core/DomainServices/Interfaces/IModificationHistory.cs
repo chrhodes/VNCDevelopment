@@ -8,6 +8,6 @@ namespace VNC.Core.DomainServices
 
         Nullable<DateTime> DateCreated { get; set; }
 
-        bool? IsDirty { get; set; }
+        Boolean? IsDirty { get; set; }
     }
 }

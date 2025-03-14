@@ -295,7 +295,7 @@ namespace VNC.WPF.Presentation.Views
 
         public void DisplayUserControlInHost(
             string title,
-            int width, int height,
+            Int32 width, Int32 height,
             ShowWindowMode mode,
             UserControl userControl)
         {
@@ -322,7 +322,7 @@ namespace VNC.WPF.Presentation.Views
 
         public void DisplayUserControlInHost(
             string title,
-            int width, int height,
+            Int32 width, Int32 height,
             ShowWindowMode mode,
             string userControlName = null)
         {
@@ -349,7 +349,7 @@ namespace VNC.WPF.Presentation.Views
 
         public void DisplayUserControlInHost(
             string title,
-            int width, int height,
+            Int32 width, Int32 height,
             ShowWindowMode mode,
             ViewModelBase viewModel)
         {
@@ -372,7 +372,7 @@ namespace VNC.WPF.Presentation.Views
 
         public void DisplayHost(
             string title,
-            int width, int height,
+            Int32 width, Int32 height,
             ShowWindowMode mode,
             Int64 startTicks)
         {

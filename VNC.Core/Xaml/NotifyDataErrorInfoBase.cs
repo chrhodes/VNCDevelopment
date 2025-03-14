@@ -15,7 +15,7 @@ namespace VNC.Core.Xaml
          = new Dictionary<string, List<string>>();
 
         [Display(AutoGenerateField = false)]
-        public bool HasErrors => _errorsByPropertyName.Any();
+        public Boolean HasErrors => _errorsByPropertyName.Any();
 
         public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
 

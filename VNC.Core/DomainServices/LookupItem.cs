@@ -1,8 +1,10 @@
-﻿namespace VNC.Core.DomainServices
+﻿using System;
+
+namespace VNC.Core.DomainServices
 {
-    public class LookupItem : ILookupItem<int>
+    public class LookupItem : ILookupItem<Int32>
     {
-        public int Id { get; set; }
+        public Int32 Id { get; set; }
 
         public string DisplayMember { get; set; }
     }

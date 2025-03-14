@@ -19,7 +19,7 @@ namespace VNC.Core.Mvvm
         private string _detailViewModelName;
 
         public NavigationItemViewModel(
-            int id,
+            Int32 id,
             string displayMember,
             string detailViewModelName,
             IEventAggregator eventAggregator,
@@ -43,7 +43,7 @@ namespace VNC.Core.Mvvm
 
         #region Fields & Properties
 
-        public int Id { get; set; }
+        public Int32 Id { get; set; }
 
         public string DisplayMember
         {

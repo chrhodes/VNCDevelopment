@@ -108,7 +108,7 @@ namespace VNC.Core.DomainServices
 
         #region Find
 
-        public virtual TEntity FindById(int entityId)
+        public virtual TEntity FindById(Int32 entityId)
         {
 #if LOGGING
             Int64 startTicks = 0;
@@ -124,7 +124,7 @@ namespace VNC.Core.DomainServices
             return result;
         }
 
-        public virtual async Task<TEntity> FindByIdAsync(int entityId)
+        public virtual async Task<TEntity> FindByIdAsync(Int32 entityId)
         {
 #if LOGGING
             Int64 startTicks = 0;
@@ -141,7 +141,7 @@ namespace VNC.Core.DomainServices
         }
 
         public virtual IEnumerable<TEntity> FindBy(
-            Expression<Func<TEntity, bool>> predicate)
+            Expression<Func<TEntity, Boolean>> predicate)
         {
 #if LOGGING
             Int64 startTicks = 0;
@@ -158,7 +158,7 @@ namespace VNC.Core.DomainServices
         }
 
         public virtual async Task<IEnumerable<TEntity>> FindByAsync(
-            Expression<Func<TEntity, bool>> predicate)
+            Expression<Func<TEntity, Boolean>> predicate)
         {
 #if LOGGING
             Int64 startTicks = 0;
@@ -175,7 +175,7 @@ namespace VNC.Core.DomainServices
         }
 
         public virtual IEnumerable<TEntity> FindByInclude(
-            Expression<Func<TEntity, bool>> predicate,
+            Expression<Func<TEntity, Boolean>> predicate,
             params Expression<Func<TEntity, object>>[] includeProperties)
         {
 #if LOGGING
@@ -194,7 +194,7 @@ namespace VNC.Core.DomainServices
         }
 
         public virtual async Task<IEnumerable<TEntity>> FindByIncludeAsync(
-            Expression<Func<TEntity, bool>> predicate,
+            Expression<Func<TEntity, Boolean>> predicate,
             params Expression<Func<TEntity, object>>[] includeProperties)
         {
 #if LOGGING
@@ -214,11 +214,11 @@ namespace VNC.Core.DomainServices
 
         // This is not part of the interface but left to show the technique
 
-        //public TEntity FindByKey(int id)
+        //public TEntity FindByKey(Int32 id)
         //{
         //    return _dbSet.Find(id);
         //    // This handles <Entity>Id style keys, e.g. CustomerId
-        //    //Expression<Func<TEntity, bool>> lambda = Utilities.BuildLambdaForFindByKey<TEntity>(id);
+        //    //Expression<Func<TEntity, Boolean>> lambda = Utilities.BuildLambdaForFindByKey<TEntity>(id);
         //    //return _dbSet.AsNoTracking().SingleOrDefault(lambda);
         //}
 
@@ -256,7 +256,7 @@ namespace VNC.Core.DomainServices
 
         #region Update
 
-        public virtual bool HasChanges()
+        public virtual Boolean HasChanges()
         {
 #if LOGGING
             Int64 startTicks = 0;

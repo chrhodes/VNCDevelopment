@@ -1,4 +1,6 @@
-﻿namespace VNC.Core
+﻿using System;
+
+namespace VNC.Core
 {
     public class FileInformation
     {
@@ -16,10 +18,10 @@
 
         public string Comments { get; set; }
 
-        public bool IsDebug { get; set; }
-        public bool IsPatched { get; set; }
-        public bool IsPreRelease { get; set; }
-        public bool IsPrivateBuild { get; set; }
-        public bool IsSpecialBuild { get; set; }
+        public Boolean IsDebug { get; set; }
+        public Boolean IsPatched { get; set; }
+        public Boolean IsPreRelease { get; set; }
+        public Boolean IsPrivateBuild { get; set; }
+        public Boolean IsSpecialBuild { get; set; }
     }
 }

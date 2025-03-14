@@ -1,4 +1,5 @@
-﻿
+﻿using System;
+
 namespace VNC.Core.Mvvm
 {
     public interface IInstanceCountV
@@ -6,11 +7,11 @@ namespace VNC.Core.Mvvm
         /// <summary>
         /// Used to count the number of times parameterless constructor called
         /// </summary>
-        int InstanceCountV { get; set; }
+        Int32 InstanceCountV { get; set; }
 
         /// <summary>
         /// Used to count the number of times constructor called
         /// </summary>
-        int InstanceCountVP { get; set; }
+        Int32 InstanceCountVP { get; set; }
     }
 }
