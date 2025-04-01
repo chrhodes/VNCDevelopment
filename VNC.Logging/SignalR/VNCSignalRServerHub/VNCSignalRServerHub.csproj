@@ -5,9 +5,9 @@
         <TargetFrameworks>net8.0-windows</TargetFrameworks>
         <UseWPF>true</UseWPF>
         <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
-        <VersionPrefix>1.1.0</VersionPrefix>
+        <VersionPrefix>1.2.0</VersionPrefix>
         <VersionSuffix>Release</VersionSuffix>
-        <FileVersion>2024.07.17A</FileVersion>
+        <FileVersion>2025.04.01A</FileVersion>
         <Description>SignalR Hub</Description>
         <ImplicitUsings>disable</ImplicitUsings>
     </PropertyGroup>
@@ -22,7 +22,7 @@
     </PropertyGroup>
 
     <ItemGroup Condition="'$(TargetFramework)' == 'net8.0-windows'">       
-        <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.1" />
+        <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.3" />
         <FrameworkReference Include="Microsoft.AspNetCore.App" Version="6.0.0" />
     </ItemGroup>
      

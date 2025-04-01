@@ -505,33 +505,40 @@ namespace VNCSignalRClient
             );
 
 #else
-            Connection = new HubConnectionBuilder()
-                .WithUrl(ServerURI)
-                .Build();
+            try
+            {
+                Connection = new HubConnectionBuilder()
+                    .WithUrl(ServerURI)
+                    .Build();
 
-            Connection.Closed += Connection_Closed;
-            Connection.Reconnecting += Connection_Reconnecting;
-            Connection.Reconnected += Connection_Reconnected;
+                Connection.Closed += Connection_Closed;
+                Connection.Reconnecting += Connection_Reconnecting;
+                Connection.Reconnected += Connection_Reconnected;
 
-            //Handle incoming event from server: use Invoke to write to console from SignalR's thread
+                //Handle incoming event from server: use Invoke to write to console from SignalR's thread
 
-            Connection.On<string>("AddMessage", (message) =>
-                this.Dispatcher.InvokeAsync(() =>
-                    rtbConsole.AppendText($"{message}\r")
-                )
-            );
+                Connection.On<string>("AddMessage", (message) =>
+                    this.Dispatcher.InvokeAsync(() =>
+                        rtbConsole.AppendText($"{message}\r")
+                    )
+                );
 
-            Connection.On<string, string>("AddUserMessage", (name, message) =>
-                this.Dispatcher.InvokeAsync(() =>
-                    rtbConsole.AppendText($"{name}: {message}\r")
-                )
-            );
+                Connection.On<string, string>("AddUserMessage", (name, message) =>
+                    this.Dispatcher.InvokeAsync(() =>
+                        rtbConsole.AppendText($"{name}: {message}\r")
+                    )
+                );
 
-            Connection.On<string, Int32>("AddPriorityMessage", (message, priority) =>
-                this.Dispatcher.InvokeAsync(() =>
-                    rtbConsole.AppendText($"P{priority}: {message}\r")
-                )
-            );
+                Connection.On<string, Int32>("AddPriorityMessage", (message, priority) =>
+                    this.Dispatcher.InvokeAsync(() =>
+                        rtbConsole.AppendText($"P{priority}: {message}\r")
+                    )
+                );
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, Common.LOG_CATEGORY);
+            }
 
 #endif
 
