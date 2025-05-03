@@ -9,7 +9,7 @@
         <AssemblyOriginatorKeyFile>VNC.snk</AssemblyOriginatorKeyFile>
         <VersionPrefix>3.0.0</VersionPrefix>
         <VersionSuffix>Release</VersionSuffix>
-        <FileVersion>2024.07.17A</FileVersion>     
+        <FileVersion>2025.05.03A</FileVersion>     
         <Description>SignalRCore TraceListeners for EnterpriseLibrary Logging</Description>
         <Nullable>enable</Nullable>
         <ImplicitUsings>disable</ImplicitUsings>
@@ -28,13 +28,14 @@
          <PackageIcon>VNC.png</PackageIcon> 
          <Authors>Christopher Rhodes</Authors> 
          <Company>VNC</Company> 
-         <Copyright>Copyright © VNC 2010-2024</Copyright> 
+         <Copyright>Copyright © VNC 2010-2025</Copyright> 
          <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance> 
      </PropertyGroup>     
 
     <ItemGroup>
         <PackageReference Include="EnterpriseLibrary.Logging.NetCore" Version="6.3.2" />
-        <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="9.0.3" />
+        <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="9.0.4" />
+        <PackageReference Include="Microsoft.AspNetCore.SignalR.Protocols.MessagePack" Version="9.0.4" />
     </ItemGroup>
 
     <ItemGroup>

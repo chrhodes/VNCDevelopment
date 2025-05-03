@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:VNCSignalRServerHub"
         mc:Ignorable="d"
         Title="{Binding ProductName}"
-        Height="450" Width="650"
+        Height="550" Width="450"
 >
     <Window.Resources>
         <SolidColorBrush x:Key="RedText" Color="#c70000" />
@@ -32,18 +32,28 @@
 
         </StackPanel>
 
-        <WrapPanel Orientation="Horizontal"  DockPanel.Dock="Bottom" >
+        <StackPanel Orientation="Vertical"  DockPanel.Dock="Bottom" >
             
             <!--<Label Content="Product Name:" />
             <Label Content="{Binding ProductName}" Foreground="{StaticResource RedText}" />-->
-        
-            <Label Content="Product Version:" Margin="0,0,0,0" />
-            <Label Content="{Binding ProductVersion}" Foreground="{StaticResource RedText}" />
-            <Label Content="File Version:" Margin="10,0,0,0"/>
-            <Label Content="{Binding FileVersion}" Foreground="{StaticResource RedText}" />
-            <Label Content=".NET Runtime:" Margin="10,0,0,0" />
-            <Label Content="{Binding RuntimeVersion}" Foreground="{StaticResource RedText}"/>
-        </WrapPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Product Version:" Margin="0,0,0,0" />
+                <Label Content="{Binding ProductVersion}" Foreground="{StaticResource RedText}" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <Label Content="File Version:" />
+                <Label Content="{Binding FileVersion}" Foreground="{StaticResource RedText}" />
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Label Content=".NET Runtime:" Margin="10,0,0,0" />
+                    <Label Content="{Binding RuntimeVersion}" Foreground="{StaticResource RedText}"/>
+                </StackPanel>
+
+            </StackPanel>
+
+        </StackPanel>
 
         <RichTextBox x:Name="rtbConsole" 
                      Margin="2,0,2,2"                      

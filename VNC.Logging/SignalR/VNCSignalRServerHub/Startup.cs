@@ -4,6 +4,8 @@
 using Microsoft.Owin.Cors;
 using Owin;
 #else
+using System.Windows.Controls.Primitives;
+
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -35,7 +37,27 @@ namespace VNCSignalRServerHub
 
         public void ConfigureServices(IServiceCollection serviceCollection)
         {
-            serviceCollection.AddSignalR();
+            // NOTE(crhodes)
+            // SignalrR defaults to JSON
+            //serviceCollection.AddSignalR();
+            // Add support for MessagePack
+            serviceCollection.AddSignalR().AddMessagePackProtocol();
+
+            // TODO(crhodes)
+            // Learn what these do.  Tried to make exceptions go away.
+
+            //serviceCollection.AddSignalR(hubOptions =>
+            //{
+            //    hubOptions.EnableDetailedErrors = true;
+            //    hubOptions.DisableImplicitFromServicesParameters = false;
+            //}).AddJsonProtocol(options =>
+            //   {
+            //       options.PayloadSerializerOptions.PropertyNamingPolicy = null;
+            //   });
+            //serviceCollection.AddSignalR(
+            //    options =>
+            //    { options.DisableImplicitFromServicesParameters = true; }
+            //);
         }
 
         public void Configure(IApplicationBuilder app)

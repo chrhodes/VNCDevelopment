@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using System.Windows;
 
 using SignalRCoreServerHub;
+using Microsoft.Extensions.DependencyInjection;
+
 
 #if NET48
 using Microsoft.AspNet.SignalR.Client;
@@ -329,6 +331,8 @@ namespace VNCSignalRClient
                     HubProxy.Invoke("SendPriorityMessage", $"TGrace{i}", i);     
                 }
 #else
+                Connection.SendAsync("SendPriorityMessage", "Critical SA", -10);
+
                 if (sendAsync)
                 {
                     Connection.SendAsync("SendPriorityMessage", "Critical SA", -10);
@@ -463,7 +467,7 @@ namespace VNCSignalRClient
                 HubProxy.Invoke("SendTimedMessage", "Timing Info", signalRTime);
 #else
                 Connection.InvokeAsync("SendTimedMessage", "Timing Info", signalRTime);
-                //Connection.SendAsync("SendTimedMessage", "Timing Info", signalRTime);
+                Connection.SendAsync("SendTimedMessage", "Timing Info", signalRTime);
 #endif
             }
             catch (Exception ex)
@@ -507,9 +511,17 @@ namespace VNCSignalRClient
 #else
             try
             {
+                //Connection = new HubConnectionBuilder()
+                //    .WithUrl(ServerURI)
+                //    .Build();
+
+                // NOTE(crhodes)
+                // This defaults to JSON
+
                 Connection = new HubConnectionBuilder()
-                    .WithUrl(ServerURI)
-                    .Build();
+                     .WithUrl(ServerURI)
+                     .AddMessagePackProtocol()
+                     .Build();
 
                 Connection.Closed += Connection_Closed;
                 Connection.Reconnecting += Connection_Reconnecting;

@@ -22,7 +22,15 @@ namespace VNCSignalRServerHub
 #else
         public async Task SendMessage(string message)
         {
-            await Clients.All.SendAsync("AddMessage", message);
+            try
+            {
+                await Clients.All.SendAsync("AddMessage", message);
+            }
+            catch (Exception ex)
+            {
+                Application.Current.Dispatcher.Invoke(() =>
+                    ((MainWindow)Application.Current.MainWindow).WriteToConsole(ex.ToString()));
+            }            
         }
 #endif
 
@@ -93,8 +101,16 @@ namespace VNCSignalRServerHub
         }
 #else
         public async Task SendUserMessage(string userName, string message)
-        {
-            await Clients.All.SendAsync("AddUserMessage", userName, message);
+        {       
+            try
+            {
+                await Clients.All.SendAsync("AddUserMessage", userName, message);
+            }
+            catch (Exception ex)
+            {
+                Application.Current.Dispatcher.Invoke(() =>
+                    ((MainWindow)Application.Current.MainWindow).WriteToConsole(ex.ToString()));
+            }
         }
 #endif
 

@@ -8,7 +8,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.SignalR.Client;
-
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Practices.EnterpriseLibrary.Common.Configuration;
 using Microsoft.Practices.EnterpriseLibrary.Logging;
 using Microsoft.Practices.EnterpriseLibrary.Logging.Configuration;
@@ -186,11 +186,37 @@ namespace VNC.Logging.TraceListeners
         {
             Connection = new HubConnectionBuilder()
                 .WithUrl(ServerURI)
+                .AddMessagePackProtocol()
                 .Build();
 
             Connection.Closed += Connection_Closed;
             Connection.Reconnected += Connection_Reconnected;
             Connection.Reconnecting += Connection_Reconnecting;
+
+            // HACK(crhodes)
+            // Try adding Client Listeners until we learn how to tell the hub to not
+            // send back to us.
+
+            Connection.On<string>("AddMessage", (message) =>
+            { }
+            //this.Dispatcher.InvokeAsync(() =>
+            //    rtbConsole.AppendText($"{message}\r")
+            //)
+            );
+
+            Connection.On<string, string>("AddUserMessage", (name, message) =>
+            { }
+            //this.Dispatcher.InvokeAsync(() =>
+            //    rtbConsole.AppendText($"{name}: {message}\r")
+            //)
+            );
+
+            Connection.On<string, Int32>("AddPriorityMessage", (message, priority) =>
+            { }
+            //this.Dispatcher.InvokeAsync(() =>
+            //    rtbConsole.AppendText($"P{priority}: {message}\r")
+            //)
+            );
 
             try
             {
