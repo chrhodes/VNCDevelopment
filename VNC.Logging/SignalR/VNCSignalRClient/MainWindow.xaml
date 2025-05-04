@@ -33,6 +33,10 @@
                             Content="Sign In" 
                             Width="75" Style="{StaticResource Button}" HorizontalAlignment="Right" IsEnabled="True"
                             Click="SignInButton_Click"  />
+                    <Button x:Name="IdentifyUser" 
+                            Content="IdentifyUser" 
+                            Width="75" Style="{StaticResource Button}" HorizontalAlignment="Right" IsEnabled="False"
+                            Click="IdentifyUser_Click"  />
                     <Button x:Name="SignOutButton" 
                             Content="Sign Out" 
                             Width="75" Style="{StaticResource Button}" HorizontalAlignment="Right" IsEnabled="False"

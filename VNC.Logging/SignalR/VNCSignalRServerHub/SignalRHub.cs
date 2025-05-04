@@ -14,6 +14,20 @@ namespace VNCSignalRServerHub
 
     public class SignalRHub : Hub
     {
+        public async Task IdentifyUser(string userName)
+        {
+            string message = $"connectionID:>{Context.ConnectionId}< userName:>{userName}<";
+
+            try
+            {
+                await Clients.All.SendAsync("AddMessage", message);
+            }
+            catch (Exception ex)
+            {
+                Application.Current.Dispatcher.Invoke(() =>
+                    ((MainWindow)Application.Current.MainWindow).WriteToConsole(ex.ToString()));
+            }
+        }
 #if NET48
         public void SendMessage(string message)
         {

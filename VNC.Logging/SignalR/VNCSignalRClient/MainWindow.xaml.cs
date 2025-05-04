@@ -640,6 +640,8 @@ namespace VNCSignalRClient
             rtbConsole.AppendText($"Connected to server at {ServerURI}\r");
 
             SignInButton.IsEnabled = false;
+
+            IdentifyUser.IsEnabled = true;
             SignOutButton.IsEnabled = true;
 
             ButtonSend.IsEnabled = true;
@@ -768,9 +770,24 @@ namespace VNCSignalRClient
                 rtbConsole.AppendText("Signed out of ServerHub\r");
             }
 
+            IdentifyUser.IsEnabled = false;
             SignOutButton.IsEnabled = false;
+
             SignInButton.IsEnabled = true;
         }
 
+        private void IdentifyUser_Click(object sender, RoutedEventArgs e)
+        {
+            Boolean sendAsync = (bool)cbSendAsync.IsChecked;
+
+            if (sendAsync)
+            {
+                Connection.SendAsync("IdentifyUser", UserName);
+            }
+            else
+            {
+                Connection.InvokeAsync("IdentifyUser", UserName);
+            }
+        }
     }
 }
