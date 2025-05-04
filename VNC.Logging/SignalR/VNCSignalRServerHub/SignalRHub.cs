@@ -135,9 +135,11 @@ namespace VNCSignalRServerHub
 #else
         public override Task OnConnectedAsync()
         {
-            //Use Application.Current.Dispatcher to access UI thread from outside the MainWindow class
+             //Use Application.Current.Dispatcher to access UI thread from outside the MainWindow class
             Application.Current.Dispatcher.Invoke(() =>
-                ((MainWindow)Application.Current.MainWindow).WriteToConsole("Client connected: " + Context.ConnectionId));
+                ((MainWindow)Application.Current.MainWindow).WriteToConsole($"Client connected: {Context.ConnectionId}" +
+                $" user:>{Context.User.Identity.Name}< userIdentifier:>{Context.UserIdentifier}<")
+            );
 
             return base.OnConnectedAsync();
         }
@@ -146,7 +148,8 @@ namespace VNCSignalRServerHub
         {
             //Use Application.Current.Dispatcher to access UI thread from outside the MainWindow class
             Application.Current?.Dispatcher.Invoke(() =>
-                ((MainWindow)Application.Current.MainWindow).WriteToConsole("Client disconnected: " + Context.ConnectionId));
+                ((MainWindow)Application.Current.MainWindow).WriteToConsole("Client disconnected: " + Context.ConnectionId)
+            );
 
             return base.OnDisconnectedAsync(exception);
         }
