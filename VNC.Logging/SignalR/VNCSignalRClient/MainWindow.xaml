@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="{Binding ProductName}"
-        Height="1200" Width="2400"
-        MinWidth="400" MinHeight="400"
+        Height="400" Width="600"
+        MinWidth="400" MinHeight="600"
         ResizeMode="CanResizeWithGrip"
 >
     <Window.Resources>
@@ -24,24 +24,34 @@
             <StackPanel Orientation="Horizontal">
                 <Label Content="ServerHub URI:" />
                 <TextBox x:Name="tbServerURI" Text="{Binding ServerURI}" Height="20" VerticalContentAlignment="Center" />
-                <Label Content="Enter user name:" VerticalAlignment="Center" />
-                <TextBox x:Name="UserNameTextBox" Text="SCC" Height="20" Width="50"/>
+                <Button x:Name="btnSignIn" 
+                        Content="Sign In" 
+                        Width="75" Style="{StaticResource Button}" HorizontalAlignment="Right" IsEnabled="True"
+                        Click="SignIn_Click" />
+                <Button x:Name="btnSignOut" 
+                        Content="Sign Out" 
+                        Width="75" Style="{StaticResource Button}" HorizontalAlignment="Right" IsEnabled="False"
+                        Click="SignOut_Click" />
             </StackPanel>
 
-                <StackPanel Orientation="Horizontal">
-                    <Button x:Name="SignInButton" 
-                            Content="Sign In" 
-                            Width="75" Style="{StaticResource Button}" HorizontalAlignment="Right" IsEnabled="True"
-                            Click="SignInButton_Click"  />
-                    <Button x:Name="IdentifyUser" 
-                            Content="IdentifyUser" 
-                            Width="75" Style="{StaticResource Button}" HorizontalAlignment="Right" IsEnabled="False"
-                            Click="IdentifyUser_Click"  />
-                    <Button x:Name="SignOutButton" 
-                            Content="Sign Out" 
-                            Width="75" Style="{StaticResource Button}" HorizontalAlignment="Right" IsEnabled="False"
-                            Click="SignOutButton_Click"  />
-                </StackPanel>
+            <StackPanel Orientation="Horizontal">
+
+                <Label Content="User:" VerticalAlignment="Center" />
+                <TextBox x:Name="UserNameTextBox" Text="{Binding UserName}" Height="20" Width="50"/>
+                
+                <Button x:Name="btnIdentifyUser" 
+                        Content="Identify User" 
+                        Width="75" Style="{StaticResource Button}" HorizontalAlignment="Right" IsEnabled="False"
+                        Click="IdentifyUser_Click" />
+                <Label Content="Group:" VerticalAlignment="Center" />
+                
+                <TextBox x:Name="tbGroup" Text="{Binding GroupName}" Height="20" Width="50"/>    
+                
+                <Button x:Name="btnJoinGroup" 
+                        Content="Join Group" 
+                        Width="75" Style="{StaticResource Button}" HorizontalAlignment="Right" IsEnabled="False"
+                        Click="JoinGroup_Click" />
+            </StackPanel>
                 
         </DockPanel>
 
@@ -80,15 +90,15 @@
             <StackPanel Orientation="Horizontal" DockPanel.Dock="Right" HorizontalAlignment="Right">
                 
                 <StackPanel Orientation="Vertical">
-                    <Button x:Name="ButtonSend" Content="Send" Click="btnSend_Click" IsEnabled="False" Style="{StaticResource Button}" />
-                    <Button x:Name="ButtonSendPriority" Content="Send Priority"  Click="btnSendPriority_Click" IsEnabled="False" Style="{StaticResource Button}" />
-                    <Button x:Name="ButtonSendAnnoymous" Content="Send Annoymous" Click="btnSendAnnoymous_Click" IsEnabled="False" Style="{StaticResource Button}" />
+                    <Button x:Name="btnSend" Content="Send" Click="btnSend_Click" IsEnabled="False" Style="{StaticResource Button}" />
+                    <Button x:Name="btnSendPriority" Content="Send Priority"  Click="btnSendPriority_Click" IsEnabled="False" Style="{StaticResource Button}" />
+                    <Button x:Name="btnSendAnnoymous" Content="Send Annoymous" Click="btnSendAnnoymous_Click" IsEnabled="False" Style="{StaticResource Button}" />
                 </StackPanel>
 
                 <StackPanel Orientation="Vertical">
-                    <Button x:Name="ButtonSendTimed" Content="Send Timed"  Click="btnSendTimed_Click" IsEnabled="False" Style="{StaticResource Button}" />
-                    <Button x:Name="ButtonSendPriorityTimed" Content="Send Priority Timed"  Click="btnSendPriorityTimed_Click" IsEnabled="False" Style="{StaticResource Button}"/>
-                    <Button x:Name="ButtonLoggingPriorities" Content="Send Logging Priorities" Click="btnSendLoggingPriorities_Click" IsEnabled="False" Style="{StaticResource Button}"/>
+                    <Button x:Name="btnSendTimed" Content="Send Timed"  Click="btnSendTimed_Click" IsEnabled="False" Style="{StaticResource Button}" />
+                    <Button x:Name="btnSendPriorityTimed" Content="Send Priority Timed"  Click="btnSendPriorityTimed_Click" IsEnabled="False" Style="{StaticResource Button}"/>
+                    <Button x:Name="btnLoggingPriorities" Content="Send Logging Priorities" Click="btnSendLoggingPriorities_Click" IsEnabled="False" Style="{StaticResource Button}"/>
                 </StackPanel>
 
                 <Button x:Name="btnClear" Content="Clear Console" Margin="5,2,0,2"

@@ -29,12 +29,13 @@ namespace VNCSignalRServerHub
 
         public IDisposable SignalR { get; set; }
 #else
+        
         private string serverURI = "http://localhost:58195";
 
         private IHost _host;
 
         private IWebHost _webHost;
-        
+
 #endif
 
         public MainWindow()
@@ -50,15 +51,28 @@ namespace VNCSignalRServerHub
         public string ProductVersion { get => Common.ProductVersion; }
         public string ProductName { get => Common.ProductName; }
 
+        private bool _sendPriorityToAll;
+        public bool SendPriorityToAll
+        {
+            get => _sendPriorityToAll;
+            set
+            {
+                _sendPriorityToAll = value;
+            }
+        }
+        
+
         /// <summary>
         /// Calls the StartServer method with Task.Run 
         /// So as to not block the UI thread. 
         /// </summary>
-        private void ButtonStart_Click(object sender, RoutedEventArgs e)
+        private void btnStart_Click(object sender, RoutedEventArgs e)
         {
             WriteToConsole("Starting server...");
             ServerURI = tbServerURI.Text;
-            ButtonStart.IsEnabled = false;
+
+            btnStart.IsEnabled = false;
+            btnStop.IsEnabled = true;
 
             Task.Run(() => StartServer());
         }
@@ -67,7 +81,7 @@ namespace VNCSignalRServerHub
         /// Stops the server and closes the form. Restart functionality omitted
         /// for clarity.
         /// </summary>
-        private void ButtonStop_Click(object sender, RoutedEventArgs e)
+        private void btnStop_Click(object sender, RoutedEventArgs e)
         {
 #if NET48
             SignalR.Dispose();
@@ -76,8 +90,9 @@ namespace VNCSignalRServerHub
 #endif
 
             WriteToConsole("Server Stopped");
-            ButtonStart.IsEnabled = true;
-            ButtonStop.IsEnabled = false;
+
+            btnStart.IsEnabled = true;
+            btnStop.IsEnabled = false;
         }
 
         /// <summary>
@@ -102,13 +117,13 @@ namespace VNCSignalRServerHub
             catch (TargetInvocationException ex)
             {
                 WriteToConsole("A server is already running at " + ServerURI);
-                this.Dispatcher.InvokeAsync(() => ButtonStart.IsEnabled = true);
+                this.Dispatcher.InvokeAsync(() => btnStart.IsEnabled = true);
                 return;
             }
 
             WriteToConsole("Server started at " + ServerURI);
 
-            this.Dispatcher.InvokeAsync(() => ButtonStop.IsEnabled = true);
+            this.Dispatcher.InvokeAsync(() => btnStop.IsEnabled = true);
         }
 
         ///This method adds a line to the RichTextBoxConsole control, using Dispatcher.Invoke if used

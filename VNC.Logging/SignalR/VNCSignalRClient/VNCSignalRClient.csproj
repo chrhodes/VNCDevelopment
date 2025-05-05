@@ -7,7 +7,7 @@
         <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
         <VersionPrefix>1.2.1</VersionPrefix>
         <VersionSuffix>Release</VersionSuffix>
-        <FileVersion>2025.05.03A</FileVersion>
+        <FileVersion>2025.05.04</FileVersion>
         <Description>SignalR Client</Description>
         <ImplicitUsings>disable</ImplicitUsings>
     </PropertyGroup>

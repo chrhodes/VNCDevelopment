@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Reflection.PortableExecutable;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -17,6 +18,21 @@ namespace VNCSignalRServerHub
         public async Task IdentifyUser(string userName)
         {
             string message = $"connectionID:>{Context.ConnectionId}< userName:>{userName}<";
+
+            try
+            {
+                await Clients.All.SendAsync("AddMessage", message);
+            }
+            catch (Exception ex)
+            {
+                Application.Current.Dispatcher.Invoke(() =>
+                    ((MainWindow)Application.Current.MainWindow).WriteToConsole(ex.ToString()));
+            }
+        }
+
+        public async Task JoinGroup(string groupName)
+        {
+            string message = $"connectionID:>{Context.ConnectionId}< groupName:>{groupName}<";
 
             try
             {
@@ -62,11 +78,21 @@ namespace VNCSignalRServerHub
             }
         }
 #else
+
+        Boolean SendPriorityToAll;
+
         public async void SendPriorityMessage(string message, Int32 priority)
         {
             try
             {
-                await Clients.All.SendAsync("AddPriorityMessage", message, priority);
+                //if (SendPriorityToAll)
+                //{
+                //    await Clients.All.SendAsync("AddPriorityMessage", message, priority);
+                //}
+                //else
+                //{
+                    await Clients.Others.SendAsync("AddPriorityMessage", message, priority);
+                //}
             }
             catch (Exception ex)
             {

@@ -54,7 +54,8 @@ namespace VNCSignalRClient
         /// This name is simply added to sent messages to identify the user; this 
         /// sample does not include authentication.
         /// </summary>
-        public String UserName { get; set; }
+        public String UserName { get; set; } = "CHR";
+        public String GroupName { get; set; } = "VNC";
 
         public string RuntimeVersion { get => Common.RuntimeVersion; }
         public string FileVersion { get => Common.FileVersion; }
@@ -639,17 +640,18 @@ namespace VNCSignalRClient
 
             rtbConsole.AppendText($"Connected to server at {ServerURI}\r");
 
-            SignInButton.IsEnabled = false;
+            btnSignIn.IsEnabled = false;
 
-            IdentifyUser.IsEnabled = true;
-            SignOutButton.IsEnabled = true;
+            btnIdentifyUser.IsEnabled = true;
+            btnJoinGroup.IsEnabled = true;
+            btnSignOut.IsEnabled = true;
 
-            ButtonSend.IsEnabled = true;
-            ButtonSendTimed.IsEnabled = true;
-            ButtonSendAnnoymous.IsEnabled = true;
-            ButtonSendPriority.IsEnabled = true;
-            ButtonSendPriorityTimed.IsEnabled = true;
-            ButtonLoggingPriorities.IsEnabled = true;
+            btnSend.IsEnabled = true;
+            btnSendTimed.IsEnabled = true;
+            btnSendAnnoymous.IsEnabled = true;
+            btnSendPriority.IsEnabled = true;
+            btnSendPriorityTimed.IsEnabled = true;
+            btnLoggingPriorities.IsEnabled = true;
         }
 
 #if NET48
@@ -704,26 +706,29 @@ namespace VNCSignalRClient
         {
             var dispatcher = Application.Current.Dispatcher;
 
-            dispatcher.InvokeAsync(() => ButtonSend.IsEnabled = false);
-            dispatcher.InvokeAsync(() => ButtonSendTimed.IsEnabled = false);
-            dispatcher.InvokeAsync(() => ButtonSendAnnoymous.IsEnabled = false);
-            dispatcher.InvokeAsync(() => ButtonSendPriority.IsEnabled = false);
-            dispatcher.InvokeAsync(() => ButtonSendPriorityTimed.IsEnabled = false);
-            dispatcher.InvokeAsync(() => ButtonLoggingPriorities.IsEnabled = false);
+            dispatcher.InvokeAsync(() => btnSend.IsEnabled = false);
+            dispatcher.InvokeAsync(() => btnSendTimed.IsEnabled = false);
+            dispatcher.InvokeAsync(() => btnSendAnnoymous.IsEnabled = false);
+            dispatcher.InvokeAsync(() => btnSendPriority.IsEnabled = false);
+            dispatcher.InvokeAsync(() => btnSendPriorityTimed.IsEnabled = false);
+            dispatcher.InvokeAsync(() => btnLoggingPriorities.IsEnabled = false);
 
             dispatcher.InvokeAsync(() => rtbConsole.AppendText($"Connection Closed.\r{(arg is null ? "" : (arg.Message + '\r'))}"));
 
-            dispatcher.InvokeAsync(() => SignOutButton.IsEnabled = false);
-            dispatcher.InvokeAsync(() => SignInButton.IsEnabled = true);
+            dispatcher.InvokeAsync(() => btnSignIn.IsEnabled = true);
+
+            dispatcher.InvokeAsync(() => btnIdentifyUser.IsEnabled = false);
+            dispatcher.InvokeAsync(() => btnJoinGroup.IsEnabled = false);
+            dispatcher.InvokeAsync(() => btnSignOut.IsEnabled = false);
 
             return null;
         }
 #endif
 
-        private void SignInButton_Click(object sender, RoutedEventArgs e)
+        private void SignIn_Click(object sender, RoutedEventArgs e)
         {
             UserName = UserNameTextBox.Text;
-
+            
             if (!String.IsNullOrEmpty(UserName))
             {
                 rtbConsole.AppendText("Connecting to server...\r");
@@ -755,7 +760,7 @@ namespace VNCSignalRClient
             rtbConsole.Document.Blocks.Clear();
         }
 
-        private async void SignOutButton_Click(object sender, RoutedEventArgs e)
+        private async void SignOut_Click(object sender, RoutedEventArgs e)
         {
             if (Connection != null)
             {
@@ -770,10 +775,11 @@ namespace VNCSignalRClient
                 rtbConsole.AppendText("Signed out of ServerHub\r");
             }
 
-            IdentifyUser.IsEnabled = false;
-            SignOutButton.IsEnabled = false;
+            btnSignIn.IsEnabled = true;
 
-            SignInButton.IsEnabled = true;
+            btnIdentifyUser.IsEnabled = false;
+            btnJoinGroup.IsEnabled = false;
+            btnSignOut.IsEnabled = false;
         }
 
         private void IdentifyUser_Click(object sender, RoutedEventArgs e)
@@ -787,6 +793,20 @@ namespace VNCSignalRClient
             else
             {
                 Connection.InvokeAsync("IdentifyUser", UserName);
+            }
+        }
+
+        private void JoinGroup_Click(object sender, RoutedEventArgs e)
+        {
+            Boolean sendAsync = (bool)cbSendAsync.IsChecked;
+
+            if (sendAsync)
+            {
+                Connection.SendAsync("JoinGroup", GroupName);
+            }
+            else
+            {
+                Connection.InvokeAsync("JoinGroup", GroupName);
             }
         }
     }

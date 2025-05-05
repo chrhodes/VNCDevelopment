@@ -11,21 +11,24 @@
     <Window.Resources>
         <SolidColorBrush x:Key="RedText" Color="#c70000" />
     </Window.Resources>
-    
+
     <DockPanel>
 
         <StackPanel DockPanel.Dock="Top" Margin="2">
-            
+
             <StackPanel Orientation="Horizontal">
                 <Label Content="ServerHub URI:" />
                 <TextBox x:Name="tbServerURI" Text="{Binding ServerURI}" VerticalContentAlignment="Center" Margin="2" />
+                <!--<CheckBox x:Name="cbSendPriorityToAll"
+                          IsChecked="{Binding SendPriorityToAll}"
+                          Content="Send Priority Messages to All" />-->
             </StackPanel>
 
-            <DockPanel>
-                <Button x:Name="ButtonStart" Content="Start" HorizontalAlignment="Left" Width="100" Margin="2"
-                        Click="ButtonStart_Click"/>
-                <Button x:Name="ButtonStop" Content="Stop" HorizontalAlignment="Left" Width="100" Margin="2"
-                        Click="ButtonStop_Click" IsEnabled="False"/>
+            <DockPanel RenderTransformOrigin="0.5,0.5">
+                <Button x:Name="btnStart" Content="Start" HorizontalAlignment="Left" Width="100" Margin="2"
+                        Click="btnStart_Click"/>
+                <Button x:Name="btnStop" Content="Stop" HorizontalAlignment="Left" Width="100" Margin="2"
+                        Click="btnStop_Click" IsEnabled="False"/>
                 <Button x:Name="btnClear" Content="Clear Console" HorizontalAlignment="Right" Width="100" Margin="2"
                         Click="btnClear_Click" Foreground="Red" />
             </DockPanel>
@@ -33,7 +36,7 @@
         </StackPanel>
 
         <StackPanel Orientation="Vertical"  DockPanel.Dock="Bottom" >
-            
+
             <!--<Label Content="Product Name:" />
             <Label Content="{Binding ProductName}" Foreground="{StaticResource RedText}" />-->
 
@@ -65,5 +68,5 @@
         </RichTextBox>
 
     </DockPanel>
-    
+
 </Window>
