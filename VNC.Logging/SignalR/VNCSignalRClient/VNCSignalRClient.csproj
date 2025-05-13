@@ -7,7 +7,7 @@
         <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
         <VersionPrefix>1.2.1</VersionPrefix>
         <VersionSuffix>Release</VersionSuffix>
-        <FileVersion>2025.05.04</FileVersion>
+        <FileVersion>2025.05.12</FileVersion>
         <Description>SignalR Client</Description>
         <ImplicitUsings>disable</ImplicitUsings>
     </PropertyGroup>
@@ -40,7 +40,7 @@
         </When>
         <When Condition="'!$(DefineConstants.Contains(VNCPROJECTREF))'">
             <ItemGroup>
-                <PackageReference Include="VNC.Logging" Version="3.0.0" />
+                <PackageReference Include="VNC.Logging" Version="3.1.0" />
                 <PackageReference Include="VNC.Logging.TraceListeners.SignalRCoreListeners" Version="3.0.0" />                
             </ItemGroup>
         </When>

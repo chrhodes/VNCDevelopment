@@ -809,5 +809,10 @@ namespace VNCSignalRClient
                 Connection.InvokeAsync("JoinGroup", GroupName);
             }
         }
+
+        private void btnCopyContents_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

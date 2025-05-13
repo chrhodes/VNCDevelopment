@@ -101,8 +101,8 @@
                     <Button x:Name="btnLoggingPriorities" Content="Send Logging Priorities" Click="btnSendLoggingPriorities_Click" IsEnabled="False" Style="{StaticResource Button}"/>
                 </StackPanel>
 
-                <Button x:Name="btnClear" Content="Clear Console" Margin="5,2,0,2"
-                        Click="btnClear_Click" Foreground="Red" />
+                <!--<Button x:Name="btnClear" Content="Clear Console" Margin="5,2,0,2"
+                        Click="btnClear_Click" Foreground="Red" />-->
                 
             </StackPanel>            
 
@@ -131,13 +131,39 @@
 
         </StackPanel>
 
-        <RichTextBox x:Name="rtbConsole" FontFamily="Consolas"
-            Grid.Row="1" Grid.ColumnSpan="2" Margin="5,0,5,0" VerticalScrollBarVisibility="Visible" >
-            <FlowDocument>
-                <Paragraph>
-                </Paragraph>
-            </FlowDocument>
-        </RichTextBox>
+        <DockPanel>
+            <Grid DockPanel.Dock="Bottom" HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                
+                <Button Content="Copy Contents" Margin="5,2,0,2" Grid.Column="0"
+                    Click="btnCopyContents_Click" Foreground="Red"/>
+                <Button Content="Clear Console" Margin="5,2,0,2" Grid.Column="1"
+                    Click="btnClear_Click" Foreground="Red"  />
+            </Grid>
+
+            <Grid DockPanel.Dock="Top" HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Button Content="Copy Contents" Margin="5,2,0,2" Grid.Column="0"
+                    Click="btnCopyContents_Click" Foreground="Red"/>
+                <Button Content="Clear Console" Margin="5,2,0,2" Grid.Column="1"
+                    Click="btnClear_Click" Foreground="Red"  />
+            </Grid>
+
+            <RichTextBox x:Name="rtbConsole" FontFamily="Consolas"
+                 Margin="5,0,5,0" VerticalScrollBarVisibility="Visible"  >
+                <FlowDocument>
+                    <Paragraph>
+                    </Paragraph>
+                </FlowDocument>
+            </RichTextBox>
+        </DockPanel>            
 
     </DockPanel>
     
