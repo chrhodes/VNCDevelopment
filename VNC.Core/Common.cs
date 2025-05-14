@@ -14,6 +14,7 @@ namespace VNC.Core
         // TODO(crhodes)
         // Not sure we need to initialize these
         public static Information InformationApplication = new Information();
+        public static Information InformationApplicationCore = new Information();
         public static Information InformationVNCCore = new Information();
 
         public const string APPNAME = "VNCCore";
