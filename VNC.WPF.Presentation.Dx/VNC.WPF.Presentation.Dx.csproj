@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetFrameworks>net8.0-windows</TargetFrameworks>
@@ -11,7 +11,7 @@
         <VersionPrefix>3.1.0</VersionPrefix>
         <VersionSuffix>development</VersionSuffix>
         <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>        
-        <FileVersion>2025.05.09</FileVersion>
+        <FileVersion>2025.05.23</FileVersion>
         <Description>WPF Helpers DevExpress</Description>
     </PropertyGroup>
 
@@ -95,6 +95,10 @@
                 <PackageReference Include="VNC.WPF.Presentation" Version="3.1.0" />
             </ItemGroup>
         </When>
-    </Choose>    
-   
+    </Choose>
+
+    <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+        <Exec Command="powershell.exe -File &quot;$(ProjectDir)\Execute-PreBuild.ps1&quot; -Verbose $(ProjectFileName)" />
+    </Target>
+
 </Project>
