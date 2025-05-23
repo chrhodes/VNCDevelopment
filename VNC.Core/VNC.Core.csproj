@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetFrameworks>net8.0-windows</TargetFrameworks>
@@ -11,7 +11,7 @@
         <VersionPrefix>3.1.0</VersionPrefix>
         <VersionSuffix>Development</VersionSuffix>
         <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
-        <FileVersion>2025.03.14A</FileVersion>
+        <FileVersion>2025.05.23</FileVersion>
         <Description>Base class for a variety of needs</Description>        
     </PropertyGroup>
     
@@ -98,6 +98,10 @@
                 <PackageReference Include="VNC.Logging" Version="3.1.0" />
             </ItemGroup>
         </When>
-    </Choose>    
-
+    </Choose>
+   
+    <Target Name="PreBuild" BeforeTargets="PreBuildEvent" Condition="'$(Configuration)'=='Release'">     
+        <Exec Command="powershell.exe -File &quot;$(ProjectDir)\Execute-PreBuild.ps1&quot; -Verbose $(ProjectFileName)" />
+    </Target>    
+    
 </Project>
