@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetFrameworks>net8.0</TargetFrameworks>
@@ -9,7 +9,7 @@
         <AssemblyOriginatorKeyFile>VNC.snk</AssemblyOriginatorKeyFile>        
         <VersionPrefix>3.1.0</VersionPrefix>
         <VersionSuffix>Release</VersionSuffix>
-        <FileVersion>2025.03.13A</FileVersion>    
+        <FileVersion>2025.05.31</FileVersion>    
         <Description>Logging Wrapper on top of EnterpriseLibrary.Logging</Description>
         <Nullable>enable</Nullable>
         <ImplicitUsings>disable</ImplicitUsings>        
@@ -86,6 +86,10 @@
 
     <ItemGroup>
       <PackageReference Include="EnterpriseLibrary.Logging.NetCore" Version="6.3.2" />
-    </ItemGroup>   
-    
+    </ItemGroup>
+
+    <Target Name="PreBuild" BeforeTargets="PreBuildEvent" Condition="'$(Configuration)'=='Release'">
+        <Exec Command="powershell.exe -File &quot;$(ProjectDir)\Execute-PreBuild.ps1&quot; -Verbose $(ProjectFileName)" />
+    </Target>
+
 </Project>

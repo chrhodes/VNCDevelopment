@@ -110,7 +110,7 @@ namespace VNC.WPF.Presentation.Dx.Views
 
         private void ceArch07C_EditValueChanged(object sender, DevExpress.Xpf.Editors.EditValueChangedEventArgs e)
         {
-            Common.VNCLogging.DeviceInitalize = (Boolean)e.NewValue;
+            Common.VNCLogging.DeviceInitialize = (Boolean)e.NewValue;
         }
 
         private void ceArch08C_EditValueChanged(object sender, DevExpress.Xpf.Editors.EditValueChangedEventArgs e)
@@ -208,10 +208,10 @@ namespace VNC.WPF.Presentation.Dx.Views
             Common.VNCLogging.Arch106 = (Boolean)e.NewValue;
         }
 
-        private void ceArch107C_EditValueChanged(object sender, DevExpress.Xpf.Editors.EditValueChangedEventArgs e)
-        {
-            Common.VNCLogging.Arch107 = (Boolean)e.NewValue;
-        }
+        //private void ceArch107C_EditValueChanged(object sender, DevExpress.Xpf.Editors.EditValueChangedEventArgs e)
+        //{
+        //    Common.VNCLogging.Arch107 = (Boolean)e.NewValue;
+        //}
 
         private void ceArch108C_EditValueChanged(object sender, DevExpress.Xpf.Editors.EditValueChangedEventArgs e)
         {
@@ -304,7 +304,7 @@ namespace VNC.WPF.Presentation.Dx.Views
             ceArch04C.IsChecked = Common.VNCLogging.Core;
             ceArch05C.IsChecked = Common.VNCLogging.Module;
             ceArch06C.IsChecked = Common.VNCLogging.ModuleInitialize;
-            ceArch07C.IsChecked = Common.VNCLogging.DeviceInitalize;
+            ceArch07C.IsChecked = Common.VNCLogging.DeviceInitialize;
             //ceArch08C.IsChecked = Common.VNCLogging.Arch08;
             //ceArch09C.IsChecked = Common.VNCLogging.Arch09;
             ceArch10C.IsChecked = Common.VNCLogging.Application;

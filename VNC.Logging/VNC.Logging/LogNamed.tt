@@ -93,6 +93,7 @@ namespace VNC
             "MODULE",
             "MODULE_INITIALIZE",
             "DEVICE_INITIALIZE",
+            "DEVICE_INITIALIZE_LOW",
 
             "APPLICATION",
             "APPLICATION_LOW",

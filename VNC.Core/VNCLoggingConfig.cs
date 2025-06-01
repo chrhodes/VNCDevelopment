@@ -27,7 +27,8 @@ namespace VNC.Core
         public Boolean ApplicationLow { get; set; }
         public Boolean ApplicationServices { get; set; }
         public Boolean ApplicationServicesLow { get; set; }
-        public Boolean DeviceInitalize { get; set; }
+        public Boolean DeviceInitialize { get; set; }
+        public Boolean DeviceInitializeLow { get; set; }
         public Boolean Domain { get; set; }
         public Boolean DomainLow { get; set; }
         public Boolean DomainServices { get; set; }
@@ -64,7 +65,7 @@ namespace VNC.Core
         public Boolean Arch104 { get; set; }
         public Boolean Arch105 { get; set; }
         public Boolean Arch106 { get; set; }
-        public Boolean Arch107 { get; set; }
+        //public Boolean Arch107 { get; set; }
         public Boolean Arch108 { get; set; }
         public Boolean Arch109 { get; set; }
 

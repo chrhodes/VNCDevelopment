@@ -445,9 +445,8 @@ namespace VNC.WPF.Presentation.Views
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-
-            Int64 startTicks = 0;
 //#if LOGGING
+//          Int64 startTicks = 0;
 //            if (LogOnPropertyChanged)
 //            {
 //                startTicks = Log.VIEWMODEL_LOW($"Enter ({propertyName})", Common.LOG_CATEGORY);

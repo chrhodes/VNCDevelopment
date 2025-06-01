@@ -3207,6 +3207,82 @@ namespace VNC
 
         #endregion
 
+		#region DEVICE_INITIALIZE_LOW
+
+        [DebuggerStepThrough]
+        public static long DEVICE_INITIALIZE_LOW(string message, string applicationCategory, MethodBase method = null)
+        {
+            if (method == null) method = new StackFrame(1).GetMethod();
+            InternalWrite(message, TraceEventType.Verbose, applicationCategory, LoggingPriority.DEVICE_INITIALIZE_LOW,
+                method.ReflectedType.Name, method.Name, Assembly.GetCallingAssembly().GetName().Name, false);
+            return Stopwatch.GetTimestamp();
+        }
+
+        [DebuggerStepThrough]
+        public static long DEVICE_INITIALIZE_LOW(string message, string applicationCategory, Dictionary<string, string> props)
+        {
+            MethodBase method = new StackFrame(1).GetMethod();
+            InternalWrite(message, TraceEventType.Verbose, applicationCategory, LoggingPriority.DEVICE_INITIALIZE_LOW,
+                method.ReflectedType.Name, method.Name, Assembly.GetCallingAssembly().GetName().Name, false, props);
+            return Stopwatch.GetTimestamp();
+        }
+
+        [DebuggerStepThrough]
+        public static long DEVICE_INITIALIZE_LOW(string message, string applicationCategory, int EventId)
+        {
+            MethodBase method = new StackFrame(1).GetMethod();
+            InternalWrite(message, TraceEventType.Verbose, applicationCategory, LoggingPriority.DEVICE_INITIALIZE_LOW,
+                method.ReflectedType.Name, method.Name, Assembly.GetCallingAssembly().GetName().Name, Convert.ToBoolean(0), EventId);
+            return Stopwatch.GetTimestamp();
+        }
+
+        [DebuggerStepThrough]
+        public static long DEVICE_INITIALIZE_LOW(string message, string applicationCategory, long startTicks, MethodBase method = null)
+        {
+            if (method == null) method = new StackFrame(1).GetMethod();
+            InternalWrite(message, TraceEventType.Verbose, applicationCategory, LoggingPriority.DEVICE_INITIALIZE_LOW,
+                method.ReflectedType.Name, method.Name, Assembly.GetCallingAssembly().GetName().Name, Convert.ToBoolean(0), startTicks);
+            return Stopwatch.GetTimestamp();
+        }
+
+        [DebuggerStepThrough]
+        public static long DEVICE_INITIALIZE_LOW(string message, string applicationCategory, int EventId, Dictionary<string, string> props)
+        {
+            MethodBase method = new StackFrame(1).GetMethod();
+            InternalWrite(message, TraceEventType.Verbose, applicationCategory, LoggingPriority.DEVICE_INITIALIZE_LOW,
+                method.ReflectedType.Name, method.Name, Assembly.GetCallingAssembly().GetName().Name, Convert.ToBoolean(0), EventId, props);
+            return Stopwatch.GetTimestamp();
+        }
+
+        [DebuggerStepThrough]
+        public static long DEVICE_INITIALIZE_LOW(string message, string applicationCategory, int EventId, long startTicks)
+        {
+            MethodBase method = new StackFrame(1).GetMethod();
+            InternalWrite(message, TraceEventType.Verbose, applicationCategory, LoggingPriority.DEVICE_INITIALIZE_LOW,
+                method.ReflectedType.Name, method.Name, Assembly.GetCallingAssembly().GetName().Name, Convert.ToBoolean(0), EventId, startTicks);
+            return Stopwatch.GetTimestamp();
+        }
+
+        [DebuggerStepThrough]
+        public static long DEVICE_INITIALIZE_LOW(string message, string applicationCategory, long startTicks, Dictionary<string, string> props)
+        {
+            MethodBase method = new StackFrame(1).GetMethod();
+            InternalWrite(message, TraceEventType.Verbose, applicationCategory, LoggingPriority.DEVICE_INITIALIZE_LOW,
+                method.ReflectedType.Name, method.Name, Assembly.GetCallingAssembly().GetName().Name, Convert.ToBoolean(0), startTicks, props);
+            return Stopwatch.GetTimestamp();
+        }
+
+        [DebuggerStepThrough]
+        public static long DEVICE_INITIALIZE_LOW(string message, string applicationCategory, int EventId, long startTicks, Dictionary<string, string> props)
+        {
+            MethodBase method = new StackFrame(1).GetMethod();
+            InternalWrite(message, TraceEventType.Verbose, applicationCategory, LoggingPriority.DEVICE_INITIALIZE_LOW,
+                method.ReflectedType.Name, method.Name, Assembly.GetCallingAssembly().GetName().Name, Convert.ToBoolean(0), EventId, startTicks, props);
+            return Stopwatch.GetTimestamp();
+        }
+
+        #endregion
+
 		#region APPLICATION
 
         [DebuggerStepThrough]

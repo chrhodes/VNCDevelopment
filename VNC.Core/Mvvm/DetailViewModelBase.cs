@@ -66,18 +66,18 @@ namespace VNC.Core.Mvvm
             }
         }
 
-        private string _title;
-        public string Title
-        {
-            get { return _title; }
-            protected set
-            {
-                if (_title == value)
-                    return;
-                _title = value;
-                OnPropertyChanged();
-            }
-        }
+        //private string _title;
+        //public string Title
+        //{
+        //    get { return _title; }
+        //    protected set
+        //    {
+        //        if (_title == value)
+        //            return;
+        //        _title = value;
+        //        OnPropertyChanged();
+        //    }
+        //}
 
         private Boolean _hasChanges;
         public Boolean HasChanges
