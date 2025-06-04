@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 
 namespace VNC.Core.Mvvm
 {
-    public class ViewModelBase : IViewModel, INotifyPropertyChanged
+    public class ViewModelBase : IViewModel, INotifyPropertyChanged, IInstanceCountVM
     {
         #region Constructors, Initialization, and Load
 
@@ -109,6 +109,18 @@ namespace VNC.Core.Mvvm
 #if LOGGING
             if (Common.VNCCoreLogging.INPC) Log.VIEWMODEL_LOW("Exit", Common.LOG_CATEGORY, startTicks);
 #endif
+        }
+
+        #endregion
+
+        #region IInstanceCountVM
+
+        private static Int32 _instanceCountVM;
+
+        public Int32 InstanceCountVM
+        {
+            get => _instanceCountVM;
+            set => _instanceCountVM = value;
         }
 
         #endregion

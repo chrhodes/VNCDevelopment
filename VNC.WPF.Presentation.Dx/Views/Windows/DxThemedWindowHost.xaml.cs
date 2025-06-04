@@ -259,6 +259,7 @@ namespace VNC.WPF.Presentation.Dx.Views
             catch (Exception ex)
             {
                 MessageBox.Show("Incorrect Tag Name.  Cannot load type:{0}", userControlName);
+                Log.Error(ex, Common.LOG_CATEGORY);
             }
 
 #if LOGGING
@@ -448,8 +449,9 @@ namespace VNC.WPF.Presentation.Dx.Views
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
 
-            Int64 startTicks = 0;
+
             //#if LOGGING
+            //Int64 startTicks = 0;
             //            if (LogOnPropertyChanged)
             //            {
             //                startTicks = Log.VIEWMODEL_LOW($"Enter ({propertyName})", Common.LOG_CATEGORY);
