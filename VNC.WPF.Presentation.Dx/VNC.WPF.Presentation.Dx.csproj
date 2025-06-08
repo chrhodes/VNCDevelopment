@@ -85,7 +85,6 @@
     <Choose>
         <When Condition="'$(DefineConstants.Contains(VNCPROJECTREF))'">
             <ItemGroup>
-                <ProjectReference Include="..\VNC.Core\VNC.Core.csproj" />
                 <ProjectReference Include="..\VNC.WPF.Presentation\VNC.WPF.Presentation.csproj" />                
             </ItemGroup>
         </When>
