@@ -126,13 +126,23 @@
                         EditValueChanged="ceArch06C_EditValueChanged"/>
 
                 <!--DeviceInitialize-->
-                <dxe:CheckEdit x:Name="ceArch07C" VerticalAlignment="Top"
-                        Style="{StaticResource uiLoggingFilterCheckEdit}"
-                        Content="{Binding LoggingUIConfig.Arch07.Label}"
-                        Foreground="{Binding LoggingUIConfig.Arch07.LabelColor, Converter={StaticResource ColorToBrushConverter}}"
-                        ToolTip="{Binding LoggingUIConfig.Arch07.ToolTip}" 
-                        IsChecked="False"                                   
-                        EditValueChanged="ceArch07C_EditValueChanged"/>
+                <dxlc:LayoutGroup View="Group" Orientation="Vertical">
+                    <dxe:CheckEdit x:Name="ceArch07C" VerticalAlignment="Top"
+                            Style="{StaticResource uiLoggingFilterCheckEdit}"
+                            Content="{Binding LoggingUIConfig.Arch07.Label}"
+                            Foreground="{Binding LoggingUIConfig.Arch07.LabelColor, Converter={StaticResource ColorToBrushConverter}}"
+                            ToolTip="{Binding LoggingUIConfig.Arch07.ToolTip}" 
+                            IsChecked="False"                                   
+                            EditValueChanged="ceArch07C_EditValueChanged"/>
+
+                    <dxe:CheckEdit x:Name="ceArch107C" VerticalAlignment="Top"
+                            Style="{StaticResource uiLoggingFilterCheckEdit}"
+                            Content="{Binding LoggingUIConfig.Arch107.Label}"
+                            Foreground="{Binding LoggingUIConfig.Arch107.LabelColor, Converter={StaticResource ColorToBrushConverter}}"
+                            ToolTip="{Binding LoggingUIConfig.Arch107.ToolTip}" 
+                            IsChecked="False"                                   
+                            EditValueChanged="ceArch07C_EditValueChanged"/>
+                </dxlc:LayoutGroup>
 
             </dxlc:LayoutGroup>
 

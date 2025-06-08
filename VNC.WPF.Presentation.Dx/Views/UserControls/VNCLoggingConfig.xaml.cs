@@ -208,10 +208,10 @@ namespace VNC.WPF.Presentation.Dx.Views
             Common.VNCLogging.Arch106 = (Boolean)e.NewValue;
         }
 
-        //private void ceArch107C_EditValueChanged(object sender, DevExpress.Xpf.Editors.EditValueChangedEventArgs e)
-        //{
-        //    Common.VNCLogging.Arch107 = (Boolean)e.NewValue;
-        //}
+        private void ceArch107C_EditValueChanged(object sender, DevExpress.Xpf.Editors.EditValueChangedEventArgs e)
+        {
+            Common.VNCLogging.DeviceInitializeLow = (Boolean)e.NewValue;
+        }
 
         private void ceArch108C_EditValueChanged(object sender, DevExpress.Xpf.Editors.EditValueChangedEventArgs e)
         {
@@ -324,7 +324,7 @@ namespace VNC.WPF.Presentation.Dx.Views
             //ceArch104C.IsChecked = Common.VNCLogging.Arch104;
             //ceArch105C.IsChecked = Common.VNCLogging.Arch105;
             //ceArch106C.IsChecked = Common.VNCLogging.Arch106;
-            //ceArch107C.IsChecked = Common.VNCLogging.Arch107;
+            ceArch107C.IsChecked = Common.VNCLogging.DeviceInitializeLow;
             //ceArch018C.IsChecked = Common.VNCLogging.Arch08;
             //ceArch109C.IsChecked = Common.VNCLogging.Arch09;
             ceArch110C.IsChecked = Common.VNCLogging.ApplicationLow;
