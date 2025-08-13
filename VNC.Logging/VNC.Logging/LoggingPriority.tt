@@ -134,61 +134,63 @@ namespace VNC
 	
 		DEFAULT = 10029,
 
-		// Below are the standard levels
+		#region  These are the standard levels
 
         Failure		= -10,
         Error		= -1,
         Warning		= 1,
 
-        Info		= 100,
+        INFO		= 100,
 <#
 	for (int i = 1 ; i <= infoLevels ; i++)
 	{
 #>
-        Info<#= i #>		= 10<#= i #>,
+        INFO<#= i #>		= 10<#= i #>,
 <#
 	}
 #>
 
-        Debug		= 1000,
+        DEBUG		= 1000,
 <#
 	for (int i = 1 ; i <= debugLevels ; i++)
 	{
 #>
-		Debug<#= i #>		= 100<#= i #>,
+		DEBUG<#= i #>		= 100<#= i #>,
 <#
 	}
 #>
 
-        Arch		= 9000,
+        ARCH		= 9000,
 <#
 	for (int i = 1 ; i < archLevels ; i++)
 	{
 		if (i < 10)
 		{ 
-			WriteLine(string.Format("\t\tArch{0}\t\t= 900{1},", i, i));
+			WriteLine(string.Format("\t\tARCH{0}\t\t= 900{1},", i, i));
 		}
 		else
 		{ 
-			WriteLine(string.Format("\t\tArch{0}\t\t= 90{1},", i, i));
+			WriteLine(string.Format("\t\tARCH{0}\t\t= 90{1},", i, i));
 		}
 	}
 #>
 
-        Trace		= 10000,
+        TRACE		= 10000,
 <#
 	for (int i = 1 ; i < traceLevels ; i++)
 	{
 		if (i < 10)
 		{ 
-			WriteLine(string.Format("\t\tTrace{0}\t\t= 1000{1},", i, i));
+			WriteLine(string.Format("\t\tTRACE{0}\t\t= 1000{1},", i, i));
 		}
 		else
 		{ 
-			WriteLine(string.Format("\t\tTrace{0}\t\t= 100{1},", i, i));
+			WriteLine(string.Format("\t\tTRACE{0}\t\t= 100{1},", i, i));
 		}
 	}
 #>
 		Max			= 100<#= traceLevels #>
     }
+
+	#endregion
 }

@@ -17,13 +17,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignalRServerHub", "SignalR
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignalRClient", "SignalR\AspNet\SignalRClient\SignalRClient.csproj", "{1EC0EE20-0953-4967-9BAA-DF8811157B08}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignalRCoreClientWPF", "SignalR\AspNetCore\SignalRCoreClientWPF\SignalRCoreClientWPF.csproj", "{8BAF684E-3F38-47A3-AFB9-18388163B32F}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignalRCoreServerHubWPF", "SignalR\AspNetCore\SignalRCoreServerHubWPF\SignalRCoreServerHubWPF.csproj", "{E2850176-15A2-4543-A0D8-5A154FD18064}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VNC.Logging.TraceListeners.SignalRCoreListener", "VNC.Logging.TraceListeners\SignalRCoreListener\VNC.Logging.TraceListeners.SignalRCoreListener.csproj", "{BD1F43DF-92B6-453A-9462-5264F8353B14}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VNC.Logging.TraceListeners.SignalRCoreListeners", "VNC.Logging.TraceListeners\SignalRCoreListeners\VNC.Logging.TraceListeners.SignalRCoreListeners.csproj", "{69FA6432-0BB5-4785-B347-FF3C9CD20273}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoLoggingCoreSimple", "DemoLLoggingCoreSimple\DemoLoggingCoreSimple.csproj", "{CD3466F3-8AFC-0052-CAAB-26241D40B85A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoAndTestLogging", "DemoAndTestLogging\DemoAndTestLogging.csproj", "{D98A6AEF-325E-4F3F-8BA2-8F95BD1DFDF1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,14 +59,6 @@ Global
 		{1EC0EE20-0953-4967-9BAA-DF8811157B08}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1EC0EE20-0953-4967-9BAA-DF8811157B08}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1EC0EE20-0953-4967-9BAA-DF8811157B08}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8BAF684E-3F38-47A3-AFB9-18388163B32F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8BAF684E-3F38-47A3-AFB9-18388163B32F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8BAF684E-3F38-47A3-AFB9-18388163B32F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8BAF684E-3F38-47A3-AFB9-18388163B32F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E2850176-15A2-4543-A0D8-5A154FD18064}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E2850176-15A2-4543-A0D8-5A154FD18064}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E2850176-15A2-4543-A0D8-5A154FD18064}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E2850176-15A2-4543-A0D8-5A154FD18064}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BD1F43DF-92B6-453A-9462-5264F8353B14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BD1F43DF-92B6-453A-9462-5264F8353B14}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BD1F43DF-92B6-453A-9462-5264F8353B14}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -75,6 +67,14 @@ Global
 		{69FA6432-0BB5-4785-B347-FF3C9CD20273}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{69FA6432-0BB5-4785-B347-FF3C9CD20273}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{69FA6432-0BB5-4785-B347-FF3C9CD20273}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD3466F3-8AFC-0052-CAAB-26241D40B85A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD3466F3-8AFC-0052-CAAB-26241D40B85A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD3466F3-8AFC-0052-CAAB-26241D40B85A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD3466F3-8AFC-0052-CAAB-26241D40B85A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D98A6AEF-325E-4F3F-8BA2-8F95BD1DFDF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D98A6AEF-325E-4F3F-8BA2-8F95BD1DFDF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D98A6AEF-325E-4F3F-8BA2-8F95BD1DFDF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D98A6AEF-325E-4F3F-8BA2-8F95BD1DFDF1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

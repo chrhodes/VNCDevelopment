@@ -1,23 +1,26 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>net8.0-windows</TargetFrameworks>
+        <TargetFrameworks>net8.0-windows;net481</TargetFrameworks>
         <UseWPF>true</UseWPF>
         <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
         <AssemblyName>VNC.Core</AssemblyName>
         <RootNamespace>VNC.Core</RootNamespace>
         <SignAssembly>true</SignAssembly>
         <AssemblyOriginatorKeyFile>VNC.snk</AssemblyOriginatorKeyFile>
-        <VersionPrefix>3.1.0</VersionPrefix>
+        <VersionPrefix>3.2.0</VersionPrefix>
         <VersionSuffix>Development</VersionSuffix>
         <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
-        <FileVersion>2025.05.23</FileVersion>
-        <Description>Base class for a variety of needs</Description>        
+        <FileVersion>2025.08.10</FileVersion>
+        <Description>Base class for a variety of needs</Description>
+        <LangVersion>12.0</LangVersion>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>disable</ImplicitUsings>
     </PropertyGroup>
     
     <PropertyGroup>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>        
-        <PackageVersion>3.1.0</PackageVersion>
+        <PackageVersion>3.2.0</PackageVersion>
         <PackageLicenseFile>LICENSE</PackageLicenseFile>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageProjectUrl>https://github.com/chrhodes/vncdevelopment</PackageProjectUrl>
@@ -32,10 +35,18 @@
         <SatelliteResourceLanguages>en-US</SatelliteResourceLanguages>        
     </PropertyGroup>
 
+    <ItemGroup Condition="'$(TargetFramework)'=='net8.0-windows'">
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.7" />
+    </ItemGroup>
+
+    <ItemGroup Condition="'$(TargetFramework)'=='net481'">  
+       <PackageReference Include="EntityFramework" Version="6.5.1" />  
+    </ItemGroup>    
+    
     <ItemGroup>
         <PackageReference Include="CommonServiceLocator" Version="2.0.7" />
         <PackageReference Include="Microsoft.DependencyValidation.Analyzers" Version="0.11.0" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.7" />
+        <!--<PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.7" />-->
         <PackageReference Include="Prism.Core" Version="8.1.97" />
         <PackageReference Include="Prism.Wpf" Version="8.1.97" />
         <PackageReference Include="System.Text.Json" Version="8.0.5" />
@@ -82,9 +93,9 @@
         <DefineConstants>TRACE;LOGGING</DefineConstants>
     </PropertyGroup>
 
-    <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-windows|AnyCPU'">
+    <PropertyGroup Condition="'$(Configuration)|$(TargetFrameworks)|$(Platform)'=='Debug|net8.0-windows;net481|AnyCPU'">
         <!-- Uncoment next line to switch to ProjectReference(s) -->
-         <!--<DefineConstants>$(DefineConstants);VNCPROJECTREF</DefineConstants>--> 
+         <DefineConstants>$(DefineConstants);VNCPROJECTREF</DefineConstants> 
     </PropertyGroup>
 
     <Choose>
@@ -95,7 +106,7 @@
         </When>
         <When Condition="'!$(DefineConstants.Contains(VNCPROJECTREF))'">
             <ItemGroup>
-                <PackageReference Include="VNC.Logging" Version="3.1.0" />
+                <PackageReference Include="VNC.Logging" Version="3.2.0" />
             </ItemGroup>
         </When>
     </Choose>

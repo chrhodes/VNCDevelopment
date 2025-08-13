@@ -4,7 +4,11 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
+#if NET481
+using System.Data.Entity;
+#else
 using Microsoft.EntityFrameworkCore;
+#endif
 
 namespace VNC.Core.DomainServices
 {

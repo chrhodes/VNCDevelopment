@@ -1,7 +1,10 @@
 ﻿using System;
 
+#if NET481
+using System.Data.Entity;
+#else
 using Microsoft.EntityFrameworkCore;
-
+#endif
 
 namespace VNC.Core.DomainServices
 {

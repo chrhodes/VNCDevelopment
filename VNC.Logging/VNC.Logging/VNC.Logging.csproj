@@ -1,16 +1,17 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>net8.0</TargetFrameworks>
+        <TargetFrameworks>net8.0;net481</TargetFrameworks>
         <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
         <AssemblyName>VNC.Logging</AssemblyName>
         <RootNamespace>VNC.Logging</RootNamespace>
         <SignAssembly>true</SignAssembly>
         <AssemblyOriginatorKeyFile>VNC.snk</AssemblyOriginatorKeyFile>        
-        <VersionPrefix>3.1.0</VersionPrefix>
+        <VersionPrefix>3.2.0</VersionPrefix>
         <VersionSuffix>Release</VersionSuffix>
-        <FileVersion>2025.05.31</FileVersion>    
+        <FileVersion>2025.08.10</FileVersion>    
         <Description>Logging Wrapper on top of EnterpriseLibrary.Logging</Description>
+        <LangVersion>8.0</LangVersion>
         <Nullable>enable</Nullable>
         <ImplicitUsings>disable</ImplicitUsings>        
     </PropertyGroup>
@@ -18,7 +19,7 @@
     <!-- This is for NuGet Packages -->
     <PropertyGroup>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <PackageVersion>3.1.0</PackageVersion>
+        <PackageVersion>3.2.0</PackageVersion>
         <PackageLicenseFile>LICENSE</PackageLicenseFile>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageProjectUrl>https://github.com/chrhodes/VNCDevelopment</PackageProjectUrl>

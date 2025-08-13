@@ -4,7 +4,11 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
+#if NET481
+using System.Data.Entity.Infrastructure;
+#else
 using Microsoft.EntityFrameworkCore;
+#endif
 
 using Prism.Commands;
 using Prism.Events;
