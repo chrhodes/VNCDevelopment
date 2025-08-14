@@ -21,19 +21,19 @@ namespace DemoLoggingSimple
         private void btnLogSomething(object sender, RoutedEventArgs e)
         {
 
-            Log.Info("SignalR Delay", LOG_APPNAME, 0);
+            Log.INFO("SignalR Delay", LOG_APPNAME, 0);
             Thread.Sleep(125);
 
             long startTicks;
 
-            Log.Info("Good Everything", LOG_APPNAME, 0);
+            Log.INFO("Good Everything", LOG_APPNAME, 0);
             Log.EVENT_HANDLER("High Five", LOG_APPNAME, 0);
 
-            startTicks = Log.Trace("Start", LOG_APPNAME);
+            startTicks = Log.TRACE("Start", LOG_APPNAME);
 
             Thread.Sleep(750);
 
-            Log.Trace("End", LOG_APPNAME, startTicks);       
+            Log.TRACE("End", LOG_APPNAME, startTicks);       
         }
     }
 }

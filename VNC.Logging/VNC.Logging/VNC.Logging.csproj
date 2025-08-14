@@ -17,6 +17,7 @@
     </PropertyGroup>
 
     <!-- This is for NuGet Packages -->
+    
     <PropertyGroup>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageVersion>3.2.0</PackageVersion>

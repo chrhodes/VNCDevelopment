@@ -17,6 +17,8 @@
         <Nullable>enable</Nullable>
         <ImplicitUsings>disable</ImplicitUsings>
     </PropertyGroup>
+
+    <!-- This is for NuGet Packages -->
     
     <PropertyGroup>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>        
@@ -93,7 +95,7 @@
         <DefineConstants>TRACE;LOGGING</DefineConstants>
     </PropertyGroup>
 
-    <PropertyGroup Condition="'$(Configuration)|$(TargetFrameworks)|$(Platform)'=='Debug|net8.0-windows;net481|AnyCPU'">
+    <PropertyGroup Condition="'$(Configuration)'=='Debug'">
         <!-- Uncoment next line to switch to ProjectReference(s) -->
          <DefineConstants>$(DefineConstants);VNCPROJECTREF</DefineConstants> 
     </PropertyGroup>

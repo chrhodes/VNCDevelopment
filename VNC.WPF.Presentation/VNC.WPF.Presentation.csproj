@@ -1,20 +1,22 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>net8.0-windows</TargetFrameworks>
+        <TargetFrameworks>net8.0-windows;net481</TargetFrameworks>
         <UseWPF>true</UseWPF>
         <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
         <AssemblyName>VNC.WPF.Presentation</AssemblyName>
         <RootNamespace>VNC.WPF.Presentation</RootNamespace>
         <!--<SignAssembly>true</SignAssembly>
         <AssemblyOriginatorKeyFile>VNC.snk</AssemblyOriginatorKeyFile>-->
-        <VersionPrefix>3.1.0</VersionPrefix>
+        <VersionPrefix>3.2.0</VersionPrefix>
         <VersionSuffix>development</VersionSuffix>
         <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
         <FileVersion>2025.05.23</FileVersion>
         <Description>WPF Helpers</Description>
     </PropertyGroup>
 
+    <!-- This is for NuGet Packages -->
+    
     <PropertyGroup>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageVersion>3.1.0</PackageVersion>
@@ -55,7 +57,7 @@
         <DefineConstants>TRACE;LOGGING</DefineConstants>
     </PropertyGroup>
 
-    <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-windows|AnyCPU'">
+    <PropertyGroup Condition="'$(Configuration)'=='Debug'">
         <!-- Uncoment next line to switch to ProjectReference(s) -->
          <DefineConstants>$(DefineConstants);VNCPROJECTREF</DefineConstants> 
     </PropertyGroup>
@@ -68,7 +70,7 @@
         </When>
         <When Condition="'!$(DefineConstants.Contains(VNCPROJECTREF))'">
             <ItemGroup>
-                <PackageReference Include="VNC.Core" Version="3.1.0" />
+                <PackageReference Include="VNC.Core" Version="3.2.0" />
             </ItemGroup>
         </When>
     </Choose>

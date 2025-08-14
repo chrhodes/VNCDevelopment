@@ -234,5 +234,7 @@ namespace SignalRClient
             SignOutButton.IsEnabled = false;
             SignInButton.IsEnabled = true;
         }
+
+
     }
 }

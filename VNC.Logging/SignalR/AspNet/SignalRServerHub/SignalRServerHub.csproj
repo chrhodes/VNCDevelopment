@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-      <TargetFrameworks>net48</TargetFrameworks>
+      <TargetFrameworks>net481</TargetFrameworks>
       <!--<TargetFrameworks>net5.0-windows;net48</TargetFrameworks>-->
       <UseWPF>true</UseWPF>
       <FileVersion>2023.09.09A</FileVersion>

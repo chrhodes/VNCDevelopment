@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>net48;net6.0</TargetFrameworks>
+        <TargetFrameworks>net481;net6.0</TargetFrameworks>
         <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
         <AssemblyName>VNC.Logging.TraceListeners.SignalRListener</AssemblyName>
         <RootNamespace>VNC.Logging.TraceListeners</RootNamespace>

@@ -183,6 +183,23 @@ namespace VNC.Core
 
         private static void PopulateInformation(Assembly assembly, FileVersionInfo fileVersionInfo, Information information, AssemblyName assemblyName)
         {
+            if (assembly is null)
+            {
+                throw new ArgumentNullException(nameof(assembly), "Assembly cannot be null.");
+            }
+            if (fileVersionInfo is null)
+            {
+                throw new ArgumentNullException(nameof(fileVersionInfo), "FileVersionInfo cannot be null.");
+            }
+            if (information is null)
+            {
+                throw new ArgumentNullException(nameof(information), "Information cannot be null.");
+            }
+            if (assemblyName is null)
+            {
+                throw new ArgumentNullException(nameof(assemblyName), "AssemblyName cannot be null.");
+            }                
+
             // Information in Assembly
 
             information.AssemblyInformation.Version = assemblyName.Version.ToString();
@@ -200,7 +217,9 @@ namespace VNC.Core
             information.AssemblyInformation.FileVersion = assembly.GetCustomAttribute<AssemblyFileVersionAttribute>()?.Version;
             information.AssemblyInformation.InformationalVersion = assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion;
             information.AssemblyInformation.Product = assembly.GetCustomAttribute<AssemblyProductAttribute>()?.Product;
+
             // Information in FileVersionInfo
+
             information.FileInformation.FileVersion = fileVersionInfo.FileVersion;
             information.FileInformation.FileDescription = fileVersionInfo.FileDescription;
 
@@ -223,6 +242,7 @@ namespace VNC.Core
             // Runtime Information
 
             information.RuntimeVersion = FileVersionInfo.GetVersionInfo(typeof(Int32).Assembly.Location).FileVersion;
+
         }
 
         public static void SetVersionInfoApplication(Assembly appAssembly, FileVersionInfo appFileVersionInfo)

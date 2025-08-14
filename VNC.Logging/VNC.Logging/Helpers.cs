@@ -10,7 +10,7 @@ namespace VNC.Logging
     public static class Helpers
     {
         [DebuggerStepThrough]
-        public static T ExecuteLogHandledOp<T>(Func<T> action, LoggingPriority loggingPriority, string applicationCategory, string additionalStartMessage = null, string additionalEndMessage = null)
+        public static T ExecuteLogHandledOp<T>(Func<T> action, LoggingPriority loggingPriority, string applicationCategory, string? additionalStartMessage = null, string? additionalEndMessage = null)
         {
             //StackTrace trace = new StackTrace();
             MethodBase method = new StackFrame(1).GetMethod();
@@ -49,7 +49,7 @@ namespace VNC.Logging
         }
 
         [DebuggerStepThrough]
-        public static void ExecuteLogHandledOp(Action action, LoggingPriority loggingPriority, string applicationCategory, string additionalStartMessage = null, string additionalEndMessage = null)
+        public static void ExecuteLogHandledOp(Action action, LoggingPriority loggingPriority, string applicationCategory, string? additionalStartMessage = null, string? additionalEndMessage = null)
         {
             //StackTrace trace = new StackTrace();
             MethodBase method = new StackFrame(1).GetMethod();
