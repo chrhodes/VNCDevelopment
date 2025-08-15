@@ -11,7 +11,7 @@
         <VersionPrefix>3.2.0</VersionPrefix>
         <VersionSuffix>development</VersionSuffix>
         <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
-        <FileVersion>2025.05.23</FileVersion>
+        <FileVersion>2025.08.15</FileVersion>
         <Description>WPF Helpers</Description>
     </PropertyGroup>
 
@@ -19,7 +19,7 @@
     
     <PropertyGroup>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <PackageVersion>3.1.0</PackageVersion>
+        <PackageVersion>3.2.0</PackageVersion>
         <PackageLicenseFile>LICENSE</PackageLicenseFile>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageProjectUrl>https://github.com/chrhodes/vncdevelopment</PackageProjectUrl>
