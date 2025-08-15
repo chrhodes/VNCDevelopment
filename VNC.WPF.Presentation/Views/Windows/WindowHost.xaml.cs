@@ -39,7 +39,7 @@ namespace VNC.WPF.Presentation.Views
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
-                Log.Error(ex, Common.LOG_CATEGORY);
+                Log.ERROR(ex, Common.LOG_CATEGORY);
             }
 
 #if LOGGING
@@ -72,7 +72,7 @@ namespace VNC.WPF.Presentation.Views
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
-                Log.Error(ex, Common.LOG_CATEGORY);
+                Log.ERROR(ex, Common.LOG_CATEGORY);
             }
 
 #if LOGGING
@@ -103,7 +103,7 @@ namespace VNC.WPF.Presentation.Views
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
-                Log.Error(ex, Common.LOG_CATEGORY);
+                Log.ERROR(ex, Common.LOG_CATEGORY);
             }
 
 #if LOGGING

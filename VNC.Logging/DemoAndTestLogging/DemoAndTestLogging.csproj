@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetFrameworks>net8.0-windows;net481</TargetFrameworks>
@@ -8,8 +8,9 @@
         <VersionPrefix>1.0.0</VersionPrefix>
         <VersionSuffix>development</VersionSuffix>
         <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
-        <FileVersion>YYYY.MM.DDA</FileVersion>
+        <FileVersion>2025.08.14</FileVersion>
         <Description>describe application</Description>
+        <LangVersion>9.0</LangVersion>
         <Nullable>enable</Nullable>
         <ImplicitUsings>disable</ImplicitUsings>
     </PropertyGroup>
@@ -60,11 +61,11 @@
 
     <ItemGroup Condition="'$(TargetFramework)' == 'net481'">
         <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="7.0.10" />
-        <PackageReference Include="VNC.Logging.TraceListeners.SignalRCoreListeners" Version="3.0.0" />
-    </ItemGroup>    
+        <PackageReference Include="VNC.Logging.TraceListeners.SignalRListener" Version="1.0.0" />
+    </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\DemoAndTestLogging.Core\DemoAndTestLogging.Core.csproj" />
+      <ProjectReference Include="..\DemoAndTestLogging.Core\DemoAndTestLogging.Core.csproj" />
     </ItemGroup>
 
     <ItemGroup>
@@ -92,9 +93,9 @@
     <Choose>
         <When Condition="'$(DefineConstants.Contains(VNCPROJECTREF))'">
             <ItemGroup>
-                <ProjectReference Include="..\..\..\VNCDevelopment\VNC.Core\VNC.Core.csproj" />
-                <ProjectReference Include="..\..\..\VNCDevelopment\VNC.WPF.Presentation.Dx\VNC.WPF.Presentation.Dx.csproj" />
-                <ProjectReference Include="..\..\..\VNCDevelopment\VNC.WPF.Presentation\VNC.WPF.Presentation.csproj" />
+                <ProjectReference Include="..\..\VNC.Core\VNC.Core.csproj" />
+                <ProjectReference Include="..\..\VNC.WPF.Presentation.Dx\VNC.WPF.Presentation.Dx.csproj" />
+                <ProjectReference Include="..\..\VNC.WPF.Presentation\VNC.WPF.Presentation.csproj" />
             </ItemGroup>
         </When>
         <When Condition="'!$(DefineConstants.Contains(VNCPROJECTREF))'">
@@ -128,9 +129,9 @@
       </None>
     </ItemGroup>
     
-    <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <!--<Target Name="PreBuild" BeforeTargets="PreBuildEvent">
         <Exec Command="powershell.exe -File &quot;$(ProjectDir)\Execute-PreBuild.ps1&quot; -Verbose $(ProjectFileName)" />
-    </Target>
+    </Target>-->
 
     <!--<Target Name="PreBuild" BeforeTargets="PreBuildEvent" Condition="'$(Configuration)'=='Release'">
         <Exec Command="powershell.exe -File &quot;$(ProjectDir)\Execute-PreBuild.ps1&quot; -Verbose $(ProjectFileName)" />

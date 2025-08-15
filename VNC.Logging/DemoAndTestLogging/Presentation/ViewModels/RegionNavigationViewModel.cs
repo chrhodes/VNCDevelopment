@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Windows.Input;
-
-using DemoAndTestLogging.Core;
 
 using Prism.Commands;
 using Prism.Events;
@@ -10,7 +7,6 @@ using Prism.Services.Dialogs;
 
 using VNC;
 using VNC.Core.Mvvm;
-using VNC.WPF.Presentation.Views;
 
 namespace DemoAndTestLogging.Presentation.ViewModels
 {

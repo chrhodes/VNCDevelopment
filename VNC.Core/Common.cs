@@ -38,7 +38,7 @@ namespace VNC.Core
                 }
                 catch (Exception ex)
                 {
-                    Log.Error(ex, LOG_CATEGORY);
+                    Log.ERROR(ex, LOG_CATEGORY);
                 }
             }
 

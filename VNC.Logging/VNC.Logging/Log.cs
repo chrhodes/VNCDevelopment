@@ -654,14 +654,14 @@ namespace VNC
         #region Log Failure Methods
 
         [DebuggerStepThrough]
-        public static void Failure(Exception ex, string applicationCategory)
+        public static void FAILURE(Exception ex, string applicationCategory)
         {
             MethodBase method = new StackFrame(1).GetMethod();
             InternalWrite(ex.Message + ex.StackTrace, TraceEventType.Critical, applicationCategory, LoggingPriority.Failure, method.ReflectedType.Name, method.Name, Assembly.GetCallingAssembly().GetName().Name, true);
         }
 
         [DebuggerStepThrough]
-        public static void Failure(Exception ex, string applicationCategory, 
+        public static void FAILURE(Exception ex, string applicationCategory, 
                                             Dictionary<string, string> props)
         {
             MethodBase method = new StackFrame(1).GetMethod();
@@ -671,7 +671,7 @@ namespace VNC
         }
 
         [DebuggerStepThrough]
-        public static void Failure(string message, string applicationCategory)
+        public static void FAILURE(string message, string applicationCategory)
         {
             MethodBase method = new StackFrame(1).GetMethod();
             InternalWrite(message, TraceEventType.Critical, applicationCategory, LoggingPriority.Failure,
@@ -679,7 +679,7 @@ namespace VNC
         }
 
         [DebuggerStepThrough]
-        public static void Failure(Exception ex, string applicationCategory, 
+        public static void FAILURE(Exception ex, string applicationCategory, 
                                             int EventId)
         {
             MethodBase method = new StackFrame(1).GetMethod();
@@ -689,7 +689,7 @@ namespace VNC
         }
 
         [DebuggerStepThrough]
-        public static void Failure(string message, string applicationCategory, bool showStack)
+        public static void FAILURE(string message, string applicationCategory, bool showStack)
         {
             MethodBase method = new StackFrame(1).GetMethod();
             InternalWrite(message, TraceEventType.Critical, applicationCategory, LoggingPriority.Failure,
@@ -697,7 +697,7 @@ namespace VNC
         }
 
         [DebuggerStepThrough]
-        public static void Failure(string message, string applicationCategory, 
+        public static void FAILURE(string message, string applicationCategory, 
                                             int EventId)
         {
             MethodBase method = new StackFrame(1).GetMethod();
@@ -707,7 +707,7 @@ namespace VNC
         }
 
         [DebuggerStepThrough]
-        public static void Failure(string message, string applicationCategory, 
+        public static void FAILURE(string message, string applicationCategory, 
                                             Dictionary<string, string> props)
         {
             MethodBase method = new StackFrame(1).GetMethod();
@@ -717,7 +717,7 @@ namespace VNC
         }
 
         [DebuggerStepThrough]
-        public static void Failure(Exception ex, string applicationCategory, 
+        public static void FAILURE(Exception ex, string applicationCategory, 
                                             int EventId, Dictionary<string, string> props)
         {
             MethodBase method = new StackFrame(1).GetMethod();
@@ -727,7 +727,7 @@ namespace VNC
         }
 
         [DebuggerStepThrough]
-        public static void Failure(string message, string applicationCategory, bool showStack, 
+        public static void FAILURE(string message, string applicationCategory, bool showStack, 
                                             Dictionary<string, string> props)
         {
             MethodBase method = new StackFrame(1).GetMethod();
@@ -737,7 +737,7 @@ namespace VNC
         }
 
         [DebuggerStepThrough]
-        public static void Failure(string message, string applicationCategory, 
+        public static void FAILURE(string message, string applicationCategory, 
         int EventId, Dictionary<string, string> props)
         {
             MethodBase method = new StackFrame(1).GetMethod();
@@ -751,14 +751,14 @@ namespace VNC
         #region Log Error Methods
 
         [DebuggerStepThrough]
-        public static void Error(Exception ex, string applicationCategory)
+        public static void ERROR(Exception ex, string applicationCategory)
         {
             MethodBase method = new StackFrame(1).GetMethod();
             InternalWrite(ex.Message + ex.StackTrace, TraceEventType.Error, applicationCategory, LoggingPriority.Error, method.ReflectedType.Name, method.Name, Assembly.GetCallingAssembly().GetName().Name, true);
         }
 
         [DebuggerStepThrough]
-        public static void Error(Exception ex, string applicationCategory, 
+        public static void ERROR(Exception ex, string applicationCategory, 
                                             Dictionary<string, string> props)
         {
             MethodBase method = new StackFrame(1).GetMethod();
@@ -768,7 +768,7 @@ namespace VNC
         }
 
         [DebuggerStepThrough]
-        public static void Error(string message, string applicationCategory)
+        public static void ERROR(string message, string applicationCategory)
         {
             MethodBase method = new StackFrame(1).GetMethod();
             InternalWrite(message, TraceEventType.Error, applicationCategory, LoggingPriority.Error,
@@ -776,7 +776,7 @@ namespace VNC
         }
 
         [DebuggerStepThrough]
-        public static void Error(Exception ex, string applicationCategory, 
+        public static void ERROR(Exception ex, string applicationCategory, 
                                             int EventId)
         {
             MethodBase method = new StackFrame(1).GetMethod();
@@ -786,7 +786,7 @@ namespace VNC
         }
 
         [DebuggerStepThrough]
-        public static void Error(string message, string applicationCategory, bool showStack)
+        public static void ERROR(string message, string applicationCategory, bool showStack)
         {
             MethodBase method = new StackFrame(1).GetMethod();
             InternalWrite(message, TraceEventType.Error, applicationCategory, LoggingPriority.Error,
@@ -794,7 +794,7 @@ namespace VNC
         }
 
         [DebuggerStepThrough]
-        public static void Error(string message, string applicationCategory, 
+        public static void ERROR(string message, string applicationCategory, 
                                             int EventId)
         {
             MethodBase method = new StackFrame(1).GetMethod();
@@ -804,7 +804,7 @@ namespace VNC
         }
 
         [DebuggerStepThrough]
-        public static void Error(string message, string applicationCategory, 
+        public static void ERROR(string message, string applicationCategory, 
                                             Dictionary<string, string> props)
         {
             MethodBase method = new StackFrame(1).GetMethod();
@@ -814,7 +814,7 @@ namespace VNC
         }
 
         [DebuggerStepThrough]
-        public static void Error(Exception ex, string applicationCategory, 
+        public static void ERROR(Exception ex, string applicationCategory, 
                                             int EventId, Dictionary<string, string> props)
         {
             MethodBase method = new StackFrame(1).GetMethod();
@@ -824,7 +824,7 @@ namespace VNC
         }
 
         [DebuggerStepThrough]
-        public static void Error(string message, string applicationCategory, bool showStack, 
+        public static void ERROR(string message, string applicationCategory, bool showStack, 
                                             Dictionary<string, string> props)
         {
             MethodBase method = new StackFrame(1).GetMethod();
@@ -834,7 +834,7 @@ namespace VNC
         }
 
         [DebuggerStepThrough]
-        public static void Error(string message, string applicationCategory, 
+        public static void ERROR(string message, string applicationCategory, 
         int EventId, Dictionary<string, string> props)
         {
             MethodBase method = new StackFrame(1).GetMethod();
@@ -848,14 +848,14 @@ namespace VNC
         #region Log Warning Methods
 
         [DebuggerStepThrough]
-        public static void Warning(Exception ex, string applicationCategory)
+        public static void WARNING(Exception ex, string applicationCategory)
         {
             MethodBase method = new StackFrame(1).GetMethod();
             InternalWrite(ex.Message + ex.StackTrace, TraceEventType.Warning, applicationCategory, LoggingPriority.Warning, method.ReflectedType.Name, method.Name, Assembly.GetCallingAssembly().GetName().Name, true);
         }
 
         [DebuggerStepThrough]
-        public static void Warning(Exception ex, string applicationCategory, 
+        public static void WARNING(Exception ex, string applicationCategory, 
                                             Dictionary<string, string> props)
         {
             MethodBase method = new StackFrame(1).GetMethod();
@@ -865,7 +865,7 @@ namespace VNC
         }
 
         [DebuggerStepThrough]
-        public static void Warning(string message, string applicationCategory)
+        public static void WARNING(string message, string applicationCategory)
         {
             MethodBase method = new StackFrame(1).GetMethod();
             InternalWrite(message, TraceEventType.Warning, applicationCategory, LoggingPriority.Warning,
@@ -873,7 +873,7 @@ namespace VNC
         }
 
         [DebuggerStepThrough]
-        public static void Warning(Exception ex, string applicationCategory, 
+        public static void WARNING(Exception ex, string applicationCategory, 
                                             int EventId)
         {
             MethodBase method = new StackFrame(1).GetMethod();
@@ -883,7 +883,7 @@ namespace VNC
         }
 
         [DebuggerStepThrough]
-        public static void Warning(string message, string applicationCategory, bool showStack)
+        public static void WARNING(string message, string applicationCategory, bool showStack)
         {
             MethodBase method = new StackFrame(1).GetMethod();
             InternalWrite(message, TraceEventType.Warning, applicationCategory, LoggingPriority.Warning,
@@ -891,7 +891,7 @@ namespace VNC
         }
 
         [DebuggerStepThrough]
-        public static void Warning(string message, string applicationCategory, 
+        public static void WARNING(string message, string applicationCategory, 
                                             int EventId)
         {
             MethodBase method = new StackFrame(1).GetMethod();
@@ -901,7 +901,7 @@ namespace VNC
         }
 
         [DebuggerStepThrough]
-        public static void Warning(string message, string applicationCategory, 
+        public static void WARNING(string message, string applicationCategory, 
                                             Dictionary<string, string> props)
         {
             MethodBase method = new StackFrame(1).GetMethod();
@@ -911,7 +911,7 @@ namespace VNC
         }
 
         [DebuggerStepThrough]
-        public static void Warning(Exception ex, string applicationCategory, 
+        public static void WARNING(Exception ex, string applicationCategory, 
                                             int EventId, Dictionary<string, string> props)
         {
             MethodBase method = new StackFrame(1).GetMethod();
@@ -921,7 +921,7 @@ namespace VNC
         }
 
         [DebuggerStepThrough]
-        public static void Warning(string message, string applicationCategory, bool showStack, 
+        public static void WARNING(string message, string applicationCategory, bool showStack, 
                                             Dictionary<string, string> props)
         {
             MethodBase method = new StackFrame(1).GetMethod();
@@ -931,7 +931,7 @@ namespace VNC
         }
 
         [DebuggerStepThrough]
-        public static void Warning(string message, string applicationCategory, 
+        public static void WARNING(string message, string applicationCategory, 
         int EventId, Dictionary<string, string> props)
         {
             MethodBase method = new StackFrame(1).GetMethod();

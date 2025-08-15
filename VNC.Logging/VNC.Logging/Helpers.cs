@@ -24,8 +24,8 @@ namespace VNC.Logging
                 }
                 catch (Exception ex)
                 {
-                    Log.Error(string.Format("Exception: {0}", additionalStartMessage), applicationCategory);
-                    Log.Error(ex, applicationCategory);
+                    Log.ERROR(string.Format("Exception: {0}", additionalStartMessage), applicationCategory);
+                    Log.ERROR(ex, applicationCategory);
                 }
             }
 
@@ -40,8 +40,8 @@ namespace VNC.Logging
                 }
                 catch (Exception ex)
                 {
-                    Log.Error(string.Format("Exception: {0}", additionalEndMessage), applicationCategory);
-                    Log.Error(ex, applicationCategory);
+                    Log.ERROR(string.Format("Exception: {0}", additionalEndMessage), applicationCategory);
+                    Log.ERROR(ex, applicationCategory);
                 }
             }
 
@@ -63,8 +63,8 @@ namespace VNC.Logging
                 }
                 catch (Exception ex)
                 {
-                    Log.Error(string.Format("Exception: {0}", additionalStartMessage), applicationCategory);
-                    Log.Error(ex, applicationCategory);
+                    Log.ERROR(string.Format("Exception: {0}", additionalStartMessage), applicationCategory);
+                    Log.ERROR(ex, applicationCategory);
                 }
             }
 
@@ -79,8 +79,8 @@ namespace VNC.Logging
                 }
                 catch (Exception ex)
                 {
-                    Log.Error(string.Format("Exception: {0}", additionalEndMessage), applicationCategory);
-                    Log.Error(ex, applicationCategory);
+                    Log.ERROR(string.Format("Exception: {0}", additionalEndMessage), applicationCategory);
+                    Log.ERROR(ex, applicationCategory);
                 }
             }
         }

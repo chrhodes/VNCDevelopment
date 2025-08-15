@@ -5,7 +5,6 @@ using Prism.Events;
 using Prism.Services.Dialogs;
 
 using VNC;
-using VNC.Core.Events;
 using VNC.Core.Mvvm;
 
 namespace DemoAndTestLogging.Presentation.ViewModels

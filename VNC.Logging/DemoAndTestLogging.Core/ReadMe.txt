@@ -1,0 +1,4 @@
+﻿DemoAndTestLogging\Core\
+DemoAndTestLogging\Core\Events\
+
+Notes for using this template

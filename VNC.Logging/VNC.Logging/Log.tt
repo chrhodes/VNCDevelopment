@@ -636,14 +636,14 @@ foreach (string methodName in named_methods)
         #region Log <#= methodName #> Methods
 
         [DebuggerStepThrough]
-        public static void <#= methodName #>(Exception ex, string applicationCategory)
+        public static void <#= methodName.ToUpper() #>(Exception ex, string applicationCategory)
         {
             MethodBase method = new StackFrame(1).GetMethod();
             InternalWrite(ex.Message + ex.StackTrace, TraceEventType.<#= traceEventType #>, applicationCategory, LoggingPriority.<#= methodName #>, method.ReflectedType.Name, method.Name, Assembly.GetCallingAssembly().GetName().Name, true);
         }
 
         [DebuggerStepThrough]
-        public static void <#= methodName #>(Exception ex, string applicationCategory, 
+        public static void <#= methodName.ToUpper() #>(Exception ex, string applicationCategory, 
                                             Dictionary<string, string> props)
         {
             MethodBase method = new StackFrame(1).GetMethod();
@@ -653,7 +653,7 @@ foreach (string methodName in named_methods)
         }
 
         [DebuggerStepThrough]
-        public static void <#= methodName #>(string message, string applicationCategory)
+        public static void <#= methodName.ToUpper() #>(string message, string applicationCategory)
         {
             MethodBase method = new StackFrame(1).GetMethod();
             InternalWrite(message, TraceEventType.<#= traceEventType #>, applicationCategory, LoggingPriority.<#= methodName #>,
@@ -661,7 +661,7 @@ foreach (string methodName in named_methods)
         }
 
         [DebuggerStepThrough]
-        public static void <#= methodName #>(Exception ex, string applicationCategory, 
+        public static void <#= methodName.ToUpper() #>(Exception ex, string applicationCategory, 
                                             int EventId)
         {
             MethodBase method = new StackFrame(1).GetMethod();
@@ -671,7 +671,7 @@ foreach (string methodName in named_methods)
         }
 
         [DebuggerStepThrough]
-        public static void <#= methodName #>(string message, string applicationCategory, bool showStack)
+        public static void <#= methodName.ToUpper() #>(string message, string applicationCategory, bool showStack)
         {
             MethodBase method = new StackFrame(1).GetMethod();
             InternalWrite(message, TraceEventType.<#= traceEventType #>, applicationCategory, LoggingPriority.<#= methodName #>,
@@ -679,7 +679,7 @@ foreach (string methodName in named_methods)
         }
 
         [DebuggerStepThrough]
-        public static void <#= methodName #>(string message, string applicationCategory, 
+        public static void <#= methodName.ToUpper() #>(string message, string applicationCategory, 
                                             int EventId)
         {
             MethodBase method = new StackFrame(1).GetMethod();
@@ -689,7 +689,7 @@ foreach (string methodName in named_methods)
         }
 
         [DebuggerStepThrough]
-        public static void <#= methodName #>(string message, string applicationCategory, 
+        public static void <#= methodName.ToUpper() #>(string message, string applicationCategory, 
                                             Dictionary<string, string> props)
         {
             MethodBase method = new StackFrame(1).GetMethod();
@@ -699,7 +699,7 @@ foreach (string methodName in named_methods)
         }
 
         [DebuggerStepThrough]
-        public static void <#= methodName #>(Exception ex, string applicationCategory, 
+        public static void <#= methodName.ToUpper() #>(Exception ex, string applicationCategory, 
                                             int EventId, Dictionary<string, string> props)
         {
             MethodBase method = new StackFrame(1).GetMethod();
@@ -709,7 +709,7 @@ foreach (string methodName in named_methods)
         }
 
         [DebuggerStepThrough]
-        public static void <#= methodName #>(string message, string applicationCategory, bool showStack, 
+        public static void <#= methodName.ToUpper() #>(string message, string applicationCategory, bool showStack, 
                                             Dictionary<string, string> props)
         {
             MethodBase method = new StackFrame(1).GetMethod();
@@ -719,7 +719,7 @@ foreach (string methodName in named_methods)
         }
 
         [DebuggerStepThrough]
-        public static void <#= methodName #>(string message, string applicationCategory, 
+        public static void <#= methodName.ToUpper() #>(string message, string applicationCategory, 
         int EventId, Dictionary<string, string> props)
         {
             MethodBase method = new StackFrame(1).GetMethod();

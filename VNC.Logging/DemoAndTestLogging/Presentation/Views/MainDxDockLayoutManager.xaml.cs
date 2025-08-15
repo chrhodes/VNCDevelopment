@@ -66,7 +66,7 @@ namespace DemoAndTestLogging.Presentation.Views
 
             // Store information about the View, DataContext, and ViewModel 
             // for the DeveloperInfo control. Useful for debugging binding issues
-            // Set the DataConext to us.
+            // Set the DataContext to use.
 
             ViewType = this.GetType().ToString().Split('.').Last();
             ViewModelType = ViewModel?.GetType().ToString().Split('.').Last();
@@ -75,7 +75,7 @@ namespace DemoAndTestLogging.Presentation.Views
 
             // TODO(crhodes)
             // Put things here that initialize the View
-            // Hook eventhandlers, etc.
+            // Hook event handlers, etc.
 
 
             // Establish any additional DataContext(s) to things held in this View  

@@ -18,7 +18,7 @@ namespace DemoAndTestLogging
         public static IContainerProvider Container;
 
         public static Shell? CurrentShell;
-        public static RibbonShell? CurrentRibbonShell;
+        //public static RibbonShell? CurrentRibbonShell;
 
         public static event EventHandler AutoHideGroupSpeedChanged;
 

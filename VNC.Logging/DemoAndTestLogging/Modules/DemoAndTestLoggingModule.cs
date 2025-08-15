@@ -4,8 +4,6 @@ using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Regions;
 
-using DemoAndTestLogging.Core;
-
 #if VNCEF
 using DemoAndTestLogging.DomainServices;
 #endif
@@ -18,6 +16,7 @@ using Unity;
 using VNC;
 using VNC.WPF.Presentation.Views;
 using VNC.WPF.Presentation.ViewModels;
+using DemoAndTestLogging.Core;
 
 namespace DemoAndTestLogging
 {
@@ -54,18 +53,18 @@ namespace DemoAndTestLogging
 
             // If you are using the Ribbon Shell and the RibbonRegion
 
-            //containerRegistry.RegisterSingleton<IRibbonViewModel, RibbonViewModel>();
-            //containerRegistry.RegisterSingleton<IRibbon, Ribbon>();
+            containerRegistry.RegisterSingleton<IRibbonViewModel, RibbonViewModel>();
+            containerRegistry.RegisterSingleton<IRibbon, Ribbon>();
 
             // If you are using the Shell and the RibbonRegion
 
-            containerRegistry.RegisterSingleton<IRibbonViewModel, ShellRibbonViewModel>();
-            containerRegistry.RegisterSingleton<IRibbon, ShellRibbon>();
+            //containerRegistry.RegisterSingleton<IRibbonViewModel, ShellRibbonViewModel>();
+            //containerRegistry.RegisterSingleton<IRibbon, ShellRibbon>();
 
             // Pick one of these for the MainRegion
 
             // TODO(crhodes)
-            // Learn how to dynamically switch this while appliion running
+            // Learn how to dynamically switch this while application running
 
             //containerRegistry.Register<IMain, Main>();
             containerRegistry.Register<IMain, MainDxLayoutControl>();
@@ -256,11 +255,11 @@ namespace DemoAndTestLogging
             containerRegistry.RegisterForNavigation<StepD, StepABCDEViewModel>("uistepd");
             containerRegistry.RegisterForNavigation<StepE, StepABCDEViewModel>("uistepe");
 
-            containerRegistry.RegisterForNavigation<DetailMVA, DetailMVViewModel>("uicatdetaila");
-            containerRegistry.RegisterForNavigation<DetailMVB, DetailMVViewModel>("uicatdetailb");
-            containerRegistry.RegisterForNavigation<DetailMVC, DetailMVViewModel>("uicatdetailc");
-            containerRegistry.RegisterForNavigation<DetailMVD, DetailMVViewModel>("uicatdetaild");
-            containerRegistry.RegisterForNavigation<DetailMVE, DetailMVViewModel>("uicatdetaile");
+            //containerRegistry.RegisterForNavigation<DetailMVA, DetailMVViewModel>("uicatdetaila");
+            //containerRegistry.RegisterForNavigation<DetailMVB, DetailMVViewModel>("uicatdetailb");
+            //containerRegistry.RegisterForNavigation<DetailMVC, DetailMVViewModel>("uicatdetailc");
+            //containerRegistry.RegisterForNavigation<DetailMVD, DetailMVViewModel>("uicatdetaild");
+            //containerRegistry.RegisterForNavigation<DetailMVE, DetailMVViewModel>("uicatdetaile");
 
             //containerRegistry.RegisterSingleton<ICatDetailMV, CatDetailMVA>();
 

@@ -41,7 +41,7 @@ namespace VNC.WPF.Presentation.Dx.Views
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
-                Log.Error(ex, Common.LOG_CATEGORY);
+                Log.ERROR(ex, Common.LOG_CATEGORY);
             }          
 
 #if LOGGING
@@ -73,7 +73,7 @@ namespace VNC.WPF.Presentation.Dx.Views
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
-                Log.Error(ex, Common.LOG_CATEGORY);
+                Log.ERROR(ex, Common.LOG_CATEGORY);
             }
 
 #if LOGGING
@@ -105,7 +105,7 @@ namespace VNC.WPF.Presentation.Dx.Views
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
-                Log.Error(ex, Common.LOG_CATEGORY);
+                Log.ERROR(ex, Common.LOG_CATEGORY);
             }
 
 #if LOGGING
@@ -253,7 +253,7 @@ namespace VNC.WPF.Presentation.Dx.Views
             catch (Exception ex)
             {
                 MessageBox.Show("Incorrect Tag Name.  Cannot load type:{0}", userControlName);
-                Log.Error(ex, Common.LOG_CATEGORY);
+                Log.ERROR(ex, Common.LOG_CATEGORY);
             }
 
 #if LOGGING

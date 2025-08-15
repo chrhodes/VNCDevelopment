@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Windows.Input;
 
-using Prism.Commands;
 using Prism.Events;
 using Prism.Services.Dialogs;
 
