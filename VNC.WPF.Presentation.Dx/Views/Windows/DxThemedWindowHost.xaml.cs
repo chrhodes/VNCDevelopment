@@ -27,6 +27,30 @@ namespace VNC.WPF.Presentation.Dx.Views
         public readonly IEventAggregator EventAggregator;
         public readonly IDialogService DialogService;
 
+        public DxThemedWindowHost()
+        {
+#if LOGGING
+            Int64 startTicks = 0;
+            if (Common.VNCCoreLogging.Constructor) startTicks = Log.CONSTRUCTOR("Enter", Common.LOG_CATEGORY);
+#endif
+            //EventAggregator = eventAggregator;
+            //DialogService = dialogService;
+
+            try
+            {
+                InitializeComponent();
+                InitializeWindow();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+                Log.ERROR(ex, Common.LOG_CATEGORY);
+            }
+#if LOGGING
+            if (Common.VNCCoreLogging.Constructor) Log.CONSTRUCTOR("Exit", Common.LOG_CATEGORY, startTicks);
+#endif
+        }
+
         public DxThemedWindowHost(
             IEventAggregator eventAggregator)
         {

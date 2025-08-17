@@ -9,9 +9,9 @@
         <SignAssembly>true</SignAssembly>
         <AssemblyOriginatorKeyFile>VNC.snk</AssemblyOriginatorKeyFile>
         <VersionPrefix>3.2.0</VersionPrefix>
-        <VersionSuffix>Development</VersionSuffix>
+        <VersionSuffix>Release</VersionSuffix>
         <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
-        <FileVersion>2025.08.15</FileVersion>
+        <FileVersion>2025.08.17</FileVersion>
         <Description>Base class for a variety of needs</Description>
         <LangVersion>12.0</LangVersion>
         <Nullable>enable</Nullable>
@@ -48,7 +48,6 @@
     <ItemGroup>
         <PackageReference Include="CommonServiceLocator" Version="2.0.7" />
         <PackageReference Include="Microsoft.DependencyValidation.Analyzers" Version="0.11.0" />
-        <!--<PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.7" />-->
         <PackageReference Include="Prism.Core" Version="8.1.97" />
         <PackageReference Include="Prism.Wpf" Version="8.1.97" />
         <PackageReference Include="System.Text.Json" Version="8.0.5" />
