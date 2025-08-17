@@ -8,6 +8,7 @@ using Prism.Commands;
 using Prism.Events;
 using Prism.Services.Dialogs;
 
+using VNC.Core;
 using VNC.Core.Events;
 using VNC.Core.Mvvm;
 using VNC.Core.Presentation;
@@ -20,6 +21,31 @@ namespace VNC.WPF.Presentation.Views
 
         public readonly IEventAggregator EventAggregator;
         public readonly IDialogService DialogService;
+
+        public WindowHost()
+        {
+#if LOGGING
+            Int64 startTicks = 0;
+            if (Common.VNCCoreLogging.Constructor) startTicks = Log.CONSTRUCTOR("Enter", Common.LOG_CATEGORY);
+#endif
+            //EventAggregator = eventAggregator;
+            //DialogService = dialogService;
+
+            try
+            {
+                InitializeComponent();
+                InitializeWindow();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+                Log.ERROR(ex, Common.LOG_CATEGORY);
+            }
+
+#if LOGGING
+            if (Common.VNCCoreLogging.Constructor) Log.CONSTRUCTOR("Exit", Common.LOG_CATEGORY, startTicks);
+#endif
+        }
 
         public WindowHost(
             IEventAggregator eventAggregator)
@@ -179,6 +205,18 @@ namespace VNC.WPF.Presentation.Views
             }
         }
 
+        public Information InformationApplication { 
+            get; 
+            set; }
+        public Information InformationApplicationCore { 
+            get; 
+            set; }
+
+        //TODO(crhodes)
+        // Add additional Information InformationXXX for other assemblies
+
+        public Information InformationVNCCore { get; set; }
+
         #endregion
 
         #region Event Handlers
@@ -231,6 +269,8 @@ namespace VNC.WPF.Presentation.Views
         #endregion
 
         #region Commands (none)
+
+
 
         #endregion
 

@@ -53,7 +53,7 @@ namespace VNC.WPF.Presentation.Views
 
             // NOTE(crhodes)
             // Put things here that initialize the View
-            // Hook eventhandlers, etc.
+            // Hook event handlers, etc.
 
             ViewType = this.GetType().ToString().Split('.').Last();
             ViewDataContextType = this.DataContext?.GetType().ToString().Split('.').Last();
@@ -92,6 +92,7 @@ namespace VNC.WPF.Presentation.Views
         #region Commands (none)
         
          
+
         #endregion
 
         #region Public Methods (none)
@@ -109,26 +110,8 @@ namespace VNC.WPF.Presentation.Views
         #region Private Methods (none)
 
 
+
         #endregion   
         
-        #region IInstanceCount
-
-        //private static Int32 _instanceCountV;
-
-        //public Int32 InstanceCountV
-        //{
-        //    get => _instanceCountV;
-        //    set => _instanceCountV = value;
-        //}
-
-        //private static Int32 _instanceCountVP;
-
-        //public Int32 InstanceCountVP
-        //{
-        //    get => _instanceCountVP;
-        //    set => _instanceCountVP = value;
-        //}
-
-        #endregion
     }
 }
