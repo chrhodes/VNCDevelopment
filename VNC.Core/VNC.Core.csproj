@@ -100,11 +100,7 @@
     </PropertyGroup>
 
     <Choose>
-        <When Condition="'$(DefineConstants.Contains(VNCPROJECTREF))'">
-            <ItemGroup>
-               <ProjectReference Include="..\VNC.Logging\VNC.Logging\VNC.Logging.csproj" />
-            </ItemGroup>
-        </When>
+        <When Condition="'$(DefineConstants.Contains(VNCPROJECTREF))'" />
         <When Condition="'!$(DefineConstants.Contains(VNCPROJECTREF))'">
             <ItemGroup>
                 <PackageReference Include="VNC.Logging" Version="3.2.0" />
