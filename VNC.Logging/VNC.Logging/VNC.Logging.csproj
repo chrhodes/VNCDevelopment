@@ -3,13 +3,11 @@
     <PropertyGroup>
         <TargetFrameworks>net8.0;net481</TargetFrameworks>
         <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
-        <AssemblyName>VNC.Logging</AssemblyName>
-        <RootNamespace>VNC.Logging</RootNamespace>
         <SignAssembly>true</SignAssembly>
         <AssemblyOriginatorKeyFile>VNC.snk</AssemblyOriginatorKeyFile>        
         <VersionPrefix>3.2.0</VersionPrefix>
         <VersionSuffix>Release</VersionSuffix>
-        <FileVersion>2025.08.17</FileVersion>    
+        <FileVersion>2025.08.18</FileVersion>    
         <Description>Logging Wrapper on top of EnterpriseLibrary.Logging</Description>
         <LangVersion>12.0</LangVersion>
         <Nullable>enable</Nullable>
@@ -76,7 +74,7 @@
             <Pack>True</Pack>
             <PackagePath></PackagePath>
         </None>
-        <None Include="..\..\README.md">
+        <None Include="README.md">
             <Pack>True</Pack>
             <PackagePath></PackagePath>
         </None>
@@ -90,8 +88,44 @@
       <PackageReference Include="EnterpriseLibrary.Logging.NetCore" Version="6.3.2" />
     </ItemGroup>
 
+    <PropertyGroup Condition="'$(Configuration)'=='Debug'">
+        <!-- Uncoment next line to switch to ProjectReference(s) -->
+        <!-- <DefineConstants>$(DefineConstants);VNCPROJECTREF</DefineConstants> -->
+    </PropertyGroup>
+
+    <Choose>
+        <When Condition="'$(DefineConstants.Contains(VNCPROJECTREF))'">
+            <ItemGroup>
+            </ItemGroup>
+        </When>
+        <When Condition="'!$(DefineConstants.Contains(VNCPROJECTREF))'">
+            <ItemGroup>
+            </ItemGroup>
+        </When>
+    </Choose>
+
+    <!--Keep a copy as Visual Studio will remove things when doing Release builds.-->
+
+    <!--<Choose>
+        <When Condition="'$(DefineConstants.Contains(VNCPROJECTREF))'">
+            <ItemGroup>
+            </ItemGroup>
+        </When>
+        <When Condition="'!$(DefineConstants.Contains(VNCPROJECTREF))'">
+            <ItemGroup>
+            </ItemGroup>
+        </When>
+    </Choose>--> 
+
+    <!--This updates the file version to the current date.-->
+
     <Target Name="PreBuild" BeforeTargets="PreBuildEvent" Condition="'$(Configuration)'=='Release'">
         <Exec Command="powershell.exe -File &quot;$(ProjectDir)\Execute-PreBuild.ps1&quot; -Verbose $(ProjectFileName)" />
     </Target>
+
+    <!--<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+        <Exec Command="powershell.exe -File &quot;$(ProjectDir)\Execute-PostBuild.ps1&quot; -Verbose $(ProjectFileName)" />
+    </Target>-->
+
 
 </Project>

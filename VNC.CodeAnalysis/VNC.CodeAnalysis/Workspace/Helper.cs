@@ -18,7 +18,7 @@ namespace VNC.CodeAnalysis.Workspace
 
         public static List<String> GetSourceFilesToProcessFromConfigFile(string configFileFullPath, string branchName, string solutionName, string projectName)
         {
-            long startTicks = Log.Trace(string.Format("configFileFullPath:({0})", configFileFullPath), Common.LOG_CATEGORY);
+            long startTicks = Log.TRACE(string.Format("configFileFullPath:({0})", configFileFullPath), Common.LOG_CATEGORY);
 
             List<String> filesToProcess = null;
             string sourcePath = string.Empty;
@@ -102,7 +102,7 @@ namespace VNC.CodeAnalysis.Workspace
 
         public static List<String> GetSourceFilesToProcessFromVSProject(string projectFullPath)
         {
-            long startTicks = Log.Trace(string.Format("projectFullPath:({0})", projectFullPath), Common.LOG_CATEGORY);
+            long startTicks = Log.TRACE(string.Format("projectFullPath:({0})", projectFullPath), Common.LOG_CATEGORY);
 
             List<String> filesToProcess = new List<string>();
 
@@ -151,17 +151,17 @@ namespace VNC.CodeAnalysis.Workspace
             }
             catch (Exception ex)
             {
-                Log.Error(ex, Common.LOG_CATEGORY);
+                Log.ERROR(ex, Common.LOG_CATEGORY);
             }
 
-            Log.Trace(string.Format("Exit: Count({0})", filesToProcess.Count), Common.LOG_CATEGORY, startTicks);
+            Log.TRACE(string.Format("Exit: Count({0})", filesToProcess.Count), Common.LOG_CATEGORY, startTicks);
 
             return filesToProcess;
         }
 
         public static void AddSourceFilesFromVBProject(List<string> filesToProcess, Microsoft.CodeAnalysis.Project project)
         {
-            long startTicks = Log.Trace1(string.Format("Enter: project.Path:({0})", project.FilePath), Common.LOG_CATEGORY);
+            long startTicks = Log.TRACE1(string.Format("Enter: project.Path:({0})", project.FilePath), Common.LOG_CATEGORY);
 
             // This did not return files until Microsoft.Build.Tasks.Core was added
             // https://github.com/dotnet/roslyn/issues/25370
@@ -195,12 +195,12 @@ namespace VNC.CodeAnalysis.Workspace
                 }
             }
 
-            Log.Trace(string.Format("Exit: Count({0})", filesToProcess.Count), Common.LOG_CATEGORY, startTicks);
+            Log.TRACE(string.Format("Exit: Count({0})", filesToProcess.Count), Common.LOG_CATEGORY, startTicks);
         }
 
         public static void AddSourceFilesFromCSProject(List<string> filesToProcess, Microsoft.CodeAnalysis.Project project)
         {
-            Log.Trace1(string.Format("Enter: project.Path:({0})", project.FilePath), Common.LOG_CATEGORY);
+            Log.TRACE1(string.Format("Enter: project.Path:({0})", project.FilePath), Common.LOG_CATEGORY);
 
             var foo = project.GetSourceGeneratedDocumentsAsync().Result;
             foreach (var document in project.Documents)
@@ -227,7 +227,7 @@ namespace VNC.CodeAnalysis.Workspace
                 }
             }
 
-            Log.Trace(string.Format("Exit: Count({0})", filesToProcess.Count), Common.LOG_CATEGORY);
+            Log.TRACE1(string.Format("Exit: Count({0})", filesToProcess.Count), Common.LOG_CATEGORY);
         }
     }
 }

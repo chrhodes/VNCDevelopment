@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetFrameworks>net6.0</TargetFrameworks>
@@ -7,21 +7,35 @@
         <RootNamespace>VNC.Logging.TraceListeners</RootNamespace>
         <SignAssembly>true</SignAssembly>
         <AssemblyOriginatorKeyFile>VNC.snk</AssemblyOriginatorKeyFile>
-        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <PackageVersion>1.0.0</PackageVersion>
-        <PackageLicenseFile>LICENSE</PackageLicenseFile>
-        <PackageReadmeFile>README.md</PackageReadmeFile>        
-        <PackageProjectUrl>https://github.com/chrhodes/vnc</PackageProjectUrl>
-        <RepositoryUrl>https://github.com/chrhodes/vnc</RepositoryUrl>
-        <RepositoryType>Git</RepositoryType>
-        <PackageTags>logging</PackageTags>
-        <PackageIcon>VNC.png</PackageIcon>
-        <Authors>Christopher Rhodes</Authors>
-        <Copyright>Copyright © VNC 2010-2023</Copyright>
-        <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>        
+        <VersionPrefix>3.2.0</VersionPrefix>
+        <VersionSuffix>Release</VersionSuffix>
+        <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
+        <FileVersion>2025.08.18</FileVersion> 
         <Description>SignalRCore TraceListener for EnterpriseLibrary Logging</Description>
+        <LangVersion>12.0</LangVersion>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>disable</ImplicitUsings>
     </PropertyGroup>
 
+    <!-- This is for NuGet Packages -->
+
+    <PropertyGroup>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <PackageVersion>3.2.0</PackageVersion>
+        <PackageLicenseFile>LICENSE</PackageLicenseFile>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageProjectUrl>https://github.com/chrhodes/VNCDevelopment</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/chrhodes/VNCDevelopment</RepositoryUrl>
+        <RepositoryType>Git</RepositoryType>
+        <PackageTags></PackageTags>
+        <PackageIcon>VNC.png</PackageIcon>
+        <Authors>Christopher Rhodes</Authors>
+        <Company>VNC</Company>
+        <Copyright>Copyright © VNC 2018-2025</Copyright>
+        <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+        <SatelliteResourceLanguages>en-US</SatelliteResourceLanguages>
+    </PropertyGroup>
+    
     <ItemGroup>
         <PackageReference Include="EnterpriseLibrary.Logging" Version="6.0.1304" />
         <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="7.0.10" />
@@ -32,7 +46,7 @@
             <Pack>True</Pack>
             <PackagePath></PackagePath>
         </None>
-        <None Include="..\..\..\README.md">
+        <None Include="README.md">
             <Pack>True</Pack>
             <PackagePath></PackagePath>
         </None>
@@ -41,4 +55,20 @@
             <PackagePath></PackagePath>
         </None>
     </ItemGroup>
+
+    <PropertyGroup Condition="'$(Configuration)'=='Debug'">
+        <!-- Uncoment next line to switch to ProjectReference(s) -->
+        <!-- <DefineConstants>$(DefineConstants);VNCPROJECTREF</DefineConstants> -->
+    </PropertyGroup>
+
+    <!--This updates the file version to the current date.-->
+
+    <Target Name="PreBuild" BeforeTargets="PreBuildEvent" Condition="'$(Configuration)'=='Release'">
+        <Exec Command="powershell.exe -File &quot;$(ProjectDir)\Execute-PreBuild.ps1&quot; -Verbose $(ProjectFileName)" />
+    </Target>
+
+    <!--<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+        <Exec Command="powershell.exe -File &quot;$(ProjectDir)\Execute-PostBuild.ps1&quot; -Verbose $(ProjectFileName)" />
+    </Target>-->
+
 </Project>
