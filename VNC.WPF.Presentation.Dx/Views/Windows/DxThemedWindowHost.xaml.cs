@@ -27,6 +27,9 @@ namespace VNC.WPF.Presentation.Dx.Views
         public readonly IEventAggregator EventAggregator;
         public readonly IDialogService DialogService;
 
+        /// <summary>
+        /// No Prism EventAggregator use is permitted.
+        /// </summary>
         public DxThemedWindowHost()
         {
 #if LOGGING
@@ -242,6 +245,7 @@ namespace VNC.WPF.Presentation.Dx.Views
             if (Common.VNCCoreLogging.EventHandler) Log.EVENT_HANDLER("Exit", Common.LOG_CATEGORY, startTicks);
 #endif
         }
+
         private void thisControl_SizeChanged(object sender, SizeChangedEventArgs e)
         {
 #if LOGGING
@@ -336,7 +340,7 @@ namespace VNC.WPF.Presentation.Dx.Views
             if (Common.VNCCoreLogging.Presentation) startTicks = Log.PRESENTATION("Enter", Common.LOG_CATEGORY);
 #endif
 
-            if (!(userControl is null))
+            if (userControl is not null)
             {
                 LoadUserControl(userControl);
             }
@@ -359,7 +363,7 @@ namespace VNC.WPF.Presentation.Dx.Views
             if (Common.VNCCoreLogging.Presentation) startTicks = Log.PRESENTATION("Enter", Common.LOG_CATEGORY);
 #endif
 
-            if (!(userControlName is null))
+            if (userControlName is not null)
             {
                 LoadUserControl(userControlName);
             }
@@ -382,7 +386,7 @@ namespace VNC.WPF.Presentation.Dx.Views
             if (Common.VNCCoreLogging.Presentation) startTicks = Log.PRESENTATION("Enter", Common.LOG_CATEGORY);
 #endif
 
-            if (!(viewModel.View is null))
+            if (viewModel.View is not null)
             {
                 LoadUserControl((UserControl)viewModel.View);
             }
@@ -472,8 +476,6 @@ namespace VNC.WPF.Presentation.Dx.Views
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-
-
             //#if LOGGING
             //Int64 startTicks = 0;
             //            if (LogOnPropertyChanged)
@@ -484,6 +486,7 @@ namespace VNC.WPF.Presentation.Dx.Views
             // This is the new CompilerServices attribute!
 
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+
             //#if LOGGING
             //            if (LogOnPropertyChanged)
             //            {

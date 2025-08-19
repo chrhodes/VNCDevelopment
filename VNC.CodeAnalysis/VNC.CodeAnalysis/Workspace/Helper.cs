@@ -7,6 +7,7 @@ using System.Xml.Linq;
 
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.MSBuild;
+//using Microsoft.CodeAnalysis.MSBuild;
 
 namespace VNC.CodeAnalysis.Workspace
 {

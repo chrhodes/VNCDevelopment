@@ -19,9 +19,12 @@ namespace VNC.WPF.Presentation.Dx.Views
     {
         #region Constructors, Initialization, and Load
 
-        public readonly IEventAggregator EventAggregator;
-        public readonly IDialogService DialogService;
+        public readonly IEventAggregator? EventAggregator;
+        public readonly IDialogService? DialogService;
 
+        /// <summary>
+        /// No Prism EventAggregator or DialogService is supported.
+        /// </summary>
         public DxWindowHost()
         {
 #if LOGGING
@@ -85,6 +88,7 @@ namespace VNC.WPF.Presentation.Dx.Views
             if (Common.VNCCoreLogging.Constructor) startTicks = Log.CONSTRUCTOR($"Enter {title} {userControlFullyQualifiedName}", Common.LOG_CATEGORY);
 #endif
             EventAggregator = eventAggregator;
+            //DialogService = dialogService;
 
             try
             {
@@ -144,7 +148,7 @@ namespace VNC.WPF.Presentation.Dx.Views
             this.HorizontalAlignment = HorizontalAlignment.Center;
             this.VerticalAlignment = VerticalAlignment.Center;
 
-            EventAggregator.GetEvent<DeveloperModeEvent>()
+            EventAggregator?.GetEvent<DeveloperModeEvent>()
                 .Subscribe(DeveloperMode);
         }
 
@@ -296,7 +300,7 @@ namespace VNC.WPF.Presentation.Dx.Views
             //UnhookTitleEvent(_currentControl);
             g_UserControlContainer.Children.Clear();
 
-            if (control != null)
+            if (control is not null)
             {
                 g_UserControlContainer.Children.Add(control);
 
@@ -332,7 +336,7 @@ namespace VNC.WPF.Presentation.Dx.Views
             if (Common.VNCCoreLogging.Presentation) startTicks = Log.PRESENTATION("Enter", Common.LOG_CATEGORY);
 #endif
 
-            if (!(userControl is null))
+            if (userControl is not null)
             {
                 LoadUserControl(userControl);
             }
@@ -348,14 +352,14 @@ namespace VNC.WPF.Presentation.Dx.Views
             string title,
             Int32 width, Int32 height,
             ShowWindowMode mode,
-            string userControlName = null)
+            string? userControlName = null)
         {
 #if LOGGING
             Int64 startTicks = 0;
             if (Common.VNCCoreLogging.Presentation) startTicks = Log.PRESENTATION("Enter", Common.LOG_CATEGORY);
 #endif
 
-            if (!(userControlName is null))
+            if (userControlName is not null)
             {
                 LoadUserControl(userControlName);
             }
@@ -455,6 +459,7 @@ namespace VNC.WPF.Presentation.Dx.Views
             // This is the new CompilerServices attribute!
 
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+
             //#if LOGGING
             //            if (LogOnPropertyChanged)
             //            {

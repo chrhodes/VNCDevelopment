@@ -1,10 +1,9 @@
 ﻿
-using Microsoft.CodeAnalysis.MSBuild;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-using Microsoft.Build.Locator;
+using Microsoft.CodeAnalysis.MSBuild;
 
 namespace VNC.CodeAnalysis.Workspace
 {
