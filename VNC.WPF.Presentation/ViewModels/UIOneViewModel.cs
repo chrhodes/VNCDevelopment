@@ -4,7 +4,7 @@ using VNC.Core.Mvvm;
 
 namespace VNC.WPF.Presentation.ViewModels
 {
-    public class UIOneViewModel : ViewModelBase
+    public class UIOneViewModel : ViewModelBase, IInstanceCountVM
     {
         #region Constructors, Initialization, and Load
 
@@ -18,6 +18,18 @@ namespace VNC.WPF.Presentation.ViewModels
             Message = "Hello from UIOne ViewModel";
 
             if (Common.VNCLogging.Constructor) Log.CONSTRUCTOR("Exit", Common.LOG_CATEGORY, startTicks);
+        }
+
+        #endregion
+
+        #region IInstanceCountVM
+
+        private static int _instanceCountVM;
+
+        public int InstanceCountVM
+        {
+            get => _instanceCountVM;
+            set => _instanceCountVM = value;
         }
 
         #endregion

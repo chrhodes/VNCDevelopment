@@ -4,7 +4,7 @@ using VNC.Core.Mvvm;
 
 namespace VNC.WPF.Presentation.ViewModels
 {
-    public class UIThreeViewModel : ViewModelBase
+    public class UIThreeViewModel : ViewModelBase, IInstanceCountVM
     {
         #region Constructors, Initialization, and Load
 
@@ -21,5 +21,17 @@ namespace VNC.WPF.Presentation.ViewModels
         }
 
         #endregion
+
+        #region IInstanceCountVM
+
+        private static int _instanceCountVM;
+
+        public int InstanceCountVM
+        {
+            get => _instanceCountVM;
+            set => _instanceCountVM = value;
+        }
+
+        #endregion   
     }
 }

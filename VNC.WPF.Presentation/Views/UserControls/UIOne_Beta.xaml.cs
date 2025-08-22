@@ -7,7 +7,7 @@ using VNC.WPF.Presentation.ViewModels;
 
 namespace VNC.WPF.Presentation.Views
 {
-    public partial class UIOne_Beta : ViewBase
+    public partial class UIOne_Beta : ViewBase, IInstanceCountV
     {
         public UIOne_Beta()
         {
@@ -70,5 +70,25 @@ namespace VNC.WPF.Presentation.Views
         {           
             MessageBox.Show("Zoom One");
         }
+
+        #region IInstanceCountV
+
+        private static Int32 _instanceCountV;
+
+        public Int32 InstanceCountV
+        {
+            get => _instanceCountV;
+            set => _instanceCountV = value;
+        }
+
+        private static Int32 _instanceCountVP;
+
+        public Int32 InstanceCountVP
+        {
+            get => _instanceCountVP;
+            set => _instanceCountVP = value;
+        }
+
+        #endregion        
     }
 }

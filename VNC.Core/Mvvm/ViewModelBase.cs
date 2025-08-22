@@ -12,14 +12,14 @@ namespace VNC.Core.Mvvm
         public ViewModelBase()
         {
             Int64 startTicks = 0;
-            if (Common.VNCCoreLogging.Constructor) startTicks = Log.CONSTRUCTOR($"Enter VM:{InstanceCountVM}", Common.LOG_CATEGORY);
+            if (Common.VNCCoreLogging.Constructor) startTicks = Log.CONSTRUCTOR("Enter", Common.LOG_CATEGORY);
 
         }
 
         public ViewModelBase(IView view)
         {
             Int64 startTicks = 0;
-            if (Common.VNCCoreLogging.Constructor) startTicks = Log.CONSTRUCTOR($"Enter view({view.GetType()}) VM:{InstanceCountVM}", Common.LOG_CATEGORY);
+            if (Common.VNCCoreLogging.Constructor) startTicks = Log.CONSTRUCTOR("Enter view({view.GetType()})", Common.LOG_CATEGORY);
 
             View = view;
             View.ViewModel = this;
@@ -100,26 +100,6 @@ namespace VNC.Core.Mvvm
 
             if (Common.VNCCoreLogging.INPC) Log.VIEWMODEL_LOW("Exit", Common.LOG_CATEGORY, startTicks);
 
-        }
-
-        #endregion
-
-        #region IInstanceCountVM
-
-        private static Int32 _instanceCountVM;
-
-        public Int32 InstanceCountVM
-        {
-            get => _instanceCountVM;
-            set => _instanceCountVM = value;
-        }
-
-        private static Int32 _instanceCountVMP;
-
-        public Int32 InstanceCountVMP
-        {
-            get => _instanceCountVMP;
-            set => _instanceCountVMP = value;
         }
 
         #endregion

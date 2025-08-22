@@ -6,7 +6,7 @@ using VNC.Core.Mvvm;
 
 namespace VNC.WPF.Presentation.Views
 {
-    public partial class UITwo : ViewBase
+    public partial class UITwo : ViewBase, IInstanceCountV
     {
         public UITwo()
         {
@@ -51,5 +51,25 @@ namespace VNC.WPF.Presentation.Views
         {
             MessageBox.Show("Two Booms");
         }
+
+        #region IInstanceCountV
+
+        private static Int32 _instanceCountV;
+
+        public Int32 InstanceCountV
+        {
+            get => _instanceCountV;
+            set => _instanceCountV = value;
+        }
+
+        private static Int32 _instanceCountVP;
+
+        public Int32 InstanceCountVP
+        {
+            get => _instanceCountVP;
+            set => _instanceCountVP = value;
+        }
+
+        #endregion        
     }
 }

@@ -14,7 +14,7 @@ namespace VNC.Core.Mvvm
         public ViewBase()
         {
             Int64 startTicks = 0;
-            if (Common.VNCCoreLogging.Constructor) startTicks = Log.CONSTRUCTOR($"Enter V:{InstanceCountV} VP:{InstanceCountVP}", Common.LOG_CATEGORY);
+            if (Common.VNCCoreLogging.Constructor) startTicks = Log.CONSTRUCTOR("Enter", Common.LOG_CATEGORY);
 
             this.DataContextChanged += UserControl_DataContextChanged;
         }
@@ -22,7 +22,7 @@ namespace VNC.Core.Mvvm
         public ViewBase(IViewModel viewModel)
         {
             Int64 startTicks = 0;
-            if (Common.VNCCoreLogging.Constructor) startTicks = Log.CONSTRUCTOR($"Enter viewModel({viewModel.GetType()}) V:{InstanceCountV} VP:{InstanceCountVP}", Common.LOG_CATEGORY);
+            if (Common.VNCCoreLogging.Constructor) startTicks = Log.CONSTRUCTOR("Enter viewModel({viewModel.GetType()})", Common.LOG_CATEGORY);
 
             ViewModel = viewModel;
 
@@ -160,26 +160,6 @@ namespace VNC.Core.Mvvm
 
             if (Common.VNCCoreLogging.INPC) Log.VIEW_LOW("Exit", Common.LOG_CATEGORY, startTicks);
 
-        }
-
-        #endregion
-
-        #region IInstanceCountV
-
-        private static Int32 _instanceCountV;
-
-        public Int32 InstanceCountV
-        {
-            get => _instanceCountV;
-            set => _instanceCountV = value;
-        }
-
-        private static Int32 _instanceCountVP;
-
-        public Int32 InstanceCountVP
-        {
-            get => _instanceCountVP;
-            set => _instanceCountVP = value;
         }
 
         #endregion
