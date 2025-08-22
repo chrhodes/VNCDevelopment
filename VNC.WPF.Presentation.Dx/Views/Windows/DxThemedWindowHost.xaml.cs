@@ -28,7 +28,7 @@ namespace VNC.WPF.Presentation.Dx.Views
         public readonly IDialogService DialogService;
 
         /// <summary>
-        /// No Prism EventAggregator use is permitted.
+        /// No Prism EventAggregator or DialogService is supported.
         /// </summary>
         public DxThemedWindowHost()
         {

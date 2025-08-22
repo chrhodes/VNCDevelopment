@@ -1,4 +1,4 @@
-﻿<UserControl 
+﻿<vncmvvm:ViewBase
     x:Class="VNC.WPF.Presentation.Views.UIFour_Beta"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -6,12 +6,22 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
     mc:Ignorable="d"
     
+    xmlns:views="clr-namespace:VNC.WPF.Presentation.Views"
+    
+    xmlns:vncmvvm="clr-namespace:VNC.Core.Mvvm;assembly=VNC.Core"
+    
+    SizeChanged="thisControl_SizeChanged"
+    
     d:DesignWidth="300" d:DesignHeight="300"
 >
     <DockPanel Background="LightSeaGreen" Margin="10">
+
+        <views:DeveloperUIInfo x:Name="spDeveloperInfo" DockPanel.Dock="Bottom"/>
+        
         <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Center" FontSize="20" Text="UIFour Beta"  />
         <TextBlock DockPanel.Dock="Bottom" HorizontalAlignment="Center" Text="{Binding Message}" />
         <Button Click="Button_Click" Margin="20" FontSize="20">Zoom Four</Button>
+        
     </DockPanel>
     
-</UserControl>
+</vncmvvm:ViewBase>

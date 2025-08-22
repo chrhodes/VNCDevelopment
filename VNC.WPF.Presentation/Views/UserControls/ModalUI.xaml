@@ -6,6 +6,10 @@
              mc:Ignorable="d"
              Background="WhiteSmoke">
     <Grid>
-        <TextBlock Text="Modal UI.  Must close before continuing with Application"/>
+        <StackPanel >
+            <TextBlock Text="Modal UI" HorizontalAlignment="Center" FontSize="20"/>
+            <TextBlock Text="Must close before continuing with Application."/>
+            <TextBlock Text="Yes, that ding you hear is me :)" HorizontalAlignment="Center"/>
+        </StackPanel>
     </Grid>
 </UserControl>

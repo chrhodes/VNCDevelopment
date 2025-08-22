@@ -6,6 +6,9 @@
              mc:Ignorable="d"
              Background="WhiteSmoke">
     <Grid>
-        <TextBlock Text="Modeless UI.  Can still interact with Application without closing."/>
+        <StackPanel >
+            <TextBlock Text="Modeless UI" HorizontalAlignment="Center" FontSize="20"/>
+            <TextBlock Text="Can still interact with Application without closing."/>
+        </StackPanel>
     </Grid>
 </UserControl>
