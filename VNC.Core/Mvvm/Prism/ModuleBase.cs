@@ -15,15 +15,15 @@ namespace VNC.Core.Mvvm.Prism
 
         public ModuleBase(IUnityContainer container, IRegionManager regionManager)
         {
-#if LOGGING
+
             Int64 startTicks = 0;
             if (Common.VNCLogging.Constructor) startTicks = Log.CONSTRUCTOR("Enter", Common.LOG_CATEGORY);
-#endif
+
             Container = container;
             RegionManager = regionManager;
-#if LOGGING
+
             if (Common.VNCLogging.Constructor) Log.CONSTRUCTOR("Exit", Common.LOG_CATEGORY, startTicks);
-#endif
+
         }
 
         public void Initialize()
@@ -42,27 +42,27 @@ namespace VNC.Core.Mvvm.Prism
         //These are in 7 not 6.3
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
-#if LOGGING
+
             Int64 startTicks = 0;
             if (Common.VNCLogging.ModuleInitialize) startTicks = Log.CONSTRUCTOR("Enter", Common.LOG_CATEGORY);
-#endif
 
-#if LOGGING
+
+
             if (Common.VNCLogging.ModuleInitialize) Log.CONSTRUCTOR("Exit", Common.LOG_CATEGORY, startTicks);
-#endif
+
 
         }
 
         public void OnInitialized(IContainerProvider containerProvider)
         {
-#if LOGGING
+
             Int64 startTicks = 0;
             if (Common.VNCLogging.ModuleInitialize) startTicks = Log.CONSTRUCTOR("Enter", Common.LOG_CATEGORY);
-#endif
 
-#if LOGGING
+
+
             if (Common.VNCLogging.ModuleInitialize) Log.CONSTRUCTOR("Exit", Common.LOG_CATEGORY, startTicks);
-#endif
+
         }
     }
 }

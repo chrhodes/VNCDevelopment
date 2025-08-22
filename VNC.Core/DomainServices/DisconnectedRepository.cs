@@ -15,17 +15,17 @@ namespace VNC.Core.DomainServices
 
         public DisconnectedRepository(DbContext context)
         {
-#if LOGGING
+
             Int64 startTicks = 0;
             if (Common.VNCLogging.Constructor) startTicks = Log.CONSTRUCTOR("Enter", Common.LOG_CATEGORY);
-#endif
+
 
             _context = context;
             _dbSet = context.Set<TEntity>();
 
-#if LOGGING
+
             if (Common.VNCLogging.Constructor) Log.CONSTRUCTOR("Exit", Common.LOG_CATEGORY, startTicks);
-#endif
+
         }
 
         // TODO(crhodes)

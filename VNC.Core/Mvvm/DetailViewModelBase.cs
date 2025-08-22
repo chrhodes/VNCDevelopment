@@ -26,10 +26,10 @@ namespace VNC.Core.Mvvm
             IEventAggregator eventAggregator,
             IDialogService dialogService) : base(eventAggregator, dialogService)
         {
-#if LOGGING
+
             Int64 startTicks = 0;
             if (Common.VNCCoreLogging.Constructor) startTicks = Log.CONSTRUCTOR("Enter", Common.LOG_CATEGORY);
-#endif
+
             SaveCommand = new DelegateCommand(
                 SaveExecute, SaveCanExecute);
 
@@ -38,9 +38,9 @@ namespace VNC.Core.Mvvm
 
             CloseDetailViewCommand = new DelegateCommand(
                 CloseDetailViewExecute);
-#if LOGGING
+
             if (Common.VNCCoreLogging.Constructor) Log.CONSTRUCTOR("Exit", Common.LOG_CATEGORY, startTicks);
-#endif
+
         }
 
         #endregion
@@ -110,10 +110,10 @@ namespace VNC.Core.Mvvm
 
         protected virtual void CloseDetailViewExecute()
         {
-#if LOGGING
+
             Int64 startTicks = 0;
             if (Common.VNCCoreLogging.EventHandler) startTicks = Log.EVENT_HANDLER("Enter", Common.LOG_CATEGORY);
-#endif
+
 
             if (HasChanges)
             {
@@ -127,9 +127,9 @@ namespace VNC.Core.Mvvm
             }
 
             PublishAfterDetailClosedEvent();
-#if LOGGING
+
             if (Common.VNCCoreLogging.EventHandler) Log.EVENT_HANDLER("Exit", Common.LOG_CATEGORY, startTicks);
-#endif
+
         }
 
         #endregion
@@ -144,27 +144,27 @@ namespace VNC.Core.Mvvm
 
         protected virtual void PublishAfterCollectionSavedEvent()
         {
-#if LOGGING
+
             Int64 startTicks = 0;
             if (Common.VNCCoreLogging.Event) startTicks = Log.EVENT("Enter", Common.LOG_CATEGORY);
-#endif
+
 
             EventAggregator.GetEvent<AfterCollectionSavedEvent>()
                 .Publish(new AfterCollectionSavedEventArgs
                 {
                     ViewModelName = this.GetType().Name
                 });
-#if LOGGING
+
             if (Common.VNCCoreLogging.Event) Log.EVENT("Exit", Common.LOG_CATEGORY, startTicks);
-#endif
+
         }
 
         protected virtual void PublishAfterDetailClosedEvent()
         {
-#if LOGGING
+
             Int64 startTicks = 0;
             if (Common.VNCCoreLogging.Event) startTicks = Log.EVENT("Enter", Common.LOG_CATEGORY);
-#endif
+
 
             EventAggregator.GetEvent<AfterDetailClosedEvent>()
                 .Publish(new AfterDetailClosedEventArgs
@@ -172,17 +172,17 @@ namespace VNC.Core.Mvvm
                     Id = this.Id,
                     ViewModelName = this.GetType().Name
                 });
-#if LOGGING
+
             if (Common.VNCCoreLogging.Event) Log.EVENT("Exit", Common.LOG_CATEGORY, startTicks);
-#endif
+
         }
 
         protected virtual void PublishAfterDetailDeletedEvent(Int32 modelId)
         {
-#if LOGGING
+
             Int64 startTicks = 0;
             if (Common.VNCCoreLogging.Event) startTicks = Log.EVENT("Enter", Common.LOG_CATEGORY);
-#endif
+
 
             EventAggregator.GetEvent<AfterDetailDeletedEvent>()
                 .Publish(new AfterDetailDeletedEventArgs
@@ -190,17 +190,17 @@ namespace VNC.Core.Mvvm
                     Id = modelId,
                     ViewModelName = this.GetType().Name
                 });
-#if LOGGING
+
             if (Common.VNCCoreLogging.Event) Log.EVENT("Exit", Common.LOG_CATEGORY, startTicks);
-#endif
+
         }
 
         protected virtual void PublishAfterDetailSavedEvent(Int32 modelId, string displayMember)
         {
-#if LOGGING
+
             Int64 startTicks = 0;
             if (Common.VNCCoreLogging.Event) startTicks = Log.EVENT("Enter", Common.LOG_CATEGORY);
-#endif
+
 
             EventAggregator.GetEvent<AfterDetailSavedEvent>()
                 .Publish(new AfterDetailSavedEventArgs
@@ -209,9 +209,9 @@ namespace VNC.Core.Mvvm
                     DisplayMember = displayMember,
                     ViewModelName = this.GetType().Name
                 });
-#if LOGGING
+
             if (Common.VNCCoreLogging.Event) Log.EVENT("Exit", Common.LOG_CATEGORY, startTicks);
-#endif
+
         }
 
         #endregion
@@ -237,10 +237,10 @@ namespace VNC.Core.Mvvm
 
         protected virtual async Task SaveWithOptimisticConcurrencyAsync(Func<Task> saveFunc, Action afterSaveAction)
         {
-#if LOGGING
+
             Int64 startTicks = 0;
             if (Common.VNCCoreLogging.Persistence) startTicks = Log.PERSISTENCE("Enter", Common.LOG_CATEGORY);
-#endif
+
 
             try
             {
@@ -281,9 +281,9 @@ namespace VNC.Core.Mvvm
             // Do anything that needs to occur after saving
 
             afterSaveAction();
-#if LOGGING
+
             if (Common.VNCCoreLogging.Persistence) Log.PERSISTENCE("Exit", Common.LOG_CATEGORY, startTicks);
-#endif
+
         }
 
         #endregion

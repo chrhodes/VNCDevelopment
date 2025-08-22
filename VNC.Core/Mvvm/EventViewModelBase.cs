@@ -18,17 +18,13 @@ namespace VNC.Core.Mvvm
             IEventAggregator eventAggregator,
             IDialogService dialogService)
         {
-#if LOGGING
             Int64 startTicks = 0;
             if (Common.VNCCoreLogging.Constructor) startTicks = Log.CONSTRUCTOR("Enter", Common.LOG_CATEGORY);
-#endif
 
             EventAggregator = eventAggregator;
             DialogService = dialogService;
 
-#if LOGGING
             if (Common.VNCCoreLogging.Constructor) Log.CONSTRUCTOR("Exit", Common.LOG_CATEGORY, startTicks);
-#endif
         }
 
         #endregion
@@ -47,10 +43,10 @@ namespace VNC.Core.Mvvm
 //        public virtual void AfterDetailSaved(ObservableCollection<NavigationItemViewModel> items,
 //            AfterDetailSavedEventArgs args)
 //        {
-//#if LOGGING
+//
 //            Int64 startTicks = 0;
 //            if (Common.VNCCoreLogging.EventHandler) startTicks = Log.EVENT_HANDLER($"Enter Id:({args.Id})", Common.LOG_CATEGORY);
-//#endif
+//
 
 //            var lookupItem = items.SingleOrDefault(l => l.Id == args.Id);
 
@@ -64,27 +60,27 @@ namespace VNC.Core.Mvvm
 //            {
 //                lookupItem.DisplayMember = args.DisplayMember;
 //            }
-//#if LOGGING
+//
 //            if (Common.VNCCoreLogging.EventHandler) Log.EVENT_HANDLER("Exit", Common.LOG_CATEGORY, startTicks);
-//#endif
+//
 //        }
 
 //        public virtual void AfterDetailDeleted(ObservableCollection<NavigationItemViewModel> items,
 //            AfterDetailDeletedEventArgs args)
 //        {
-//#if LOGGING
+//
 //            Int64 startTicks = 0;
 //            if (Common.VNCCoreLogging.EventHandler) startTicks = Log.EVENT_HANDLER($"Enter Id:({args.Id})", Common.LOG_CATEGORY);
-//#endif
+//
 //            var lookupItem = items.SingleOrDefault(f => f.Id == args.Id);
 
 //            if (lookupItem != null)
 //            {
 //                items.Remove(lookupItem);
 //            }
-//#if LOGGING
+//
 //            if (Common.VNCCoreLogging.EventHandler) Log.EVENT_HANDLER("Exit", Common.LOG_CATEGORY, startTicks);
-//#endif
+//
 //        }
 
         #endregion
@@ -98,30 +94,30 @@ namespace VNC.Core.Mvvm
 
         public virtual void PublishDeveloperMode(Boolean developerMode)
         {
-#if LOGGING
+
             Int64 startTicks = 0;
             if (Common.VNCCoreLogging.Event) startTicks = Log.EVENT("Enter", Common.LOG_CATEGORY);
-#endif
+
             var evt = EventAggregator.GetEvent<DeveloperModeEvent>();
             evt.Publish(developerMode);
             //EventAggregator.GetEvent<DeveloperModeEvent>().Publish(developerMode);
-#if LOGGING
+
             if (Common.VNCCoreLogging.Event) Log.EVENT("Exit", Common.LOG_CATEGORY, startTicks);
-#endif
+
         }
 
         public virtual void PublishStatusMessage(string message)
         {
-#if LOGGING
+
             Int64 startTicks = 0;
             if (Common.VNCCoreLogging.Event) startTicks = Log.EVENT("Enter", Common.LOG_CATEGORY);
-#endif
+
             var evt = EventAggregator.GetEvent<StatusMessageEvent>();
             evt.Publish(message);
             //EventAggregator.GetEvent<StatusMessageEvent>().Publish(message);
-#if LOGGING
+
             if (Common.VNCCoreLogging.Event) Log.EVENT("Exit", Common.LOG_CATEGORY, startTicks);
-#endif
+
         }
 
         #endregion

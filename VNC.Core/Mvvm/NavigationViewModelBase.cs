@@ -22,15 +22,15 @@ namespace VNC.Core.Mvvm
             IEventAggregator eventAggregator,
             IDialogService dialogService) : base (eventAggregator, dialogService)
         {
-#if LOGGING
+
             Int64 startTicks = 0;
             if (Common.VNCCoreLogging.Constructor) startTicks = Log.CONSTRUCTOR("Enter", Common.LOG_CATEGORY);
-#endif
+
             RegionManager = regionManager;
 
-#if LOGGING
+
             if (Common.VNCCoreLogging.Constructor) Log.CONSTRUCTOR("Exit", Common.LOG_CATEGORY, startTicks);
-#endif
+
         }
 
         #endregion

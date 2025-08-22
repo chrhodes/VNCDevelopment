@@ -7,34 +7,26 @@ using System.Windows.Controls;
 
 namespace VNC.Core.Mvvm
 {
-    public class ViewBase : UserControl, IView, INotifyPropertyChanged, IViewSize, IInstanceCountV
+    public class ViewBase : UserControl, IView, INotifyPropertyChanged, IViewSize
     {
         #region Constructors, Initialization, and Load
 
         public ViewBase()
         {
-#if LOGGING
             Int64 startTicks = 0;
-            if (Common.VNCCoreLogging.Constructor) startTicks = Log.CONSTRUCTOR("Enter", Common.LOG_CATEGORY);
-#endif
+            if (Common.VNCCoreLogging.Constructor) startTicks = Log.CONSTRUCTOR($"Enter V:{InstanceCountV} VP:{InstanceCountVP}", Common.LOG_CATEGORY);
+
             this.DataContextChanged += UserControl_DataContextChanged;
-#if LOGGING
-            if (Common.VNCCoreLogging.Constructor) Log.CONSTRUCTOR("Exit", Common.LOG_CATEGORY, startTicks);
-#endif
         }
 
         public ViewBase(IViewModel viewModel)
         {
-#if LOGGING
             Int64 startTicks = 0;
-            if (Common.VNCCoreLogging.Constructor) startTicks = Log.CONSTRUCTOR($"Enter viewModel({viewModel.GetType()})", Common.LOG_CATEGORY);
-#endif
+            if (Common.VNCCoreLogging.Constructor) startTicks = Log.CONSTRUCTOR($"Enter viewModel({viewModel.GetType()}) V:{InstanceCountV} VP:{InstanceCountVP}", Common.LOG_CATEGORY);
+
             ViewModel = viewModel;
 
             this.DataContextChanged += UserControl_DataContextChanged;
-#if LOGGING
-            if (Common.VNCCoreLogging.Constructor) Log.CONSTRUCTOR("Exit", Common.LOG_CATEGORY, startTicks);
-#endif
         }
 
         #endregion
@@ -124,17 +116,17 @@ namespace VNC.Core.Mvvm
 
         public void thisControl_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-#if LOGGING
+
             Int64 startTicks = 0;
             if (Common.VNCCoreLogging.EventHandler) startTicks = Log.EVENT_HANDLER("Enter", Common.LOG_CATEGORY);
-#endif
+
             var newSize = e.NewSize;
             var previousSize = e.PreviousSize;
             WindowSize = newSize;
 
-#if LOGGING
+
             if (Common.VNCCoreLogging.EventHandler) Log.EVENT_HANDLER("Exit", Common.LOG_CATEGORY, startTicks);
-#endif
+
         }
 
         private void UserControl_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
@@ -159,20 +151,20 @@ namespace VNC.Core.Mvvm
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             Int64 startTicks = 0;
-#if LOGGING
+
             if (Common.VNCCoreLogging.INPC) startTicks = Log.VIEW_LOW($"Enter ({propertyName})", Common.LOG_CATEGORY);
-#endif
+
             // This is the new CompilerServices attribute!
 
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-#if LOGGING
+
             if (Common.VNCCoreLogging.INPC) Log.VIEW_LOW("Exit", Common.LOG_CATEGORY, startTicks);
-#endif
+
         }
 
         #endregion
 
-        #region IInstanceCount
+        #region IInstanceCountV
 
         private static Int32 _instanceCountV;
 

@@ -5,33 +5,24 @@ using System.Runtime.CompilerServices;
 
 namespace VNC.Core.Mvvm
 {
-    public class ViewModelBase : IViewModel, INotifyPropertyChanged, IInstanceCountVM
+    public class ViewModelBase : IViewModel, INotifyPropertyChanged
     {
         #region Constructors, Initialization, and Load
 
         public ViewModelBase()
         {
-#if LOGGING
             Int64 startTicks = 0;
-            if (Common.VNCCoreLogging.Constructor) startTicks = Log.CONSTRUCTOR("Enter", Common.LOG_CATEGORY);
-#endif
+            if (Common.VNCCoreLogging.Constructor) startTicks = Log.CONSTRUCTOR($"Enter VM:{InstanceCountVM}", Common.LOG_CATEGORY);
 
-#if LOGGING
-            if (Common.VNCCoreLogging.Constructor) Log.CONSTRUCTOR("Exit", Common.LOG_CATEGORY, startTicks);
-#endif
         }
 
         public ViewModelBase(IView view)
         {
-#if LOGGING
             Int64 startTicks = 0;
-            if (Common.VNCCoreLogging.Constructor) startTicks = Log.CONSTRUCTOR($"Enter view({view.GetType()})", Common.LOG_CATEGORY);
-#endif
+            if (Common.VNCCoreLogging.Constructor) startTicks = Log.CONSTRUCTOR($"Enter view({view.GetType()}) VM:{InstanceCountVM}", Common.LOG_CATEGORY);
+
             View = view;
             View.ViewModel = this;
-#if LOGGING
-            if (Common.VNCCoreLogging.Constructor) Log.CONSTRUCTOR("Exit", Common.LOG_CATEGORY, startTicks);
-#endif
         }
 
         #endregion
@@ -100,15 +91,15 @@ namespace VNC.Core.Mvvm
         protected virtual void OnPropertyChanged([CallerMemberName]string propertyName = null)
         {
             Int64 startTicks = 0;
-#if LOGGING
+
             if (Common.VNCCoreLogging.INPC) startTicks = Log.VIEWMODEL_LOW($"Enter ({propertyName})", Common.LOG_CATEGORY);
-#endif
+
             // This is the new CompilerServices attribute!
 
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-#if LOGGING
+
             if (Common.VNCCoreLogging.INPC) Log.VIEWMODEL_LOW("Exit", Common.LOG_CATEGORY, startTicks);
-#endif
+
         }
 
         #endregion
@@ -121,6 +112,14 @@ namespace VNC.Core.Mvvm
         {
             get => _instanceCountVM;
             set => _instanceCountVM = value;
+        }
+
+        private static Int32 _instanceCountVMP;
+
+        public Int32 InstanceCountVMP
+        {
+            get => _instanceCountVMP;
+            set => _instanceCountVMP = value;
         }
 
         #endregion

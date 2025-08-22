@@ -25,18 +25,18 @@ namespace VNC.Core.Mvvm
             IEventAggregator eventAggregator,
             IDialogService dialogService) : base(eventAggregator, dialogService)
         {
-#if LOGGING
+
             Int64 startTicks = 0;
             if (Common.VNCCoreLogging.Constructor) startTicks = Log.CONSTRUCTOR($"Enter id:({id}) displayMember:({displayMember}) detailViewModelName:({detailViewModelName})", Common.LOG_CATEGORY);
-#endif
+
             Id = id;
             DisplayMember = displayMember;
             _detailViewModelName = detailViewModelName;
 
             OpenDetailViewCommand = new DelegateCommand(OpenDetailView);
-#if LOGGING
+
             if (Common.VNCCoreLogging.Constructor) Log.CONSTRUCTOR("Exit", Common.LOG_CATEGORY, startTicks);
-#endif
+
         }
 
         #endregion
@@ -68,14 +68,14 @@ namespace VNC.Core.Mvvm
 
         private void OpenDetailView()
         {
-#if LOGGING
+
             Int64 startTicks = 0;
             if (Common.VNCCoreLogging.EventHandler) startTicks = Log.EVENT_HANDLER("Enter", Common.LOG_CATEGORY);
-#endif
+
             PublishOpenDetailViewEvent();
-#if LOGGING
+
             if (Common.VNCCoreLogging.EventHandler) Log.EVENT_HANDLER("Exit", Common.LOG_CATEGORY, startTicks);
-#endif
+
         }
 
         #endregion
@@ -84,10 +84,10 @@ namespace VNC.Core.Mvvm
 
         private void PublishOpenDetailViewEvent()
         {
-#if LOGGING
+
             Int64 startTicks = 0;
             if (Common.VNCCoreLogging.Event) startTicks = Log.EVENT($"Enter Id:({Id})", Common.LOG_CATEGORY);
-#endif
+
 
             EventAggregator.GetEvent<OpenDetailViewEvent>()
                 .Publish(new OpenDetailViewEventArgs
@@ -96,9 +96,9 @@ namespace VNC.Core.Mvvm
                     ViewModelName = _detailViewModelName
                 });
 
-#if LOGGING
+
             if (Common.VNCCoreLogging.Event) Log.EVENT("Exit", Common.LOG_CATEGORY, startTicks);
-#endif
+
         }
 
         #endregion

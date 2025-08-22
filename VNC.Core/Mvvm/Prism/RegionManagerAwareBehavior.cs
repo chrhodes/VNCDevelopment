@@ -14,10 +14,10 @@ namespace VNC.Core.Mvvm.Prism
 
         protected override void OnAttach()
         {
-#if LOGGING
+
             Int64 startTicks = 0;
             if (Common.VNCLogging.Presentation) startTicks = Log.PRESENTATION($"Enter", Common.LOG_CATEGORY);
-#endif
+
             // Attach to all regions.  But, can also pick and choose
 
 
@@ -26,17 +26,17 @@ namespace VNC.Core.Mvvm.Prism
 
             Region.ActiveViews.CollectionChanged += ActiveViews_CollectionChanged;
 
-#if LOGGING
+
             if (Common.VNCLogging.Presentation) Log.PRESENTATION($"Exit", Common.LOG_CATEGORY, startTicks);
-#endif
+
         }
 
         void ActiveViews_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-#if LOGGING
+
             Int64 startTicks = 0;
             if (Common.VNCLogging.Presentation) startTicks = Log.PRESENTATION($"Enter", Common.LOG_CATEGORY);
-#endif
+
             if (e.Action == NotifyCollectionChangedAction.Add)
             {
                 foreach (var item in e.NewItems)
@@ -71,17 +71,17 @@ namespace VNC.Core.Mvvm.Prism
                 }
             }
 
-#if LOGGING
+
             if (Common.VNCLogging.Presentation) Log.PRESENTATION($"Exit", Common.LOG_CATEGORY, startTicks);
-#endif
+
         }
 
         static void InvokeOnRegionManagerAwareElement(object item, Action<IRegionManagerAware> invocation)
         {
-#if LOGGING
+
             Int64 startTicks = 0;
             if (Common.VNCLogging.Presentation) startTicks = Log.PRESENTATION($"Enter {item.GetType()}", Common.LOG_CATEGORY);
-#endif
+
 
             // Want to support View and/or ViewModel first approaches
 
@@ -137,9 +137,9 @@ namespace VNC.Core.Mvvm.Prism
                     invocation(rmAwareDataContext);
                 }
             }
-#if LOGGING
+
             if (Common.VNCLogging.Presentation) Log.PRESENTATION($"Exit", Common.LOG_CATEGORY, startTicks);
-#endif
+
         }
     }
 }
