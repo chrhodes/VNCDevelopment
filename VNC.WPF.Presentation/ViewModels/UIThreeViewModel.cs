@@ -15,9 +15,42 @@ namespace VNC.WPF.Presentation.ViewModels
 
             InstanceCountVM++;
 
-            Message = "Hello from UIThree ViewModel";
+            InitializeViewModel();
 
-            if (Common.VNCLogging.Constructor) Log.CONSTRUCTOR("Exit", Common.LOG_CATEGORY, startTicks);
+            if (Common.VNCLogging.Constructor) Log.CONSTRUCTOR($"Exit VM:{InstanceCountVM}", Common.LOG_CATEGORY, startTicks);
+        }
+
+        private void InitializeViewModel()
+        {
+            Int64 startTicks = 0;
+            if (Common.VNCLogging.ViewModelLow) startTicks = Log.VIEWMODEL_LOW("Enter", Common.LOG_CATEGORY);
+
+            // NOTE(crhodes)
+            // Put things here that initialize the ViewModel
+            // Initialize EventHandlers, Commands, etc.
+
+            Message = "UIThreeViewModel says Hello";
+            MessageThree = "UIThreeViewModel says hello Three";
+
+            if (Common.VNCLogging.ViewModelLow) Log.VIEWMODEL_LOW("Exit", Common.LOG_CATEGORY, startTicks);
+        }
+
+        #endregion
+
+        #region Fields and Properties
+
+        private string _messageThree;
+
+        public string MessageThree
+        {
+            get => _messageThree;
+            set
+            {
+                if (_messageThree == value)
+                    return;
+                _messageThree = value;
+                OnPropertyChanged();
+            }
         }
 
         #endregion

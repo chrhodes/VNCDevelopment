@@ -15,7 +15,6 @@ namespace VNC.WPF.Presentation.Views
             Int64 startTicks = 0;
             if (Common.VNCLogging.Constructor) startTicks = Log.CONSTRUCTOR("Enter", Common.LOG_CATEGORY);
 
-            InstanceCountV++;
             InitializeComponent();
 
             // Expose ViewModel

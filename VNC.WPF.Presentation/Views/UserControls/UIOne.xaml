@@ -5,11 +5,14 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:VNC.WPF.Presentation.Views"
+    xmlns:prism="http://prismlibrary.com/"    
     mc:Ignorable="d"
     
     xmlns:views="clr-namespace:VNC.WPF.Presentation.Views"
     
     xmlns:vncmvvm="clr-namespace:VNC.Core.Mvvm;assembly=VNC.Core"
+    
+    prism:ViewModelLocator.AutoWireViewModel="False"
     
     SizeChanged="thisControl_SizeChanged"
     
