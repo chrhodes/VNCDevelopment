@@ -3,12 +3,13 @@ using System.Linq;
 using System.Windows;
 
 using VNC.Core.Mvvm;
+using VNC.WPF.Presentation.ViewModels;
 
 namespace VNC.WPF.Presentation.Views
 {
-    public partial class UITwo : ViewBase, IInstanceCountV
+    public partial class UI5_Beta : ViewBase, IInstanceCountV
     {
-        public UITwo()
+        public UI5_Beta()
         {
             Int64 startTicks = 0;
             if (Common.VNCLogging.Constructor) startTicks = Log.CONSTRUCTOR("Enter", Common.LOG_CATEGORY);
@@ -16,6 +17,24 @@ namespace VNC.WPF.Presentation.Views
             InstanceCountV++;
 
             InitializeComponent();
+            InitializeView();
+
+            if (Common.VNCLogging.Constructor) Log.CONSTRUCTOR("Exit", Common.LOG_CATEGORY, startTicks);
+        }
+
+        public UI5_Beta(UI5ViewModel viewModel)
+        {
+            Int64 startTicks = Log.CONSTRUCTOR($"Enter viewModel({viewModel.GetType()}", Common.LOG_CATEGORY);
+
+            InstanceCountVP++;
+
+            InitializeComponent();
+
+            ViewModel = viewModel;  // ViewBase sets the DataContext to ViewModel
+
+            // For the rare case where the ViewModel needs to know about the View
+            // ViewModel.View = this;
+
             InitializeView();
 
             if (Common.VNCLogging.Constructor) Log.CONSTRUCTOR("Exit", Common.LOG_CATEGORY, startTicks);
@@ -45,11 +64,11 @@ namespace VNC.WPF.Presentation.Views
             if (Common.VNCLogging.ViewLow) Log.VIEW_LOW("Exit", Common.LOG_CATEGORY, startTicks);
         }
 
-        public string Message { get; set; } = "UITwo";
+        public string Message { get; set; } = "UI5_Beta View says Hello";
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Two Booms");
+            MessageBox.Show("Zoom Five");
         }
 
         #region IInstanceCountV

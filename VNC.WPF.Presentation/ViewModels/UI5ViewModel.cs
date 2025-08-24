@@ -4,11 +4,11 @@ using VNC.Core.Mvvm;
 
 namespace VNC.WPF.Presentation.ViewModels
 {
-    public class UITwoViewModel : ViewModelBase, IInstanceCountVM
+    public class UI5ViewModel : ViewModelBase, IInstanceCountVM
     {
         #region Constructors, Initialization, and Load
 
-        public UITwoViewModel()
+        public UI5ViewModel()
         {
             Int64 startTicks = 0;
             if (Common.VNCLogging.Constructor) startTicks = Log.CONSTRUCTOR("Enter", Common.LOG_CATEGORY);
@@ -29,8 +29,8 @@ namespace VNC.WPF.Presentation.ViewModels
             // Put things here that initialize the ViewModel
             // Initialize EventHandlers, Commands, etc.
 
-            Message = "UIFiveViewModel says Hello";
-            MessageTwo = "UIFiveViewModel says hello Two";
+            Message = "UI5 ViewModel says Hello";
+            MessageFive = "UI5 ViewModel says hello Five";
 
             if (Common.VNCLogging.ViewModelLow) Log.VIEWMODEL_LOW("Exit", Common.LOG_CATEGORY, startTicks);
         }
@@ -39,16 +39,16 @@ namespace VNC.WPF.Presentation.ViewModels
 
         #region Fields and Properties
 
-        private string _messageTwo;
+        private string _messageFive;
 
-        public string MessageTwo
+        public string MessageFive
         {
-            get => _messageTwo;
+            get => _messageFive;
             set
             {
-                if (_messageTwo == value)
+                if (_messageFive == value)
                     return;
-                _messageTwo = value;
+                _messageFive = value;
                 OnPropertyChanged();
             }
         }

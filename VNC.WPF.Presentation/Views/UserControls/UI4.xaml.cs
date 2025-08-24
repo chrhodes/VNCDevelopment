@@ -6,9 +6,9 @@ using VNC.Core.Mvvm;
 
 namespace VNC.WPF.Presentation.Views
 {
-    public partial class UIOne : ViewBase, IInstanceCountV
+    public partial class UI4 : ViewBase, IInstanceCountV
     {
-        public UIOne()
+        public UI4()
         {
             Int64 startTicks = 0;
             if (Common.VNCLogging.Constructor) startTicks = Log.CONSTRUCTOR("Enter", Common.LOG_CATEGORY);
@@ -45,11 +45,11 @@ namespace VNC.WPF.Presentation.Views
             if (Common.VNCLogging.ViewLow) Log.VIEW_LOW("Exit", Common.LOG_CATEGORY, startTicks);
         }
 
-        public string Message { get; set; } = "UIOne";
+        public string Message { get; set; } = "UI4 View says Hello";
 
         private void Button_Click(object sender, RoutedEventArgs e)
-        {           
-            MessageBox.Show("One Boom");
+        {
+            MessageBox.Show("Four Booms");
         }
 
         #region IInstanceCountV

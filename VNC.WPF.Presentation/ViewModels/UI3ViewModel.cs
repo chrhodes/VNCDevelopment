@@ -4,11 +4,11 @@ using VNC.Core.Mvvm;
 
 namespace VNC.WPF.Presentation.ViewModels
 {
-    public class UIThreeViewModel : ViewModelBase, IInstanceCountVM
+    public class UI3ViewModel : ViewModelBase, IInstanceCountVM
     {
         #region Constructors, Initialization, and Load
 
-        public UIThreeViewModel()
+        public UI3ViewModel()
         {
             Int64 startTicks = 0;
             if (Common.VNCLogging.Constructor) startTicks = Log.CONSTRUCTOR("Enter", Common.LOG_CATEGORY);
@@ -29,8 +29,8 @@ namespace VNC.WPF.Presentation.ViewModels
             // Put things here that initialize the ViewModel
             // Initialize EventHandlers, Commands, etc.
 
-            Message = "UIThreeViewModel says Hello";
-            MessageThree = "UIThreeViewModel says hello Three";
+            Message = "UI3 ViewModel says Hello";
+            MessageThree = "UI3 ViewModel says hello Three";
 
             if (Common.VNCLogging.ViewModelLow) Log.VIEWMODEL_LOW("Exit", Common.LOG_CATEGORY, startTicks);
         }
