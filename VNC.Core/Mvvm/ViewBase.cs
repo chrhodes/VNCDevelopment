@@ -118,15 +118,19 @@ namespace VNC.Core.Mvvm
         {
 
             Int64 startTicks = 0;
-            if (Common.VNCCoreLogging.EventHandler) startTicks = Log.EVENT_HANDLER("Enter", Common.LOG_CATEGORY);
+            if (Common.VNCCoreLogging.EventHandlerLow) startTicks = Log.EVENT_HANDLER_LOW("Enter", Common.LOG_CATEGORY);
 
             var newSize = e.NewSize;
             var previousSize = e.PreviousSize;
+
+            // TODO(crhodes)
+            // Learn how to get runtime value
+
+            newSize.Height -= 55; // Adjust for DeveloperUIInfo control height
+
             WindowSize = newSize;
 
-
-            if (Common.VNCCoreLogging.EventHandler) Log.EVENT_HANDLER("Exit", Common.LOG_CATEGORY, startTicks);
-
+            if (Common.VNCCoreLogging.EventHandlerLow) Log.EVENT_HANDLER_LOW("Exit", Common.LOG_CATEGORY, startTicks);
         }
 
         private void UserControl_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)

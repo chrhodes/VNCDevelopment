@@ -143,11 +143,15 @@ namespace VNC.Core.Mvvm
 
             var newSize = e.NewSize;
             var previousSize = e.PreviousSize;
+
+            // TODO(crhodes)
+            // Learn how to get runtime value
+
+            newSize.Height -= 55; // Adjust for DeveloperUIInfo control height
+
             WindowSize = newSize;
 
-
             if (Common.VNCCoreLogging.EventHandler) Log.EVENT_HANDLER("Exit", Common.LOG_CATEGORY, startTicks);
-
         }
 
         private void UserControl_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
