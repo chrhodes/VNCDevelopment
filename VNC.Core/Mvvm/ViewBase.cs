@@ -124,9 +124,15 @@ namespace VNC.Core.Mvvm
             var previousSize = e.PreviousSize;
 
             // TODO(crhodes)
-            // Learn how to get runtime value
+            // Learn how to get runtime value of DeveloperUIInfo RenderHeight
 
-            newSize.Height -= 55; // Adjust for DeveloperUIInfo control height
+            // HACK (crhodes)
+            // For now assume if height is > 46 it is visible.
+
+            if (newSize.Height > 46)
+            {
+                newSize.Height -= 46; // Adjust for visible DeveloperUIInfo control height
+            }
 
             WindowSize = newSize;
 
