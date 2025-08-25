@@ -251,6 +251,12 @@ namespace VNC.WPF.Presentation.Dx.Views
 #endif
             var newSize = e.NewSize;
             var previousSize = e.PreviousSize;
+
+            // TODO(crhodes)
+            // Learn how to get runtime value
+
+            newSize.Height -= 55; // Adjust for DeveloperUIInfo control height
+
             WindowSize = newSize;
 #if LOGGING
             if (Common.VNCCoreLogging.EventHandler) Log.EVENT_HANDLER("Exit", Common.LOG_CATEGORY, startTicks);

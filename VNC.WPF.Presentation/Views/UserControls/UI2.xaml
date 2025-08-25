@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:prism="http://prismlibrary.com/"
     mc:Ignorable="d"
     
     xmlns:views="clr-namespace:VNC.WPF.Presentation.Views"
@@ -18,16 +19,20 @@
 
         <views:DeveloperUIInfo x:Name="spDeveloperInfo" DockPanel.Dock="Bottom"/>
 
-        <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Center" FontSize="20" Text="UI2"  />
+        <StackPanel DockPanel.Dock="Top">
+            <TextBlock HorizontalAlignment="Center" FontSize="20" Text="UI2"  />
+            <TextBlock HorizontalAlignment="Center"  Text="ctor() - Prism AutoWire True"  />
+            <TextBlock HorizontalAlignment="Center" Text="tbVMessage.DataContext = this" />
+        </StackPanel>
 
         <StackPanel DockPanel.Dock="Bottom">
             <StackPanel Orientation="Horizontal">
-                <Label Content="Message:" />
-                <TextBlock Text="{Binding Message}" VerticalAlignment="Center"/>
+                <Label Content="Message:" Width="60" />
+                <TextBox Text="{Binding Message}" VerticalAlignment="Center"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <Label Content="MessageTwo:" />
-                <TextBlock Text="{Binding MessageTwo}" VerticalAlignment="Center"/>
+                <Label Content="VMessage:" Width="60" />
+                <TextBox x:Name="tbVMessage" Text="{Binding VMessage}" VerticalAlignment="Center"/>
             </StackPanel>
         </StackPanel>
         

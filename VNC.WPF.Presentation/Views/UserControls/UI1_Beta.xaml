@@ -4,12 +4,14 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:VNC.WPF.Presentation.Views"
+    xmlns:prism="http://prismlibrary.com/"
     mc:Ignorable="d"
     
     xmlns:views="clr-namespace:VNC.WPF.Presentation.Views"
     
     xmlns:vncmvvm="clr-namespace:VNC.Core.Mvvm;assembly=VNC.Core"
+    
+    prism:ViewModelLocator.AutoWireViewModel="False"
     
     SizeChanged="thisControl_SizeChanged"
     
@@ -18,20 +20,24 @@
     <DockPanel Background="LightSeaGreen" Margin="10">
 
         <views:DeveloperUIInfo x:Name="spDeveloperInfo" DockPanel.Dock="Bottom"/>
-        
-        <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Center" FontSize="20" Text="UI1 Beta"  />
-        
+
+        <StackPanel DockPanel.Dock="Top">
+            <TextBlock HorizontalAlignment="Center" FontSize="20" Text="UI1 Beta" />
+            <TextBlock HorizontalAlignment="Center" Text="ctor() and ctor(VM) - Prism AutoWire False" />
+            <TextBlock HorizontalAlignment="Center" Text="" />
+        </StackPanel>
+
         <StackPanel DockPanel.Dock="Bottom">
             <StackPanel Orientation="Horizontal">
-                <Label Content="Message:" />
-                <TextBlock Text="{Binding Message}" VerticalAlignment="Center" />
+                <Label Content="Message:" Width="60" />
+                <TextBox Text="{Binding Message}" VerticalAlignment="Center"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <Label Content="MessageOne:" />
-                <TextBlock Text="{Binding MessageOne}" VerticalAlignment="Center" />
+                <Label Content="VMessage:" Width="60" />
+                <TextBox x:Name="tbVMessage" Text="{Binding VMessage}" VerticalAlignment="Center"/>
             </StackPanel>
         </StackPanel>
-        
+
         <Button Click="Button_Click" Margin="20" FontSize="20">Zoom One</Button>
         
     </DockPanel>

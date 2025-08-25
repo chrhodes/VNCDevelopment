@@ -3,25 +3,44 @@ using System.Linq;
 using System.Windows;
 
 using VNC.Core.Mvvm;
+using VNC.WPF.Presentation.ViewModels;
 
 namespace VNC.WPF.Presentation.Views
 {
     public partial class UI5 : ViewBase, IInstanceCountV
     {
-        public UI5()
-        {
-            Int64 startTicks = 0;
-            if (Common.VNCLogging.Constructor) startTicks = Log.CONSTRUCTOR("Enter", Common.LOG_CATEGORY);
+        //public UI5()
+        //{
+        //    Int64 startTicks = 0;
+        //    if (Common.VNCLogging.Constructor) startTicks = Log.CONSTRUCTOR("Enter", Common.LOG_CATEGORY);
 
-            InstanceCountV++;
+        //    InstanceCountV++;
+
+        //    InitializeComponent();
+        //    InitializeView("C()");
+
+        //    if (Common.VNCLogging.Constructor) Log.CONSTRUCTOR("Exit", Common.LOG_CATEGORY, startTicks);
+        //}
+
+        public UI5(UI5ViewModel viewModel)
+        {
+            Int64 startTicks = Log.CONSTRUCTOR($"Enter viewModel({viewModel.GetType()}", Common.LOG_CATEGORY);
+
+            InstanceCountVP++;
 
             InitializeComponent();
-            InitializeView();
+
+            ViewModel = viewModel;  // ViewBase sets the DataContext to ViewModel
+
+            // For the rare case where the ViewModel needs to know about the View
+            // ViewModel.View = this;
+
+            InitializeView("C(VM)");
 
             if (Common.VNCLogging.Constructor) Log.CONSTRUCTOR("Exit", Common.LOG_CATEGORY, startTicks);
         }
 
-        private void InitializeView()
+        private void InitializeView(string message)
         {
             Int64 startTicks = 0;
             if (Common.VNCLogging.ViewLow) startTicks = Log.VIEW_LOW("Enter", Common.LOG_CATEGORY);
@@ -39,13 +58,30 @@ namespace VNC.WPF.Presentation.Views
             // Put things here that initialize the View
             // Hook event handlers, etc.
 
+            VMessage = $"{message} UI5 View says Hello";
 
             // Establish any additional DataContext(s) to things held in this View            
+
+            tbVMessage.DataContext = this;
 
             if (Common.VNCLogging.ViewLow) Log.VIEW_LOW("Exit", Common.LOG_CATEGORY, startTicks);
         }
 
-        public string Message { get; set; } = "UI5 View says Hello";
+        private string _vMessage;
+        public string VMessage
+        {
+            get => _vMessage;
+            set
+            {
+                if (_vMessage == value)
+                {
+                    return;
+                }
+
+                _vMessage = value;
+                OnPropertyChanged();
+            }
+        }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {

@@ -30,27 +30,8 @@ namespace VNC.WPF.Presentation.ViewModels
             // Initialize EventHandlers, Commands, etc.
 
             Message = "UI1 ViewModel says Hello";
-            MessageOne = "UI1 ViewModel says hello One";
 
             if (Common.VNCLogging.ViewModelLow) Log.VIEWMODEL_LOW("Exit", Common.LOG_CATEGORY, startTicks);
-        }
-
-        #endregion
-
-        #region Fields and Properties
-
-        private string _messageOne;
-
-        public string MessageOne
-        {
-            get => _messageOne;
-            set
-            {
-                if (_messageOne == value)
-                    return;
-                _messageOne = value;
-                OnPropertyChanged();
-            }
         }
 
         #endregion

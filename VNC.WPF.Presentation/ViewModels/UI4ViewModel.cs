@@ -30,27 +30,8 @@ namespace VNC.WPF.Presentation.ViewModels
             // Initialize EventHandlers, Commands, etc.
 
             Message = "UI4 ViewModel says Hello";
-            MessageFour = "UI4 ViewModel says hello Four";
 
             if (Common.VNCLogging.ViewModelLow) Log.VIEWMODEL_LOW("Exit", Common.LOG_CATEGORY, startTicks);
-        }
-
-        #endregion
-
-        #region Fields and Properties
-
-        private string _messageFour;
-
-        public string MessageFour
-        {
-            get => _messageFour;
-            set
-            {
-                if (_messageFour == value)
-                    return;
-                _messageFour = value;
-                OnPropertyChanged();
-            }
         }
 
         #endregion

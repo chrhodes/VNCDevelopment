@@ -30,27 +30,8 @@ namespace VNC.WPF.Presentation.ViewModels
             // Initialize EventHandlers, Commands, etc.
 
             Message = "UI3 ViewModel says Hello";
-            MessageThree = "UI3 ViewModel says hello Three";
 
             if (Common.VNCLogging.ViewModelLow) Log.VIEWMODEL_LOW("Exit", Common.LOG_CATEGORY, startTicks);
-        }
-
-        #endregion
-
-        #region Fields and Properties
-
-        private string _messageThree;
-
-        public string MessageThree
-        {
-            get => _messageThree;
-            set
-            {
-                if (_messageThree == value)
-                    return;
-                _messageThree = value;
-                OnPropertyChanged();
-            }
         }
 
         #endregion

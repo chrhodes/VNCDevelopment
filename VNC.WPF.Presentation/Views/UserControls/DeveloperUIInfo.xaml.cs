@@ -110,7 +110,6 @@ namespace VNC.WPF.Presentation.Views
 
 
 
-        #endregion   
-        
+        #endregion           
     }
 }
