@@ -4,6 +4,11 @@ using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Regions;
 
+using VNC.UIApproaches.Presentation.ViewModels;
+using VNC.UIApproaches.Presentation.Views;
+using VNC.WPF.Presentation.ViewModels;
+using VNC.WPF.Presentation.Views;
+
 namespace VNC.UIApproaches
 {
     public class UIApproachesModule : IModule
@@ -17,7 +22,7 @@ namespace VNC.UIApproaches
             Int64 startTicks = 0;
             if (Common.VNCLogging.Constructor) startTicks = Log.CONSTRUCTOR("Enter", Common.LOG_CATEGORY);
 
-        _regionManager = regionManager;
+            _regionManager = regionManager;
 
             if (Common.VNCLogging.Constructor) Log.CONSTRUCTOR("Exit", Common.LOG_CATEGORY, startTicks);
         }
@@ -105,8 +110,8 @@ namespace VNC.UIApproaches
             // containerRegistry.RegisterSingleton<IViewABCDViewModel, ViewABCDViewModel>();
             // //containerRegistry.Register<IViewABCDViewModel, ViewABCDViewModel>();
 
-            //containerRegistry.Register<IUILaunchApproachesViewModel, UILaunchApproachesViewModel>();
-            //containerRegistry.Register<UILaunchApproaches>();
+            containerRegistry.Register<IUILaunchApproachesViewModel, UILaunchApproachesViewModel>();
+            containerRegistry.Register<UILaunchApproaches>();
 
             // NOTE(crhodes)
             // Observations on wiring Views and ViewModels
@@ -176,9 +181,9 @@ namespace VNC.UIApproaches
             // But, if register ViewDiscoveryAndInjectionViewModel
             // against an Interface
 
-            //containerRegistry.Register<IViewDiscoveryViewModel, ViewDiscoveryViewModel>();
-            //containerRegistry.Register<IViewInjectionViewModel, ViewInjectionViewModel>();
-            //containerRegistry.Register<IRegionNavigationViewModel, RegionNavigationViewModel>();
+            containerRegistry.Register<IViewDiscoveryViewModel, ViewDiscoveryViewModel>();
+            containerRegistry.Register<IViewInjectionViewModel, ViewInjectionViewModel>();
+            containerRegistry.Register<IRegionNavigationViewModel, RegionNavigationViewModel>();
 
             // ViewDiscoveryAndInjection(IViewDiscoveryAndInjectionViewModel viewModel) gets called
             // and View is wired to ViewModel
@@ -193,23 +198,23 @@ namespace VNC.UIApproaches
 
             // These are for RegionNavigation
 
-            //containerRegistry.RegisterForNavigation(typeof(UI1), "UI1");
+            containerRegistry.RegisterForNavigation(typeof(UI1), "UI1");
             // containerRegistry.RegisterForNavigation<UI2>();    // name defaults to UI2
-            //containerRegistry.RegisterForNavigation<UI2>("UI2");
-            //containerRegistry.RegisterForNavigation<UI3>("UI3");
+            containerRegistry.RegisterForNavigation<UI2>("UI2");
+            containerRegistry.RegisterForNavigation<UI3>("UI3");
 
             // NOTE(crhodes)
             // Can also (optionally) register a ViewModel with View
 
-            //containerRegistry.RegisterForNavigation<UI4, UI4ViewModel>("UI4");
-            //containerRegistry.RegisterForNavigation<UI5, UI5ViewModel>("UI5");
+            containerRegistry.RegisterForNavigation<UI4, UI4ViewModel>("UI4");
+            containerRegistry.RegisterForNavigation<UI5, UI5ViewModel>("UI5");
 
             // Since these do not have a ViewModel and only a parameterless constructor()
             // their DataContext is the parent control.  Probably don't want this
 
-            //containerRegistry.RegisterForNavigation<UI1_Beta>("UI1beta");
-            //containerRegistry.RegisterForNavigation<UI2_Beta>("UI2beta");
-            //containerRegistry.RegisterForNavigation<UI3_Beta>("UI3beta");
+            containerRegistry.RegisterForNavigation<UI1_Beta>("UI1beta");
+            containerRegistry.RegisterForNavigation<UI2_Beta>("UI2beta");
+            containerRegistry.RegisterForNavigation<UI3_Beta>("UI3beta");
 
             // Can specify ViewModel to use
 

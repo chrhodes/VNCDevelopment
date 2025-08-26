@@ -25,27 +25,27 @@ namespace VNC.UIApproaches.Core
 
         //public static string ViewABCDRegion = "ViewABCDRegion";
 
-        //public static string UILaunchApproaches = "UILaunchApproaches";
+        public static string UILaunchApproaches = "UILaunchApproaches";
 
-        //public static string ViewDiscovery = "ViewDiscovery";
+        public static string ViewDiscovery = "ViewDiscovery";
 
-        //public static string ViewDiscoveryViewOne = "ViewDiscoveryViewOne";
-        //public static string ViewDiscoveryViewTwo = "ViewDiscoveryViewTwo";
-        //public static string ViewDiscoveryViewThree = "ViewDiscoveryViewThree";
-        //public static string ViewDiscoveryViewFour = "ViewDiscoveryViewFour";
-        //public static string ViewDiscoveryViewFive = "ViewDiscoveryViewFive";
+        public static string ViewDiscoveryViewOne = "ViewDiscoveryViewOne";
+        public static string ViewDiscoveryViewTwo = "ViewDiscoveryViewTwo";
+        public static string ViewDiscoveryViewThree = "ViewDiscoveryViewThree";
+        public static string ViewDiscoveryViewFour = "ViewDiscoveryViewFour";
+        public static string ViewDiscoveryViewFive = "ViewDiscoveryViewFive";
 
-        //public static string ViewDiscoveryViewOneBeta = "ViewDiscoveryViewOneBeta";
-        //public static string ViewDiscoveryViewTwoBeta = "ViewDiscoveryViewTwoBeta";
-        //public static string ViewDiscoveryViewThreeBeta = "ViewDiscoveryViewThreeBeta";
-        //public static string ViewDiscoveryViewFourBeta = "ViewDiscoveryViewFourBeta";
-        //public static string ViewDiscoveryViewFiveBeta = "ViewDiscoveryViewFiveBeta";
+        public static string ViewDiscoveryViewOneBeta = "ViewDiscoveryViewOneBeta";
+        public static string ViewDiscoveryViewTwoBeta = "ViewDiscoveryViewTwoBeta";
+        public static string ViewDiscoveryViewThreeBeta = "ViewDiscoveryViewThreeBeta";
+        public static string ViewDiscoveryViewFourBeta = "ViewDiscoveryViewFourBeta";
+        public static string ViewDiscoveryViewFiveBeta = "ViewDiscoveryViewFiveBeta";
 
-        //public static string ViewInjection = "ViewInjection";
-        //public static string ViewInjectionView = "ViewInjectionView";
+        public static string ViewInjection = "ViewInjection";
+        public static string ViewInjectionView = "ViewInjectionView";
 
-        //public static string RegionNavigation = "RegionNavigation";
-        //public static string RegionNavigationView = "RegionNavigationView";
+        public static string RegionNavigation = "RegionNavigation";
+        public static string RegionNavigationView = "RegionNavigationView";
 
         //public static string MultiStepProcess = "MultiStepProcess";
         //public static string MultiStepProcessView = "MultiStepProcessView";
