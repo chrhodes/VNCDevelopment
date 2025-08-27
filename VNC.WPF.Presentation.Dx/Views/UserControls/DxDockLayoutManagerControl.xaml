@@ -52,8 +52,10 @@
 
             <!-- Use this if you want a LayoutManager -->
 
-            <dxdo:DockLayoutManager Name="lg_Body_dlm" 
-                                    dx:StyleManager.ApplyApplicationTheme="True" FontSize="12" >
+            <dxdo:DockLayoutManager x:Name="dlmControl" 
+                dx:StyleManager.ApplyApplicationTheme="True" FontSize="12"
+                FloatingMode="Desktop"
+                AutoHideExpandMode="MouseDown">
 
                 <dxdo:LayoutGroup Name="lg_Body_dlm_lg"  AllowClose="False" AllowFloat="False" AllowDock="False"  >
                     <!--<dxdo:LayoutPanel Name="lg_Body_dlm_lg_lpRoot" MaxHeight="1200" FontSize="12"-->
