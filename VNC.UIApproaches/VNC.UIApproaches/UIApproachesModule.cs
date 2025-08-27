@@ -4,6 +4,7 @@ using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Regions;
 
+using VNC.UIApproaches.Core;
 using VNC.UIApproaches.Presentation.ViewModels;
 using VNC.UIApproaches.Presentation.Views;
 using VNC.WPF.Presentation.ViewModels;
@@ -218,18 +219,18 @@ namespace VNC.UIApproaches
 
             // Can specify ViewModel to use
 
-            //containerRegistry.RegisterForNavigation<UI4_Beta, UI4ViewModel>("UI4beta");
-            //containerRegistry.RegisterForNavigation<UI5_Beta, UI5ViewModel>("UI5beta");
+            containerRegistry.RegisterForNavigation<UI4_Beta, UI4ViewModel>("UI4beta");
+            containerRegistry.RegisterForNavigation<UI5_Beta, UI5ViewModel>("UI5beta");
 
-            //containerRegistry.Register<IMultiStepProcessViewModel, MultiStepProcessViewModel>();
-            //containerRegistry.Register<IMultiStepProcess, MultiStepProcess>();
+            containerRegistry.Register<IMultiStepProcessViewModel, MultiStepProcessViewModel>();
+            containerRegistry.Register<IMultiStepProcess, MultiStepProcess>();
 
             // NOTE(crhodes)
             // If we don't register this, first step comes up but cannot navigate
             // Need to register against interface to get the parameterized constructor of StepX(viewModel) to be called
 
-            //containerRegistry.RegisterSingleton<IStepABCDEViewModel, StepABCDEViewModel>();
-            //containerRegistry.RegisterSingleton<StepABCDEViewModel>();
+            containerRegistry.RegisterSingleton<IStepABCDEViewModel, StepABCDEViewModel>();
+            containerRegistry.RegisterSingleton<StepABCDEViewModel>();
 
             ////containerRegistry.RegisterSingleton<ICatDetailMVViewModel, CatDetailMVViewModel>();
             //containerRegistry.Register<ICatDetailMVViewModel, CatDetailMVViewModel>();
@@ -239,11 +240,11 @@ namespace VNC.UIApproaches
             // NOTE(crhodes)
             // Need to Register for Navigation so RequestNavigate works.
 
-            //containerRegistry.RegisterForNavigation<StepA, StepABCDEViewModel>("uistepa");
-            //containerRegistry.RegisterForNavigation<StepB, StepABCDEViewModel>("uistepb");
-            //containerRegistry.RegisterForNavigation<StepC, StepABCDEViewModel>("uistepc");
-            //containerRegistry.RegisterForNavigation<StepD, StepABCDEViewModel>("uistepd");
-            //containerRegistry.RegisterForNavigation<StepE, StepABCDEViewModel>("uistepe");
+            containerRegistry.RegisterForNavigation<StepA, StepABCDEViewModel>("uistepa");
+            containerRegistry.RegisterForNavigation<StepB, StepABCDEViewModel>("uistepb");
+            containerRegistry.RegisterForNavigation<StepC, StepABCDEViewModel>("uistepc");
+            containerRegistry.RegisterForNavigation<StepD, StepABCDEViewModel>("uistepd");
+            containerRegistry.RegisterForNavigation<StepE, StepABCDEViewModel>("uistepe");
 
             //containerRegistry.RegisterForNavigation<DetailMVA, DetailMVViewModel>("uicatdetaila");
             //containerRegistry.RegisterForNavigation<DetailMVB, DetailMVViewModel>("uicatdetailb");
@@ -309,12 +310,12 @@ namespace VNC.UIApproaches
 
             // _regionManager.RegisterViewWithRegion(RegionNames.ViewABCDRegion, typeof(IViewABCD));
 
-            //_regionManager.RegisterViewWithRegion(RegionNames.UILaunchApproaches, typeof(UILaunchApproaches));
+            _regionManager.RegisterViewWithRegion(RegionNames.UILaunchApproaches, typeof(UILaunchApproaches));
 
-            //_regionManager.RegisterViewWithRegion(RegionNames.ViewInjection, typeof(ViewInjection));
-            //_regionManager.RegisterViewWithRegion(RegionNames.ViewDiscovery, typeof(ViewDiscovery));
-            //_regionManager.RegisterViewWithRegion(RegionNames.RegionNavigation, typeof(RegionNavigation));
-            //_regionManager.RegisterViewWithRegion(RegionNames.MultiStepProcess, typeof(MultiStepProcess));
+            _regionManager.RegisterViewWithRegion(RegionNames.ViewInjection, typeof(ViewInjection));
+            _regionManager.RegisterViewWithRegion(RegionNames.ViewDiscovery, typeof(ViewDiscovery));
+            _regionManager.RegisterViewWithRegion(RegionNames.RegionNavigation, typeof(RegionNavigation));
+            _regionManager.RegisterViewWithRegion(RegionNames.MultiStepProcess, typeof(MultiStepProcess));
 
             //_regionManager.RegisterViewWithRegion(RegionNames.MultiStepProcessViewMV, typeof(CatDetailMVA));
 
