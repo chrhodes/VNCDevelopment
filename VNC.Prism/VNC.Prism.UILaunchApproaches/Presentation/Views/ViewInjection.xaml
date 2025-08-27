@@ -1,5 +1,5 @@
 ﻿<vncmvvm:ViewBase
-    x:Class="VNC.UIApproaches.Presentation.Views.ViewInjection"
+    x:Class="VNC.Prism.UILaunchApproaches.Presentation.Views.ViewInjection"
     x:Name="thisControl"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -19,10 +19,10 @@
     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
     xmlns:i1="http://schemas.microsoft.com/xaml/behaviors"
 
-    xmlns:views="clr-namespace:VNC.UIApproaches.Presentation.Views"
-    xmlns:viewModels="clr-namespace:VNC.UIApproaches.Presentation.ViewModels"
+    xmlns:views="clr-namespace:VNC.Prism.UILaunchApproaches.Presentation.Views"
+    xmlns:viewModels="clr-namespace:VNC.Prism.UILaunchApproaches.Presentation.ViewModels"
 
-    xmlns:core="clr-namespace:VNC.UIApproaches.Core"
+    xmlns:core="clr-namespace:VNC.Prism.UILaunchApproaches.Core;assembly=VNC.Prism.UILaunchApproaches.Core"
 
     xmlns:vnccore="clr-namespace:VNC.Core;assembly=VNC.Core"
     xmlns:vncenum="clr-namespace:VNC.Core.Xaml.Enums;assembly=VNC.Core"
@@ -40,7 +40,7 @@
 
     SizeChanged="thisControl_SizeChanged"
 >
-    <!--xmlns:converters="clr-namespace:VNC.UIApproaches.Presentation.Converters"-->
+    <!--xmlns:converters="clr-namespace:VNC.Prism.UILaunchApproaches.Presentation.Converters"-->
 
     <!-- Move this to Resources\Xaml\Display_StylesAndTemplates.xaml -->
     <!-- <SolidColorBrush x:Key="ViewDiscoveryAndInjectionBackground" Color="#00FF00" /> -->
@@ -92,11 +92,10 @@
            <dxg:GridControl x:Name="grdViews" 
                            ItemsSource="{Binding Views}">
                <dxg:GridControl.Columns>
-                    <dxg:GridColumn Binding="{Binding VMessage}" Header="VMessage" ReadOnly="True" />
-                    <dxg:GridColumn Binding="{Binding Message}" Header="Message" ReadOnly="True" />
-                    <dxg:GridColumn Binding="{Binding Name}" Header="Name" ReadOnly="True" />
-                    <dxg:GridColumn Binding="{Binding ViewType}" Header="ViewType" ReadOnly="True"  />
-                    <dxg:GridColumn Binding="{Binding ViewModelType}" Header="ViewModelType" ReadOnly="True" />
+                   <dxg:GridColumn Binding="{Binding Message}" Header="Message" ReadOnly="True" />
+                   <dxg:GridColumn Binding="{Binding Name}" Header="Name" ReadOnly="True" />
+                   <dxg:GridColumn Binding="{Binding ViewType}" Header="ViewType" ReadOnly="True"  />
+                   <dxg:GridColumn Binding="{Binding ViewModelType}" Header="ViewModelType" ReadOnly="True" />
                </dxg:GridControl.Columns>
                <dxg:GridControl.View>
                    <dxg:TableView ShowGroupPanel="False" BestFitModeOnSourceChange="AllRows"/>
@@ -164,71 +163,11 @@
            <Button
                Command="{Binding PerformViewInjectionCommand}"
                CommandParameter="VNC.WPF.Presentation|Views.UI2|remove" 
-               Content="remove UI2" HorizontalContentAlignment="Right" />
+               Content="remove UI2" HorizontalContentAlignment="Right" />            
 
-            <Button
-               Command="{Binding PerformViewInjectionCommand}" 
-               CommandParameter="VNC.WPF.Presentation|Views.UI3|add" 
-               Content="Inject (add) UI3" HorizontalContentAlignment="Left" />
+       </StackPanel>
 
-            <Button
-               Command="{Binding PerformViewInjectionCommand}" 
-               CommandParameter="VNC.WPF.Presentation|Views.UI3|activate" 
-               Content="activate UI3" HorizontalContentAlignment="Right" />
-
-            <Button
-               Command="{Binding PerformViewInjectionCommand}"
-               CommandParameter="VNC.WPF.Presentation|Views.UI3|deactivate" 
-               Content="deactivate UI3" HorizontalContentAlignment="Right" />
-
-            <Button
-               Command="{Binding PerformViewInjectionCommand}"
-               CommandParameter="VNC.WPF.Presentation|Views.UI3|remove" 
-               Content="remove UI3" HorizontalContentAlignment="Right" />
-
-        <Button
-               Command="{Binding PerformViewInjectionCommand}" 
-               CommandParameter="VNC.WPF.Presentation|Views.UI4|add" 
-               Content="Inject (add) UI4" HorizontalContentAlignment="Left" />
-
-        <Button
-               Command="{Binding PerformViewInjectionCommand}" 
-               CommandParameter="VNC.WPF.Presentation|Views.UI4|activate" 
-               Content="activate UI4" HorizontalContentAlignment="Right" />
-
-        <Button
-               Command="{Binding PerformViewInjectionCommand}"
-               CommandParameter="VNC.WPF.Presentation|Views.UI4|deactivate" 
-               Content="deactivate UI4" HorizontalContentAlignment="Right" />
-
-        <Button
-               Command="{Binding PerformViewInjectionCommand}"
-               CommandParameter="VNC.WPF.Presentation|Views.UI4|remove" 
-               Content="remove UI4" HorizontalContentAlignment="Right" />
-
-        <Button
-               Command="{Binding PerformViewInjectionCommand}" 
-               CommandParameter="VNC.WPF.Presentation|Views.UI5|add" 
-               Content="Inject (add) UI5" HorizontalContentAlignment="Left" />
-
-        <Button
-               Command="{Binding PerformViewInjectionCommand}" 
-               CommandParameter="VNC.WPF.Presentation|Views.UI5|activate" 
-               Content="activate UI5" HorizontalContentAlignment="Right" />
-
-        <Button
-               Command="{Binding PerformViewInjectionCommand}"
-               CommandParameter="VNC.WPF.Presentation|Views.UI5|deactivate" 
-               Content="deactivate UI5" HorizontalContentAlignment="Right" />
-
-        <Button
-               Command="{Binding PerformViewInjectionCommand}"
-               CommandParameter="VNC.WPF.Presentation|Views.UI5|remove" 
-               Content="remove UI5" HorizontalContentAlignment="Right" />
-           
-        </StackPanel>
-       
-        <StackPanel DockPanel.Dock="Right">
+       <StackPanel DockPanel.Dock="Right">
 
            <Button
                Command="{Binding PerformViewInjectionCommand}" 
@@ -250,6 +189,7 @@
                CommandParameter="VNC.WPF.Presentation|Views.UI1_Beta|remove" 
                Content="remove UI1_Beta" HorizontalContentAlignment="Right" />
 
+
             <Button
                 Command="{Binding PerformViewInjectionCommand}" 
                 CommandParameter="VNC.WPF.Presentation|Views.UI2_Beta|add|true" 
@@ -269,68 +209,8 @@
                 Command="{Binding PerformViewInjectionCommand}"
                 CommandParameter="VNC.WPF.Presentation|Views.UI2_Beta|remove" 
                 Content="remove UI2_Beta" HorizontalContentAlignment="Right" />
-
-            <Button
-                Command="{Binding PerformViewInjectionCommand}" 
-                CommandParameter="VNC.WPF.Presentation|Views.UI3_Beta|add" 
-                Content="Inject (add) UI3_Beta" HorizontalContentAlignment="Left" />
-
-            <Button
-                Command="{Binding PerformViewInjectionCommand}" 
-                CommandParameter="VNC.WPF.Presentation|Views.UI3_Beta|activate" 
-                Content="activate UI3_Beta" HorizontalContentAlignment="Right" />
-
-            <Button
-                Command="{Binding PerformViewInjectionCommand}"
-                CommandParameter="VNC.WPF.Presentation|Views.UI3_Beta|deactivate" 
-                Content="deactivate UI3_Beta" HorizontalContentAlignment="Right" />
-
-            <Button
-                Command="{Binding PerformViewInjectionCommand}"
-                CommandParameter="VNC.WPF.Presentation|Views.UI3_Beta|remove" 
-                Content="remove UI3_Beta" HorizontalContentAlignment="Right" />
-
-            <Button
-                Command="{Binding PerformViewInjectionCommand}" 
-                CommandParameter="VNC.WPF.Presentation|Views.UI4_Beta|add" 
-                Content="Inject (add) UI4_Beta" HorizontalContentAlignment="Left" />
-
-            <Button
-                Command="{Binding PerformViewInjectionCommand}" 
-                CommandParameter="VNC.WPF.Presentation|Views.UI4_Beta|activate" 
-                Content="activate UI4_Beta" HorizontalContentAlignment="Right" />
-
-            <Button
-                Command="{Binding PerformViewInjectionCommand}"
-                CommandParameter="VNC.WPF.Presentation|Views.UI4_Beta|deactivate" 
-                Content="deactivate UI4_Beta" HorizontalContentAlignment="Right" />
-
-            <Button
-                Command="{Binding PerformViewInjectionCommand}"
-                CommandParameter="VNC.WPF.Presentation|Views.UI4_Beta|remove" 
-                Content="remove UI4_Beta" HorizontalContentAlignment="Right" />
-
-            <Button
-                Command="{Binding PerformViewInjectionCommand}" 
-                CommandParameter="VNC.WPF.Presentation|Views.UI5_Beta|add" 
-                Content="Inject (add) UI5_Beta" HorizontalContentAlignment="Left" />
-
-            <Button
-                Command="{Binding PerformViewInjectionCommand}" 
-                CommandParameter="VNC.WPF.Presentation|Views.UI5_Beta|activate" 
-                Content="activate UI5_Beta" HorizontalContentAlignment="Right" />
-
-            <Button
-                Command="{Binding PerformViewInjectionCommand}"
-                CommandParameter="VNC.WPF.Presentation|Views.UI5_Beta|deactivate" 
-                Content="deactivate UI5_Beta" HorizontalContentAlignment="Right" />
-
-            <Button
-                Command="{Binding PerformViewInjectionCommand}"
-                CommandParameter="VNC.WPF.Presentation|Views.UI5_Beta|remove" 
-                Content="remove UI5_Beta" HorizontalContentAlignment="Right" />
-
-        </StackPanel>
+                
+       </StackPanel>
        
        <ContentControl prism:RegionManager.RegionName="{x:Static core:RegionNames.ViewInjectionView}" />
 

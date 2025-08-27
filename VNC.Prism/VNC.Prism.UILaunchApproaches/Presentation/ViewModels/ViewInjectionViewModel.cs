@@ -3,8 +3,6 @@ using System.Linq;
 using System.Reflection;
 using System.Windows.Input;
 
-using VNC.UIApproaches.Core;
-
 using Prism.Commands;
 using Prism.Events;
 using Prism.Regions;
@@ -12,9 +10,10 @@ using Prism.Services.Dialogs;
 
 using VNC;
 using VNC.Core.Mvvm;
+using VNC.Prism.UILaunchApproaches.Core;
 using VNC.WPF.Presentation.Views;
 
-namespace VNC.UIApproaches.Presentation.ViewModels
+namespace VNC.Prism.UILaunchApproaches.Presentation.ViewModels
 {
     // NOTE(crhodes)
     // This ViewModel has knowledge of concrete views, UI1, UI2, UI3
@@ -194,20 +193,13 @@ namespace VNC.UIApproaches.Presentation.ViewModels
                 case "add":
 
                     if (!viewExists)
-                        try
+                        if (useContainer)
                         {
-                            if (useContainer)
-                            {
-                                region.Add(Common.Container.Resolve(ucType2));
-                            }
-                            else
-                            {
-                                region.Add(Activator.CreateInstance(ucType2));
-                            }
+                            region.Add(Common.Container.Resolve(ucType2));
                         }
-                        catch (Exception ex)
+                        else
                         {
-                            Message = ex.ToString();
+                            region.Add(Activator.CreateInstance(ucType2));
                         }
 
                     break;
