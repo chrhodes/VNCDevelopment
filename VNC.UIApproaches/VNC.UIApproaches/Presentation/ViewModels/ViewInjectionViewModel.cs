@@ -194,13 +194,20 @@ namespace VNC.UIApproaches.Presentation.ViewModels
                 case "add":
 
                     if (!viewExists)
-                        if (useContainer)
+                        try
                         {
-                            region.Add(Common.Container.Resolve(ucType2));
+                            if (useContainer)
+                            {
+                                region.Add(Common.Container.Resolve(ucType2));
+                            }
+                            else
+                            {
+                                region.Add(Activator.CreateInstance(ucType2));
+                            }
                         }
-                        else
+                        catch (Exception ex)
                         {
-                            region.Add(Activator.CreateInstance(ucType2));
+                            Message = ex.ToString();
                         }
 
                     break;
