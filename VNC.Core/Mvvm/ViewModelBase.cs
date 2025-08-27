@@ -29,13 +29,6 @@ namespace VNC.Core.Mvvm
 
         #region Fields and Properties
 
-        [Display(AutoGenerateField = false)]
-        public IView View
-        {
-            get;
-            set;
-        }
-
         private Boolean _isBusy;
         public Boolean IsBusy
         {
@@ -73,6 +66,17 @@ namespace VNC.Core.Mvvm
                 _title = value;
                 OnPropertyChanged();
             }
+        }
+
+        #endregion
+
+        #region IViewModel
+
+        [Display(AutoGenerateField = false)]
+        public IView View
+        {
+            get;
+            set;
         }
 
         #endregion

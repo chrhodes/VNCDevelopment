@@ -217,7 +217,7 @@ namespace VNC.WPF.Presentation.Dx.Views
         private void DeveloperMode(Boolean developerMode)
         {
             Int64 startTicks = 0;
-            if (Common.VNCLogging.EventHandler) startTicks = Log.EVENT_HANDLER("Enter", Common.LOG_CATEGORY);
+            if (Common.VNCCoreLogging.EventHandler) startTicks = Log.EVENT_HANDLER("Enter", Common.LOG_CATEGORY);
 
             if (developerMode)
             { 
@@ -228,7 +228,7 @@ namespace VNC.WPF.Presentation.Dx.Views
                 DeveloperUIMode = Visibility.Collapsed;
             }
 
-            if (Common.VNCLogging.EventHandler) Log.EVENT_HANDLER("Exit", Common.LOG_CATEGORY, startTicks);
+            if (Common.VNCCoreLogging.EventHandler) Log.EVENT_HANDLER("Exit", Common.LOG_CATEGORY, startTicks);
         }
 
         private void OnClosing(object sender, System.ComponentModel.CancelEventArgs e)

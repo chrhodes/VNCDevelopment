@@ -112,11 +112,10 @@
            <dxg:GridControl x:Name="grdActiveViews" 
                             ItemsSource="{Binding ActiveViews}"  >
                <dxg:GridControl.Columns>
-                    <dxg:GridColumn Binding="{Binding VMessage}" Header="VMessage" ReadOnly="True" />
-                    <dxg:GridColumn Binding="{Binding Message}" Header="Message" ReadOnly="True" />
-                    <dxg:GridColumn Binding="{Binding Name}" Header="Name" ReadOnly="True" />
-                    <dxg:GridColumn Binding="{Binding ViewType}" Header="ViewType" ReadOnly="True" />
-                    <dxg:GridColumn Binding="{Binding ViewModelType}" Header="ViewModelType" ReadOnly="True" />
+                   <dxg:GridColumn Binding="{Binding Message}" Header="Message" ReadOnly="True" />
+                   <dxg:GridColumn Binding="{Binding Name}" Header="Name" ReadOnly="True" />
+                   <dxg:GridColumn Binding="{Binding ViewType}" Header="ViewType" ReadOnly="True" />
+                   <dxg:GridColumn Binding="{Binding ViewModelType}" Header="ViewModelType" ReadOnly="True" />
                </dxg:GridControl.Columns>
                <dxg:GridControl.View>
                    <dxg:TableView ShowGroupPanel="False" BestFitModeOnSourceChange="AllRows"/>

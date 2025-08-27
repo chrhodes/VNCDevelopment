@@ -12,14 +12,14 @@ namespace VNC.WPF.Presentation.Views
         //public UI4()
         //{
         //    Int64 startTicks = 0;
-        //    if (Common.VNCLogging.Constructor) startTicks = Log.CONSTRUCTOR("Enter", Common.LOG_CATEGORY);
+        //    if (Common.VNCCoreLogging.Constructor) startTicks = Log.CONSTRUCTOR("Enter", Common.LOG_CATEGORY);
 
         //    InstanceCountV++;
 
         //    InitializeComponent();
         //    InitializeView("C()");
 
-        //    if (Common.VNCLogging.Constructor) Log.CONSTRUCTOR("Exit", Common.LOG_CATEGORY, startTicks);
+        //    if (Common.VNCCoreLogging.Constructor) Log.CONSTRUCTOR("Exit", Common.LOG_CATEGORY, startTicks);
         //}
 
         public UI4(UI4ViewModel viewModel)
@@ -37,13 +37,13 @@ namespace VNC.WPF.Presentation.Views
 
             InitializeView("C(VM)");
 
-            if (Common.VNCLogging.Constructor) Log.CONSTRUCTOR("Exit", Common.LOG_CATEGORY, startTicks);
+            if (Common.VNCCoreLogging.Constructor) Log.CONSTRUCTOR("Exit", Common.LOG_CATEGORY, startTicks);
         }
 
         private void InitializeView(string message)
         {
             Int64 startTicks = 0;
-            if (Common.VNCLogging.ViewLow) startTicks = Log.VIEW_LOW("Enter", Common.LOG_CATEGORY);
+            if (Common.VNCCoreLogging.ViewLow) startTicks = Log.VIEW_LOW("Enter", Common.LOG_CATEGORY);
 
             // Store information about the View, DataContext, and ViewModel 
             // for the DeveloperInfo control. Useful for debugging binding issues
@@ -64,7 +64,7 @@ namespace VNC.WPF.Presentation.Views
 
             tbVMessage.DataContext = this;
 
-            if (Common.VNCLogging.ViewLow) Log.VIEW_LOW("Exit", Common.LOG_CATEGORY, startTicks);
+            if (Common.VNCCoreLogging.ViewLow) Log.VIEW_LOW("Exit", Common.LOG_CATEGORY, startTicks);
         }
 
         private string _vMessage;
