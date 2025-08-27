@@ -17,12 +17,12 @@ namespace VNC.Core.Mvvm.Prism
         {
 
             Int64 startTicks = 0;
-            if (Common.VNCLogging.Constructor) startTicks = Log.CONSTRUCTOR("Enter", Common.LOG_CATEGORY);
+            if (Common.VNCCoreLogging.Constructor) startTicks = Log.CONSTRUCTOR("Enter", Common.LOG_CATEGORY);
 
             Container = container;
             RegionManager = regionManager;
 
-            if (Common.VNCLogging.Constructor) Log.CONSTRUCTOR("Exit", Common.LOG_CATEGORY, startTicks);
+            if (Common.VNCCoreLogging.Constructor) Log.CONSTRUCTOR("Exit", Common.LOG_CATEGORY, startTicks);
 
         }
 
@@ -44,11 +44,11 @@ namespace VNC.Core.Mvvm.Prism
         {
 
             Int64 startTicks = 0;
-            if (Common.VNCLogging.ModuleInitialize) startTicks = Log.CONSTRUCTOR("Enter", Common.LOG_CATEGORY);
+            if (Common.VNCCoreLogging.ModuleInitialize) startTicks = Log.CONSTRUCTOR("Enter", Common.LOG_CATEGORY);
 
 
 
-            if (Common.VNCLogging.ModuleInitialize) Log.CONSTRUCTOR("Exit", Common.LOG_CATEGORY, startTicks);
+            if (Common.VNCCoreLogging.ModuleInitialize) Log.CONSTRUCTOR("Exit", Common.LOG_CATEGORY, startTicks);
 
 
         }
@@ -57,11 +57,11 @@ namespace VNC.Core.Mvvm.Prism
         {
 
             Int64 startTicks = 0;
-            if (Common.VNCLogging.ModuleInitialize) startTicks = Log.CONSTRUCTOR("Enter", Common.LOG_CATEGORY);
+            if (Common.VNCCoreLogging.ModuleInitialize) startTicks = Log.CONSTRUCTOR("Enter", Common.LOG_CATEGORY);
 
 
 
-            if (Common.VNCLogging.ModuleInitialize) Log.CONSTRUCTOR("Exit", Common.LOG_CATEGORY, startTicks);
+            if (Common.VNCCoreLogging.ModuleInitialize) Log.CONSTRUCTOR("Exit", Common.LOG_CATEGORY, startTicks);
 
         }
     }

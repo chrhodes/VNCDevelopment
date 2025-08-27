@@ -16,18 +16,18 @@ namespace VNC.Core.Mvvm.Prism
         {
 
             Int64 startTicks = 0;
-            if (Common.VNCLogging.Presentation) startTicks = Log.PRESENTATION($"Enter", Common.LOG_CATEGORY);
+            if (Common.VNCCoreLogging.Presentation) startTicks = Log.PRESENTATION($"Enter", Common.LOG_CATEGORY);
 
             // Attach to all regions.  But, can also pick and choose
 
 
             if (Region.ActiveViews.Count() > 0)
-            if (Common.VNCLogging.Presentation) Log.PRESENTATION($"Region.ActiveViews {Region.ActiveViews.Count()} {Region.ActiveViews.First()}", Common.LOG_CATEGORY);
+            if (Common.VNCCoreLogging.Presentation) Log.PRESENTATION($"Region.ActiveViews {Region.ActiveViews.Count()} {Region.ActiveViews.First()}", Common.LOG_CATEGORY);
 
             Region.ActiveViews.CollectionChanged += ActiveViews_CollectionChanged;
 
 
-            if (Common.VNCLogging.Presentation) Log.PRESENTATION($"Exit", Common.LOG_CATEGORY, startTicks);
+            if (Common.VNCCoreLogging.Presentation) Log.PRESENTATION($"Exit", Common.LOG_CATEGORY, startTicks);
 
         }
 
@@ -35,13 +35,13 @@ namespace VNC.Core.Mvvm.Prism
         {
 
             Int64 startTicks = 0;
-            if (Common.VNCLogging.Presentation) startTicks = Log.PRESENTATION($"Enter", Common.LOG_CATEGORY);
+            if (Common.VNCCoreLogging.Presentation) startTicks = Log.PRESENTATION($"Enter", Common.LOG_CATEGORY);
 
             if (e.Action == NotifyCollectionChangedAction.Add)
             {
                 foreach (var item in e.NewItems)
                 {
-                    if (Common.VNCLogging.Presentation) startTicks = Log.PRESENTATION($"{item.GetType()}", Common.LOG_CATEGORY);
+                    if (Common.VNCCoreLogging.Presentation) startTicks = Log.PRESENTATION($"{item.GetType()}", Common.LOG_CATEGORY);
 
                     IRegionManager regionManager = Region.RegionManager;
 
@@ -65,14 +65,14 @@ namespace VNC.Core.Mvvm.Prism
             {
                 foreach (var item in e.OldItems)
                 {
-                    if (Common.VNCLogging.Presentation) startTicks = Log.PRESENTATION($"{item.GetType()}", Common.LOG_CATEGORY);
+                    if (Common.VNCCoreLogging.Presentation) startTicks = Log.PRESENTATION($"{item.GetType()}", Common.LOG_CATEGORY);
 
                     InvokeOnRegionManagerAwareElement(item, x => x.RegionManager = null);
                 }
             }
 
 
-            if (Common.VNCLogging.Presentation) Log.PRESENTATION($"Exit", Common.LOG_CATEGORY, startTicks);
+            if (Common.VNCCoreLogging.Presentation) Log.PRESENTATION($"Exit", Common.LOG_CATEGORY, startTicks);
 
         }
 
@@ -80,7 +80,7 @@ namespace VNC.Core.Mvvm.Prism
         {
 
             Int64 startTicks = 0;
-            if (Common.VNCLogging.Presentation) startTicks = Log.PRESENTATION($"Enter {item.GetType()}", Common.LOG_CATEGORY);
+            if (Common.VNCCoreLogging.Presentation) startTicks = Log.PRESENTATION($"Enter {item.GetType()}", Common.LOG_CATEGORY);
 
 
             // Want to support View and/or ViewModel first approaches
@@ -93,7 +93,7 @@ namespace VNC.Core.Mvvm.Prism
 
             if (rmAwareItem != null)
             {
-                if (Common.VNCLogging.Presentation) startTicks = Log.PRESENTATION($"VM rmAware", Common.LOG_CATEGORY);
+                if (Common.VNCCoreLogging.Presentation) startTicks = Log.PRESENTATION($"VM rmAware", Common.LOG_CATEGORY);
 
                 invocation(rmAwareItem);
             }
@@ -132,13 +132,13 @@ namespace VNC.Core.Mvvm.Prism
                         }
                     }
 
-                    if (Common.VNCLogging.Presentation) startTicks = Log.PRESENTATION($"V rmAwareDataContext", Common.LOG_CATEGORY);
+                    if (Common.VNCCoreLogging.Presentation) startTicks = Log.PRESENTATION($"V rmAwareDataContext", Common.LOG_CATEGORY);
 
                     invocation(rmAwareDataContext);
                 }
             }
 
-            if (Common.VNCLogging.Presentation) Log.PRESENTATION($"Exit", Common.LOG_CATEGORY, startTicks);
+            if (Common.VNCCoreLogging.Presentation) Log.PRESENTATION($"Exit", Common.LOG_CATEGORY, startTicks);
 
         }
     }

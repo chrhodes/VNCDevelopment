@@ -13,7 +13,7 @@ namespace VNC.WPF.Presentation.Views
         public DeveloperUIInfo()
         {
             Int64 startTicks = 0;
-            if (Common.VNCLogging.Constructor) startTicks = Log.CONSTRUCTOR("Enter", Common.LOG_CATEGORY);
+            if (Common.VNCCoreLogging.Constructor) startTicks = Log.CONSTRUCTOR("Enter", Common.LOG_CATEGORY);
 
             InitializeComponent();
 
@@ -28,7 +28,7 @@ namespace VNC.WPF.Presentation.Views
 
             //InitializeView();
 
-            if (Common.VNCLogging.Constructor) Log.CONSTRUCTOR("Exit", Common.LOG_CATEGORY, startTicks);
+            if (Common.VNCCoreLogging.Constructor) Log.CONSTRUCTOR("Exit", Common.LOG_CATEGORY, startTicks);
         }
         
         //public HostSelector(IHostSelectorViewModel viewModel)
@@ -48,7 +48,7 @@ namespace VNC.WPF.Presentation.Views
         private void InitializeView()
         {
             Int64 startTicks = 0;
-            if (Common.VNCLogging.ViewLow) startTicks = Log.VIEW_LOW("Enter", Common.LOG_CATEGORY);
+            if (Common.VNCCoreLogging.ViewLow) startTicks = Log.VIEW_LOW("Enter", Common.LOG_CATEGORY);
 
             // NOTE(crhodes)
             // Put things here that initialize the View
@@ -59,7 +59,7 @@ namespace VNC.WPF.Presentation.Views
 
             // Establish any additional DataContext(s), e.g. to things held in this View
 
-            if (Common.VNCLogging.ViewLow) Log.VIEW_LOW("Exit", Common.LOG_CATEGORY, startTicks);
+            if (Common.VNCCoreLogging.ViewLow) Log.VIEW_LOW("Exit", Common.LOG_CATEGORY, startTicks);
         }
         
         #endregion

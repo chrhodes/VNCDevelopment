@@ -4,6 +4,7 @@ using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Regions;
 
+using VNC.UIApproaches.Core;
 using VNC.UIApproaches.Presentation.ViewModels;
 using VNC.UIApproaches.Presentation.Views;
 using VNC.WPF.Presentation.ViewModels;
@@ -309,11 +310,11 @@ namespace VNC.UIApproaches
 
             // _regionManager.RegisterViewWithRegion(RegionNames.ViewABCDRegion, typeof(IViewABCD));
 
-            //_regionManager.RegisterViewWithRegion(RegionNames.UILaunchApproaches, typeof(UILaunchApproaches));
+            _regionManager.RegisterViewWithRegion(RegionNames.UILaunchApproaches, typeof(UILaunchApproaches));
 
-            //_regionManager.RegisterViewWithRegion(RegionNames.ViewInjection, typeof(ViewInjection));
-            //_regionManager.RegisterViewWithRegion(RegionNames.ViewDiscovery, typeof(ViewDiscovery));
-            //_regionManager.RegisterViewWithRegion(RegionNames.RegionNavigation, typeof(RegionNavigation));
+            _regionManager.RegisterViewWithRegion(RegionNames.ViewInjection, typeof(ViewInjection));
+            _regionManager.RegisterViewWithRegion(RegionNames.ViewDiscovery, typeof(ViewDiscovery));
+            _regionManager.RegisterViewWithRegion(RegionNames.RegionNavigation, typeof(RegionNavigation));
             //_regionManager.RegisterViewWithRegion(RegionNames.MultiStepProcess, typeof(MultiStepProcess));
 
             //_regionManager.RegisterViewWithRegion(RegionNames.MultiStepProcessViewMV, typeof(CatDetailMVA));

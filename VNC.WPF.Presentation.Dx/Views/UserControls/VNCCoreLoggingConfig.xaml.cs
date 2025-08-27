@@ -285,7 +285,7 @@ namespace VNC.WPF.Presentation.Dx.Views
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
             Int64 startTicks = 0;
-            if (Common.VNCLogging.EventHandler) startTicks = Log.EVENT_HANDLER("Enter", Common.LOG_CATEGORY);
+            if (Common.VNCCoreLogging.EventHandler) startTicks = Log.EVENT_HANDLER("Enter", Common.LOG_CATEGORY);
 
             ceInfo00C.IsChecked = Common.VNCCoreLogging.Info00;
             //ceInfo01C.IsChecked = Common.VNCCoreLogging.Info01;
@@ -342,7 +342,7 @@ namespace VNC.WPF.Presentation.Dx.Views
 
             ceINPC.IsChecked = Common.VNCCoreLogging.INPC;
 
-            if (Common.VNCLogging.EventHandler) Log.EVENT_HANDLER("Exit", Common.LOG_CATEGORY, startTicks);
+            if (Common.VNCCoreLogging.EventHandler) Log.EVENT_HANDLER("Exit", Common.LOG_CATEGORY, startTicks);
         }
 
         private void ceEnabled_EditValueChanged(object sender, DevExpress.Xpf.Editors.EditValueChangedEventArgs e)
