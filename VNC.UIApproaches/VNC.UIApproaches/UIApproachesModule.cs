@@ -1,9 +1,11 @@
 using System;
 
+using Prism.Events;
 using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Regions;
 
+using VNC.Core.Events;
 using VNC.UIApproaches.Core;
 using VNC.UIApproaches.Presentation.ViewModels;
 using VNC.UIApproaches.Presentation.Views;
@@ -18,12 +20,13 @@ namespace VNC.UIApproaches
 
         // 01
 
-        public UIApproachesModule(IRegionManager regionManager)
+        public UIApproachesModule(IEventAggregator eventAggregator, IRegionManager regionManager)
         {
             Int64 startTicks = 0;
             if (Common.VNCLogging.Constructor) startTicks = Log.CONSTRUCTOR("Enter", Common.LOG_CATEGORY);
 
             _regionManager = regionManager;
+            Common.EventAggregator = eventAggregator;
 
             if (Common.VNCLogging.Constructor) Log.CONSTRUCTOR("Exit", Common.LOG_CATEGORY, startTicks);
         }
@@ -320,6 +323,9 @@ namespace VNC.UIApproaches
             //_regionManager.RegisterViewWithRegion(RegionNames.MultiStepProcessViewMV, typeof(CatDetailMVA));
 
             //var ok = _regionManager.Regions.ContainsRegionWithName(RegionNames.MultiStepProcessViewMV);
+
+            Common.EventAggregator.GetEvent<ModuleLoadedEvent>()
+                .Publish("UIApproachesModule");
 
             if (Common.VNCLogging.ModuleInitialize) Log.MODULE_INITIALIZE("Exit", Common.LOG_CATEGORY, startTicks);
         }
