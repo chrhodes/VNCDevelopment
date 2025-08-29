@@ -84,14 +84,6 @@
         </None>
     </ItemGroup>
 
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-        <DefineConstants>TRACE;LOGGING</DefineConstants>
-    </PropertyGroup>
-
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-        <DefineConstants>TRACE;LOGGING</DefineConstants>
-    </PropertyGroup>
-
     <PropertyGroup Condition="'$(Configuration)'=='Debug'">
         <!-- Uncoment next line to switch to ProjectReference(s) -->
          <!--<DefineConstants>$(DefineConstants);VNCPROJECTREF</DefineConstants>--> 

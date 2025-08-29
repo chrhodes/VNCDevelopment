@@ -56,6 +56,5 @@ namespace VNC.Core.DomainServices
         //Task UpdateAsync(TEntity entity);
 
         #endregion
-
     }
 }
