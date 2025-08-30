@@ -83,11 +83,11 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <StackPanel>
+            <StackPanel Width="200">
                 <TextBlock Text="UILaunchApproaches" />
                 <!-- <TextBlock Text="{Binding Message}" /> -->
-                <Button Content="Say Hello"
-                        Command="{Binding SayHelloCommand}" />
+                <!--<Button Content="Say Hello"
+                        Command="{Binding SayHelloCommand}" />-->
 
                 <dxlc:LayoutItem>
                     <Button
@@ -112,9 +112,9 @@
 
                 <dxlc:LayoutItem>
                     <Button
-                    Command="{Binding ThemedWindowHostModalCommand }"
-                    Content="{Binding ThemedWindowHostModalContent, FallbackValue='ThemedWindowHostModal' }"
-                    ToolTip="{Binding ThemedWindowHostModalToolTip, FallbackValue='ThemedWindowHostModal ToolTip' }" />
+                        Command="{Binding ThemedWindowHostModalCommand }"
+                        Content="{Binding ThemedWindowHostModalContent, FallbackValue='ThemedWindowHostModal' }"
+                        ToolTip="{Binding ThemedWindowHostModalToolTip, FallbackValue='ThemedWindowHostModal ToolTip' }" />
                 </dxlc:LayoutItem>
 
 

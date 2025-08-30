@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Forms;
 using System.Windows.Input;
 
 using Prism.Commands;
@@ -44,10 +45,9 @@ namespace VNC.UIApproaches.Presentation.ViewModels
             // Put things here that initialize the ViewModel
             // Initialize EventHandlers, Commands, etc.
 
-            SayHelloCommand = new DelegateCommand(SayHello, SayHelloCanExecute);
-
             LaunchCylon1Command = new DelegateCommand(LaunchCylon1, LaunchCylon1CanExecute);
             LaunchCylon2Command = new DelegateCommand(LaunchCylon2, LaunchCylon2CanExecute);
+
             ThemedWindowHostModelessCommand = new DelegateCommand(ThemedWindowHostModeless, ThemedWindowHostModelessCanExecute);
             ThemedWindowHostModalCommand = new DelegateCommand(ThemedWindowHostModal, ThemedWindowHostModalCanExecute);
 
@@ -90,29 +90,6 @@ namespace VNC.UIApproaches.Presentation.ViewModels
         #endregion
 
         #region Commands
-
-        #region SayHello Command
-
-        public ICommand SayHelloCommand { get; private set; }
-
-        private void SayHello()
-        {
-            Int64 startTicks = 0;
-            if (Common.VNCLogging.EventHandler) startTicks = Log.EVENT_HANDLER("Enter", Common.LOG_CATEGORY);
-
-            Message = $"Hello from {this.GetType()}";
-
-            PublishStatusMessage(Message);
-
-            if (Common.VNCLogging.EventHandler) Log.EVENT_HANDLER("Exit", Common.LOG_CATEGORY, startTicks);
-        }
-
-        private bool SayHelloCanExecute()
-        {
-            return true;
-        }
-
-        #endregion
 
         #region LaunchCylon1 Command
 
@@ -707,36 +684,9 @@ namespace VNC.UIApproaches.Presentation.ViewModels
             // )
             // );
 
-            // Uncomment this if you are telling someone else to handle this
-
-            // Common.EventAggregator.GetEvent<MVVM1Event>().Publish();
-
-            // May want EventArgs
-
-            //  EventAggregator.GetEvent<MVVM1Event>().Publish(
-            //      new MVVM1EventArgs()
-            //      {
-            //            Organization = _collectionMainViewModel.SelectedCollection.Organization,
-            //            Process = _contextMainViewModel.Context.SelectedProcess
-            //      });
-
-            // Start Cut Three - Put this in PrismEvents
-
-            // public class MVVM1Event : PubSubEvent { }
-
-            // End Cut Three
-
-            // Start Cut Four - Put this in places that listen for event
-
-            //Common.EventAggregator.GetEvent<MVVM1Event>().Subscribe(MVVM1);
-
-            // End Cut Four
-
             if (Common.VNCLogging.EventHandler) Log.EVENT_HANDLER("Exit", Common.LOG_CATEGORY, startTicks);
         }
 
-        // If using CommandParameter, figure out TYPE and fix above
-        //public bool MVVM1CanExecute(TYPE value)
         public bool MVVM1CanExecute()
         {
             // TODO(crhodes)
@@ -753,16 +703,6 @@ namespace VNC.UIApproaches.Presentation.ViewModels
         public string MVVM2Content { get; set; } = "MVVM2";
         public string MVVM2ToolTip { get; set; } = "MVVM2 ToolTip";
 
-        // Can get fancy and use Resources
-        //public string MVVM2Content { get; set; } = "ViewName_MVVM2Content";
-        //public string MVVM2ToolTip { get; set; } = "ViewName_MVVM2ContentToolTip";
-
-        // Put these in Resource File
-        //    <system:String x:Key="ViewName_MVVM2Content">MVVM2</system:String>
-        //    <system:String x:Key="ViewName_MVVM2ContentToolTip">MVVM2 ToolTip</system:String>
-
-        // If using CommandParameter, figure out TYPE and fix above
-        //public void MVVM2(TYPE value)
         public void MVVM2()
         {
             Int64 startTicks = 0;
@@ -773,30 +713,20 @@ namespace VNC.UIApproaches.Presentation.ViewModels
 
             PublishStatusMessage(Message);
 
-            // Uncomment this if you are telling someone else to handle this
+            // FIX(crhodes)
 
-            // Common.EventAggregator.GetEvent<MVVM2Event>().Publish();
+            //if (vncMVVM_VA_Host is null) vncMVVM_VA_Host = new DxThemedWindowHost(Common.EventAggregator);
+            //// NOTE(crhodes)
+            //// This does not wire View to ViewModel
+            //// Because we HAVE NOT Registered ViewAViewModel in VNCVisioToolsApplicationModules
+            //// Parameterless ViewA() constructor is called.
 
-            // May want EventArgs
-
-            //  EventAggregator.GetEvent<MVVM2Event>().Publish(
-            //      new MVVM2EventArgs()
-            //      {
-            //            Organization = _collectionMainViewModel.SelectedCollection.Organization,
-            //            Process = _contextMainViewModel.Context.SelectedProcess
-            //      });
-
-            // Start Cut Three - Put this in PrismEvents
-
-            // public class MVVM2Event : PubSubEvent { }
-
-            // End Cut Three
-
-            // Start Cut Four - Put this in places that listen for event
-
-            //Common.EventAggregator.GetEvent<MVVM2Event>().Subscribe(MVVM2);
-
-            // End Cut Four
+            //vncMVVM_VA_Host.DisplayUserControlInHost(
+            //    "MVVM ViewA First - No Registrations - DI Resolve",
+            //    Common.DEFAULT_WINDOW_WIDTH_SMALL, Common.DEFAULT_WINDOW_HEIGHT_SMALL,
+            //    ShowWindowMode.Modeless_Show,
+            //    (ViewA)Common.ApplicationBootstrapper.Container.Resolve(typeof(ViewA))
+            //);
 
             if (Common.VNCLogging.EventHandler) Log.EVENT_HANDLER("Exit", Common.LOG_CATEGORY, startTicks);
         }
@@ -819,16 +749,6 @@ namespace VNC.UIApproaches.Presentation.ViewModels
         public string MVVM3Content { get; set; } = "MVVM3";
         public string MVVM3ToolTip { get; set; } = "MVVM3 ToolTip";
 
-        // Can get fancy and use Resources
-        //public string MVVM3Content { get; set; } = "ViewName_MVVM3Content";
-        //public string MVVM3ToolTip { get; set; } = "ViewName_MVVM3ContentToolTip";
-
-        // Put these in Resource File
-        //    <system:String x:Key="ViewName_MVVM3Content">MVVM3</system:String>
-        //    <system:String x:Key="ViewName_MVVM3ContentToolTip">MVVM3 ToolTip</system:String>
-
-        // If using CommandParameter, figure out TYPE and fix above
-        //public void MVVM3(TYPE value)
         public void MVVM3()
         {
             Int64 startTicks = 0;
@@ -839,30 +759,20 @@ namespace VNC.UIApproaches.Presentation.ViewModels
 
             PublishStatusMessage(Message);
 
-            // Uncomment this if you are telling someone else to handle this
+            // FIX(crhodes)
 
-            // Common.EventAggregator.GetEvent<MVVM3Event>().Publish();
+            //if (vncMVVM_VAVMDI_Host is null) vncMVVM_VAVMDI_Host = new DxThemedWindowHost(Common.EventAggregator);
 
-            // May want EventArgs
+            //// NOTE(crhodes)
+            //// This does wire View to ViewModel
+            //// Because ViewModel is passed a View (DI) and wires itself to View
 
-            //  EventAggregator.GetEvent<MVVM3Event>().Publish(
-            //      new MVVM3EventArgs()
-            //      {
-            //            Organization = _collectionMainViewModel.SelectedCollection.Organization,
-            //            Process = _contextMainViewModel.Context.SelectedProcess
-            //      });
-
-            // Start Cut Three - Put this in PrismEvents
-
-            // public class MVVM3Event : PubSubEvent { }
-
-            // End Cut Three
-
-            // Start Cut Four - Put this in places that listen for event
-
-            //Common.EventAggregator.GetEvent<MVVM3Event>().Subscribe(MVVM3);
-
-            // End Cut Four
+            //vncMVVM_VAVMDI_Host.DisplayUserControlInHost(
+            //    "MVVM ViewAViewModel First (ViewModel is passed new View) - DI Resolve",
+            //    Common.DEFAULT_WINDOW_WIDTH_SMALL, Common.DEFAULT_WINDOW_HEIGHT_SMALL,
+            //    ShowWindowMode.Modeless_Show,
+            //    (ViewAViewModel)Common.ApplicationBootstrapper.Container.Resolve(typeof(ViewAViewModel))
+            //);
 
             if (Common.VNCLogging.EventHandler) Log.EVENT_HANDLER("Exit", Common.LOG_CATEGORY, startTicks);
         }
@@ -885,50 +795,31 @@ namespace VNC.UIApproaches.Presentation.ViewModels
         public string MVVM4Content { get; set; } = "MVVM4";
         public string MVVM4ToolTip { get; set; } = "MVVM4 ToolTip";
 
-        // Can get fancy and use Resources
-        //public string MVVM4Content { get; set; } = "ViewName_MVVM4Content";
-        //public string MVVM4ToolTip { get; set; } = "ViewName_MVVM4ContentToolTip";
-
-        // Put these in Resource File
-        //    <system:String x:Key="ViewName_MVVM4Content">MVVM4</system:String>
-        //    <system:String x:Key="ViewName_MVVM4ContentToolTip">MVVM4 ToolTip</system:String>
-
-        // If using CommandParameter, figure out TYPE and fix above
-        //public void MVVM4(TYPE value)
         public void MVVM4()
         {
             Int64 startTicks = 0;
             if (Common.VNCLogging.EventHandler) startTicks = Log.EVENT_HANDLER("Enter", Common.LOG_CATEGORY);
-            // TODO(crhodes)
-            // Do something amazing.
+
             Message = "Cool, you called MVVM4";
 
             PublishStatusMessage(Message);
 
-            // Uncomment this if you are telling someone else to handle this
+            // FIX(crhodes)
 
-            // Common.EventAggregator.GetEvent<MVVM4Event>().Publish();
+            //// NOTE(crhodes)
+            ///
+            //if (vncMVVM_VB_Host is null) vncMVVM_VB_Host = new DxThemedWindowHost(Common.EventAggregator);
 
-            // May want EventArgs
+            //// NOTE(crhodes)
+            //// This does wire View to ViewModel
+            //// Because we have Registered ViewBViewModel in VNCVisioToolsApplicationModules
 
-            //  EventAggregator.GetEvent<MVVM4Event>().Publish(
-            //      new MVVM4EventArgs()
-            //      {
-            //            Organization = _collectionMainViewModel.SelectedCollection.Organization,
-            //            Process = _contextMainViewModel.Context.SelectedProcess
-            //      });
-
-            // Start Cut Three - Put this in PrismEvents
-
-            // public class MVVM4Event : PubSubEvent { }
-
-            // End Cut Three
-
-            // Start Cut Four - Put this in places that listen for event
-
-            //Common.EventAggregator.GetEvent<MVVM4Event>().Subscribe(MVVM4);
-
-            // End Cut Four
+            //vncMVVM_VB_Host.DisplayUserControlInHost(
+            //    "MVVM ViewB First (View is passed new ViewModel) DI Resolve",
+            //    Common.DEFAULT_WINDOW_WIDTH_SMALL, Common.DEFAULT_WINDOW_HEIGHT_SMALL,
+            //    ShowWindowMode.Modeless_Show,
+            //    (ViewB)Common.ApplicationBootstrapper.Container.Resolve(typeof(ViewB))
+            //);
 
             if (Common.VNCLogging.EventHandler) Log.EVENT_HANDLER("Exit", Common.LOG_CATEGORY, startTicks);
         }
@@ -951,16 +842,6 @@ namespace VNC.UIApproaches.Presentation.ViewModels
         public string MVVM5Content { get; set; } = "MVVM5";
         public string MVVM5ToolTip { get; set; } = "MVVM5 ToolTip";
 
-        // Can get fancy and use Resources
-        //public string MVVM5Content { get; set; } = "ViewName_MVVM5Content";
-        //public string MVVM5ToolTip { get; set; } = "ViewName_MVVM5ContentToolTip";
-
-        // Put these in Resource File
-        //    <system:String x:Key="ViewName_MVVM5Content">MVVM5</system:String>
-        //    <system:String x:Key="ViewName_MVVM5ContentToolTip">MVVM5 ToolTip</system:String>
-
-        // If using CommandParameter, figure out TYPE and fix above
-        //public void MVVM5(TYPE value)
         public void MVVM5()
         {
             Int64 startTicks = 0;
@@ -971,36 +852,25 @@ namespace VNC.UIApproaches.Presentation.ViewModels
 
             PublishStatusMessage(Message);
 
-            // Uncomment this if you are telling someone else to handle this
+            // FIX(crhodes)
 
-            // Common.EventAggregator.GetEvent<MVVM5Event>().Publish();
+            //if (vncMVVM_VC1_Host is null) vncMVVM_VC1_Host = new DxThemedWindowHost(Common.EventAggregator);
 
-            // May want EventArgs
+            //// NOTE(crhodes)
+            //// This does wire View to ViewModel
+            //// C1 has C1() and C1(ViewModel) constructors. No DI Registrations
+            //// NB.  AutoWireViewModel=false
 
-            //  EventAggregator.GetEvent<MVVM5Event>().Publish(
-            //      new MVVM5EventArgs()
-            //      {
-            //            Organization = _collectionMainViewModel.SelectedCollection.Organization,
-            //            Process = _contextMainViewModel.Context.SelectedProcess
-            //      });
-
-            // Start Cut Three - Put this in PrismEvents
-
-            // public class MVVM5Event : PubSubEvent { }
-
-            // End Cut Three
-
-            // Start Cut Four - Put this in places that listen for event
-
-            //Common.EventAggregator.GetEvent<MVVM5Event>().Subscribe(MVVM5);
-
-            // End Cut Four
+            //vncMVVM_VC1_Host.DisplayUserControlInHost(
+            //    "MVVM ViewC1 First.  ViewC1 has C1() and C1(ViewModel) constructors. No DI Registrations",
+            //    Common.DEFAULT_WINDOW_WIDTH_SMALL, Common.DEFAULT_WINDOW_HEIGHT_SMALL,
+            //    ShowWindowMode.Modeless_Show,
+            //(ViewC1)Common.ApplicationBootstrapper.Container.Resolve(typeof(ViewC1))
+            //);
 
             if (Common.VNCLogging.EventHandler) Log.EVENT_HANDLER("Exit", Common.LOG_CATEGORY, startTicks);
         }
 
-        // If using CommandParameter, figure out TYPE and fix above
-        //public bool MVVM5CanExecute(TYPE value)
         public bool MVVM5CanExecute()
         {
             // TODO(crhodes)
@@ -1017,50 +887,30 @@ namespace VNC.UIApproaches.Presentation.ViewModels
         public string MVVM6Content { get; set; } = "MVVM6";
         public string MVVM6ToolTip { get; set; } = "MVVM6 ToolTip";
 
-        // Can get fancy and use Resources
-        //public string MVVM6Content { get; set; } = "ViewName_MVVM6Content";
-        //public string MVVM6ToolTip { get; set; } = "ViewName_MVVM6ContentToolTip";
-
-        // Put these in Resource File
-        //    <system:String x:Key="ViewName_MVVM6Content">MVVM6</system:String>
-        //    <system:String x:Key="ViewName_MVVM6ContentToolTip">MVVM6 ToolTip</system:String>
-
-        // If using CommandParameter, figure out TYPE and fix above
-        //public void MVVM6(TYPE value)
         public void MVVM6()
         {
             Int64 startTicks = 0;
             if (Common.VNCLogging.EventHandler) startTicks = Log.EVENT_HANDLER("Enter", Common.LOG_CATEGORY);
-            // TODO(crhodes)
-            // Do something amazing.
+
             Message = "Cool, you called MVVM6";
 
             PublishStatusMessage(Message);
 
-            // Uncomment this if you are telling someone else to handle this
+            // FIX(crhodes)
 
-            // Common.EventAggregator.GetEvent<MVVM6Event>().Publish();
+            //if (vncMVVM_VC2_Host is null) vncMVVM_VC2_Host = new DxThemedWindowHost(Common.EventAggregator);
 
-            // May want EventArgs
+            //// NOTE(crhodes)
+            //// This does wire View to ViewModel
+            //// Because we have removed the default ViewC2 Constructor
+            //// and Registered ViewCViewModel in VNCVisioToolsApplicationModules
 
-            //  EventAggregator.GetEvent<MVVM6Event>().Publish(
-            //      new MVVM6EventArgs()
-            //      {
-            //            Organization = _collectionMainViewModel.SelectedCollection.Organization,
-            //            Process = _contextMainViewModel.Context.SelectedProcess
-            //      });
-
-            // Start Cut Three - Put this in PrismEvents
-
-            // public class MVVM6Event : PubSubEvent { }
-
-            // End Cut Three
-
-            // Start Cut Four - Put this in places that listen for event
-
-            //Common.EventAggregator.GetEvent<MVVM6Event>().Subscribe(MVVM6);
-
-            // End Cut Four
+            //vncMVVM_VC2_Host.DisplayUserControlInHost(
+            //    "MVVM ViewC2 First (View is passed new ViewModel) DI Resolve",
+            //    Common.DEFAULT_WINDOW_WIDTH_SMALL, Common.DEFAULT_WINDOW_HEIGHT_SMALL,
+            //    ShowWindowMode.Modeless_Show,
+            //    (ViewC2)Common.ApplicationBootstrapper.Container.Resolve(typeof(ViewC2))
+            //);
 
             if (Common.VNCLogging.EventHandler) Log.EVENT_HANDLER("Exit", Common.LOG_CATEGORY, startTicks);
         }

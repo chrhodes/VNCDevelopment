@@ -133,7 +133,6 @@ namespace VNC.UIApproaches.Presentation.Views
 
         #endregion
 
-
         #region IInstanceCountV
 
         private static Int32 _instanceCountV;
