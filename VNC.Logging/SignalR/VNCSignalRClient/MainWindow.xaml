@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="{Binding ProductName}"
-        Height="400" Width="600"
-        MinWidth="400" MinHeight="600"
+        Width="775" MinWidth="425"
+        Height="800" MinHeight="425"
         ResizeMode="CanResizeWithGrip"
 >
     <Window.Resources>

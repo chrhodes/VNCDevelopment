@@ -1,13 +1,14 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <OutputType>WinExe</OutputType>
         <TargetFrameworks>net8.0-windows</TargetFrameworks>
         <UseWPF>true</UseWPF>
         <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
-        <VersionPrefix>1.2.1</VersionPrefix>
+        <VersionPrefix>3.2.0</VersionPrefix>        
         <VersionSuffix>Release</VersionSuffix>
-        <FileVersion>2025.05.04</FileVersion>
+        <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>        
+        <FileVersion>2025.12.24</FileVersion>
         <Description>SignalR Hub</Description>
         <ImplicitUsings>disable</ImplicitUsings>
     </PropertyGroup>
@@ -45,10 +46,24 @@
         </When>
         <When Condition="'!$(DefineConstants.Contains(VNCPROJECTREF))'">
             <ItemGroup>
-                <PackageReference Include="VNC.Logging" Version="3.0.0" />
-                <PackageReference Include="VNC.Logging.TraceListeners.SignalRCoreListeners" Version="3.0.0" />                
+                <PackageReference Include="VNC.Logging" Version="3.2.0" />
+                <PackageReference Include="VNC.Logging.TraceListeners.SignalRCoreListeners" Version="3.2.0" />                
             </ItemGroup>
         </When>
     </Choose>
+
+    <!--This updates the file version to the current date.-->
+
+    <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+        <Exec Command="powershell.exe -File &quot;$(ProjectDir)\Execute-PreBuild.ps1&quot; -Verbose $(ProjectFileName)" />
+    </Target>
+
+    <!--<Target Name="PreBuild" BeforeTargets="PreBuildEvent" Condition="'$(Configuration)'=='Release'">
+        <Exec Command="powershell.exe -File &quot;$(ProjectDir)\Execute-PreBuild.ps1&quot; -Verbose $(ProjectFileName)" />
+    </Target>-->
+
+    <!--<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+        <Exec Command="powershell.exe -File &quot;$(ProjectDir)\Execute-PostBuild.ps1&quot; -Verbose $(ProjectFileName)" />
+    </Target>-->    
 
 </Project>

@@ -7,7 +7,7 @@
         <AssemblyOriginatorKeyFile>VNC.snk</AssemblyOriginatorKeyFile>        
         <VersionPrefix>3.2.0</VersionPrefix>
         <VersionSuffix>Release</VersionSuffix>
-        <FileVersion>2025.08.20</FileVersion>    
+        <FileVersion>2025.12.24</FileVersion>    
         <Description>Logging Wrapper on top of EnterpriseLibrary.Logging</Description>
         <LangVersion>12.0</LangVersion>
         <Nullable>enable</Nullable>
@@ -119,13 +119,18 @@
 
     <!--This updates the file version to the current date.-->
 
-    <Target Name="PreBuild" BeforeTargets="PreBuildEvent" Condition="'$(Configuration)'=='Release'">
+    <!--This updates the file version to the current date.-->
+
+    <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
         <Exec Command="powershell.exe -File &quot;$(ProjectDir)\Execute-PreBuild.ps1&quot; -Verbose $(ProjectFileName)" />
     </Target>
+
+    <!--<Target Name="PreBuild" BeforeTargets="PreBuildEvent" Condition="'$(Configuration)'=='Release'">
+        <Exec Command="powershell.exe -File &quot;$(ProjectDir)\Execute-PreBuild.ps1&quot; -Verbose $(ProjectFileName)" />
+    </Target>-->
 
     <!--<Target Name="PostBuild" AfterTargets="PostBuildEvent">
         <Exec Command="powershell.exe -File &quot;$(ProjectDir)\Execute-PostBuild.ps1&quot; -Verbose $(ProjectFileName)" />
     </Target>-->
-
 
 </Project>

@@ -6,7 +6,9 @@
         xmlns:local="clr-namespace:VNCSignalRServerHub"
         mc:Ignorable="d"
         Title="{Binding ProductName}"
-        Height="550" Width="450"
+        Width="425" MinWidth="425"
+        Height="425" MinHeight="425"
+        ResizeMode="CanResizeWithGrip"
 >
     <Window.Resources>
         <SolidColorBrush x:Key="RedText" Color="#c70000" />

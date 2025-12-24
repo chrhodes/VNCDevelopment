@@ -104,7 +104,7 @@ namespace VNCSignalRClient
             }
             catch (Exception ex)
             {
-                Log.Error(ex, Common.LOG_CATEGORY);
+                Log.ERROR(ex, Common.LOG_CATEGORY);
             }
         }
 
@@ -159,7 +159,7 @@ namespace VNCSignalRClient
             }
             catch (Exception ex)
             {
-                Log.Error(ex, Common.LOG_CATEGORY);
+                Log.ERROR(ex, Common.LOG_CATEGORY);
             }
         }
 
@@ -199,7 +199,7 @@ namespace VNCSignalRClient
             }
             catch (Exception ex)
             {
-                Log.Error(ex, Common.LOG_CATEGORY);
+                Log.ERROR(ex, Common.LOG_CATEGORY);
             }
         }
 
@@ -239,7 +239,7 @@ namespace VNCSignalRClient
             }
             catch (Exception ex)
             {
-                Log.Error(ex, Common.LOG_CATEGORY);
+                Log.ERROR(ex, Common.LOG_CATEGORY);
             }
         }
 
@@ -294,7 +294,7 @@ namespace VNCSignalRClient
             }
             catch (Exception ex)
             {
-                Log.Error(ex, Common.LOG_CATEGORY);
+                Log.ERROR(ex, Common.LOG_CATEGORY);
             }
         }
 
@@ -395,75 +395,75 @@ namespace VNCSignalRClient
                     }
                 }
 #endif
-                Log.Error("Error", Common.LOG_CATEGORY);
-                Log.Warning("Warning", Common.LOG_CATEGORY);
+                Log.ERROR("Error", Common.LOG_CATEGORY);
+                Log.WARNING("Warning", Common.LOG_CATEGORY);
 
-                Log.Info("Info", Common.LOG_CATEGORY);
-                Log.Info1("Info1", Common.LOG_CATEGORY);
-                Log.Info2("Info2", Common.LOG_CATEGORY);
-                Log.Info3("Info3", Common.LOG_CATEGORY);
-                Log.Info4("Info4", Common.LOG_CATEGORY);
+                Log.INFO("Info", Common.LOG_CATEGORY);
+                Log.INFO1("Info1", Common.LOG_CATEGORY);
+                Log.INFO2("Info2", Common.LOG_CATEGORY);
+                Log.INFO3("Info3", Common.LOG_CATEGORY);
+                Log.INFO4("Info4", Common.LOG_CATEGORY);
 
-                Log.Debug("Debug", Common.LOG_CATEGORY);
-                Log.Debug1("Debug1", Common.LOG_CATEGORY);
-                Log.Debug2("Debug2", Common.LOG_CATEGORY);
-                Log.Debug3("Debug3", Common.LOG_CATEGORY);
-                Log.Debug4("Debug4", Common.LOG_CATEGORY);
+                Log.DEBUG("Debug", Common.LOG_CATEGORY);
+                Log.DEBUG1("Debug1", Common.LOG_CATEGORY);
+                Log.DEBUG2("Debug2", Common.LOG_CATEGORY);
+                Log.DEBUG3("Debug3", Common.LOG_CATEGORY);
+                Log.DEBUG4("Debug4", Common.LOG_CATEGORY);
 
-                Log.Arch("Arch", Common.LOG_CATEGORY);
-                Log.Arch1("Arch1", Common.LOG_CATEGORY);
-                Log.Arch2("Arch2", Common.LOG_CATEGORY);
-                Log.Arch3("Arch3", Common.LOG_CATEGORY);
-                Log.Arch4("Arch4", Common.LOG_CATEGORY);
-                Log.Arch5("Arch5", Common.LOG_CATEGORY);
-                Log.Arch6("Arch6", Common.LOG_CATEGORY);
-                Log.Arch7("Arch7", Common.LOG_CATEGORY);
-                Log.Arch8("Arch8", Common.LOG_CATEGORY);
-                Log.Arch9("Arch9", Common.LOG_CATEGORY);
+                Log.ARCH("Arch", Common.LOG_CATEGORY);
+                Log.ARCH1("Arch1", Common.LOG_CATEGORY);
+                Log.ARCH2("Arch2", Common.LOG_CATEGORY);
+                Log.ARCH3("Arch3", Common.LOG_CATEGORY);
+                Log.ARCH4("Arch4", Common.LOG_CATEGORY);
+                Log.ARCH5("Arch5", Common.LOG_CATEGORY);
+                Log.ARCH6("Arch6", Common.LOG_CATEGORY);
+                Log.ARCH7("Arch7", Common.LOG_CATEGORY);
+                Log.ARCH8("Arch8", Common.LOG_CATEGORY);
+                Log.ARCH9("Arch9", Common.LOG_CATEGORY);
 
-                Log.Arch10("Arch10", Common.LOG_CATEGORY);
-                Log.Arch11("Arch11", Common.LOG_CATEGORY);
-                Log.Arch12("Arch12", Common.LOG_CATEGORY);
-                Log.Arch13("Arch13", Common.LOG_CATEGORY);
-                Log.Arch14("Arch14", Common.LOG_CATEGORY);
-                Log.Arch15("Arch15", Common.LOG_CATEGORY);
-                Log.Arch16("Arch16", Common.LOG_CATEGORY);
-                Log.Arch17("Arch17", Common.LOG_CATEGORY);
-                Log.Arch18("Arch18", Common.LOG_CATEGORY);
-                Log.Arch19("Arch19", Common.LOG_CATEGORY);
+                Log.ARCH10("Arch10", Common.LOG_CATEGORY);
+                Log.ARCH11("Arch11", Common.LOG_CATEGORY);
+                Log.ARCH12("Arch12", Common.LOG_CATEGORY);
+                Log.ARCH13("Arch13", Common.LOG_CATEGORY);
+                Log.ARCH14("Arch14", Common.LOG_CATEGORY);
+                Log.ARCH15("Arch15", Common.LOG_CATEGORY);
+                Log.ARCH16("Arch16", Common.LOG_CATEGORY);
+                Log.ARCH17("Arch17", Common.LOG_CATEGORY);
+                Log.ARCH18("Arch18", Common.LOG_CATEGORY);
+                Log.ARCH19("Arch19", Common.LOG_CATEGORY);
 
-                Log.Trace("Trace", Common.LOG_CATEGORY);
-                Log.Trace1("Trace1", Common.LOG_CATEGORY);
-                Log.Trace2("Trace2", Common.LOG_CATEGORY);
-                Log.Trace3("Trace3", Common.LOG_CATEGORY);
-                Log.Trace4("Trace4", Common.LOG_CATEGORY);
-                Log.Trace5("Trace5", Common.LOG_CATEGORY);
-                Log.Trace6("Trace6", Common.LOG_CATEGORY);
-                Log.Trace7("Trace7", Common.LOG_CATEGORY);
-                Log.Trace8("Trace8", Common.LOG_CATEGORY);
-                Log.Trace9("Trace9", Common.LOG_CATEGORY);
+                Log.TRACE("Trace", Common.LOG_CATEGORY);
+                Log.TRACE1("Trace1", Common.LOG_CATEGORY);
+                Log.TRACE2("Trace2", Common.LOG_CATEGORY);
+                Log.TRACE3("Trace3", Common.LOG_CATEGORY);
+                Log.TRACE4("Trace4", Common.LOG_CATEGORY);
+                Log.TRACE5("Trace5", Common.LOG_CATEGORY);
+                Log.TRACE6("Trace6", Common.LOG_CATEGORY);
+                Log.TRACE7("Trace7", Common.LOG_CATEGORY);
+                Log.TRACE8("Trace8", Common.LOG_CATEGORY);
+                Log.TRACE9("Trace9", Common.LOG_CATEGORY);
 
-                Log.Trace10("Trace10", Common.LOG_CATEGORY);
-                Log.Trace11("Trace11", Common.LOG_CATEGORY);
-                Log.Trace12("Trace12", Common.LOG_CATEGORY);
-                Log.Trace13("Trace13", Common.LOG_CATEGORY);
-                Log.Trace14("Trace14", Common.LOG_CATEGORY);
-                Log.Trace15("Trace15", Common.LOG_CATEGORY);
-                Log.Trace16("Trace16", Common.LOG_CATEGORY);
-                Log.Trace17("Trace17", Common.LOG_CATEGORY);
-                Log.Trace18("Trace18", Common.LOG_CATEGORY);
-                Log.Trace19("Trace19", Common.LOG_CATEGORY);
+                Log.TRACE10("Trace10", Common.LOG_CATEGORY);
+                Log.TRACE11("Trace11", Common.LOG_CATEGORY);
+                Log.TRACE12("Trace12", Common.LOG_CATEGORY);
+                Log.TRACE13("Trace13", Common.LOG_CATEGORY);
+                Log.TRACE14("Trace14", Common.LOG_CATEGORY);
+                Log.TRACE15("Trace15", Common.LOG_CATEGORY);
+                Log.TRACE16("Trace16", Common.LOG_CATEGORY);
+                Log.TRACE17("Trace17", Common.LOG_CATEGORY);
+                Log.TRACE18("Trace18", Common.LOG_CATEGORY);
+                Log.TRACE19("Trace19", Common.LOG_CATEGORY);
 
-                Log.Trace20("Trace20", Common.LOG_CATEGORY);
-                Log.Trace21("Trace21", Common.LOG_CATEGORY);
-                Log.Trace22("Trace22", Common.LOG_CATEGORY);
-                Log.Trace23("Trace23", Common.LOG_CATEGORY);
-                Log.Trace24("Trace24", Common.LOG_CATEGORY);
-                Log.Trace25("Trace25", Common.LOG_CATEGORY);
-                Log.Trace26("Trace26", Common.LOG_CATEGORY);
-                Log.Trace27("Trace27", Common.LOG_CATEGORY);
-                Log.Trace28("Trace28", Common.LOG_CATEGORY);
-                Log.Trace29("Trace29", Common.LOG_CATEGORY);
+                Log.TRACE20("Trace20", Common.LOG_CATEGORY);
+                Log.TRACE21("Trace21", Common.LOG_CATEGORY);
+                Log.TRACE22("Trace22", Common.LOG_CATEGORY);
+                Log.TRACE23("Trace23", Common.LOG_CATEGORY);
+                Log.TRACE24("Trace24", Common.LOG_CATEGORY);
+                Log.TRACE25("Trace25", Common.LOG_CATEGORY);
+                Log.TRACE26("Trace26", Common.LOG_CATEGORY);
+                Log.TRACE27("Trace27", Common.LOG_CATEGORY);
+                Log.TRACE28("Trace28", Common.LOG_CATEGORY);
+                Log.TRACE29("Trace29", Common.LOG_CATEGORY);
 #if NET48
                 HubProxy.Invoke("SendTimedMessage", "Timing Info", signalRTime);
 #else
@@ -473,7 +473,7 @@ namespace VNCSignalRClient
             }
             catch (Exception ex)
             {
-                Log.Error(ex, Common.LOG_CATEGORY);
+                Log.ERROR(ex, Common.LOG_CATEGORY);
             }
         }
 
@@ -550,7 +550,7 @@ namespace VNCSignalRClient
             }
             catch (Exception ex)
             {
-                Log.Error(ex, Common.LOG_CATEGORY);
+                Log.ERROR(ex, Common.LOG_CATEGORY);
             }
 
 #endif
