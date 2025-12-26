@@ -7,7 +7,7 @@
         <AssemblyOriginatorKeyFile>VNC.snk</AssemblyOriginatorKeyFile>        
         <VersionPrefix>3.2.0</VersionPrefix>
         <VersionSuffix>Release</VersionSuffix>
-        <FileVersion>2025.12.25</FileVersion>    
+        <FileVersion>2025.12.26</FileVersion>    
         <Description>Logging Wrapper on top of EnterpriseLibrary.Logging</Description>
         <LangVersion>12.0</LangVersion>
         <Nullable>enable</Nullable>
