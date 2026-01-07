@@ -64,284 +64,284 @@ namespace VNC.WPF.Presentation.Dx.Views
 
         private void ceInfo00C_EditValueChanged(object sender, DevExpress.Xpf.Editors.EditValueChangedEventArgs e)
         {
-            Common.VNCCoreLogging.Info00 = (Boolean)e.NewValue;
+            Common.VNCLogging.Info00 = (Boolean)e.NewValue;
         }
 
         #region Arch Levels
 
         private void ceArch00C_EditValueChanged(object sender, DevExpress.Xpf.Editors.EditValueChangedEventArgs e)
         {
-            Common.VNCCoreLogging.Constructor = (Boolean)e.NewValue;
+            Common.VNCLogging.Constructor = (Boolean)e.NewValue;
         }
 
         private void ceArch01C_EditValueChanged(object sender, DevExpress.Xpf.Editors.EditValueChangedEventArgs e)
         {
-            Common.VNCCoreLogging.Event = (Boolean)e.NewValue;
+            Common.VNCLogging.Event = (Boolean)e.NewValue;
         }
 
         private void ceArch02C_EditValueChanged(object sender, DevExpress.Xpf.Editors.EditValueChangedEventArgs e)
         {
-            Common.VNCCoreLogging.EventHandler = (Boolean)e.NewValue;
+            Common.VNCLogging.EventHandler = (Boolean)e.NewValue;
         }
 
         private void ceArch03C_EditValueChanged(object sender, DevExpress.Xpf.Editors.EditValueChangedEventArgs e)
         {
-            Common.VNCCoreLogging.ApplicationInitialize = (Boolean)e.NewValue;
+            Common.VNCLogging.ApplicationInitialize = (Boolean)e.NewValue;
         }
 
         private void ceArch04C_EditValueChanged(object sender, DevExpress.Xpf.Editors.EditValueChangedEventArgs e)
         {
-            Common.VNCCoreLogging.Core = (Boolean)e.NewValue;
+            Common.VNCLogging.Core = (Boolean)e.NewValue;
         }
 
         private void ceArch05C_EditValueChanged(object sender, DevExpress.Xpf.Editors.EditValueChangedEventArgs e)
         {
-            Common.VNCCoreLogging.Module = (Boolean)e.NewValue;
+            Common.VNCLogging.Module = (Boolean)e.NewValue;
         }
 
         private void ceArch06C_EditValueChanged(object sender, DevExpress.Xpf.Editors.EditValueChangedEventArgs e)
         {
-            Common.VNCCoreLogging.ModuleInitialize = (Boolean)e.NewValue;
+            Common.VNCLogging.ModuleInitialize = (Boolean)e.NewValue;
         }
 
         private void ceArch07C_EditValueChanged(object sender, DevExpress.Xpf.Editors.EditValueChangedEventArgs e)
         {
-            Common.VNCCoreLogging.DeviceInitialize = (Boolean)e.NewValue;
+            Common.VNCLogging.DeviceInitialize = (Boolean)e.NewValue;
         }
 
         private void ceArch08C_EditValueChanged(object sender, DevExpress.Xpf.Editors.EditValueChangedEventArgs e)
         {
-            Common.VNCCoreLogging.Arch08 = (Boolean)e.NewValue;
+            Common.VNCLogging.Arch08 = (Boolean)e.NewValue;
         }
 
         private void ceArch09C_EditValueChanged(object sender, DevExpress.Xpf.Editors.EditValueChangedEventArgs e)
         {
-            Common.VNCCoreLogging.Arch09 = (Boolean)e.NewValue;
+            Common.VNCLogging.Arch09 = (Boolean)e.NewValue;
         }
 
         private void ceArch10C_EditValueChanged(object sender, DevExpress.Xpf.Editors.EditValueChangedEventArgs e)
         {
-            Common.VNCCoreLogging.Application = (Boolean)e.NewValue;
+            Common.VNCLogging.Application = (Boolean)e.NewValue;
         }
 
         private void ceArch11C_EditValueChanged(object sender, DevExpress.Xpf.Editors.EditValueChangedEventArgs e)
         {
-            Common.VNCCoreLogging.ApplicationServices = (Boolean)e.NewValue;
+            Common.VNCLogging.ApplicationServices = (Boolean)e.NewValue;
         }
 
         private void ceArch12C_EditValueChanged(object sender, DevExpress.Xpf.Editors.EditValueChangedEventArgs e)
         {
-            Common.VNCCoreLogging.Domain = (Boolean)e.NewValue;
+            Common.VNCLogging.Domain = (Boolean)e.NewValue;
         }
 
         private void ceArch13C_EditValueChanged(object sender, DevExpress.Xpf.Editors.EditValueChangedEventArgs e)
         {
-            Common.VNCCoreLogging.DomainServices = (Boolean)e.NewValue;
+            Common.VNCLogging.DomainServices = (Boolean)e.NewValue;
         }
 
         private void ceArch14C_EditValueChanged(object sender, DevExpress.Xpf.Editors.EditValueChangedEventArgs e)
         {
-            Common.VNCCoreLogging.Infrastructure = (Boolean)e.NewValue;
+            Common.VNCLogging.Infrastructure = (Boolean)e.NewValue;
         }
 
         private void ceArch15C_EditValueChanged(object sender, DevExpress.Xpf.Editors.EditValueChangedEventArgs e)
         {
-            Common.VNCCoreLogging.Persistence = (Boolean)e.NewValue;
+            Common.VNCLogging.Persistence = (Boolean)e.NewValue;
         }
 
         private void ceArch16C_EditValueChanged(object sender, DevExpress.Xpf.Editors.EditValueChangedEventArgs e)
         {
-            Common.VNCCoreLogging.Presentation = (Boolean)e.NewValue;
+            Common.VNCLogging.Presentation = (Boolean)e.NewValue;
         }
 
         private void ceArch17C_EditValueChanged(object sender, DevExpress.Xpf.Editors.EditValueChangedEventArgs e)
         {
-            Common.VNCCoreLogging.View = (Boolean)e.NewValue;
+            Common.VNCLogging.View = (Boolean)e.NewValue;
         }
 
         private void ceArch18C_EditValueChanged(object sender, DevExpress.Xpf.Editors.EditValueChangedEventArgs e)
         {
-            Common.VNCCoreLogging.ViewModel = (Boolean)e.NewValue;
+            Common.VNCLogging.ViewModel = (Boolean)e.NewValue;
         }
 
         private void ceArch19C_EditValueChanged(object sender, DevExpress.Xpf.Editors.EditValueChangedEventArgs e)
         {
-            Common.VNCCoreLogging.Arch19 = (Boolean)e.NewValue;
+            Common.VNCLogging.Arch19 = (Boolean)e.NewValue;
         }
 
         private void ceArch100C_EditValueChanged(object sender, DevExpress.Xpf.Editors.EditValueChangedEventArgs e)
         {
-            Common.VNCCoreLogging.Arch100 = (Boolean)e.NewValue;
+            Common.VNCLogging.Arch100 = (Boolean)e.NewValue;
         }
 
         private void ceArch101C_EditValueChanged(object sender, DevExpress.Xpf.Editors.EditValueChangedEventArgs e)
         {
-            Common.VNCCoreLogging.Arch101 = (Boolean)e.NewValue;
+            Common.VNCLogging.Arch101 = (Boolean)e.NewValue;
         }
 
         private void ceArch102C_EditValueChanged(object sender, DevExpress.Xpf.Editors.EditValueChangedEventArgs e)
         {
-            Common.VNCCoreLogging.EventHandlerLow = (Boolean)e.NewValue;
+            Common.VNCLogging.EventHandlerLow = (Boolean)e.NewValue;
         }
 
         private void ceArc1h03C_EditValueChanged(object sender, DevExpress.Xpf.Editors.EditValueChangedEventArgs e)
         {
-            Common.VNCCoreLogging.ApplicationInitializeLow = (Boolean)e.NewValue;
+            Common.VNCLogging.ApplicationInitializeLow = (Boolean)e.NewValue;
         }
 
         private void ceArch104C_EditValueChanged(object sender, DevExpress.Xpf.Editors.EditValueChangedEventArgs e)
         {
-            Common.VNCCoreLogging.Arch104 = (Boolean)e.NewValue;
+            Common.VNCLogging.Arch104 = (Boolean)e.NewValue;
         }
 
         private void ceArch105C_EditValueChanged(object sender, DevExpress.Xpf.Editors.EditValueChangedEventArgs e)
         {
-            Common.VNCCoreLogging.Arch105 = (Boolean)e.NewValue;
+            Common.VNCLogging.Arch105 = (Boolean)e.NewValue;
         }
 
         private void ceArch106C_EditValueChanged(object sender, DevExpress.Xpf.Editors.EditValueChangedEventArgs e)
         {
-            Common.VNCCoreLogging.Arch106 = (Boolean)e.NewValue;
+            Common.VNCLogging.Arch106 = (Boolean)e.NewValue;
         }
 
         private void ceArch107C_EditValueChanged(object sender, DevExpress.Xpf.Editors.EditValueChangedEventArgs e)
         {
-            Common.VNCCoreLogging.DeviceInitializeLow = (Boolean)e.NewValue;
+            Common.VNCLogging.DeviceInitializeLow = (Boolean)e.NewValue;
         }
 
         private void ceArch108C_EditValueChanged(object sender, DevExpress.Xpf.Editors.EditValueChangedEventArgs e)
         {
-            Common.VNCCoreLogging.Arch108 = (Boolean)e.NewValue;
+            Common.VNCLogging.Arch108 = (Boolean)e.NewValue;
         }
 
         private void ceArch109C_EditValueChanged(object sender, DevExpress.Xpf.Editors.EditValueChangedEventArgs e)
         {
-            Common.VNCCoreLogging.Arch109 = (Boolean)e.NewValue;
+            Common.VNCLogging.Arch109 = (Boolean)e.NewValue;
         }
 
         private void ceArch110C_EditValueChanged(object sender, DevExpress.Xpf.Editors.EditValueChangedEventArgs e)
         {
-            Common.VNCCoreLogging.ApplicationLow = (Boolean)e.NewValue;
+            Common.VNCLogging.ApplicationLow = (Boolean)e.NewValue;
         }
 
         private void ceArch111C_EditValueChanged(object sender, DevExpress.Xpf.Editors.EditValueChangedEventArgs e)
         {
-            Common.VNCCoreLogging.ApplicationServicesLow = (Boolean)e.NewValue;
+            Common.VNCLogging.ApplicationServicesLow = (Boolean)e.NewValue;
         }
 
         private void ceArch112C_EditValueChanged(object sender, DevExpress.Xpf.Editors.EditValueChangedEventArgs e)
         {
-            Common.VNCCoreLogging.DomainLow = (Boolean)e.NewValue;
+            Common.VNCLogging.DomainLow = (Boolean)e.NewValue;
         }
 
         private void ceArch113C_EditValueChanged(object sender, DevExpress.Xpf.Editors.EditValueChangedEventArgs e)
         {
-            Common.VNCCoreLogging.DomainServicesLow = (Boolean)e.NewValue;
+            Common.VNCLogging.DomainServicesLow = (Boolean)e.NewValue;
         }
 
         private void ceArch114C_EditValueChanged(object sender, DevExpress.Xpf.Editors.EditValueChangedEventArgs e)
         {
-            Common.VNCCoreLogging.InfrastructureLow = (Boolean)e.NewValue;
+            Common.VNCLogging.InfrastructureLow = (Boolean)e.NewValue;
         }
 
         private void ceArch115C_EditValueChanged(object sender, DevExpress.Xpf.Editors.EditValueChangedEventArgs e)
         {
-            Common.VNCCoreLogging.PersistenceLow = (Boolean)e.NewValue;
+            Common.VNCLogging.PersistenceLow = (Boolean)e.NewValue;
         }
 
         private void ceArch116C_EditValueChanged(object sender, DevExpress.Xpf.Editors.EditValueChangedEventArgs e)
         {
-            Common.VNCCoreLogging.PresentationLow = (Boolean)e.NewValue;
+            Common.VNCLogging.PresentationLow = (Boolean)e.NewValue;
         }
 
         private void ceArch117C_EditValueChanged(object sender, DevExpress.Xpf.Editors.EditValueChangedEventArgs e)
         {
-            Common.VNCCoreLogging.ViewLow = (Boolean)e.NewValue;
+            Common.VNCLogging.ViewLow = (Boolean)e.NewValue;
         }
 
         private void ceArch118C_EditValueChanged(object sender, DevExpress.Xpf.Editors.EditValueChangedEventArgs e)
         {
-            Common.VNCCoreLogging.ViewModelLow = (Boolean)e.NewValue;
+            Common.VNCLogging.ViewModelLow = (Boolean)e.NewValue;
         }
 
         private void ceArch119C_EditValueChanged(object sender, DevExpress.Xpf.Editors.EditValueChangedEventArgs e)
         {
-            Common.VNCCoreLogging.Arch119 = (Boolean)e.NewValue;
+            Common.VNCLogging.Arch119 = (Boolean)e.NewValue;
         }
 
         #endregion
 
         private void ceINPC_EditValueChanged(object sender, DevExpress.Xpf.Editors.EditValueChangedEventArgs e)
         {
-            Common.VNCCoreLogging.INPC = (Boolean)e.NewValue;
+            Common.VNCLogging.INPC = (Boolean)e.NewValue;
         }
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
             Int64 startTicks = 0;
-            if (Common.VNCCoreLogging.EventHandler) startTicks = Log.EVENT_HANDLER("Enter", Common.LOG_CATEGORY);
+            if (Common.VNCLogging.EventHandler) startTicks = Log.EVENT_HANDLER("Enter", Common.LOG_CATEGORY);
 
-            ceInfo00C.IsChecked = Common.VNCCoreLogging.Info00;
-            //ceInfo01C.IsChecked = Common.VNCCoreLogging.Info01;
-            //ceInfo02C.IsChecked = Common.VNCCoreLogging.Info02;
-            //ceInfo03C.IsChecked = Common.VNCCoreLogging.Info03;
-            //ceInfo04C.IsChecked = Common.VNCCoreLogging.Info04;
+            ceInfo00C.IsChecked = Common.VNCLogging.Info00;
+            //ceInfo01C.IsChecked = Common.VNCLogging.Info01;
+            //ceInfo02C.IsChecked = Common.VNCLogging.Info02;
+            //ceInfo03C.IsChecked = Common.VNCLogging.Info03;
+            //ceInfo04C.IsChecked = Common.VNCLogging.Info04;
 
-            //ceDebug00C.IsChecked = Common.VNCCoreLogging.Debug00;
-            //ceDebug01C.IsChecked = Common.VNCCoreLogging.Debug01;
-            //ceDebug02C.IsChecked = Common.VNCCoreLogging.Debug02;
-            //ceDebug03C.IsChecked = Common.VNCCoreLogging.Debug03;
-            //ceDebug04C.IsChecked = Common.VNCCoreLogging.Debug04;
+            //ceDebug00C.IsChecked = Common.VNCLogging.Debug00;
+            //ceDebug01C.IsChecked = Common.VNCLogging.Debug01;
+            //ceDebug02C.IsChecked = Common.VNCLogging.Debug02;
+            //ceDebug03C.IsChecked = Common.VNCLogging.Debug03;
+            //ceDebug04C.IsChecked = Common.VNCLogging.Debug04;
 
-            ceArch00C.IsChecked = Common.VNCCoreLogging.Constructor;
-            ceArch01C.IsChecked = Common.VNCCoreLogging.Event;
-            ceArch02C.IsChecked = Common.VNCCoreLogging.EventHandler;
-            ceArch03C.IsChecked = Common.VNCCoreLogging.ApplicationInitialize;
-            ceArch04C.IsChecked = Common.VNCCoreLogging.Core;
-            ceArch05C.IsChecked = Common.VNCCoreLogging.Module;
-            ceArch06C.IsChecked = Common.VNCCoreLogging.ModuleInitialize;
-            ceArch07C.IsChecked = Common.VNCCoreLogging.DeviceInitialize;
-            //ceArch08C.IsChecked = Common.VNCCoreLogging.Arch08;
-            //ceArch09C.IsChecked = Common.VNCCoreLogging.Arch09;
-            ceArch10C.IsChecked = Common.VNCCoreLogging.Application;
-            ceArch11C.IsChecked = Common.VNCCoreLogging.ApplicationServices;
-            ceArch12C.IsChecked = Common.VNCCoreLogging.Domain;
-            ceArch13C.IsChecked = Common.VNCCoreLogging.DomainServices;
-            ceArch14C.IsChecked = Common.VNCCoreLogging.Infrastructure;
-            ceArch15C.IsChecked = Common.VNCCoreLogging.Persistence;
-            ceArch16C.IsChecked = Common.VNCCoreLogging.Presentation;
-            ceArch17C.IsChecked = Common.VNCCoreLogging.View;
-            ceArch18C.IsChecked = Common.VNCCoreLogging.ViewModel;
+            ceArch00C.IsChecked = Common.VNCLogging.Constructor;
+            ceArch01C.IsChecked = Common.VNCLogging.Event;
+            ceArch02C.IsChecked = Common.VNCLogging.EventHandler;
+            ceArch03C.IsChecked = Common.VNCLogging.ApplicationInitialize;
+            ceArch04C.IsChecked = Common.VNCLogging.Core;
+            ceArch05C.IsChecked = Common.VNCLogging.Module;
+            ceArch06C.IsChecked = Common.VNCLogging.ModuleInitialize;
+            ceArch07C.IsChecked = Common.VNCLogging.DeviceInitialize;
+            //ceArch08C.IsChecked = Common.VNCLogging.Arch08;
+            //ceArch09C.IsChecked = Common.VNCLogging.Arch09;
+            ceArch10C.IsChecked = Common.VNCLogging.Application;
+            ceArch11C.IsChecked = Common.VNCLogging.ApplicationServices;
+            ceArch12C.IsChecked = Common.VNCLogging.Domain;
+            ceArch13C.IsChecked = Common.VNCLogging.DomainServices;
+            ceArch14C.IsChecked = Common.VNCLogging.Infrastructure;
+            ceArch15C.IsChecked = Common.VNCLogging.Persistence;
+            ceArch16C.IsChecked = Common.VNCLogging.Presentation;
+            ceArch17C.IsChecked = Common.VNCLogging.View;
+            ceArch18C.IsChecked = Common.VNCLogging.ViewModel;
 
-            //ceArch100C.IsChecked = Common.VNCCoreLogging.Arch100;
-            //ceArch101C.IsChecked = Common.VNCCoreLogging.Arch101;
-            ceArch102C.IsChecked = Common.VNCCoreLogging.EventHandlerLow;
-            ceArch103C.IsChecked = Common.VNCCoreLogging.ApplicationInitializeLow;
-            //ceArch104C.IsChecked = Common.VNCCoreLogging.Arch104;
-            //ceArch105C.IsChecked = Common.VNCCoreLogging.Arch105;
-            //ceArch106C.IsChecked = Common.VNCCoreLogging.Arch106;
-            ceArch107C.IsChecked = Common.VNCCoreLogging.DeviceInitializeLow;
-            //ceArch018C.IsChecked = Common.VNCCoreLogging.Arch08;
-            //ceArch109C.IsChecked = Common.VNCCoreLogging.Arch09;
-            ceArch110C.IsChecked = Common.VNCCoreLogging.ApplicationLow;
-            ceArch111C.IsChecked = Common.VNCCoreLogging.ApplicationServicesLow;
-            ceArch112C.IsChecked = Common.VNCCoreLogging.DomainLow;
-            ceArch113C.IsChecked = Common.VNCCoreLogging.DomainServicesLow;
-            ceArch114C.IsChecked = Common.VNCCoreLogging.InfrastructureLow;
-            ceArch115C.IsChecked = Common.VNCCoreLogging.PersistenceLow;
-            ceArch116C.IsChecked = Common.VNCCoreLogging.PresentationLow;
-            ceArch117C.IsChecked = Common.VNCCoreLogging.ViewLow;
-            ceArch118C.IsChecked = Common.VNCCoreLogging.ViewModelLow;
-            //ceArch119C.IsChecked = Common.VNCCoreLogging.Arch119;
+            //ceArch100C.IsChecked = Common.VNCLogging.Arch100;
+            //ceArch101C.IsChecked = Common.VNCLogging.Arch101;
+            ceArch102C.IsChecked = Common.VNCLogging.EventHandlerLow;
+            ceArch103C.IsChecked = Common.VNCLogging.ApplicationInitializeLow;
+            //ceArch104C.IsChecked = Common.VNCLogging.Arch104;
+            //ceArch105C.IsChecked = Common.VNCLogging.Arch105;
+            //ceArch106C.IsChecked = Common.VNCLogging.Arch106;
+            ceArch107C.IsChecked = Common.VNCLogging.DeviceInitializeLow;
+            //ceArch018C.IsChecked = Common.VNCLogging.Arch08;
+            //ceArch109C.IsChecked = Common.VNCLogging.Arch09;
+            ceArch110C.IsChecked = Common.VNCLogging.ApplicationLow;
+            ceArch111C.IsChecked = Common.VNCLogging.ApplicationServicesLow;
+            ceArch112C.IsChecked = Common.VNCLogging.DomainLow;
+            ceArch113C.IsChecked = Common.VNCLogging.DomainServicesLow;
+            ceArch114C.IsChecked = Common.VNCLogging.InfrastructureLow;
+            ceArch115C.IsChecked = Common.VNCLogging.PersistenceLow;
+            ceArch116C.IsChecked = Common.VNCLogging.PresentationLow;
+            ceArch117C.IsChecked = Common.VNCLogging.ViewLow;
+            ceArch118C.IsChecked = Common.VNCLogging.ViewModelLow;
+            //ceArch119C.IsChecked = Common.VNCLogging.Arch119;
 
-            ceINPC.IsChecked = Common.VNCCoreLogging.INPC;
+            ceINPC.IsChecked = Common.VNCLogging.INPC;
 
-            if (Common.VNCCoreLogging.EventHandler) Log.EVENT_HANDLER("Exit", Common.LOG_CATEGORY, startTicks);
+            if (Common.VNCLogging.EventHandler) Log.EVENT_HANDLER("Exit", Common.LOG_CATEGORY, startTicks);
         }
 
         private void ceEnabled_EditValueChanged(object sender, DevExpress.Xpf.Editors.EditValueChangedEventArgs e)
         {
-            Common.VNCCoreLogging.Enable = (Boolean)ceEnabled.IsChecked;
+            Common.VNCLogging.Enable = (Boolean)ceEnabled.IsChecked;
 
         }
     }
