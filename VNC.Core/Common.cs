@@ -146,10 +146,6 @@ namespace VNC.Core
 
         public static void InitializeLogging(Boolean debugConfig = false)
         {
-#if DEBUG
-            VNCLogging = LoadLoggingConfig("vncloggingconfig-debug.json");
-            VNCCoreLogging = LoadLoggingConfig("vnccoreloggingconfig-debug.json");
-#else
             if (debugConfig)
             {
                 VNCLogging = LoadLoggingConfig("vncloggingconfig-debug.json");
@@ -160,7 +156,6 @@ namespace VNC.Core
                 VNCLogging = LoadLoggingConfig("vncloggingconfig.json");
                 VNCCoreLogging = LoadLoggingConfig("vnccoreloggingconfig.json");
             }
-#endif
         }
 
         public static Boolean DeveloperMode { get; set; } = false;
