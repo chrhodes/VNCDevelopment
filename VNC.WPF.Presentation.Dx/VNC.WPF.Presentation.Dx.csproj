@@ -9,7 +9,7 @@
         <VersionPrefix>3.2.0</VersionPrefix>
         <VersionSuffix>Release</VersionSuffix>
         <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>        
-        <FileVersion>2026.01.11</FileVersion>
+        <FileVersion>2026.01.13</FileVersion>
         <Description>WPF Helpers DevExpress</Description>
         <LangVersion>12.0</LangVersion>
         <Nullable>enable</Nullable>
@@ -30,7 +30,7 @@
         <PackageIcon>VNC.png</PackageIcon>
         <Authors>Christopher Rhodes</Authors>
         <Company>VNC</Company>
-        <Copyright>Copyright © VNC 2018-2025</Copyright>
+        <Copyright>Copyright © VNC 2018-2026</Copyright>
         <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
         <SatelliteResourceLanguages>en-US</SatelliteResourceLanguages>
     </PropertyGroup>
