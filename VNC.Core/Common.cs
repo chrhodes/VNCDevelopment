@@ -11,12 +11,6 @@ namespace VNC.Core
 {
     public class Common
     {
-        // TODO(crhodes)
-        // Not sure we need to initialize these
-        //public static Information InformationApplication = new Information();
-        //public static Information InformationApplicationCore = new Information();
-        //public static Information InformationVNCCore = new Information();
-
         // HACK(crhodes)
         // Try making these properties so we can bind to them in AppVersionInfo.xaml.cs
 
