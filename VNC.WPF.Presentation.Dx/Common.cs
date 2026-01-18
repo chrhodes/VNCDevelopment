@@ -4,5 +4,6 @@
     {
         public new const string LOG_CATEGORY = "VNCPresentationDx";
 
+        public static VNC.Core.Information? InformationVNCWPFPresentationDx;
     }
 }

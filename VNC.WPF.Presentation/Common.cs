@@ -24,5 +24,7 @@ namespace VNC.WPF.Presentation
 
         public const Int32 WINDOW_HOSTING_USER_CONTROL_WIDTH_PAD = 30;
         public const Int32 WINDOW_HOSTING_USER_CONTROL_HEIGHT_PAD = 75;
+
+        public static VNC.Core.Information? InformationVNCWPFPresentation;
     }
 }
