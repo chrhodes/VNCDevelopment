@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>net481;net6.0</TargetFrameworks>
+        <TargetFrameworks>net481</TargetFrameworks>
         <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
         <AssemblyName>VNC.Logging.TraceListeners.SignalRListener</AssemblyName>
         <RootNamespace>VNC.Logging.TraceListeners</RootNamespace>
@@ -10,11 +10,12 @@
         <VersionPrefix>3.2.0</VersionPrefix>
         <VersionSuffix>Release</VersionSuffix>
         <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
-        <FileVersion>2025.08.20</FileVersion>   
+        <FileVersion>2026.02.08</FileVersion>   
         <Description>SignalRCore TraceListener for EnterpriseLibrary Logging</Description>
         <LangVersion>12.0</LangVersion>
         <Nullable>enable</Nullable>
-        <ImplicitUsings>disable</ImplicitUsings>        
+        <ImplicitUsings>disable</ImplicitUsings>
+        <SatelliteResourceLanguages>en-US</SatelliteResourceLanguages>
     </PropertyGroup>
 
     <!-- This is for NuGet Packages -->
@@ -31,7 +32,7 @@
         <PackageIcon>VNC.png</PackageIcon>
         <Authors>Christopher Rhodes</Authors>
         <Company>VNC</Company>
-        <Copyright>Copyright © VNC 2010-2025</Copyright>
+        <Copyright>Copyright © VNC 2010-2026</Copyright>
         <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     </PropertyGroup>
 

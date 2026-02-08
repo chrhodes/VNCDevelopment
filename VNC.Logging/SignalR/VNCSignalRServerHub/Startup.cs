@@ -1,6 +1,4 @@
-﻿
-
-#if NET48
+﻿#if NET481
 using Microsoft.Owin.Cors;
 using Owin;
 #else
@@ -13,7 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace VNCSignalRServerHub
 {
-#if NET48
+#if NET481
     /// <summary>
     /// Used by OWIN's startup process. 
     /// </summary>

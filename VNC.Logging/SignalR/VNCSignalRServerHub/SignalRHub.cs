@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Reflection.PortableExecutable;
+
 using System.Threading.Tasks;
 using System.Windows;
 
-#if NET48
+#if NET481
 using Microsoft.AspNet.SignalR;
 #else
 using Microsoft.AspNetCore.SignalR;
+using System.Reflection.PortableExecutable;
 #endif
 
 namespace VNCSignalRServerHub
@@ -44,7 +45,7 @@ namespace VNCSignalRServerHub
                     ((MainWindow)Application.Current.MainWindow).WriteToConsole(ex.ToString()));
             }
         }
-#if NET48
+#if NET481
         public void SendMessage(string message)
         {
             Clients.All.addMessage(message);
@@ -64,7 +65,7 @@ namespace VNCSignalRServerHub
         }
 #endif
 
-#if NET48
+#if NET481
         public void SendPriorityMessage(string message, Int32 priority)
         {
             try
@@ -102,7 +103,7 @@ namespace VNCSignalRServerHub
         }
 #endif
 
-#if NET48
+#if NET481
         public void SendTimedMessage(string message, SignalRTime signalRTime)
         {
             try
@@ -134,7 +135,7 @@ namespace VNCSignalRServerHub
         }
 #endif
 
-#if NET48
+#if NET481
         public void SendUserMessage(string name, string message)
         {
             Clients.All.addUserMessage(name, message);
@@ -154,7 +155,7 @@ namespace VNCSignalRServerHub
         }
 #endif
 
-#if NET48
+#if NET481
         public override Task OnConnected()
         {
             //Use Application.Current.Dispatcher to access UI thread from outside the MainWindow class

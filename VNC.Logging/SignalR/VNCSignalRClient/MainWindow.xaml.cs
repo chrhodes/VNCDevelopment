@@ -5,13 +5,12 @@ using System.Threading.Tasks;
 using System.Windows;
 
 using SignalRCoreServerHub;
-using Microsoft.Extensions.DependencyInjection;
 
-
-#if NET48
+#if NET481
 using Microsoft.AspNet.SignalR.Client;
 #else
 using Microsoft.AspNetCore.SignalR.Client;
+using Microsoft.Extensions.DependencyInjection;
 #endif
 
 using VNC;
@@ -27,7 +26,7 @@ namespace VNCSignalRClient
     /// </summary>
     public partial class MainWindow : Window
     {
-#if NET48
+#if NET481
         private string serverURI = "http://localhost:58095";
 
         public IDisposable SignalR { get; set; }
@@ -62,7 +61,7 @@ namespace VNCSignalRClient
         public string ProductVersion { get => Common.ProductVersion; }
         public string ProductName { get => Common.ProductName; }
 
-#if NET48
+#if NET481
 
 #else
 
@@ -73,7 +72,7 @@ namespace VNCSignalRClient
             try
             {
                 Boolean sendAsync = (bool)cbSendAsync.IsChecked;
-#if NET48
+#if NET481
                 string message = TextBoxMessage.Text;
 #else
                 string message = TextBoxMessage.Text + (sendAsync ? " SA" : " IA");
@@ -81,7 +80,7 @@ namespace VNCSignalRClient
 
                 for (int i = 0; i < Int32.Parse(Count.Text); i++)
                 {
-#if NET48
+#if NET481
                     HubProxy.Invoke("SendUserMessage", UserName, message);
 #else
                     if (sendAsync)
@@ -115,13 +114,13 @@ namespace VNCSignalRClient
             try
             {
                 Boolean sendAsync = (bool)cbSendAsync.IsChecked;
-#if NET48
+#if NET481
                 string message = TextBoxMessage.Text;
 #else
                 string message = TextBoxMessage.Text + (sendAsync ? " SA" : " IA");
 #endif
 
-#if NET48
+#if NET481
                 for (int i = 0; i < Int32.Parse(Count.Text); i++)
                 {
                     HubProxy.Invoke("SendUserMessage", UserName, message);
@@ -168,7 +167,7 @@ namespace VNCSignalRClient
             try
             {
                 Boolean sendAsync = (bool)cbSendAsync.IsChecked;
-#if NET48
+#if NET481
                 string message = TextBoxMessage.Text;
 #else
                 string message = TextBoxMessage.Text + (sendAsync ? " SA" : " IA");
@@ -176,7 +175,7 @@ namespace VNCSignalRClient
 
                 for (int i = 0; i < Int32.Parse(Count.Text); i++)
                 {
-#if NET48
+#if NET481
                     HubProxy.Invoke("SendMessage", message);
 #else
                     if (sendAsync)
@@ -208,7 +207,7 @@ namespace VNCSignalRClient
             try
             {
                 Boolean sendAsync = (bool)cbSendAsync.IsChecked;
-#if NET48
+#if NET481
                 string message = TextBoxMessage.Text;
 #else
                 string message = TextBoxMessage.Text + (sendAsync ? " SA" : " IA");
@@ -217,7 +216,7 @@ namespace VNCSignalRClient
 
                 for (int i = 0; i < Int32.Parse(Count.Text); i++)
                 {
-#if NET48
+#if NET481
                     HubProxy.Invoke("SendPriorityMessage", message, priority);
 #else
                     if (sendAsync)
@@ -250,14 +249,14 @@ namespace VNCSignalRClient
             try
             {
                 Boolean sendAsync = (bool)cbSendAsync.IsChecked;
-#if NET48
+#if NET481
                 string message = TextBoxMessage.Text;
 #else
                 string message = TextBoxMessage.Text + (sendAsync ? " SA" : " IA");
 #endif   
                 Int32 priority = Int32.Parse(Priority.Text);
 
-#if NET48
+#if NET481
                 for (int i = 0; i < Int32.Parse(Count.Text); i++)
                 {
                     HubProxy.Invoke("SendPriorityMessage", message, priority);
@@ -306,7 +305,7 @@ namespace VNCSignalRClient
 
             try
             {
-#if NET48
+#if NET481
 
                 HubProxy.Invoke("SendPriorityMessage", "Critical", -10);
                 HubProxy.Invoke("SendPriorityMessage", "Error", -1);
@@ -329,7 +328,7 @@ namespace VNCSignalRClient
 
                 for (int i = 10000; i < 10030; i++)
                 {
-                    HubProxy.Invoke("SendPriorityMessage", $"TGrace{i}", i);     
+                    HubProxy.Invoke("SendPriorityMessage", $"Trace{i}", i);     
                 }
 #else
                 Connection.SendAsync("SendPriorityMessage", "Critical SA", -10);
@@ -464,7 +463,7 @@ namespace VNCSignalRClient
                 Log.TRACE27("Trace27", Common.LOG_CATEGORY);
                 Log.TRACE28("Trace28", Common.LOG_CATEGORY);
                 Log.TRACE29("Trace29", Common.LOG_CATEGORY);
-#if NET48
+#if NET481
                 HubProxy.Invoke("SendTimedMessage", "Timing Info", signalRTime);
 #else
                 Connection.InvokeAsync("SendTimedMessage", "Timing Info", signalRTime);
@@ -484,7 +483,7 @@ namespace VNCSignalRClient
         /// </summary>
         private async void ConnectAsync()
         {
-#if NET48
+#if NET481
             Connection = new HubConnection(tbServerURI.Text);
             Connection.Closed += Connection_Closed;
             HubProxy = Connection.CreateHubProxy("SignalRHub");
@@ -555,7 +554,7 @@ namespace VNCSignalRClient
 
 #endif
 
-#if NET48
+#if NET481
             HubProxy.On<string, SignalRTime>("AddTimedMessage", (message, signalrtime) =>
             {
                 signalrtime.ClientReceivedTime = DateTime.Now;
@@ -619,7 +618,7 @@ namespace VNCSignalRClient
 
             try
             {
-#if NET48
+#if NET481
                 await Connection.Start();
 #else
                 await Connection.StartAsync();
@@ -654,7 +653,7 @@ namespace VNCSignalRClient
             btnLoggingPriorities.IsEnabled = true;
         }
 
-#if NET48
+#if NET481
 
 #else
         private Task Connection_Reconnecting(Exception? arg)
@@ -674,7 +673,7 @@ namespace VNCSignalRClient
         }
 #endif
 
-#if NET48
+#if NET481
         /// <summary>
         /// If the server is stopped, the connection will time out after 30 seconds (default), 
         /// and the Closed event will fire.
@@ -684,12 +683,12 @@ namespace VNCSignalRClient
             var dispatcher = Application.Current.Dispatcher;
 
             //dispatcher.InvokeAsync(() => ChatPanel.Visibility = Visibility.Collapsed);
-            dispatcher.InvokeAsync(() => ButtonSend.IsEnabled = false);
-            dispatcher.InvokeAsync(() => ButtonSendTimed.IsEnabled = false);
-            dispatcher.InvokeAsync(() => ButtonSendAnnoymous.IsEnabled = false);
-            dispatcher.InvokeAsync(() => ButtonSendPriority.IsEnabled = false);
-            dispatcher.InvokeAsync(() => ButtonSendPriorityTimed.IsEnabled = false);
-            dispatcher.InvokeAsync(() => ButtonLoggingPriorities.IsEnabled = false);
+            dispatcher.InvokeAsync(() => btnSend.IsEnabled = false);
+            dispatcher.InvokeAsync(() => btnSendTimed.IsEnabled = false);
+            dispatcher.InvokeAsync(() => btnSendAnnoymous.IsEnabled = false);
+            dispatcher.InvokeAsync(() => btnSendPriority.IsEnabled = false);
+            dispatcher.InvokeAsync(() => btnSendPriorityTimed.IsEnabled = false);
+            dispatcher.InvokeAsync(() => btnLoggingPriorities.IsEnabled = false);
 
             dispatcher.InvokeAsync(() => rtbConsole.AppendText($"Connection Closed.\r"));
             //dispatcher.InvokeAsync(() => SignInPanel.Visibility = Visibility.Visible);
@@ -745,7 +744,7 @@ namespace VNCSignalRClient
         {
             if (Connection != null)
             {
-#if NET48
+#if NET481
                 Connection.Stop();
                 Connection.Dispose();
 #else
@@ -764,7 +763,7 @@ namespace VNCSignalRClient
         {
             if (Connection != null)
             {
-#if NET48
+#if NET481
                 Connection.Stop();
                 Connection.Dispose();
 #else
@@ -782,8 +781,14 @@ namespace VNCSignalRClient
             btnSignOut.IsEnabled = false;
         }
 
+        // TODO(crhodes)
+        // Decide if need to support this in NET481
+
         private void IdentifyUser_Click(object sender, RoutedEventArgs e)
         {
+#if NET481
+
+#else
             Boolean sendAsync = (bool)cbSendAsync.IsChecked;
 
             if (sendAsync)
@@ -794,10 +799,14 @@ namespace VNCSignalRClient
             {
                 Connection.InvokeAsync("IdentifyUser", UserName);
             }
+#endif
         }
 
         private void JoinGroup_Click(object sender, RoutedEventArgs e)
         {
+#if NET481
+
+#else
             Boolean sendAsync = (bool)cbSendAsync.IsChecked;
 
             if (sendAsync)
@@ -808,6 +817,7 @@ namespace VNCSignalRClient
             {
                 Connection.InvokeAsync("JoinGroup", GroupName);
             }
+#endif
         }
 
         private void btnCopyContents_Click(object sender, RoutedEventArgs e)

@@ -16,8 +16,37 @@ using Microsoft.Practices.EnterpriseLibrary.Logging.Configuration;
 namespace VNC.Logging.TraceListeners
 {
     [ConfigurationElementType(typeof(CustomTraceListenerData))]
-    public class SignalRCoreListenerInvokeAsync : Microsoft.Practices.EnterpriseLibrary.Logging.TraceListeners.CustomTraceListener
+    public class SignalRCoreListenerSendAsync : Microsoft.Practices.EnterpriseLibrary.Logging.TraceListeners.CustomTraceListener
     {
+
+        #region Constructors, Initialization, and Load
+
+        public SignalRCoreListenerSendAsync()
+        {
+            ConnectAsync();
+        }
+
+        public SignalRCoreListenerSendAsync(string duration)
+        {
+            maxDuration = double.Parse(duration);
+
+            ConnectAsync();
+        }
+
+        #endregion
+
+        #region Enums (None)
+
+
+        #endregion
+
+        #region Structures (None)
+
+
+        #endregion
+
+        #region Fields and Properties
+
         private const string LOG_APPNAME = "VNCLoggingListener";
 
         private string sLoggingDbConString = string.Empty;
@@ -45,23 +74,13 @@ namespace VNC.Logging.TraceListeners
 
         public IDisposable SignalR { get; set; }
 
-        public SignalRCoreListenerInvokeAsync()
-        {
-            ConnectAsync();
-        }
 
-        public SignalRCoreListenerInvokeAsync(string duration)
-        {
-            maxDuration = double.Parse(duration);
-
-            ConnectAsync();
-        }
 
         protected override string[] GetSupportedAttributes()
         {
             return _supportedCustomAttributes;
         }
-    
+
         public double MaxDuration
         {
             get
@@ -114,126 +133,9 @@ namespace VNC.Logging.TraceListeners
 
         public HubConnection Connection { get; set; }
 
-        public override void Write(string message)
-        {
-            try
-            {
-                Connection.InvokeAsync("SendPriorityMessage", message, iPriority);
-            }
-            catch (InvalidOperationException)
-            {
-                // Logging framework likely spins up worker threads that are killed
-                // if not active.  When that happens we need to start again.
+        #endregion
 
-                ConnectAsync();
-
-                // Send the message so it doesn't get lost
-
-                Connection.InvokeAsync("SendPriorityMessage", message, iPriority);
-            }
-            catch (Exception ex)
-            {
-                //Log.Error(ex, LOG_APPNAME);
-                var errorMessage = ex.ToString();
-                //client.DisplayLogEntry(string.Format("SRLWex: {0}", ex.ToString()));
-            }
-        }
-
-        public override void WriteLine(string message)
-        {
-            try
-            {
-                Connection.InvokeAsync("SendPriorityMessage", message, iPriority);
-            }
-            catch (System.InvalidOperationException)
-            {
-                // Logging framework likely spins up worker threads that are killed
-                // if not active.  When that happens we need to start again.
-                // This seems less likely.
-
-                // Calling ConnectAsync gives us two clients.
-
-                //ConnectAsync();
-
-                // Send the message so it doesn't get lost
-
-                switch (Connection.State)
-                {
-                    case HubConnectionState.Connected:
-                        Connection.InvokeAsync("SendPriorityMessage", message, iPriority);
-                        break;
-
-                    case HubConnectionState.Connecting:
-
-                        break;
-
-                    case HubConnectionState.Reconnecting:
-
-                        break;
-
-                    case HubConnectionState.Disconnected:
-                        ConnectAsync();
-                        break;
-                }
-            }
-            catch (Exception ex)
-            {
-                var errorMessage = ex.ToString();
-            }
-        }
-
-        private async void ConnectAsync()
-        {
-            Connection = new HubConnectionBuilder()
-                .WithUrl(ServerURI)
-                .AddMessagePackProtocol()
-                .Build();
-
-            Connection.Closed += Connection_Closed;
-            Connection.Reconnected += Connection_Reconnected;
-            Connection.Reconnecting += Connection_Reconnecting;
-
-            // HACK(crhodes)
-            // Try adding Client Listeners until we learn how to tell the hub to not
-            // send back to us.
-
-            Connection.On<string>("AddMessage", (message) =>
-            { }
-            //this.Dispatcher.InvokeAsync(() =>
-            //    rtbConsole.AppendText($"{message}\r")
-            //)
-            );
-
-            Connection.On<string, string>("AddUserMessage", (name, message) =>
-            { }
-            //this.Dispatcher.InvokeAsync(() =>
-            //    rtbConsole.AppendText($"{name}: {message}\r")
-            //)
-            );
-
-            Connection.On<string, Int32>("AddPriorityMessage", (message, priority) =>
-            { }
-            //this.Dispatcher.InvokeAsync(() =>
-            //    rtbConsole.AppendText($"P{priority}: {message}\r")
-            //)
-            );
-
-            try
-            {
-                await Connection.StartAsync();
-            }
-            catch (HttpRequestException ex)
-            {
-                var errorMessage = ex.ToString();
-                return;
-            }
-            catch (Exception ex)
-            {
-                var errorMessage = ex.ToString();
-            }
-        }
-
-        #region Connection Events
+        #region Event Handlers
 
         private Task Connection_Closed(Exception arg)
         {
@@ -254,6 +156,12 @@ namespace VNC.Logging.TraceListeners
         }
 
         #endregion
+
+        #region Commands (None)
+
+        #endregion
+
+        #region Public Methods
 
         public override void TraceData(TraceEventCache eventCache, string source, TraceEventType eventType, int id, object data)
         {
@@ -278,6 +186,7 @@ namespace VNC.Logging.TraceListeners
             //    //use default value
             //    iSQLCommandTimeoutInSecs = 300;
             //}
+
             if (data is LogEntry && this.Formatter != null)
             {
                 try
@@ -375,6 +284,138 @@ namespace VNC.Logging.TraceListeners
                 this.Write("not LogEntry");
                 this.WriteLine(data.ToString());
                 //Not a LogEntry. Ignore
+            }
+        }
+
+        public async override void Write(string message)
+        {
+            try
+            {
+                await Connection.SendAsync("SendPriorityMessage", message, iPriority);
+                //Connection.InvokeAsync("SendPriorityMessage", message, iPriority);
+            }
+            //catch (InvalidOperationException)
+            //{
+            //    // Logging framework likely spins up worker threads that are killed
+            //    // if not active.  When that happens we need to start again.
+
+            //    ConnectAsync();
+
+            //    // Send the message so it doesn't get lost
+
+            //    Connection.SendAsync("SendPriorityMessage", message, iPriority);
+            //}
+            catch (Exception ex)
+            {
+                //Log.Error(ex, LOG_APPNAME);
+                var errorMessage = ex.ToString();
+                //client.DisplayLogEntry(string.Format("SRLWex: {0}", ex.ToString()));
+            }
+        }
+
+        public async override void WriteLine(string message)
+        {
+            try
+            {
+                //Connection.SendAsync("SendMessage", "FOOBAR");
+                //Connection.SendAsync("SendPriorityMessage", "FOOBAR", iPriority);
+                await Connection.SendAsync("SendPriorityMessage", message, iPriority);
+                //Connection.InvokeAsync("SendPriorityMessage", message, iPriority);
+            }
+            //catch (System.InvalidOperationException)
+            //{
+            //    // Logging framework likely spins up worker threads that are killed
+            //    // if not active.  When that happens we need to start again.
+            //    // This seems less likely.
+
+            //    // Calling ConnectAsync gives us two clients.
+
+            //    //ConnectAsync();
+
+            //    // Send the message so it doesn't get lost
+
+            //    switch (Connection.State)
+            //    {
+            //        case HubConnectionState.Connected:
+            //            Connection.SendAsync("SendPriorityMessage", message, iPriority);
+            //            break;
+
+            //        case HubConnectionState.Connecting:
+
+            //            break;
+
+            //        case HubConnectionState.Reconnecting:
+
+            //            break;
+
+            //        case HubConnectionState.Disconnected:
+            //            ConnectAsync();
+            //            break;
+            //    }
+            //}
+            catch (Exception ex)
+            {
+                var errorMessage = ex.ToString();
+            }
+        }
+
+        #endregion
+
+        #region Protected Methods (None)
+
+
+        #endregion
+
+        #region Private Methods
+
+        private async void ConnectAsync()
+        {
+            Connection = new HubConnectionBuilder()
+                .WithUrl(ServerURI)
+                .AddMessagePackProtocol()
+                .Build();
+
+            Connection.Closed += Connection_Closed;
+            Connection.Reconnected += Connection_Reconnected;
+            Connection.Reconnecting += Connection_Reconnecting;
+
+            // HACK(crhodes)
+            // Try adding Client Listeners until we learn how to tell the hub to not
+            // send back to us.
+
+            Connection.On<string>("AddMessage", (message) => 
+                { }
+                //this.Dispatcher.InvokeAsync(() =>
+                //    rtbConsole.AppendText($"{message}\r")
+                //)
+            );
+
+            Connection.On<string, string>("AddUserMessage", (name, message) => 
+                { }
+                //this.Dispatcher.InvokeAsync(() =>
+                //    rtbConsole.AppendText($"{name}: {message}\r")
+                //)
+            );
+
+            Connection.On<string, Int32>("AddPriorityMessage", (message, priority) =>
+                { }
+                //this.Dispatcher.InvokeAsync(() =>
+                //    rtbConsole.AppendText($"P{priority}: {message}\r")
+                //)
+            );
+
+            try
+            {
+                await Connection.StartAsync();
+            }
+            catch (HttpRequestException ex)
+            {
+                var errorMessage = ex.ToString();
+                return;
+            }
+            catch (Exception ex)
+            {
+                var errorMessage = ex.ToString();
             }
         }
 
@@ -496,5 +537,7 @@ namespace VNC.Logging.TraceListeners
         //    return bRetVal;
 
         //}
+
+        #endregion
     }
 }

@@ -3,12 +3,12 @@ using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows;
 
-#if NET48
+#if NET481
 using Microsoft.Owin.Hosting;
 #else
 using Microsoft.AspNetCore;
-    using Microsoft.AspNetCore.Hosting;
-    using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
 #endif
 
 
@@ -24,7 +24,7 @@ namespace VNCSignalRServerHub
     /// </summary>
     public partial class MainWindow : Window
     {
-#if NET48
+#if NET481
         private string serverURI = "http://localhost:58095";
 
         public IDisposable SignalR { get; set; }
@@ -83,7 +83,7 @@ namespace VNCSignalRServerHub
         /// </summary>
         private void btnStop_Click(object sender, RoutedEventArgs e)
         {
-#if NET48
+#if NET481
             SignalR.Dispose();
 #else
             _webHost.StopAsync();
@@ -103,7 +103,7 @@ namespace VNCSignalRServerHub
         {
             try
             {
-#if NET48
+#if NET481
                 SignalR = WebApp.Start(ServerURI);
 #else
                 _webHost = WebHost.CreateDefaultBuilder()

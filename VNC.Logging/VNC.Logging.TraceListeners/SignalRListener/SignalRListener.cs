@@ -16,6 +16,35 @@ namespace VNC.Logging.TraceListeners
     [ConfigurationElementType(typeof(CustomTraceListenerData))]
     public class SignalRListener : Microsoft.Practices.EnterpriseLibrary.Logging.TraceListeners.CustomTraceListener
     {
+
+        #region Constructors, Initialization, and Load
+
+        public SignalRListener()
+        {
+            ConnectAsync();
+        }
+
+        public SignalRListener(string duration)
+        {
+            maxDuration = double.Parse(duration);
+
+            ConnectAsync();
+        }
+
+        #endregion
+
+        #region Enums (None)
+
+
+        #endregion
+
+        #region Structures (None)
+
+
+        #endregion
+
+        #region Fields and Properties
+
         private const string LOG_APPNAME = "VNCLoggingListener";
 
         private string sLoggingDbConString = string.Empty;
@@ -43,23 +72,12 @@ namespace VNC.Logging.TraceListeners
 
         public IDisposable SignalR { get; set; }
 
-        public SignalRListener()
-        {
-            ConnectAsync();
-        }
-
-        public SignalRListener(string duration)
-        {
-            maxDuration = double.Parse(duration);
-
-            ConnectAsync();
-        }
 
         protected override string[] GetSupportedAttributes()
         {
             return _supportedCustomAttributes;
         }
-    
+
         public double MaxDuration
         {
             get
@@ -113,101 +131,9 @@ namespace VNC.Logging.TraceListeners
 
         public HubConnection Connection { get; set; }
 
-        public override void Write(string message)
-        {
-            try
-            {
-                HubProxy.Invoke("SendPriorityMessage", message, iPriority);
-            }
-            catch (InvalidOperationException)
-            {
-                // Logging framework likely spins up worker threads that are killed
-                // if not active.  When that happens we need to start again.
+        #endregion
 
-                ConnectAsync();
-
-                // Send the message so it doesn't get lost
-
-                HubProxy.Invoke("SendPriorityMessage", message, iPriority);
-            }
-            catch (Exception ex)
-            {
-                var errorMessage = ex.ToString();
-            }
-        }
-
-        public override void WriteLine(string message)
-        {
-            try
-            {
-                HubProxy.Invoke("SendPriorityMessage", message, iPriority);
-            }
-            catch (System.InvalidOperationException)
-            {
-                // Logging framework likely spins up worker threads that are killed
-                // if not active.  When that happens we need to start again.
-                // This seems less likely.
-
-                // Calling ConnectAsync gives us two clients.
-
-                //ConnectAsync();
-
-                // Send the message so it doesn't get lost
-
-                switch (Connection.State)
-                {
-                    case Microsoft.AspNet.SignalR.Client.ConnectionState.Connected:
-                        HubProxy.Invoke("SendPriorityMessage", message, iPriority);
-                        break;
-
-                    case Microsoft.AspNet.SignalR.Client.ConnectionState.Connecting:
-
-                        break;
-
-                    case Microsoft.AspNet.SignalR.Client.ConnectionState.Reconnecting:
-
-                        break;
-
-                    case Microsoft.AspNet.SignalR.Client.ConnectionState.Disconnected:
-                        ConnectAsync();
-                        break;
-                }
-            }
-            catch (Exception ex)
-            {
-                var errorMessage = ex.ToString();
-            }
-        }
-
-        private async void ConnectAsync()
-        {
-            Connection = new HubConnection(ServerURI);
-
-            Connection.Closed += Connection_Closed;
-            Connection.Error += Connection_Error;
-            Connection.Received += Connection_Received;
-            Connection.Reconnected += Connection_Reconnected;
-            Connection.Reconnecting += Connection_Reconnecting;
-            Connection.StateChanged += Connection_StateChanged;
-
-            HubProxy = Connection.CreateHubProxy("SignalRHub");
-
-            try
-            {
-                await Connection.Start();
-            }
-            catch (HttpRequestException ex)
-            {
-                var errorMessage = ex.ToString();
-                return;
-            }
-            catch (Exception ex)
-            {
-                var errorMessage = ex.ToString();
-            }
-        }
-
-        #region Connection Events
+        #region Event Handlers
 
         void Connection_Reconnected()
         {
@@ -239,8 +165,13 @@ namespace VNC.Logging.TraceListeners
         {
             var info = Connection;
         }
+        #endregion
+
+        #region Commands (None)
 
         #endregion
+
+        #region Public Methods
 
         public override void TraceData(TraceEventCache eventCache, string source, TraceEventType eventType, int id, object data)
         {
@@ -366,6 +297,109 @@ namespace VNC.Logging.TraceListeners
             }
         }
 
+        public override void Write(string message)
+        {
+            try
+            {
+                HubProxy.Invoke("SendPriorityMessage", message, iPriority);
+            }
+            catch (InvalidOperationException)
+            {
+                // Logging framework likely spins up worker threads that are killed
+                // if not active.  When that happens we need to start again.
+
+                ConnectAsync();
+
+                // Send the message so it doesn't get lost
+
+                HubProxy.Invoke("SendPriorityMessage", message, iPriority);
+            }
+            catch (Exception ex)
+            {
+                var errorMessage = ex.ToString();
+            }
+        }
+
+        public override void WriteLine(string message)
+        {
+            try
+            {
+                HubProxy.Invoke("SendPriorityMessage", message, iPriority);
+            }
+            catch (System.InvalidOperationException)
+            {
+                // Logging framework likely spins up worker threads that are killed
+                // if not active.  When that happens we need to start again.
+                // This seems less likely.
+
+                // Calling ConnectAsync gives us two clients.
+
+                //ConnectAsync();
+
+                // Send the message so it doesn't get lost
+
+                switch (Connection.State)
+                {
+                    case Microsoft.AspNet.SignalR.Client.ConnectionState.Connected:
+                        HubProxy.Invoke("SendPriorityMessage", message, iPriority);
+                        break;
+
+                    case Microsoft.AspNet.SignalR.Client.ConnectionState.Connecting:
+
+                        break;
+
+                    case Microsoft.AspNet.SignalR.Client.ConnectionState.Reconnecting:
+
+                        break;
+
+                    case Microsoft.AspNet.SignalR.Client.ConnectionState.Disconnected:
+                        ConnectAsync();
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                var errorMessage = ex.ToString();
+            }
+        }
+
+        #endregion
+
+        #region Protected Methods (None)
+
+
+        #endregion
+
+        #region Private Methods
+
+        private async void ConnectAsync()
+        {
+            Connection = new HubConnection(ServerURI);
+
+            Connection.Closed += Connection_Closed;
+            Connection.Error += Connection_Error;
+            Connection.Received += Connection_Received;
+            Connection.Reconnected += Connection_Reconnected;
+            Connection.Reconnecting += Connection_Reconnecting;
+            Connection.StateChanged += Connection_StateChanged;
+
+            HubProxy = Connection.CreateHubProxy("SignalRHub");
+
+            try
+            {
+                await Connection.Start();
+            }
+            catch (HttpRequestException ex)
+            {
+                var errorMessage = ex.ToString();
+                return;
+            }
+            catch (Exception ex)
+            {
+                var errorMessage = ex.ToString();
+            }
+        }
+
         private bool InsertLogEntryIntoDb()
         {
             bool bRetVal = false;
@@ -484,5 +518,7 @@ namespace VNC.Logging.TraceListeners
 
             return bRetVal;
         }
+
+        #endregion
     }
 }
