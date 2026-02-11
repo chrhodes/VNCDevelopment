@@ -6,10 +6,10 @@
         <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
         <SignAssembly>true</SignAssembly>
         <AssemblyOriginatorKeyFile>VNC.snk</AssemblyOriginatorKeyFile>
-        <VersionPrefix>3.2.0</VersionPrefix>
+        <VersionPrefix>3.3.0</VersionPrefix>
         <VersionSuffix>Release</VersionSuffix>
         <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>        
-        <FileVersion>2026.01.19</FileVersion>
+        <FileVersion>2026.02.10</FileVersion>
         <Description>WPF Helpers DevExpress</Description>
         <LangVersion>12.0</LangVersion>
         <Nullable>enable</Nullable>
@@ -20,7 +20,7 @@
     
     <PropertyGroup>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <PackageVersion>3.2.0</PackageVersion>      
+        <PackageVersion>3.3.0</PackageVersion>      
         <PackageLicenseFile>LICENSE</PackageLicenseFile>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageProjectUrl>https://github.com/chrhodes/VNCDevelopment</PackageProjectUrl>
@@ -42,6 +42,8 @@
         <PackageReference Include="DevExpress.Wpf.Grid" Version="24.1.3" />
         <PackageReference Include="DevExpress.Wpf.LayoutControl" Version="24.1.3" />
         <PackageReference Include="Microsoft.DependencyValidation.Analyzers" Version="0.11.0" />
+        <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="10.0.2" />
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
         <PackageReference Include="System.Formats.Asn1" Version="6.0.1" />
     </ItemGroup>
 
@@ -79,8 +81,8 @@
         </When>
         <When Condition="'!$(DefineConstants.Contains(VNCPROJECTREF))'">
             <ItemGroup>
-                <PackageReference Include="VNC.Core" Version="3.2.0" />
-                <PackageReference Include="VNC.WPF.Presentation" Version="3.2.0" />
+                <PackageReference Include="VNC.Core" Version="3.3.0" />
+                <PackageReference Include="VNC.WPF.Presentation" Version="3.3.0" />
             </ItemGroup>
         </When>
     </Choose>
@@ -103,17 +105,15 @@
     </Choose>-->
 
     <!--This updates the file version to the current date.-->
-
+    
     <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-        <Exec Command="powershell.exe -File &quot;$(ProjectDir)\Execute-PreBuild.ps1&quot; -Verbose $(ProjectFileName)" />
+        <Exec Command="powershell.exe -File &quot;$(ProjectDir)\Execute-PreBuild.ps1&quot; $(ProjectFileName)" />
     </Target>
 
-    <!--<Target Name="PreBuild" BeforeTargets="PreBuildEvent" Condition="'$(Configuration)'=='Release'">
-        <Exec Command="powershell.exe -File &quot;$(ProjectDir)\Execute-PreBuild.ps1&quot; -Verbose $(ProjectFileName)" />
-    </Target>-->
+    <!--This updates any existing VNC NuGet package.-->
 
-    <!--<Target Name="PostBuild" AfterTargets="PostBuildEvent">
-        <Exec Command="powershell.exe -File &quot;$(ProjectDir)\Execute-PostBuild.ps1&quot; -Verbose $(ProjectFileName)" />
-    </Target>-->
+    <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(Configuration)'=='Release'">
+        <Exec Command="powershell.exe -File &quot;$(ProjectDir)\Execute-PostBuild.ps1&quot;  $(ProjectFileName) $(TargetName) $(PackageVersion)" />
+    </Target>
 
 </Project>
