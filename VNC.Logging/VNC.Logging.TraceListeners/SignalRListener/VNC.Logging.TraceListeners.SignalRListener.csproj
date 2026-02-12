@@ -3,14 +3,12 @@
     <PropertyGroup>
         <TargetFrameworks>net481</TargetFrameworks>
         <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
-        <AssemblyName>VNC.Logging.TraceListeners.SignalRListener</AssemblyName>
-        <RootNamespace>VNC.Logging.TraceListeners</RootNamespace>
         <SignAssembly>true</SignAssembly>
         <AssemblyOriginatorKeyFile>VNC.snk</AssemblyOriginatorKeyFile>
         <VersionPrefix>3.3.0</VersionPrefix>
         <VersionSuffix>Release</VersionSuffix>
         <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
-        <FileVersion>2026.02.10</FileVersion>   
+        <FileVersion>2026.02.12</FileVersion>   
         <Description>SignalRCore TraceListener for EnterpriseLibrary Logging</Description>
         <LangVersion>12.0</LangVersion>
         <Nullable>enable</Nullable>
@@ -102,8 +100,10 @@
     </Choose>-->
 
     <!--This updates the file version to the current date.-->
+    <!--Only run for one Target.  No need to update file twice.
+        Update TargetFramework as needed -->
 
-    <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Target Name="PreBuild" BeforeTargets="PreBuildEvent" Condition="'$(TargetFramework)'=='net481'">
         <Exec Command="powershell.exe -File &quot;$(ProjectDir)\Execute-PreBuild.ps1&quot; $(ProjectFileName)" />
     </Target>
 

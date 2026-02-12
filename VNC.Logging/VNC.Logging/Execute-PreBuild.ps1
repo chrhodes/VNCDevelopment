@@ -64,7 +64,6 @@ command includes the Role parameter of Get-Help.
 The intended use of the function. This content appears when the Get-Help
 command includes the Functionality parameter of Get-Help.
 
-
 Execute-PreBuild.ps1
 
 #>
@@ -77,10 +76,11 @@ Execute-PreBuild.ps1
 param
 (
     [string] $ProjectFileName
-    , [string] $TargetName
-    , [string] $Configuration
-    , [string] $Platform
-    , [switch] $Contents
+    , [string] $TargetFramework
+    # , [string] $TargetName
+    # , [string] $Configuration
+    # , [string] $Platform
+    # , [switch] $Contents
     # , [switch] $Verbose
 )
 
@@ -108,19 +108,12 @@ $CURRENTDIRECTORY = $PSScriptRoot
 
 function Main
 {
-    if ($SCRIPT:Verbose)
-    {
-        "SCRIPTNAME         = $SCRIPTNAME"
-        "SCRIPTPATH         = $SCRIPTPATH"
-        "CURRENTDIRECTORY   = $CURRENTDIRECTORY"
+    Write-Verbose "SCRIPTNAME         = $SCRIPTNAME"
+    Write-Verbose "SCRIPTPATH         = $SCRIPTPATH"
+    Write-Verbose "CURRENTDIRECTORY   = $CURRENTDIRECTORY"
 
-        "ProjectFileName    = $ProjectFileName"
-        "TargetName         = $TargetName"
-        "Configuration      = $Configuration"
-        "Platform           = $Platform"
-
-        "`$Verbose          = $Verbose"
-    }
+    Write-Verbose "ProjectFileName    = $ProjectFileName"
+    Write-Verbose "TargetFramework    = $TargetFramework"
 
     Set-Location $CURRENTDIRECTORY
 
@@ -132,12 +125,6 @@ function Main
 ##############################
 # Internal Functions
 ##############################
-
-if ($SCRIPT:Contents)
-{
-    $myInvocation.MyCommand.ScriptBlock
-    exit
-}
 
 # Call the main function.  Use Dot Sourcing to ensure executed in Script scope.
 

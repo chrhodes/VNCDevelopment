@@ -14,6 +14,7 @@
         <LangVersion>12.0</LangVersion>
         <Nullable>enable</Nullable>
         <ImplicitUsings>disable</ImplicitUsings>
+        <SatelliteResourceLanguages>en-US</SatelliteResourceLanguages>
     </PropertyGroup>
 
     <!-- This is for NuGet Packages -->
@@ -120,8 +121,10 @@
     </Choose>-->
 
     <!--This updates the file version to the current date.-->
+    <!--Only run for one Target.  No need to update file twice.
+        Update TargetFramework as needed -->
 
-    <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Target Name="PreBuild" BeforeTargets="PreBuildEvent" Condition="'$(TargetFramework)'=='net8.0-windows'">
         <Exec Command="powershell.exe -File &quot;$(ProjectDir)\Execute-PreBuild.ps1&quot; $(ProjectFileName)" />
     </Target>
 

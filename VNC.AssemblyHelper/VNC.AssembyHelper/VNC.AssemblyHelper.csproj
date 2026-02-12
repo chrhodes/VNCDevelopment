@@ -9,7 +9,7 @@
         <VersionPrefix>3.3.0</VersionPrefix>
         <VersionSuffix>Release</VersionSuffix>
         <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
-        <FileVersion>2026.02.10</FileVersion>
+        <FileVersion>2026.02.12</FileVersion>
         <Description>Assembly Helper</Description>
         <LangVersion>12.0</LangVersion>
         <Nullable>enable</Nullable>
