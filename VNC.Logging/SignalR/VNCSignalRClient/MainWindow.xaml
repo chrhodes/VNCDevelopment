@@ -91,14 +91,17 @@
                 
                 <StackPanel Orientation="Vertical">
                     <Button x:Name="btnSend" Content="Send" Click="btnSend_Click" IsEnabled="False" Style="{StaticResource Button}" />
-                    <Button x:Name="btnSendPriority" Content="Send Priority"  Click="btnSendPriority_Click" IsEnabled="False" Style="{StaticResource Button}" />
+                    <Button x:Name="btnSendTimed" Content="Send Timed"  Click="btnSendTimed_Click" IsEnabled="False" Style="{StaticResource Button}" />
                     <Button x:Name="btnSendAnnoymous" Content="Send Annoymous" Click="btnSendAnnoymous_Click" IsEnabled="False" Style="{StaticResource Button}" />
                 </StackPanel>
 
                 <StackPanel Orientation="Vertical">
-                    <Button x:Name="btnSendTimed" Content="Send Timed"  Click="btnSendTimed_Click" IsEnabled="False" Style="{StaticResource Button}" />
-                    <Button x:Name="btnSendPriorityTimed" Content="Send Priority Timed"  Click="btnSendPriorityTimed_Click" IsEnabled="False" Style="{StaticResource Button}"/>
-                    <Button x:Name="btnLoggingPriorities" Content="Send Logging Priorities" Click="btnSendLoggingPriorities_Click" IsEnabled="False" Style="{StaticResource Button}"/>
+                    <Button x:Name="btnSendPriority" Content="Send Priority"  Click="btnSendPriority_Click" IsEnabled="False" Style="{StaticResource Button}" 
+                            ToolTip="Send Priorty Message. Hub only sends to Others"/>
+                    <Button x:Name="btnSendPriorityTimed" Content="Send Priority Timed"  Click="btnSendPriorityTimed_Click" IsEnabled="False" Style="{StaticResource Button}"
+                            ToolTip="Send Priorty Message. Hub only sends to Others" />
+                    <Button x:Name="btnLoggingPriorities" Content="Send Logging Priorities" Click="btnSendLoggingPriorities_Click" IsEnabled="False" Style="{StaticResource Button}"
+                            ToolTip="Send Priorty Message. Hub only sends to Others" />
                 </StackPanel>
 
                 <!--<Button x:Name="btnClear" Content="Clear Console" Margin="5,2,0,2"

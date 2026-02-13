@@ -8,7 +8,7 @@
         <VersionPrefix>3.3.0</VersionPrefix>        
         <VersionSuffix>Release</VersionSuffix>
         <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>        
-        <FileVersion>2026.02.10</FileVersion>
+        <FileVersion>2026.02.13</FileVersion>
         <Description>SignalR Hub</Description>
         <ImplicitUsings>disable</ImplicitUsings>
         <SatelliteResourceLanguages>en-US</SatelliteResourceLanguages>

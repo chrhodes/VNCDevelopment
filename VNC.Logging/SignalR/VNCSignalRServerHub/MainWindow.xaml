@@ -21,9 +21,6 @@
             <StackPanel Orientation="Horizontal">
                 <Label Content="ServerHub URI:" />
                 <TextBox x:Name="tbServerURI" Text="{Binding ServerURI}" VerticalContentAlignment="Center" Margin="2" />
-                <!--<CheckBox x:Name="cbSendPriorityToAll"
-                          IsChecked="{Binding SendPriorityToAll}"
-                          Content="Send Priority Messages to All" />-->
             </StackPanel>
 
             <DockPanel RenderTransformOrigin="0.5,0.5">

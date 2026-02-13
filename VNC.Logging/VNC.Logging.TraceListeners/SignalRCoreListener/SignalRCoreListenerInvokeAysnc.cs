@@ -18,7 +18,6 @@ namespace VNC.Logging.TraceListeners
     [ConfigurationElementType(typeof(CustomTraceListenerData))]
     public class SignalRCoreListenerInvokeAsync : Microsoft.Practices.EnterpriseLibrary.Logging.TraceListeners.CustomTraceListener
     {
-
         #region Constructors, Initialization, and Load
 
         public SignalRCoreListenerInvokeAsync()
@@ -74,8 +73,6 @@ namespace VNC.Logging.TraceListeners
 
         public IDisposable SignalR { get; set; }
 
-
-
         protected override string[] GetSupportedAttributes()
         {
             return _supportedCustomAttributes;
@@ -129,6 +126,9 @@ namespace VNC.Logging.TraceListeners
 
         public String UserName { get; set; }
 
+        // TODO(crhodes)
+        // Consider passing the Server URI as a custom attribute.
+        // This would allow the listener to be used with any SignalR server.
         const string ServerURI = "http://localhost:58195/signalr";
 
         public HubConnection Connection { get; set; }
@@ -165,27 +165,6 @@ namespace VNC.Logging.TraceListeners
 
         public override void TraceData(TraceEventCache eventCache, string source, TraceEventType eventType, int id, object data)
         {
-            //Dictionary<String, Object> dictionary = new Dictionary<String, Object>();
-
-            ////Get Logging database connection string
-            //if (Attributes.ContainsKey("LoggingDbConString") == true)
-            //{
-            //    sLoggingDbConString = Attributes["LoggingDbConString"];
-            //}
-            //else
-            //{
-            //    throw new LoggingException("Logging Database Connection String is missing");
-            //}
-            ////Get SQL Command Timeout in seconds
-            //if (Attributes.ContainsKey("SQLCommandTimeout") == true)
-            //{
-            //    iSQLCommandTimeoutInSecs = Convert.ToInt32(Attributes["SQLCommandTimeout"]);
-            //}
-            //else
-            //{
-            //    //use default value
-            //    iSQLCommandTimeoutInSecs = 300;
-            //}
             if (data is LogEntry && this.Formatter != null)
             {
                 try
@@ -228,7 +207,6 @@ namespace VNC.Logging.TraceListeners
                                 }
                             default:
                                 {
-                                    //dictionary.Add(kvp.Key.ToString(), kvp.Value);
                                     break;
                                 }
                         }
@@ -374,30 +352,11 @@ namespace VNC.Logging.TraceListeners
             Connection.Reconnected += Connection_Reconnected;
             Connection.Reconnecting += Connection_Reconnecting;
 
-            // HACK(crhodes)
-            // Try adding Client Listeners until we learn how to tell the hub to not
-            // send back to us.
+            Connection.On<string>("AddMessage", (message) => { } );
 
-            Connection.On<string>("AddMessage", (message) =>
-            { }
-            //this.Dispatcher.InvokeAsync(() =>
-            //    rtbConsole.AppendText($"{message}\r")
-            //)
-            );
+            Connection.On<string, string>("AddUserMessage", (name, message) => { } );
 
-            Connection.On<string, string>("AddUserMessage", (name, message) =>
-            { }
-            //this.Dispatcher.InvokeAsync(() =>
-            //    rtbConsole.AppendText($"{name}: {message}\r")
-            //)
-            );
-
-            Connection.On<string, Int32>("AddPriorityMessage", (message, priority) =>
-            { }
-            //this.Dispatcher.InvokeAsync(() =>
-            //    rtbConsole.AppendText($"P{priority}: {message}\r")
-            //)
-            );
+            Connection.On<string, Int32>("AddPriorityMessage", (message, priority) => { } );
 
             try
             {
@@ -413,125 +372,6 @@ namespace VNC.Logging.TraceListeners
                 var errorMessage = ex.ToString();
             }
         }
-
-        //private bool InsertLogEntryIntoDb()
-        //{
-        //    bool bRetVal = false;
-        //    SqlConnection conn = null;
-        //    SqlCommand cmd = null;
-        //    try
-        //    {
-        //        //Open SQL connection 
-        //        conn = new SqlConnection(sLoggingDbConString);
-        //        conn.Open();
-
-        //        //Set command options
-        //        cmd = new SqlCommand();
-        //        cmd.Connection = conn;
-        //        cmd.CommandType = CommandType.StoredProcedure;
-        //        cmd.CommandTimeout = iSQLCommandTimeoutInSecs;
-
-        //        //Set stored procedure
-        //        cmd.CommandText = "sp_logging_add_log_entry";
-
-        //        cmd.Parameters.Add(new SqlParameter("@entry_id", this.sEntryID));
-        //        cmd.Parameters.Add(new SqlParameter("@writeDate", System.DateTime.Now));
-        //        cmd.Parameters.Add(new SqlParameter("@machine_name", this.sMachineName));
-        //        cmd.Parameters.Add(new SqlParameter("@user_name", this.sUserName));
-        //        cmd.Parameters.Add(new SqlParameter("@application_name", this.sApplicationName));
-        //        cmd.Parameters.Add(new SqlParameter("@category_name", this.sCategoryName));
-        //        cmd.Parameters.Add(new SqlParameter("@severity_tc", this.sSeverity_TC.Substring(0, 1)));
-        //        cmd.Parameters.Add(new SqlParameter("@error_number", 9999));
-        //        cmd.Parameters.Add(new SqlParameter("@message_txt", this.sMessage_Text));
-        //        cmd.Parameters.Add(new SqlParameter("@session_id", this.sSessionID));
-        //        cmd.Parameters.Add(new SqlParameter("@thread_id", this.sThreadID));
-        //        cmd.Parameters.Add(new SqlParameter("@executable_name", this.sExecutableName));
-        //        cmd.Parameters.Add(new SqlParameter("@callstack", this.sCallstack));
-        //        if (dPerformance != 0.00)
-        //        {
-        //            cmd.Parameters.Add(new SqlParameter("@performance", dPerformance));
-        //        }
-        //        cmd.Parameters.Add(new SqlParameter("@step_int", 1));
-        //        if (iEventID != 0)
-        //        {
-        //            cmd.Parameters.Add(new SqlParameter("@event_id", iEventID));
-        //        }
-        //        //Execute Query 
-        //        int i = cmd.ExecuteNonQuery();
-        //        cmd.Dispose();
-        //        bRetVal = true;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        //Log.Error(ex, LOG_APPNAME);
-        //        //throw new LoggingException(ex.Message);
-        //        //EventLog.WriteEntry("CustomDatabaseTraceListener", ex.Message, EventLogEntryType.Error);
-        //    }
-        //    finally
-        //    {
-        //        cmd = null;
-
-        //        if (conn.State == System.Data.ConnectionState.Open)
-        //        {
-        //            conn.Close();
-        //            conn.Dispose();
-        //            conn = null;
-        //        }
-        //    }
-        //    return bRetVal;
-        //}
-
-        //private bool InsertExtraData(string sKey, string sValue)
-        //{
-        //    bool bRetVal = false;
-        //    SqlConnection conn = null;
-        //    SqlCommand cmd = null;
-        //    try
-        //    {
-        //        //Open SQL connection 
-        //        conn = new SqlConnection(sLoggingDbConString);
-        //        conn.Open();
-
-        //        //Set command options
-        //        cmd = new SqlCommand();
-        //        cmd.Connection = conn;
-        //        cmd.CommandType = CommandType.StoredProcedure;
-        //        cmd.CommandTimeout = iSQLCommandTimeoutInSecs;
-
-        //        //Set stored procedure
-        //        cmd.CommandText = "sp_logging_add_extra_data";
-        //        cmd.Parameters.Add(new SqlParameter("@entry_id", this.sEntryID));
-        //        cmd.Parameters.Add(new SqlParameter("@name", sKey));
-        //        cmd.Parameters.Add(new SqlParameter("@value", sValue));
-
-        //        //Execute Query 
-        //        int i = cmd.ExecuteNonQuery();
-        //        cmd.Dispose();
-
-        //        bRetVal = true;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        //Log.Error(ex, LOG_APPNAME);
-        //        //throw new LoggingException(ex.Message);
-        //        //EventLog.WriteEntry("CustomDatabaseTraceListener", ex.Message, EventLogEntryType.Error);
-        //    }
-        //    finally
-        //    {
-
-        //        cmd = null;
-
-        //        if (conn.State == System.Data.ConnectionState.Open)
-        //        {
-        //            conn.Close();
-        //            conn.Dispose();
-        //            conn = null;
-        //        }
-
-        //    }
-        //    return bRetVal;
-
-        //}
 
         #endregion
     }

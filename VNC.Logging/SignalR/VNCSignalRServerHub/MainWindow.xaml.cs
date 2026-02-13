@@ -28,14 +28,12 @@ namespace VNCSignalRServerHub
         private string serverURI = "http://localhost:58095";
 
         public IDisposable SignalR { get; set; }
-#else
-        
+#else        
         private string serverURI = "http://localhost:58195";
 
         private IHost _host;
 
         private IWebHost _webHost;
-
 #endif
 
         public MainWindow()
@@ -50,17 +48,6 @@ namespace VNCSignalRServerHub
         public string FileVersion { get => Common.FileVersion; }
         public string ProductVersion { get => Common.ProductVersion; }
         public string ProductName { get => Common.ProductName; }
-
-        private bool _sendPriorityToAll;
-        public bool SendPriorityToAll
-        {
-            get => _sendPriorityToAll;
-            set
-            {
-                _sendPriorityToAll = value;
-            }
-        }
-        
 
         /// <summary>
         /// Calls the StartServer method with Task.Run 

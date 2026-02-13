@@ -13,7 +13,6 @@ using System.Reflection.PortableExecutable;
 
 namespace VNCSignalRServerHub
 {
-
     public class SignalRHub : Hub
     {
         public async Task IdentifyUser(string userName)
@@ -48,8 +47,16 @@ namespace VNCSignalRServerHub
 #if NET481
         public void SendMessage(string message)
         {
-            Clients.All.addMessage(message);
-        }
+            try
+            {
+                Clients.All.addMessage(message);
+            }
+            catch (Exception ex)
+            {
+                Application.Current.Dispatcher.Invoke(() =>
+                    ((MainWindow) Application.Current.MainWindow).WriteToConsole(ex.ToString()));
+            }
+}
 #else
         public async Task SendMessage(string message)
         {
@@ -65,12 +72,16 @@ namespace VNCSignalRServerHub
         }
 #endif
 
+        // NOTE(crhodes)
+        // Priority Messages are from Logging.  No need to send back to sender.
+
 #if NET481
         public void SendPriorityMessage(string message, Int32 priority)
         {
             try
-            {
-                Clients.All.addPriorityMessage(message, priority);
+            {                
+                //Clients.All.addPriorityMessage(message, priority);
+                Clients.Others.addPriorityMessage(message, priority);
             }
             catch (Exception ex)
             {
@@ -80,20 +91,12 @@ namespace VNCSignalRServerHub
         }
 #else
 
-        Boolean SendPriorityToAll;
-
         public async void SendPriorityMessage(string message, Int32 priority)
         {
             try
             {
-                //if (SendPriorityToAll)
-                //{
-                //    await Clients.All.SendAsync("AddPriorityMessage", message, priority);
-                //}
-                //else
-                //{
-                    await Clients.Others.SendAsync("AddPriorityMessage", message, priority);
-                //}
+                //await Clients.All.SendAsync("AddPriorityMessage", message, priority);
+                await Clients.Others.SendAsync("AddPriorityMessage", message, priority);
             }
             catch (Exception ex)
             {
@@ -110,6 +113,7 @@ namespace VNCSignalRServerHub
             {
                 signalRTime.HubReceivedTime = DateTime.Now;
                 signalRTime.HubReceivedTicks = Stopwatch.GetTimestamp();
+
                 Clients.All.addTimedMessage(message, signalRTime);
             }
             catch (Exception ex)
@@ -125,6 +129,7 @@ namespace VNCSignalRServerHub
             {
                 signalRTime.HubReceivedTime = DateTime.Now;
                 signalRTime.HubReceivedTicks = Stopwatch.GetTimestamp();
+
                 await Clients.All.SendAsync("AddTimedMessage", message, signalRTime);
             }
             catch (Exception ex)

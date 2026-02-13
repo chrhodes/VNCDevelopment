@@ -26,6 +26,5 @@ namespace VNCSignalRServerHub
 
         public double ClientMessageTicks { get; set; }
         public DateTime ClientMessageTime { get; set; }
-
     }
 }

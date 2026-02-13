@@ -36,9 +36,10 @@ namespace VNCSignalRServerHub
         public void ConfigureServices(IServiceCollection serviceCollection)
         {
             // NOTE(crhodes)
-            // SignalrR defaults to JSON
+            // SignalR defaults to JSON
             //serviceCollection.AddSignalR();
             // Add support for MessagePack
+
             serviceCollection.AddSignalR().AddMessagePackProtocol();
 
             // TODO(crhodes)
@@ -69,5 +70,4 @@ namespace VNCSignalRServerHub
         }
     }
 #endif
-
 }

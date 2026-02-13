@@ -56,7 +56,6 @@ namespace VNCSignalRServerHub
             //var rv5 = runtimeVersion.ProductVersion;
             //var rv6 = runtimeVersion.ProductName;
 
-
             //var assyb = Assembly.GetExecutingAssembly();
             //var a3 = assyb.Location;
             var appVersion = System.Diagnostics.FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location);
