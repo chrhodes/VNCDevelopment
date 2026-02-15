@@ -8,6 +8,7 @@
         Width="775" MinWidth="425"
         Height="800" MinHeight="425"
         ResizeMode="CanResizeWithGrip"
+        Closing="WPFClient_Closing"
 >
     <Window.Resources>
         <SolidColorBrush x:Key="RedText" Color="#c70000" />
@@ -34,23 +35,37 @@
                         Click="SignOut_Click" />
             </StackPanel>
 
-            <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Right">
 
-                <Label Content="User:" VerticalAlignment="Center" />
-                <TextBox x:Name="UserNameTextBox" Text="{Binding UserName}" Height="20" Width="50"/>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="CurrentUser:" VerticalAlignment="Center" Width="75" />
+                    <!--<TextBox x:Name="tbCurrentUser" Text="{Binding CurrentUserName}" Height="20" Width="50"/>-->
+                    <ComboBox x:Name="cbCurrentUserList"  SelectedValue="{Binding CurrentUserName}" SelectedValuePath="Content" Height="20" Width="100">
+                        <ComboBoxItem>CHR</ComboBoxItem>
+                        <ComboBoxItem>NRR</ComboBoxItem>
+                        <ComboBoxItem>VJS</ComboBoxItem>
+                    </ComboBox>
+
+                    <Button x:Name="btnIdentifyUser" 
+                            Content="Identify User" 
+                            Width="75" Style="{StaticResource Button}" HorizontalAlignment="Right" IsEnabled="False"
+                            Click="IdentifyUser_Click" />                
+                </StackPanel>
                 
-                <Button x:Name="btnIdentifyUser" 
-                        Content="Identify User" 
-                        Width="75" Style="{StaticResource Button}" HorizontalAlignment="Right" IsEnabled="False"
-                        Click="IdentifyUser_Click" />
-                <Label Content="Group:" VerticalAlignment="Center" />
-                
-                <TextBox x:Name="tbGroup" Text="{Binding GroupName}" Height="20" Width="50"/>    
-                
-                <Button x:Name="btnJoinGroup" 
-                        Content="Join Group" 
-                        Width="75" Style="{StaticResource Button}" HorizontalAlignment="Right" IsEnabled="False"
-                        Click="JoinGroup_Click" />
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Group:" VerticalAlignment="Center" Width="75" />
+                    <!--<TextBox x:Name="tbJoinGroup" Text="{Binding JoinGroupName}" Height="20" Width="50"/>-->
+                    <ComboBox x:Name="cbJoinGroupList" SelectedValue="{Binding JoinGroupName}" SelectedValuePath="Content" Height="20" Width="100">
+                        <ComboBoxItem>VNC</ComboBoxItem>
+                        <ComboBoxItem>Pet</ComboBoxItem>
+                        <ComboBoxItem>Woody</ComboBoxItem>
+                    </ComboBox>
+
+                    <Button x:Name="btnJoinGroup" 
+                            Content="Join Group" 
+                            Width="75" Style="{StaticResource Button}" HorizontalAlignment="Right" IsEnabled="False"
+                            Click="JoinGroup_Click" />
+                </StackPanel>
             </StackPanel>
                 
         </DockPanel>
@@ -87,27 +102,62 @@
 
             </StackPanel>
 
-            <StackPanel Orientation="Horizontal" DockPanel.Dock="Right" HorizontalAlignment="Right">
-                
-                <StackPanel Orientation="Vertical">
-                    <Button x:Name="btnSend" Content="Send" Click="btnSend_Click" IsEnabled="False" Style="{StaticResource Button}" />
-                    <Button x:Name="btnSendTimed" Content="Send Timed"  Click="btnSendTimed_Click" IsEnabled="False" Style="{StaticResource Button}" />
-                    <Button x:Name="btnSendAnnoymous" Content="Send Annoymous" Click="btnSendAnnoymous_Click" IsEnabled="False" Style="{StaticResource Button}" />
-                </StackPanel>
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Right">                
 
-                <StackPanel Orientation="Vertical">
-                    <Button x:Name="btnSendPriority" Content="Send Priority"  Click="btnSendPriority_Click" IsEnabled="False" Style="{StaticResource Button}" 
-                            ToolTip="Send Priorty Message. Hub only sends to Others"/>
-                    <Button x:Name="btnSendPriorityTimed" Content="Send Priority Timed"  Click="btnSendPriorityTimed_Click" IsEnabled="False" Style="{StaticResource Button}"
-                            ToolTip="Send Priorty Message. Hub only sends to Others" />
-                    <Button x:Name="btnLoggingPriorities" Content="Send Logging Priorities" Click="btnSendLoggingPriorities_Click" IsEnabled="False" Style="{StaticResource Button}"
-                            ToolTip="Send Priorty Message. Hub only sends to Others" />
-                </StackPanel>
-
-                <!--<Button x:Name="btnClear" Content="Clear Console" Margin="5,2,0,2"
-                        Click="btnClear_Click" Foreground="Red" />-->
+                <StackPanel Orientation="Vertical" DockPanel.Dock="Right" >
                 
-            </StackPanel>            
+                    <StackPanel Orientation="Horizontal">
+                        <Button x:Name="btnSend" Content="Send" IsEnabled="False" Style="{StaticResource Button}"
+                                Click="btnSend_Click" />
+                        <Button x:Name="btnSendAnnoymous" Content="Send Annoymous" IsEnabled="False" Style="{StaticResource Button}" 
+                                Click="btnSendAnnoymous_Click" />
+                        <Button x:Name="btnSendTimed" Content="Send Timed"  IsEnabled="False" Style="{StaticResource Button}"
+                                Click="btnSendTimed_Click" />                  
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <Button x:Name="btnSendPriority" Content="Send Priority" IsEnabled="False" Style="{StaticResource Button}" 
+                                Click="btnSendPriority_Click" 
+                                ToolTip="Send Priorty Message. Hub only sends to Others"/>
+                        <Button x:Name="btnSendPriorityTimed" Content="Send Priority Timed"  IsEnabled="False" Style="{StaticResource Button}"
+                                Click="btnSendPriorityTimed_Click"
+                                ToolTip="Send Priorty Message. Hub only sends to Others" />
+                        <Button x:Name="btnLoggingPriorities" Content="Send Logging Priorities" IsEnabled="False" Style="{StaticResource Button}"
+                                Click="btnSendLoggingPriorities_Click" 
+                                ToolTip="Send Priorty Message. Hub only sends to Others" />
+                    </StackPanel>
+
+                </StackPanel>
+                
+                <StackPanel>
+                    
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="User:" VerticalAlignment="Center" Width="50" />
+                        <!--<TextBox x:Name="tbUserName" Text="{Binding UserName}" Height="20" Width="50"/>-->
+                        <ComboBox x:Name="cbUserList" SelectedValue="{Binding UserName}" Height="20" Width="100">
+                            <ComboBoxItem>CHR</ComboBoxItem>
+                            <ComboBoxItem>NRR</ComboBoxItem>
+                            <ComboBoxItem>VJS</ComboBoxItem>
+                        </ComboBox>
+                        <Button x:Name="btnSendPrivate" Content="Send Private" IsEnabled="False" Style="{StaticResource Button}" 
+                        Click="btnSendPrivate_Click" />
+                    </StackPanel>
+                    
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Group:" VerticalAlignment="Center" Width="50" />
+                        <!--<TextBox x:Name="tbGroupName" Text="{Binding GroupName}" Height="20" Width="50"/>-->
+                        <ComboBox x:Name="cbGroupList" SelectedValue="{Binding GroupName}" Height="20" Width="100">
+                            <ComboBoxItem>VNC</ComboBoxItem>
+                            <ComboBoxItem>Pet</ComboBoxItem>
+                            <ComboBoxItem>Woody</ComboBoxItem>
+                        </ComboBox>                        
+                        <Button x:Name="btnSendGroup" Content="Send Group" IsEnabled="False" Style="{StaticResource Button}" 
+                          Click="btnSendGroup_Click" />
+                    </StackPanel>
+
+                </StackPanel>
+                
+            </StackPanel>
 
         </DockPanel>
 

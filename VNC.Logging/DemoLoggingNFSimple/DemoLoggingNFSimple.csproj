@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    
+  <PropertyGroup>
+      <TargetFrameworks>net481</TargetFrameworks>
+      <OutputType>WinExe</OutputType>
+      <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+      <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug'">
+        <!-- Uncoment next line to switch to ProjectReference(s) -->
+         <!--<DefineConstants>$(DefineConstants);VNCPROJECTREF</DefineConstants>--> 
+    </PropertyGroup>
+
+    <Choose>
+        <When Condition="'$(DefineConstants.Contains(VNCPROJECTREF))'">
+            <ItemGroup>
+                <ProjectReference Include="..\..\VNC.Logging\VNC.Logging.csproj" />
+                <ProjectReference Include="..\..\VNC.Logging.TraceListeners\SignalRListener\VNC.Logging.TraceListeners.SignalRListener.csproj" />
+            </ItemGroup>        
+        </When>
+        <When Condition="'!$(DefineConstants.Contains(VNCPROJECTREF))'">
+            <ItemGroup>
+                <PackageReference Include="VNC.Logging" Version="3.3.0" />                               
+                <PackageReference Include="VNC.Logging.TraceListeners.SignalRListener" Version="3.3.0" />
+            </ItemGroup>         
+        </When>
+    </Choose>
+
+</Project>

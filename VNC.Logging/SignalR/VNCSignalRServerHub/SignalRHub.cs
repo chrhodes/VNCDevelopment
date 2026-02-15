@@ -19,8 +19,17 @@ namespace VNCSignalRServerHub
         {
             string message = $"connectionID:>{Context.ConnectionId}< userName:>{userName}<";
 
+            // NOTE(crhodes)
+            // Recommended practice is to use Groups for sending messages to specific users.
+            // Clients.User() is not recommended.
             try
             {
+#if NET481
+                // TODO(crhodes)
+                // Is this supported in .NET Framework?  If not, need to remove from UI.
+#else
+                await Groups.AddToGroupAsync(Context.ConnectionId, userName);
+#endif
                 await Clients.All.SendAsync("AddMessage", message);
             }
             catch (Exception ex)
@@ -36,6 +45,12 @@ namespace VNCSignalRServerHub
 
             try
             {
+#if NET481
+                // TODO(crhodes)
+                // Is this supported in .NET Framework?  If not, need to remove from UI.
+#else
+                await Groups.AddToGroupAsync(Context.ConnectionId, groupName);
+#endif
                 await Clients.All.SendAsync("AddMessage", message);
             }
             catch (Exception ex)
@@ -44,6 +59,7 @@ namespace VNCSignalRServerHub
                     ((MainWindow)Application.Current.MainWindow).WriteToConsole(ex.ToString()));
             }
         }
+
 #if NET481
         public void SendMessage(string message)
         {
@@ -151,6 +167,50 @@ namespace VNCSignalRServerHub
             try
             {
                 await Clients.All.SendAsync("AddUserMessage", userName, message);
+            }
+            catch (Exception ex)
+            {
+                Application.Current.Dispatcher.Invoke(() =>
+                    ((MainWindow)Application.Current.MainWindow).WriteToConsole(ex.ToString()));
+            }
+        }
+#endif
+
+#if NET481
+        public void SendPrivateMessage(string userName, string message)
+        {
+            Clients.All.addPrivateMessage(userName, message);
+        }
+#else
+        public async Task SendPrivateMessage(string userName, string message)
+        {
+            try
+            {
+                //await Clients.User(userName).SendAsync("AddPrivateMessage", userName, message);
+                // NOTE(crhodes)
+                // Recommended practice is to use Groups for sending messages to specific users.
+                // Clients.User() is not recommended.
+                await Clients.Group(userName).SendAsync("AddPrivateMessage", userName, message);
+            }
+            catch (Exception ex)
+            {
+                Application.Current.Dispatcher.Invoke(() =>
+                    ((MainWindow)Application.Current.MainWindow).WriteToConsole(ex.ToString()));
+            }
+        }
+#endif
+
+#if NET481
+        public void SendGroupMessage(string groupName, string message)
+        {
+            Clients.Group(groupName).addGroupMessage(groupName, message);
+        }
+#else
+        public async Task SendGroupMessage(string groupName, string message)
+        {
+            try
+            {
+                await Clients.Group(groupName).SendAsync("AddGroupMessage", groupName, message);
             }
             catch (Exception ex)
             {

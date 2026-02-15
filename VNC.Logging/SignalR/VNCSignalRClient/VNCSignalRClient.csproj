@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <OutputType>WinExe</OutputType>
@@ -52,6 +52,9 @@
         <When Condition="'!$(DefineConstants.Contains(VNCPROJECTREF))'">
             <ItemGroup>
                 <PackageReference Include="VNC.Logging" Version="3.3.0" />                               
+            </ItemGroup>
+            <ItemGroup Condition="'$(TargetFramework)' == 'net8.0-windows'">
+                <PackageReference Include="VNC.Logging.TraceListeners.SignalRCoreListener" Version="3.3.0" />
             </ItemGroup>
             <ItemGroup Condition="'$(TargetFramework)' == 'net481'">
                 <PackageReference Include="VNC.Logging.TraceListeners.SignalRListener" Version="3.3.0" />

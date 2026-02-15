@@ -6,6 +6,11 @@ using System.Windows;
 
 using SignalRCoreServerHub;
 
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
+
+
 #if NET481
 using Microsoft.AspNet.SignalR.Client;
 #else
@@ -24,8 +29,30 @@ namespace VNCSignalRClient
     /// clients whether they are hosted in WinForms, WPF, or a web application.
     /// For simplicity, MVVM will not be used for this sample.
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, INotifyPropertyChanged
     {
+
+        #region Constructors, Initialization, and Load
+        public MainWindow()
+        {
+            InitializeComponent();
+            DataContext = this;
+        }
+
+        #endregion
+
+        #region Enums (None)
+
+
+        #endregion
+
+        #region Structures (None)
+
+
+        #endregion
+
+        #region Fields and Properties (None)
+
 #if NET481
         private string serverURI = "http://localhost:58095";
 
@@ -40,32 +67,171 @@ namespace VNCSignalRClient
         public HubConnection Connection { get; set; }
 #endif
 
-
-        public MainWindow()
-        {
-            InitializeComponent();
-            DataContext = this;
-        }
-
         public string ServerURI { get => serverURI; set => serverURI = value; }
+
 
         /// <summary>
         /// This name is simply added to sent messages to identify the user; this 
         /// sample does not include authentication.
         /// </summary>
-        public String UserName { get; set; } = "CHR";
-        public String GroupName { get; set; } = "VNC";
+        /// 
+
+        private string _currentUserName;
+        public string CurrentUserName
+        {
+            get => _currentUserName;
+            set
+            {
+                if (_currentUserName == value)
+                {
+                    return;
+                }
+
+                _currentUserName = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string _joinGroupName;
+        public string JoinGroupName
+        {
+            get => _joinGroupName;
+            set
+            {
+                if (_joinGroupName == value)
+                {
+                    return;
+                }
+
+                _joinGroupName = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string _userName;
+        public string UserName
+        {
+            get => _userName;
+            set
+            {
+                if (_userName == value)
+                {
+                    return;
+                }
+
+                _userName = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string _groupName;
+        public string GroupName
+        {
+            get => _groupName;
+            set
+            {
+                if (_groupName == value)
+                {
+                    return;
+                }
+
+                _groupName = value;
+                OnPropertyChanged();
+            }
+        }
 
         public string RuntimeVersion { get => Common.RuntimeVersion; }
         public string FileVersion { get => Common.FileVersion; }
         public string ProductVersion { get => Common.ProductVersion; }
         public string ProductName { get => Common.ProductName; }
 
+        #endregion
+
+        #region Event Handlers
+
+        #region SignalR Events
+
 #if NET481
 
 #else
+        private Task Connection_Reconnecting(Exception? arg)
+        {
+            var dispatcher = Application.Current.Dispatcher;
+            rtbConsole.AppendText($"Reconnecting {(arg is null ? "" : arg.Message)}...\r");
 
+            return null;
+        }
+
+        private Task Connection_Reconnected(string? arg)
+        {
+            var dispatcher = Application.Current.Dispatcher;
+            rtbConsole.AppendText($"Reconnected {arg}\r");
+
+            return null;
+        }
 #endif
+
+#if NET481
+        /// <summary>
+        /// If the server is stopped, the connection will time out after 30 seconds (default), 
+        /// and the Closed event will fire.
+        /// </summary>
+        void Connection_Closed()
+        {
+            var dispatcher = Application.Current.Dispatcher;
+
+            //dispatcher.InvokeAsync(() => ChatPanel.Visibility = Visibility.Collapsed);
+            dispatcher.InvokeAsync(() => btnSend.IsEnabled = false);
+            dispatcher.InvokeAsync(() => btnSendTimed.IsEnabled = false);
+            dispatcher.InvokeAsync(() => btnSendAnnoymous.IsEnabled = false);
+            dispatcher.InvokeAsync(() => btnSendPrivate.IsEnabled = false);
+            dispatcher.InvokeAsync(() => btnSendGroup.IsEnabled = false);
+
+            dispatcher.InvokeAsync(() => btnSendPriority.IsEnabled = false);
+            dispatcher.InvokeAsync(() => btnSendPriorityTimed.IsEnabled = false);
+            dispatcher.InvokeAsync(() => btnLoggingPriorities.IsEnabled = false);
+
+            dispatcher.InvokeAsync(() => rtbConsole.AppendText($"Connection Closed.\r"));
+
+            dispatcher.InvokeAsync(() => btnSignIn.IsEnabled = true);
+
+            dispatcher.InvokeAsync(() => btnIdentifyUser.IsEnabled = false);
+            dispatcher.InvokeAsync(() => btnJoinGroup.IsEnabled = false);
+            dispatcher.InvokeAsync(() => btnSignOut.IsEnabled = false);
+
+            //return null;
+        }
+#else
+        /// <summary>
+        /// If the server is stopped, the connection will time out after 30 seconds (default), 
+        /// and the Closed event will fire.
+        /// </summary>
+        Task Connection_Closed(Exception? arg)
+        {
+            var dispatcher = Application.Current.Dispatcher;
+
+            dispatcher.InvokeAsync(() => btnSend.IsEnabled = false);
+            dispatcher.InvokeAsync(() => btnSendTimed.IsEnabled = false);
+            dispatcher.InvokeAsync(() => btnSendAnnoymous.IsEnabled = false);
+            dispatcher.InvokeAsync(() => btnSendPrivate.IsEnabled = false);
+            dispatcher.InvokeAsync(() => btnSendGroup.IsEnabled = false);
+
+            dispatcher.InvokeAsync(() => btnSendPriority.IsEnabled = false);
+            dispatcher.InvokeAsync(() => btnSendPriorityTimed.IsEnabled = false);
+            dispatcher.InvokeAsync(() => btnLoggingPriorities.IsEnabled = false);
+
+            dispatcher.InvokeAsync(() => rtbConsole.AppendText($"Connection Closed.\r{(arg is null ? "" : (arg.Message + '\r'))}"));
+
+            dispatcher.InvokeAsync(() => btnSignIn.IsEnabled = true);
+
+            dispatcher.InvokeAsync(() => btnIdentifyUser.IsEnabled = false);
+            dispatcher.InvokeAsync(() => btnJoinGroup.IsEnabled = false);
+            dispatcher.InvokeAsync(() => btnSignOut.IsEnabled = false);
+
+            return null;
+        }
+#endif
+        #endregion
 
         private void btnSend_Click(object sender, RoutedEventArgs e)
         {
@@ -85,14 +251,13 @@ namespace VNCSignalRClient
 #else
                     if (sendAsync)
                     {
-                        Connection.SendAsync("SendUserMessage", UserName, message);
+                        Connection.SendAsync("SendUserMessage", CurrentUserName, message);
                     }
                     else
                     {
-                        Connection.InvokeAsync("SendUserMessage", UserName, message);
+                        Connection.InvokeAsync("SendUserMessage", CurrentUserName, message);
                     }
 #endif
-
                 }
 
                 if ((bool)cbClearMessage.IsChecked)
@@ -188,6 +353,84 @@ namespace VNCSignalRClient
                     }
 #endif
 
+                }
+
+                if ((bool)cbClearMessage.IsChecked)
+                {
+                    TextBoxMessage.Text = String.Empty;
+                    TextBoxMessage.Focus();
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.ERROR(ex, Common.LOG_CATEGORY);
+            }
+        }
+
+        private void btnSendPrivate_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Boolean sendAsync = (bool)cbSendAsync.IsChecked;
+#if NET481
+                string message = TextBoxMessage.Text;
+#else
+                string message = TextBoxMessage.Text + (sendAsync ? " SA" : " IA");
+#endif
+
+                for (int i = 0; i < Int32.Parse(Count.Text); i++)
+                {
+#if NET481
+                    HubProxy.Invoke("SendPrivateMessage", UserName, message);
+#else
+                    if (sendAsync)
+                    {
+                        Connection.SendAsync("SendPrivateMessage", UserName, message);
+                    }
+                    else
+                    {
+                        Connection.InvokeAsync("SendPrivateMessage", UserName, message);
+                    }
+#endif
+                }
+
+                if ((bool)cbClearMessage.IsChecked)
+                {
+                    TextBoxMessage.Text = String.Empty;
+                    TextBoxMessage.Focus();
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.ERROR(ex, Common.LOG_CATEGORY);
+            }
+        }
+
+        private void btnSendGroup_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Boolean sendAsync = (bool)cbSendAsync.IsChecked;
+#if NET481
+                string message = TextBoxMessage.Text;
+#else
+                string message = TextBoxMessage.Text + (sendAsync ? " SA" : " IA");
+#endif
+
+                for (int i = 0; i < Int32.Parse(Count.Text); i++)
+                {
+#if NET481
+                    HubProxy.Invoke("SendGroupMessage", GroupName, message);
+#else
+                    if (sendAsync)
+                    {
+                        Connection.SendAsync("SendGroupMessage", GroupName, message);
+                    }
+                    else
+                    {
+                        Connection.InvokeAsync("SendGroupMessage", GroupName, message);
+                    }
+#endif
                 }
 
                 if ((bool)cbClearMessage.IsChecked)
@@ -476,259 +719,11 @@ namespace VNCSignalRClient
             }
         }
 
-        /// <summary>
-        /// Creates and connects the hub connection and hub proxy. This method
-        /// is called asynchronously from SignInButton_Click.
-        /// Use async to avoid blocking UI
-        /// </summary>
-        private async void ConnectAsync()
-        {
-#if NET481
-            Connection = new HubConnection(tbServerURI.Text);
-            Connection.Closed += Connection_Closed;
-            HubProxy = Connection.CreateHubProxy("SignalRHub");
-
-            //Handle incoming event from server: use Invoke to write to console from SignalR's thread
-
-            HubProxy.On<string>("AddMessage", (message) =>
-                this.Dispatcher.InvokeAsync(() =>
-                    rtbConsole.AppendText(String.Format("{0}\r", message))
-                )
-            );
-
-            HubProxy.On<string, string>("AddUserMessage", (name, message) =>
-                this.Dispatcher.InvokeAsync(() =>
-                    rtbConsole.AppendText(String.Format("{0}: {1}\r", name, message))
-                )
-            );
-
-            HubProxy.On<string, Int32>("AddPriorityMessage", (message, priority) =>
-                this.Dispatcher.InvokeAsync(() =>
-                    rtbConsole.AppendText($"P{priority}: {message}\r")
-                )
-            );
-
-#else
-            try
-            {
-                //Connection = new HubConnectionBuilder()
-                //    .WithUrl(ServerURI)
-                //    .Build();
-
-                // NOTE(crhodes)
-                // This defaults to JSON
-
-                Connection = new HubConnectionBuilder()
-                     .WithUrl(ServerURI)
-                     .AddMessagePackProtocol()
-                     .Build();
-
-                Connection.Closed += Connection_Closed;
-                Connection.Reconnecting += Connection_Reconnecting;
-                Connection.Reconnected += Connection_Reconnected;
-
-                //Handle incoming event from server: use Invoke to write to console from SignalR's thread
-
-                Connection.On<string>("AddMessage", (message) =>
-                    this.Dispatcher.InvokeAsync(() =>
-                        rtbConsole.AppendText($"{message}\r")
-                    )
-                );
-
-                Connection.On<string, string>("AddUserMessage", (name, message) =>
-                    this.Dispatcher.InvokeAsync(() =>
-                        rtbConsole.AppendText($"{name}: {message}\r")
-                    )
-                );
-
-                Connection.On<string, Int32>("AddPriorityMessage", (message, priority) =>
-                    this.Dispatcher.InvokeAsync(() =>
-                        rtbConsole.AppendText($"P{priority}: {message}\r")
-                    )
-                );
-            }
-            catch (Exception ex)
-            {
-                Log.ERROR(ex, Common.LOG_CATEGORY);
-            }
-
-#endif
-
-#if NET481
-            HubProxy.On<string, SignalRTime>("AddTimedMessage", (message, signalrtime) =>
-            {
-                signalrtime.ClientReceivedTime = DateTime.Now;
-                signalrtime.ClientReceivedTicks = Stopwatch.GetTimestamp();
-                //this.Dispatcher.InvokeAsync(() =>
-                //    rtbConsole.AppendText($"SendT:{signalrtime.SendTime:yyyy/MM/dd HH:mm:ss.ffff} Send:{signalrtime.SendTicks} HubRT:{signalrtime.HubReceivedTime:yyyy/MM/dd HH:mm:ss.ffff} HubR:{signalrtime.HubReceivedTicks} ClientRT:{signalrtime.ClientReceivedTime:yyyy/MM/dd HH:mm:ss.ffff} ClientR:{signalrtime.ClientReceivedTicks} ClientMT:{signalrtime.ClientMessageTime:yyyy/MM/dd HH:mm:ss.ffff} ClientM:{signalrtime.ClientMessageTicks} : {message}\r")
-                //);
-                this.Dispatcher.InvokeAsync(() =>
-                    rtbConsole.AppendText($"{message}\r"));
-
-                signalrtime.ClientMessageTime = DateTime.Now;
-                signalrtime.ClientMessageTicks = Stopwatch.GetTimestamp();
-
-                this.Dispatcher.InvokeAsync(() =>
-                    rtbConsole.AppendText($"SendT:    {signalrtime.SendTime:yyyy/MM/dd HH:mm:ss.ffff} Send:{signalrtime.SendTicks}\r"));
-
-                this.Dispatcher.InvokeAsync(() =>
-                    rtbConsole.AppendText($"HubRT:    {signalrtime.HubReceivedTime:yyyy/MM/dd HH:mm:ss.ffff} - Duration:{(signalrtime.HubReceivedTicks - signalrtime.SendTicks) / (double)Stopwatch.Frequency}\r"));
-                
-                this.Dispatcher.InvokeAsync(() =>
-                    rtbConsole.AppendText($"ClientRT: {signalrtime.ClientReceivedTime:yyyy/MM/dd HH:mm:ss.ffff} - Duration:{(signalrtime.ClientReceivedTicks - signalrtime.HubReceivedTicks) / (double)Stopwatch.Frequency}\r"));
-                
-                this.Dispatcher.InvokeAsync(() =>
-                    rtbConsole.AppendText($"ClientMT: {signalrtime.ClientMessageTime:yyyy/MM/dd HH:mm:ss.ffff} - Duration:{(signalrtime.ClientMessageTicks - signalrtime.ClientReceivedTicks) / (double)Stopwatch.Frequency}\r"));
-                
-                this.Dispatcher.InvokeAsync(() =>
-                    rtbConsole.AppendText($"Duration: {(signalrtime.ClientMessageTicks - signalrtime.SendTicks) / (double)Stopwatch.Frequency}\r"));
-
-            });
-#else
-            Connection.On<string, SignalRTime>("AddTimedMessage", (message, signalrtime) =>
-            {
-                signalrtime.ClientReceivedTime = DateTime.Now;
-                signalrtime.ClientReceivedTicks = Stopwatch.GetTimestamp();
-                //this.Dispatcher.InvokeAsync(() =>
-                //    rtbConsole.AppendText($"SendT:{signalrtime.SendTime:yyyy/MM/dd HH:mm:ss.ffff} Send:{signalrtime.SendTicks} HubRT:{signalrtime.HubReceivedTime:yyyy/MM/dd HH:mm:ss.ffff} HubR:{signalrtime.HubReceivedTicks} ClientRT:{signalrtime.ClientReceivedTime:yyyy/MM/dd HH:mm:ss.ffff} ClientR:{signalrtime.ClientReceivedTicks} ClientMT:{signalrtime.ClientMessageTime:yyyy/MM/dd HH:mm:ss.ffff} ClientM:{signalrtime.ClientMessageTicks} : {message}\r")
-                //);
-                this.Dispatcher.InvokeAsync(() =>
-                    rtbConsole.AppendText($"{message}\r"));
-
-                signalrtime.ClientMessageTime = DateTime.Now;
-                signalrtime.ClientMessageTicks = Stopwatch.GetTimestamp();
-
-                this.Dispatcher.InvokeAsync(() =>
-                    rtbConsole.AppendText($"SendT:    {signalrtime.SendTime:yyyy/MM/dd HH:mm:ss.ffff} Send:{signalrtime.SendTicks}\r"));
-
-                this.Dispatcher.InvokeAsync(() =>
-                    rtbConsole.AppendText($"HubRT:    {signalrtime.HubReceivedTime:yyyy/MM/dd HH:mm:ss.ffff} - Duration:{(signalrtime.HubReceivedTicks - signalrtime.SendTicks) / (double)Stopwatch.Frequency}\r"));
-                
-                this.Dispatcher.InvokeAsync(() =>
-                    rtbConsole.AppendText($"ClientRT: {signalrtime.ClientReceivedTime:yyyy/MM/dd HH:mm:ss.ffff} - Duration:{(signalrtime.ClientReceivedTicks - signalrtime.HubReceivedTicks) / (double)Stopwatch.Frequency}\r"));
-                
-                this.Dispatcher.InvokeAsync(() =>
-                    rtbConsole.AppendText($"ClientMT: {signalrtime.ClientMessageTime:yyyy/MM/dd HH:mm:ss.ffff} - Duration:{(signalrtime.ClientMessageTicks - signalrtime.ClientReceivedTicks) / (double)Stopwatch.Frequency}\r"));
-                
-                this.Dispatcher.InvokeAsync(() =>
-                    rtbConsole.AppendText($"Duration: {(signalrtime.ClientMessageTicks - signalrtime.SendTicks) / (double)Stopwatch.Frequency}\r"));
-
-            });
-#endif
-
-            try
-            {
-#if NET481
-                await Connection.Start();
-#else
-                await Connection.StartAsync();
-#endif
-            }
-            catch (HttpRequestException hre)
-            {
-                rtbConsole.AppendText( $"Unable to connect to server: Start server before connecting clients. {hre.Message}\r");
-                //No connection: Don't enable Send button or show chat UI
-                return;
-            }
-            catch (Exception ex)
-            {
-                rtbConsole.AppendText($"Unable to connect to server, ex:{ex.Message}\r");
-                //No connection: Don't enable Send button or show chat UI
-                return;
-            }
-
-            rtbConsole.AppendText($"Connected to server at {ServerURI}\r");
-
-            btnSignIn.IsEnabled = false;
-
-            btnIdentifyUser.IsEnabled = true;
-            btnJoinGroup.IsEnabled = true;
-            btnSignOut.IsEnabled = true;
-
-            btnSend.IsEnabled = true;
-            btnSendTimed.IsEnabled = true;
-            btnSendAnnoymous.IsEnabled = true;
-            btnSendPriority.IsEnabled = true;
-            btnSendPriorityTimed.IsEnabled = true;
-            btnLoggingPriorities.IsEnabled = true;
-        }
-
-#if NET481
-
-#else
-        private Task Connection_Reconnecting(Exception? arg)
-        {
-            var dispatcher = Application.Current.Dispatcher;
-            rtbConsole.AppendText($"Reconnecting {(arg is null ? "" : arg.Message)}...\r");
-
-            return null;
-        }
-
-        private Task Connection_Reconnected(string? arg)
-        {
-            var dispatcher = Application.Current.Dispatcher;
-            rtbConsole.AppendText($"Reconnected {arg}\r");
-
-            return null;
-        }
-#endif
-
-#if NET481
-        /// <summary>
-        /// If the server is stopped, the connection will time out after 30 seconds (default), 
-        /// and the Closed event will fire.
-        /// </summary>
-        void Connection_Closed()
-        {
-            var dispatcher = Application.Current.Dispatcher;
-
-            //dispatcher.InvokeAsync(() => ChatPanel.Visibility = Visibility.Collapsed);
-            dispatcher.InvokeAsync(() => btnSend.IsEnabled = false);
-            dispatcher.InvokeAsync(() => btnSendTimed.IsEnabled = false);
-            dispatcher.InvokeAsync(() => btnSendAnnoymous.IsEnabled = false);
-            dispatcher.InvokeAsync(() => btnSendPriority.IsEnabled = false);
-            dispatcher.InvokeAsync(() => btnSendPriorityTimed.IsEnabled = false);
-            dispatcher.InvokeAsync(() => btnLoggingPriorities.IsEnabled = false);
-
-            dispatcher.InvokeAsync(() => rtbConsole.AppendText($"Connection Closed.\r"));
-            //dispatcher.InvokeAsync(() => SignInPanel.Visibility = Visibility.Visible);
-
-            //return null;
-        }
-#else
-
-        /// <summary>
-        /// If the server is stopped, the connection will time out after 30 seconds (default), 
-        /// and the Closed event will fire.
-        /// </summary>
-        Task Connection_Closed(Exception? arg)
-        {
-            var dispatcher = Application.Current.Dispatcher;
-
-            dispatcher.InvokeAsync(() => btnSend.IsEnabled = false);
-            dispatcher.InvokeAsync(() => btnSendTimed.IsEnabled = false);
-            dispatcher.InvokeAsync(() => btnSendAnnoymous.IsEnabled = false);
-            dispatcher.InvokeAsync(() => btnSendPriority.IsEnabled = false);
-            dispatcher.InvokeAsync(() => btnSendPriorityTimed.IsEnabled = false);
-            dispatcher.InvokeAsync(() => btnLoggingPriorities.IsEnabled = false);
-
-            dispatcher.InvokeAsync(() => rtbConsole.AppendText($"Connection Closed.\r{(arg is null ? "" : (arg.Message + '\r'))}"));
-
-            dispatcher.InvokeAsync(() => btnSignIn.IsEnabled = true);
-
-            dispatcher.InvokeAsync(() => btnIdentifyUser.IsEnabled = false);
-            dispatcher.InvokeAsync(() => btnJoinGroup.IsEnabled = false);
-            dispatcher.InvokeAsync(() => btnSignOut.IsEnabled = false);
-
-            return null;
-        }
-#endif
-
         private void SignIn_Click(object sender, RoutedEventArgs e)
         {
-            UserName = UserNameTextBox.Text;
-            
-            if (!String.IsNullOrEmpty(UserName))
+            //UserName = tbCurrentUser.Text;
+
+            if (!String.IsNullOrEmpty(CurrentUserName))
             {
                 rtbConsole.AppendText("Connecting to server...\r");
 
@@ -736,7 +731,7 @@ namespace VNCSignalRClient
             }
             else
             {
-                rtbConsole.AppendText("Must enter UserName\r");
+                rtbConsole.AppendText("Must enter CurrentUser\r");
             }
         }
 
@@ -793,11 +788,11 @@ namespace VNCSignalRClient
 
             if (sendAsync)
             {
-                Connection.SendAsync("IdentifyUser", UserName);
+                Connection.SendAsync("IdentifyUser", CurrentUserName);
             }
             else
             {
-                Connection.InvokeAsync("IdentifyUser", UserName);
+                Connection.InvokeAsync("IdentifyUser", CurrentUserName);
             }
 #endif
         }
@@ -811,11 +806,11 @@ namespace VNCSignalRClient
 
             if (sendAsync)
             {
-                Connection.SendAsync("JoinGroup", GroupName);
+                Connection.SendAsync("JoinGroup", JoinGroupName);
             }
             else
             {
-                Connection.InvokeAsync("JoinGroup", GroupName);
+                Connection.InvokeAsync("JoinGroup", JoinGroupName);
             }
 #endif
         }
@@ -824,5 +819,235 @@ namespace VNCSignalRClient
         {
 
         }
+
+        #endregion
+
+        #region Commands (None)
+
+        #endregion
+
+        #region Public Methods (None)
+
+
+        #endregion
+
+        #region Protected Methods (None)
+
+
+        #endregion
+
+        #region Private Methods
+
+        /// <summary>
+        /// Creates and connects the hub connection and hub proxy. This method
+        /// is called asynchronously from SignInButton_Click.
+        /// Use async to avoid blocking UI
+        /// </summary>
+        private async void ConnectAsync()
+        {
+#if NET481
+            Connection = new HubConnection(tbServerURI.Text);
+            Connection.Closed += Connection_Closed;
+            HubProxy = Connection.CreateHubProxy("SignalRHub");
+
+            //Handle incoming event from server: use Invoke to write to console from SignalR's thread
+
+            HubProxy.On<string>("AddMessage", (message) =>
+                this.Dispatcher.InvokeAsync(() =>
+                    rtbConsole.AppendText(String.Format("{0}\r", message))
+                )
+            );
+
+            HubProxy.On<string, string>("AddUserMessage", (name, message) =>
+                this.Dispatcher.InvokeAsync(() =>
+                    rtbConsole.AppendText(String.Format("{0}: {1}\r", name, message))
+                )
+            );
+
+            HubProxy.On<string, Int32>("AddPriorityMessage", (message, priority) =>
+                this.Dispatcher.InvokeAsync(() =>
+                    rtbConsole.AppendText($"P{priority}: {message}\r")
+                )
+            );
+#else
+            try
+            {
+                //Connection = new HubConnectionBuilder()
+                //    .WithUrl(ServerURI)
+                //    .Build();
+
+                // NOTE(crhodes)
+                // This defaults to JSON
+
+                Connection = new HubConnectionBuilder()
+                     .WithUrl(ServerURI)
+                     .AddMessagePackProtocol()
+                     .Build();
+
+                Connection.Closed += Connection_Closed;
+                Connection.Reconnecting += Connection_Reconnecting;
+                Connection.Reconnected += Connection_Reconnected;
+
+                //Handle incoming event from server: use Invoke to write to console from SignalR's thread
+
+                Connection.On<string>("AddMessage", (message) =>
+                    this.Dispatcher.InvokeAsync(() =>
+                        rtbConsole.AppendText($"{message}\r")
+                    )
+                );
+
+                Connection.On<string, string>("AddUserMessage", (name, message) =>
+                    this.Dispatcher.InvokeAsync(() =>
+                        rtbConsole.AppendText($"{name}: {message}\r")
+                    )
+                );
+
+                Connection.On<string, Int32>("AddPriorityMessage", (message, priority) =>
+                    this.Dispatcher.InvokeAsync(() =>
+                        rtbConsole.AppendText($"P{priority}: {message}\r")
+                    )
+                );
+
+                Connection.On<string, string>("AddPrivateMessage", (name, message) =>
+                    this.Dispatcher.InvokeAsync(() =>
+                        rtbConsole.AppendText($"{name}: {message}\r")
+                    )
+                );
+
+                Connection.On<string, string>("AddGroupMessage", (name, message) =>
+                    this.Dispatcher.InvokeAsync(() =>
+                        rtbConsole.AppendText($"{name}: {message}\r")
+                    )
+                );
+            }
+            catch (Exception ex)
+            {
+                Log.ERROR(ex, Common.LOG_CATEGORY);
+            }
+#endif
+
+#if NET481
+            HubProxy.On<string, SignalRTime>("AddTimedMessage", (message, signalrtime) =>
+            {
+                signalrtime.ClientReceivedTime = DateTime.Now;
+                signalrtime.ClientReceivedTicks = Stopwatch.GetTimestamp();
+                //this.Dispatcher.InvokeAsync(() =>
+                //    rtbConsole.AppendText($"SendT:{signalrtime.SendTime:yyyy/MM/dd HH:mm:ss.ffff} Send:{signalrtime.SendTicks} HubRT:{signalrtime.HubReceivedTime:yyyy/MM/dd HH:mm:ss.ffff} HubR:{signalrtime.HubReceivedTicks} ClientRT:{signalrtime.ClientReceivedTime:yyyy/MM/dd HH:mm:ss.ffff} ClientR:{signalrtime.ClientReceivedTicks} ClientMT:{signalrtime.ClientMessageTime:yyyy/MM/dd HH:mm:ss.ffff} ClientM:{signalrtime.ClientMessageTicks} : {message}\r")
+                //);
+                this.Dispatcher.InvokeAsync(() =>
+                    rtbConsole.AppendText($"{message}\r"));
+
+                signalrtime.ClientMessageTime = DateTime.Now;
+                signalrtime.ClientMessageTicks = Stopwatch.GetTimestamp();
+
+                this.Dispatcher.InvokeAsync(() =>
+                    rtbConsole.AppendText($"SendT:    {signalrtime.SendTime:yyyy/MM/dd HH:mm:ss.ffff} Send:{signalrtime.SendTicks}\r"));
+
+                this.Dispatcher.InvokeAsync(() =>
+                    rtbConsole.AppendText($"HubRT:    {signalrtime.HubReceivedTime:yyyy/MM/dd HH:mm:ss.ffff} - Duration:{(signalrtime.HubReceivedTicks - signalrtime.SendTicks) / (double)Stopwatch.Frequency}\r"));
+                
+                this.Dispatcher.InvokeAsync(() =>
+                    rtbConsole.AppendText($"ClientRT: {signalrtime.ClientReceivedTime:yyyy/MM/dd HH:mm:ss.ffff} - Duration:{(signalrtime.ClientReceivedTicks - signalrtime.HubReceivedTicks) / (double)Stopwatch.Frequency}\r"));
+                
+                this.Dispatcher.InvokeAsync(() =>
+                    rtbConsole.AppendText($"ClientMT: {signalrtime.ClientMessageTime:yyyy/MM/dd HH:mm:ss.ffff} - Duration:{(signalrtime.ClientMessageTicks - signalrtime.ClientReceivedTicks) / (double)Stopwatch.Frequency}\r"));
+                
+                this.Dispatcher.InvokeAsync(() =>
+                    rtbConsole.AppendText($"Duration: {(signalrtime.ClientMessageTicks - signalrtime.SendTicks) / (double)Stopwatch.Frequency}\r"));
+
+            });
+#else
+            Connection.On<string, SignalRTime>("AddTimedMessage", (message, signalrtime) =>
+            {
+                signalrtime.ClientReceivedTime = DateTime.Now;
+                signalrtime.ClientReceivedTicks = Stopwatch.GetTimestamp();
+                //this.Dispatcher.InvokeAsync(() =>
+                //    rtbConsole.AppendText($"SendT:{signalrtime.SendTime:yyyy/MM/dd HH:mm:ss.ffff} Send:{signalrtime.SendTicks} HubRT:{signalrtime.HubReceivedTime:yyyy/MM/dd HH:mm:ss.ffff} HubR:{signalrtime.HubReceivedTicks} ClientRT:{signalrtime.ClientReceivedTime:yyyy/MM/dd HH:mm:ss.ffff} ClientR:{signalrtime.ClientReceivedTicks} ClientMT:{signalrtime.ClientMessageTime:yyyy/MM/dd HH:mm:ss.ffff} ClientM:{signalrtime.ClientMessageTicks} : {message}\r")
+                //);
+                this.Dispatcher.InvokeAsync(() =>
+                    rtbConsole.AppendText($"{message}\r"));
+
+                signalrtime.ClientMessageTime = DateTime.Now;
+                signalrtime.ClientMessageTicks = Stopwatch.GetTimestamp();
+
+                this.Dispatcher.InvokeAsync(() =>
+                    rtbConsole.AppendText($"SendT:    {signalrtime.SendTime:yyyy/MM/dd HH:mm:ss.ffff} Send:{signalrtime.SendTicks}\r"));
+
+                this.Dispatcher.InvokeAsync(() =>
+                    rtbConsole.AppendText($"HubRT:    {signalrtime.HubReceivedTime:yyyy/MM/dd HH:mm:ss.ffff} - Duration:{(signalrtime.HubReceivedTicks - signalrtime.SendTicks) / (double)Stopwatch.Frequency}\r"));
+
+                this.Dispatcher.InvokeAsync(() =>
+                    rtbConsole.AppendText($"ClientRT: {signalrtime.ClientReceivedTime:yyyy/MM/dd HH:mm:ss.ffff} - Duration:{(signalrtime.ClientReceivedTicks - signalrtime.HubReceivedTicks) / (double)Stopwatch.Frequency}\r"));
+
+                this.Dispatcher.InvokeAsync(() =>
+                    rtbConsole.AppendText($"ClientMT: {signalrtime.ClientMessageTime:yyyy/MM/dd HH:mm:ss.ffff} - Duration:{(signalrtime.ClientMessageTicks - signalrtime.ClientReceivedTicks) / (double)Stopwatch.Frequency}\r"));
+
+                this.Dispatcher.InvokeAsync(() =>
+                    rtbConsole.AppendText($"Duration: {(signalrtime.ClientMessageTicks - signalrtime.SendTicks) / (double)Stopwatch.Frequency}\r"));
+
+            });
+#endif
+
+            try
+            {
+#if NET481
+                await Connection.Start();
+#else
+                await Connection.StartAsync();
+#endif
+            }
+            catch (HttpRequestException hre)
+            {
+                rtbConsole.AppendText($"Unable to connect to server: Start server before connecting clients. {hre.Message}\r");
+                //No connection: Don't enable Send button or show chat UI
+                return;
+            }
+            catch (Exception ex)
+            {
+                rtbConsole.AppendText($"Unable to connect to server, ex:{ex.Message}\r");
+                //No connection: Don't enable Send button or show chat UI
+                return;
+            }
+
+            rtbConsole.AppendText($"Connected to server at {ServerURI}\r");
+
+            btnSignIn.IsEnabled = false;
+
+            btnIdentifyUser.IsEnabled = true;
+            btnJoinGroup.IsEnabled = true;
+            btnSignOut.IsEnabled = true;
+
+            btnSend.IsEnabled = true;
+            btnSendTimed.IsEnabled = true;
+            btnSendAnnoymous.IsEnabled = true;
+            btnSendPrivate.IsEnabled = true;
+            btnSendGroup.IsEnabled = true;
+
+            btnSendPriority.IsEnabled = true;
+            btnSendPriorityTimed.IsEnabled = true;
+            btnLoggingPriorities.IsEnabled = true;
+        }
+
+        #endregion
+
+        #region INotifyPropertyChanged
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        // This is the traditional approach - requires string name to be passed in
+
+        //private void OnPropertyChanged(string propertyName)
+        //{
+        //    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        //}
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            // This is the new CompilerServices attribute!
+
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        #endregion
     }
 }

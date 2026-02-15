@@ -7,7 +7,7 @@
         <AssemblyOriginatorKeyFile>VNC.snk</AssemblyOriginatorKeyFile>
         <VersionPrefix>3.3.0</VersionPrefix>
         <VersionSuffix>Release</VersionSuffix>
-        <FileVersion>2026.02.12</FileVersion>     
+        <FileVersion>2026.02.14</FileVersion>     
         <Description>SignalRCore TraceListener for EnterpriseLibrary Logging</Description>
         <Nullable>enable</Nullable>
         <ImplicitUsings>disable</ImplicitUsings>
@@ -57,6 +57,8 @@
         <!-- Uncoment next line to switch to ProjectReference(s) -->
         <!-- <DefineConstants>$(DefineConstants);VNCPROJECTREF</DefineConstants> -->
     </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)'=='Debug'" />
 
     <Choose>
         <When Condition="'$(DefineConstants.Contains(VNCPROJECTREF))'">

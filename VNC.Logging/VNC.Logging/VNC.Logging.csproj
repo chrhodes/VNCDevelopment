@@ -8,12 +8,13 @@
         <VersionPrefix>3.3.0</VersionPrefix>
         <VersionSuffix>Release</VersionSuffix>
         <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>        
-        <FileVersion>2026.02.12</FileVersion>    
+        <FileVersion>2026.02.14</FileVersion>    
         <Description>Logging Wrapper on top of EnterpriseLibrary.Logging</Description>
         <LangVersion>12.0</LangVersion>
         <Nullable>enable</Nullable>
         <ImplicitUsings>disable</ImplicitUsings>
         <SatelliteResourceLanguages>en-US</SatelliteResourceLanguages>
+        <Configurations>Debug;Release;Debug481;Release481</Configurations>
     </PropertyGroup>
 
     <!-- This is for NuGet Packages -->
@@ -88,13 +89,15 @@
 
     <ItemGroup>
       <PackageReference Include="EnterpriseLibrary.Logging.NetCore" Version="6.3.2" />
-      <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
+      <!--<PackageReference Include="Newtonsoft.Json" Version="13.0.4" />-->
     </ItemGroup>
 
     <PropertyGroup Condition="'$(Configuration)'=='Debug'">
         <!-- Uncoment next line to switch to ProjectReference(s) -->
         <!-- <DefineConstants>$(DefineConstants);VNCPROJECTREF</DefineConstants> -->
     </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)'=='Debug481'" />
 
     <Choose>
         <When Condition="'$(DefineConstants.Contains(VNCPROJECTREF))'">

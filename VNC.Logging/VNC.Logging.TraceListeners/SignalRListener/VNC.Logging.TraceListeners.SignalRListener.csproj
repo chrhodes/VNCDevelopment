@@ -8,7 +8,7 @@
         <VersionPrefix>3.3.0</VersionPrefix>
         <VersionSuffix>Release</VersionSuffix>
         <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
-        <FileVersion>2026.02.12</FileVersion>   
+        <FileVersion>2026.02.14</FileVersion>   
         <Description>SignalRCore TraceListener for EnterpriseLibrary Logging</Description>
         <LangVersion>12.0</LangVersion>
         <Nullable>enable</Nullable>
@@ -76,6 +76,8 @@
         <!-- Uncoment next line to switch to ProjectReference(s) -->
         <!-- <DefineConstants>$(DefineConstants);VNCPROJECTREF</DefineConstants> -->
     </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)'=='Debug'" />
 
     <Choose>
         <When Condition="'$(DefineConstants.Contains(VNCPROJECTREF))'">
