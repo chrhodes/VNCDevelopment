@@ -9,7 +9,7 @@
     
     <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug'">
         <!-- Uncoment next line to switch to ProjectReference(s) -->
-         <!--<DefineConstants>$(DefineConstants);VNCPROJECTREF</DefineConstants>--> 
+         <DefineConstants>$(DefineConstants);VNCPROJECTREF</DefineConstants> 
     </PropertyGroup>
 
     <Choose>
@@ -26,5 +26,9 @@
             </ItemGroup>    
         </When>
     </Choose>
+
+    <ItemGroup>
+      <PackageReference Include="EnterpriseLibrary.Common.NetCore" Version="6.3.0" />
+    </ItemGroup>
 
 </Project>

@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.Diagnostics;
+using System.Threading;
 using System.Windows;
 
 //using Microsoft.Practices.EnterpriseLibrary.Data;
@@ -9,7 +10,7 @@ namespace DemoLoggingSimple
 {
     public partial class MainWindow : Window
     {
-        const string LOG_APPNAME = "SIMPLE";
+        const string LOG_APPNAME = "DemoAndTestLogging";
 
         public MainWindow()
         {
@@ -20,6 +21,7 @@ namespace DemoLoggingSimple
         {
 
             Log.INFO("SignalR Delay", LOG_APPNAME, 0);
+            var listeners = Trace.Listeners;
             Thread.Sleep(125);
 
             long startTicks;

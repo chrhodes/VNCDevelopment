@@ -6,7 +6,24 @@
         xmlns:local="clr-namespace:DemoLoggingSimple"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <Button Click="btnLogSomething">Log Something</Button>
-    </Grid>
+    <DockPanel>
+        <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom" >
+
+            
+            <Button Click="btnRemoveListener" >Remove Listener</Button>
+            <Button Click="btnAddListener" >Add Listener</Button>
+        </StackPanel>
+
+        <StackPanel DockPanel.Dock="Left">
+            <Button Click="btnListListeners"  >List Listeners</Button>
+            <Button Click="btnListFormatters"  >List Formatters</Button>
+            <Button Click="btnListFilters"  >List Filters</Button>
+            <Button Click="btnListCategorySources"  >List CategorySources</Button>
+            <Button Click="btnListSpecialSources"  >List SpecialSources</Button>
+        </StackPanel>
+
+        <Button Click="btnLearnSomething" DockPanel.Dock="Top" >Learn Something</Button>
+
+        <Button Click="btnLogSomething" >Log Something</Button>
+    </DockPanel>
 </Window>
