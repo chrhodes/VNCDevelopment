@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VNC.Logging.TraceListeners.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoLoggingNFSimple", "DemoLoggingNFSimple\DemoLoggingNFSimple.csproj", "{C63970CA-F9B6-E025-3B1C-AEB58557ED5B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoAndTestLoggingShared", "DemoAndTestLoggingShared\DemoAndTestLoggingShared.csproj", "{8812E01A-F48D-4FBE-A640-1B26B5E86B25}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +59,10 @@ Global
 		{C63970CA-F9B6-E025-3B1C-AEB58557ED5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C63970CA-F9B6-E025-3B1C-AEB58557ED5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C63970CA-F9B6-E025-3B1C-AEB58557ED5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8812E01A-F48D-4FBE-A640-1B26B5E86B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8812E01A-F48D-4FBE-A640-1B26B5E86B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8812E01A-F48D-4FBE-A640-1B26B5E86B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8812E01A-F48D-4FBE-A640-1B26B5E86B25}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

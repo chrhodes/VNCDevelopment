@@ -1,0 +1,46 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFrameworks>net8.0-windows;net481</TargetFrameworks>
+        <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+        <UseWPF>true</UseWPF>          
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)'=='Debug'">
+        <!-- Uncoment next line to switch to ProjectReference(s) -->
+        <DefineConstants>$(DefineConstants);VNCPROJECTREF</DefineConstants>
+    </PropertyGroup>
+
+    <Choose>
+        <When Condition="'$(DefineConstants.Contains(VNCPROJECTREF))' And '$(TargetFramework)'=='net481'">
+            <ItemGroup>
+                <ProjectReference Include="..\VNC.Logging\VNC.Logging.csproj" />
+                <ProjectReference Include="..\VNC.Logging.TraceListeners\SignalRListener\VNC.Logging.TraceListeners.SignalRListener.csproj" />
+            </ItemGroup>
+        </When>
+        <When Condition="'$(DefineConstants.Contains(VNCPROJECTREF))' And '$(TargetFramework)'=='net8.0-windows'">
+            <ItemGroup>
+                <ProjectReference Include="..\VNC.Logging\VNC.Logging.csproj" />
+                <ProjectReference Include="..\VNC.Logging.TraceListeners\SignalRCoreListener\VNC.Logging.TraceListeners.SignalRCoreListener.csproj" />
+            </ItemGroup>
+        </When>
+        
+        <When Condition="'!$(DefineConstants.Contains(VNCPROJECTREF))' And '$(TargetFramework)'=='net481'">
+            <ItemGroup>
+                <PackageReference Include="VNC.Logging" Version="3.3.0" />
+                <PackageReference Include="VNC.Logging.TraceListeners.SignalRListener" Version="3.3.0" />
+            </ItemGroup>
+        </When>
+        <When Condition="'!$(DefineConstants.Contains(VNCPROJECTREF))' And '$(TargetFramework)'=='net8.0-windows'">
+            <ItemGroup>
+                <PackageReference Include="VNC.Logging" Version="3.3.0" />
+                <PackageReference Include="VNC.Logging.TraceListeners.SignalRCoreListener" Version="3.3.0" />
+            </ItemGroup>
+        </When>        
+    </Choose>
+    
+    <ItemGroup>
+        <PackageReference Include="EnterpriseLibrary.Common.NetCore" Version="6.3.0" />
+    </ItemGroup>
+    
+</Project>

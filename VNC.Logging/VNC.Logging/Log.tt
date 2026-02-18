@@ -101,9 +101,39 @@ namespace VNC
 
         static Log()
         {
+            // NOTE(crhodes)
+            // After a lot of work this returns the appropriate configuration for the calling assembly.
+            // This allows us to have different logging configurations for different assemblies if we want.
+            // It also allows us to have a default configuration that will be used if the calling assembly
+            // doesn't have a configuration section defined.
+            // In testing it takes less than a 0.2 microseconds to do this.  
+            // So it is not a problem to do this in the static constructor and have it ready to go for the first log message.
+
+            Int64 startTicks = Stopwatch.GetTimestamp();
+
+            // NOTE(crhodes)
+            // Above NOTE came from the Enterprise Library Logging Application Block documentation and code.
+            // and was auto generated
+
             IConfigurationSource configurationSource = ConfigurationSourceFactory.Create();
+
+            // NOTE(crhodes)
+            // This returns a factory that contains "loggingConfiguration".
+            // Don't think anything of real interest has happened yet. Magic must be in logWriterFactory.Create()
+
             LogWriterFactory logWriterFactory = new LogWriterFactory(configurationSource);
+
+            // NOTE(crhodes)
+            // Magic happens here. logWriterFactory.Create reads loggingConfiguration
+            // and gets all the filters, formatters, and traceListeners
+            // and sets the Logger Writer
+
             Logger.SetLogWriter(logWriterFactory.Create());
+
+            Int64 frequency = Stopwatch.Frequency;
+            // 10,000,000 ticks per second, so this is 100 nanoseconds per tick.  So this is 0.1 microseconds.
+
+            Double duration = GetDuration(startTicks);
         }
 
         #region Public Write Methods

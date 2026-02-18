@@ -7,7 +7,7 @@
       <UseWPF>true</UseWPF>
   </PropertyGroup>
     
-    <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug'">
+    <PropertyGroup Condition="'$(Configuration)'=='Debug'">
         <!-- Uncoment next line to switch to ProjectReference(s) -->
          <DefineConstants>$(DefineConstants);VNCPROJECTREF</DefineConstants> 
     </PropertyGroup>
@@ -15,8 +15,8 @@
     <Choose>
         <When Condition="'$(DefineConstants.Contains(VNCPROJECTREF))'">
             <ItemGroup>
-                <ProjectReference Include="..\..\VNC.Logging\VNC.Logging.csproj" />
-                <ProjectReference Include="..\..\VNC.Logging.TraceListeners\SignalRCoreListeners\VNC.Logging.TraceListeners.SignalRCoreListener.csproj" />
+                <ProjectReference Include="..\VNC.Logging\VNC.Logging.csproj" />
+                <ProjectReference Include="..\VNC.Logging.TraceListeners\SignalRCoreListener\VNC.Logging.TraceListeners.SignalRCoreListener.csproj" />
             </ItemGroup>  
         </When>
         <When Condition="'!$(DefineConstants.Contains(VNCPROJECTREF))'">
@@ -30,5 +30,9 @@
     <ItemGroup>
       <PackageReference Include="EnterpriseLibrary.Common.NetCore" Version="6.3.0" />
     </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\DemoAndTestLoggingShared\DemoAndTestLoggingShared.csproj" />
+    </ItemGroup>    
 
 </Project>

@@ -7,7 +7,7 @@
         <AssemblyOriginatorKeyFile>VNC.snk</AssemblyOriginatorKeyFile>
         <VersionPrefix>3.3.0</VersionPrefix>
         <VersionSuffix>Release</VersionSuffix>
-        <FileVersion>2026.02.14</FileVersion>     
+        <FileVersion>2026.02.18</FileVersion>     
         <Description>SignalRCore TraceListener for EnterpriseLibrary Logging</Description>
         <Nullable>enable</Nullable>
         <ImplicitUsings>disable</ImplicitUsings>

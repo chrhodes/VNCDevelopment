@@ -8,7 +8,7 @@
         <VersionPrefix>3.3.0</VersionPrefix>
         <VersionSuffix>Release</VersionSuffix>
         <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
-        <FileVersion>2026.02.14</FileVersion>   
+        <FileVersion>2026.02.18</FileVersion>   
         <Description>SignalRCore TraceListener for EnterpriseLibrary Logging</Description>
         <LangVersion>12.0</LangVersion>
         <Nullable>enable</Nullable>

@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="Microsoft.Practices.EnterpriseLibrary.Logging.Logger">
+    <Position X="1" Y="1.25" Width="8" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Microsoft.Practices.EnterpriseLibrary.Logging.LogEntry">
+    <Position X="9.5" Y="17.75" Width="7.75" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Microsoft.Practices.EnterpriseLibrary.Logging.LoggingConfiguration">
+    <Position X="0.75" Y="17.75" Width="7.25" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Microsoft.Practices.EnterpriseLibrary.Logging.LogWriter">
+    <Position X="0.75" Y="8.25" Width="16.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Microsoft.Practices.EnterpriseLibrary.Logging.Configuration.LoggingSettings">
+    <Position X="0.75" Y="22.25" Width="6.5" />
+    <TypeIdentifier />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

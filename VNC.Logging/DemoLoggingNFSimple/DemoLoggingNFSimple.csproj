@@ -27,4 +27,8 @@
         </When>
     </Choose>
 
+    <ItemGroup>
+      <ProjectReference Include="..\DemoAndTestLoggingShared\DemoAndTestLoggingShared.csproj" />
+    </ItemGroup>
+
 </Project>
