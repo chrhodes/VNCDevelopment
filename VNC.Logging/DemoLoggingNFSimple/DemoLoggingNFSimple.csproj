@@ -15,13 +15,13 @@
     <Choose>
         <When Condition="'$(DefineConstants.Contains(VNCPROJECTREF))'">
             <ItemGroup>
-                <ProjectReference Include="..\..\VNC.Logging\VNC.Logging.csproj" />
-                <ProjectReference Include="..\..\VNC.Logging.TraceListeners\SignalRListener\VNC.Logging.TraceListeners.SignalRListener.csproj" />
+                <ProjectReference Include="..\..\VNC.Core\VNC.Core.csproj" />
+                <ProjectReference Include="..\VNC.Logging.TraceListeners\SignalRListener\VNC.Logging.TraceListeners.SignalRListener.csproj" />
             </ItemGroup>        
         </When>
         <When Condition="'!$(DefineConstants.Contains(VNCPROJECTREF))'">
             <ItemGroup>
-                <PackageReference Include="VNC.Logging" Version="3.3.0" />                               
+                <PackageReference Include="VNC.Core" Version="3.3.0" />                               
                 <PackageReference Include="VNC.Logging.TraceListeners.SignalRListener" Version="3.3.0" />
             </ItemGroup>         
         </When>

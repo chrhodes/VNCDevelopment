@@ -195,7 +195,7 @@ namespace DemoAndTestLoggingShared
                 // This works but the formatter is not right
 #if NET481
                 SignalRListener listenerToAdd = new SignalRListener();
-                listenerToAdd.Name = "SignalRCoreListener";
+                listenerToAdd.Name = "SignalRListener";
 #else
                 SignalRCoreListenerSendAsync listenerToAdd = new SignalRCoreListenerSendAsync();
                 listenerToAdd.Name = "SignalRCoreListener";
@@ -315,13 +315,17 @@ namespace DemoAndTestLoggingShared
             {
                 foreach (TraceListenerReferenceData listener in categorySource.TraceListeners)
                 {
-                    TraceListenerReferenceData listenerToRemove = null;
+                    //TraceListenerReferenceData listenerToRemove = null;
 
                     if (listener.Name == "Rolling FlatFile TraceListener")
                     {
                         Log.INFO($"Found {listener.Name}", LOG_APPNAME);
                     }
+#if NET481
+                    else if (listener.Name == "SignalRListener")
+#else
                     else if (listener.Name == "SignalRCoreListener")
+#endif
                     {
                         Log.INFO($"Found {listener.Name}", LOG_APPNAME);
 
