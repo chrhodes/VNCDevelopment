@@ -14,6 +14,7 @@ using Microsoft.Practices.EnterpriseLibrary.Logging.Configuration;
 //using Microsoft.Practices.EnterpriseLibrary.Data;
 
 using VNC;
+using VNC.Logging;
 using VNC.Logging.TraceListeners;
 
 namespace DemoAndTestLoggingSharedUI
@@ -92,11 +93,11 @@ namespace DemoAndTestLoggingSharedUI
         private void btnListCategorySources(object sender, RoutedEventArgs e)
         {
             // Load the configuration source
-            IConfigurationSource config = ConfigurationSourceFactory.Create();
+            //IConfigurationSource config = ConfigurationSourceFactory.Create();
 
-            Log.INFO("CategorySources(TraceSources)", LOG_APPNAME, 0);
+            Log.INFO("*** CategorySources(TraceSources) ***", LOG_APPNAME, 0);
 
-            foreach (TraceSourceData categorySource in GetAllCategorySources(config))
+            foreach (TraceSourceData categorySource in Helpers.GetAllCategorySources())
             {
                 Log.INFO($" - {categorySource.Name}", LOG_APPNAME);
 
@@ -106,18 +107,9 @@ namespace DemoAndTestLoggingSharedUI
 
         private void btnListFilters(object sender, RoutedEventArgs e)
         {
-            // Load the configuration source
-            IConfigurationSource config = ConfigurationSourceFactory.Create();
+            Log.INFO("*** Filters ***", LOG_APPNAME, 0);
 
-            //// Get the logging settings from the configuration
-            //LoggingSettings loggingSettings = LoggingSettings.GetLoggingSettings(config);
-
-            //var allFilters = loggingSettings.LogFilters;
-            //NameTypeConfigurationElementCollection<LogFilterData, CustomLogFilterData> allFilters2 = loggingSettings.LogFilters;
-
-            Log.INFO("Filters", LOG_APPNAME, 0);
-
-            foreach (CategoryFilterData filter in GetAllLogFilters(config))
+            foreach (CategoryFilterData filter in Helpers.GetAllLogFilters())
             {
                 Log.INFO($"Name:{filter.Name}", LOG_APPNAME);
             }
@@ -126,28 +118,25 @@ namespace DemoAndTestLoggingSharedUI
         private void btnListSpecialSources(object sender, RoutedEventArgs e)
         {
             // Load the configuration source
-            IConfigurationSource config = ConfigurationSourceFactory.Create();
+            //IConfigurationSource config = ConfigurationSourceFactory.Create();
 
-            Log.INFO("AllEvents Listeners", LOG_APPNAME);
+            Log.INFO("*** AllEvents Listeners ***", LOG_APPNAME);
+            DisplayListeners(Helpers.GetAllSpecialSources().AllEventsTraceSource.TraceListeners);
 
-            DisplayListeners(GetAllSpecialSources(config).AllEventsTraceSource.TraceListeners);
+            Log.INFO("*** NotProcessed Listeners ***", LOG_APPNAME);
+            DisplayListeners(Helpers.GetAllSpecialSources().NotProcessedTraceSource.TraceListeners);
 
-            Log.INFO("NotProcessed Listeners", LOG_APPNAME);
-
-            DisplayListeners(GetAllSpecialSources(config).NotProcessedTraceSource.TraceListeners);
-
-            Log.INFO("Errors Listeners", LOG_APPNAME);
-
-            DisplayListeners(GetAllSpecialSources(config).ErrorsTraceSource.TraceListeners);
+            Log.INFO("*** Errors Listeners ***", LOG_APPNAME);
+            DisplayListeners(Helpers.GetAllSpecialSources().ErrorsTraceSource.TraceListeners);
         }
 
         private void btnListListeners(object sender, RoutedEventArgs e)
         {
-            IConfigurationSource config = ConfigurationSourceFactory.Create();
+            //IConfigurationSource config = ConfigurationSourceFactory.Create();
 
-            Log.INFO("TraceListeners", LOG_APPNAME, 0);
+            Log.INFO("*** TraceListeners ***", LOG_APPNAME, 0);
 
-            foreach (TraceListenerData listener in GetAllListeners(config))
+            foreach (TraceListenerData listener in Helpers.GetAllListeners())
             {
                 Log.INFO($" - {listener.Name}", LOG_APPNAME);
             }
@@ -156,7 +145,7 @@ namespace DemoAndTestLoggingSharedUI
         private void btnListFormatters(object sender, RoutedEventArgs e)
         {
             // Load the configuration source
-            IConfigurationSource config = ConfigurationSourceFactory.Create();
+            //IConfigurationSource config = ConfigurationSourceFactory.Create();
 
             //// Get the logging settings from the configuration
             //LoggingSettings loggingSettings = LoggingSettings.GetLoggingSettings(config);
@@ -168,7 +157,7 @@ namespace DemoAndTestLoggingSharedUI
 
             Log.INFO("Formatters", LOG_APPNAME, 0);
 
-            foreach (TextFormatterData formatter in GetAllFormaters(config))
+            foreach (TextFormatterData formatter in Helpers.GetAllFormatters())
             {
                 Log.INFO($"Name:{formatter.Name} Template:>{formatter.Template}<", LOG_APPNAME);
             }
@@ -178,15 +167,18 @@ namespace DemoAndTestLoggingSharedUI
         {
             try
             {
+#if NET481
+                //SignalRListener listenerToAdd = new SignalRListener();
+                //listenerToAdd.Name = "SignalRListener";
+                Helpers.AddListener<SignalRListener>("SignalRListener", "LiveView Formatter");
+#else
+                //SignalRCoreListenerSendAsync listenerToAdd = new SignalRCoreListenerSendAsync();
+                //listenerToAdd.Name = "SignalRCoreListener";
+                Helpers.AddListener<SignalRCoreListenerSendAsync>("SignalRCoreListener", "LiveView Formatter");
+#endif
+
                 // NOTE(crhodes)
                 // This works but the formatter is not right
-#if NET481
-                SignalRListener listenerToAdd = new SignalRListener();
-                listenerToAdd.Name = "SignalRListener";
-#else
-                SignalRCoreListenerSendAsync listenerToAdd = new SignalRCoreListenerSendAsync();
-                listenerToAdd.Name = "SignalRCoreListener";
-#endif
 
                 //TextFormatter formatter = new TextFormatter("{ timestamp(local: yyyy / MM / dd HH: mm:ss.fff)}|{ category}|{ priority}|{ processId}|{ threadName}|{ win32ThreadId}|{ keyvalue(Class Name)}.{ keyvalue(Method Name)}|{ keyvalue(Duration)}|{ message}");
 
@@ -194,7 +186,7 @@ namespace DemoAndTestLoggingSharedUI
 
                 // Load the configuration source
 
-                IConfigurationSource config = ConfigurationSourceFactory.Create();
+                //IConfigurationSource config = ConfigurationSourceFactory.Create();
 
                 //LoggingSettings loggingSettings = LoggingSettings.GetLoggingSettings(config);
 
@@ -223,23 +215,23 @@ namespace DemoAndTestLoggingSharedUI
                 // NOTE(crhodes)
                 // This works!!!
 
-                var lvf = GetAllFormaters(config).Where(f => f.Name == "LiveView Formatter").FirstOrDefault();
-                listenerToAdd.Formatter = lvf.BuildFormatter();
+                //var lvf = GetAllFormatters(config).Where(f => f.Name == "LiveView Formatter").FirstOrDefault();
+                //listenerToAdd.Formatter = lvf.BuildFormatter();
 
-                foreach (var categorySource in GetAllCategorySources(config))
-                {
-                    Log.INFO($"Adding: {listenerToAdd.Name} to categorySource: {categorySource.Name}", LOG_APPNAME);
+                //foreach (var categorySource in GetAllCategorySources(config))
+                //{
+                //    Log.INFO($"Adding: {listenerToAdd.Name} to categorySource: {categorySource.Name}", LOG_APPNAME);
 
-                    LogSource logSource1 = Logger.Writer.TraceSources[categorySource.Name];
-                    List<TraceListener> listeners2 = (List<TraceListener>)logSource1.Listeners;
+                //    LogSource logSource1 = Logger.Writer.TraceSources[categorySource.Name];
+                //    List<TraceListener> listeners2 = (List<TraceListener>)logSource1.Listeners;
 
-                    var existingListener = listeners2.Where(l => l.Name == listenerToAdd.Name).FirstOrDefault();
+                //    var existingListener = listeners2.Where(l => l.Name == listenerToAdd.Name).FirstOrDefault();
 
-                    if (!listeners2.Any(l => l.Name == listenerToAdd.Name))
-                    {
-                        listeners2.Add(listenerToAdd);
-                    }
-                }
+                //    if (!listeners2.Any(l => l.Name == listenerToAdd.Name))
+                //    {
+                //        listeners2.Add(listenerToAdd);
+                //    }
+                //}
 
                 //listeners1.Add(listenerToAdd);
             }
@@ -299,30 +291,32 @@ namespace DemoAndTestLoggingSharedUI
             //                }
             //            }
 
-            string listenerToRemove;
+            //string listenerToRemove;
 #if NET481
-            listenerToRemove = "SignalRListener";
+            //listenerToRemove = "SignalRListener";
+            Helpers.RemoveListener("SignalRListener");
 #else
-            listenerToRemove = "SignalRCoreListener";
+            //listenerToRemove = "SignalRCoreListener";
+            Helpers.RemoveListener("SignalRCoreListener");
 #endif
-            IConfigurationSource config = ConfigurationSourceFactory.Create();
+            //IConfigurationSource config = ConfigurationSourceFactory.Create();
 
-            foreach (TraceSourceData categorySource in GetAllCategorySources(config))
-            {
-                foreach (TraceListenerReferenceData listener in categorySource.TraceListeners)
-                {
-                    if (listener.Name == listenerToRemove)
-                    {
-                        Log.INFO($"Found {listener.Name} to remove", LOG_APPNAME);
+            //foreach (TraceSourceData categorySource in Helpers.GetAllCategorySources())
+            //{
+            //    foreach (TraceListenerReferenceData listener in categorySource.TraceListeners)
+            //    {
+            //        if (listener.Name == listenerToRemove)
+            //        {
+            //            Log.INFO($"Found {listener.Name} to remove", LOG_APPNAME);
 
-                        RemoveListener(categorySource.Name, listener.Name);
-                    }
-                    else
-                    {
-                        Log.INFO($"Found {listener.Name}", LOG_APPNAME);
-                    }
-                }
-            }
+            //            RemoveListener(categorySource.Name, listener.Name);
+            //        }
+            //        else
+            //        {
+            //            Log.INFO($"Found {listener.Name}", LOG_APPNAME);
+            //        }
+            //    }
+            //}
 
             // TODO(crhodes)
             // Need a RemoveAllEventsTraceSourceListener,
@@ -355,18 +349,6 @@ namespace DemoAndTestLoggingSharedUI
 
         #region Private Methods
 
-        //private static void DisplayListeners(IEnumerable<TraceListener> listeners)
-        //{
-        //    foreach (TraceListener listener in listeners)
-        //    {
-        //        Log.INFO($"Found {listener.Name}", LOG_APPNAME);
-        //        foreach (var attribute in listener.Attributes)
-        //        {
-        //            Log.INFO($"Attribute {attribute}", LOG_APPNAME);
-        //        }
-        //    }
-        //}
-
         private static void DisplayListeners(NamedElementCollection<TraceListenerReferenceData> listeners)
         {
             foreach (TraceListenerReferenceData listener in listeners)
@@ -377,46 +359,46 @@ namespace DemoAndTestLoggingSharedUI
 
         #endregion
 
-        private void RemoveListener(string traceSourceName, string listenerName)
-        {
-            Log.INFO($"traceSourceName:>{traceSourceName}< listenerName:>{listenerName}<", LOG_APPNAME);
+        //private void RemoveListener(string traceSourceName, string listenerName)
+        //{
+        //    Log.INFO($"traceSourceName:>{traceSourceName}< listenerName:>{listenerName}<", LOG_APPNAME);
 
-            LogSource logSource = Logger.Writer.TraceSources[traceSourceName];
-            LogSource logSource2 = Log.LogWriter.TraceSources[traceSourceName];
+        //    LogSource logSource = Logger.Writer.TraceSources[traceSourceName];
+        //    LogSource logSource2 = Log.LogWriter.TraceSources[traceSourceName];
 
-            if (logSource != null)
-            {
-                var listeners = logSource.Listeners;
-                List<TraceListener> listeners1 = (List<TraceListener>)logSource.Listeners;
+        //    if (logSource != null)
+        //    {
+        //        var listeners = logSource.Listeners;
+        //        List<TraceListener> listeners1 = (List<TraceListener>)logSource.Listeners;
 
-                Log.INFO($"Found:{listeners.Count()} listeners", LOG_APPNAME);
+        //        Log.INFO($"Found:{listeners.Count()} listeners", LOG_APPNAME);
 
-                TraceListener listenerToRemove = null;
+        //        TraceListener listenerToRemove = null;
 
-                foreach (TraceListener listener in listeners)
-                {
-                    if (listener.Name == listenerName)
-                    {
-                        listenerToRemove = listener;
-                    }
-                }
+        //        foreach (TraceListener listener in listeners)
+        //        {
+        //            if (listener.Name == listenerName)
+        //            {
+        //                listenerToRemove = listener;
+        //            }
+        //        }
 
-                if (listenerToRemove !=null)
-                {
-                    Log.INFO($"Removing {listenerName} from {traceSourceName}", LOG_APPNAME);
-                    listeners1.Remove(listenerToRemove);
-                }
-            }
-        }
+        //        if (listenerToRemove !=null)
+        //        {
+        //            Log.INFO($"Removing {listenerName} from {traceSourceName}", LOG_APPNAME);
+        //            listeners1.Remove(listenerToRemove);
+        //        }
+        //    }
+        //}
 
         private void RemoveSpecialSourcesAllEventsListener(string listenerName)
         {
             Log.INFO($"listenerName:>{listenerName}<", LOG_APPNAME);
 
-            // Load the configuration source
-            IConfigurationSource config = ConfigurationSourceFactory.Create();
+            //// Load the configuration source
+            //IConfigurationSource config = ConfigurationSourceFactory.Create();
 
-            var traceSource = GetAllSpecialSources(config).AllEventsTraceSource;
+            var traceSource = Helpers.GetAllSpecialSources().AllEventsTraceSource;
 
             NamedElementCollection<TraceListenerReferenceData> listeners = traceSource.TraceListeners;
 
@@ -430,10 +412,10 @@ namespace DemoAndTestLoggingSharedUI
         {
             Log.INFO($"listenerName:>{listenerName}<", LOG_APPNAME);
 
-            // Load the configuration source
-            IConfigurationSource config = ConfigurationSourceFactory.Create();
+            //// Load the configuration source
+            //IConfigurationSource config = ConfigurationSourceFactory.Create();
 
-            var traceSource = GetAllSpecialSources(config).NotProcessedTraceSource;
+            var traceSource = Helpers.GetAllSpecialSources().NotProcessedTraceSource;
 
             NamedElementCollection<TraceListenerReferenceData> listeners = traceSource.TraceListeners;
             listeners.Remove(listenerName);
@@ -443,66 +425,66 @@ namespace DemoAndTestLoggingSharedUI
         {
             Log.INFO($"listenerName:>{listenerName}<", LOG_APPNAME);
 
-            // Load the configuration source
-            IConfigurationSource config = ConfigurationSourceFactory.Create();
+            //// Load the configuration source
+            //IConfigurationSource config = ConfigurationSourceFactory.Create();
 
-            var traceSource = GetAllSpecialSources(config).ErrorsTraceSource;
+            var traceSource = Helpers.GetAllSpecialSources().ErrorsTraceSource;
 
             NamedElementCollection<TraceListenerReferenceData> listeners = traceSource.TraceListeners;
             listeners.Remove(listenerName);
         }
 
-        private TraceListenerDataCollection GetAllListeners(IConfigurationSource config)
-        {
-            // Get the logging settings from the configuration
-            LoggingSettings loggingSettings = LoggingSettings.GetLoggingSettings(config);
+        //private TraceListenerDataCollection GetAllListeners(IConfigurationSource config)
+        //{
+        //    // Get the logging settings from the configuration
+        //    LoggingSettings loggingSettings = LoggingSettings.GetLoggingSettings(config);
 
-            TraceListenerDataCollection allListeners = loggingSettings.TraceListeners;
+        //    TraceListenerDataCollection allListeners = loggingSettings.TraceListeners;
 
-            return allListeners;
-        }
+        //    return allListeners;
+        //}
 
-        private NamedElementCollection<TraceSourceData> GetAllCategorySources(IConfigurationSource config)
-        {
-            // Get the logging settings from the configuration
-            LoggingSettings loggingSettings = LoggingSettings.GetLoggingSettings(config);
+        //private NamedElementCollection<TraceSourceData> GetAllCategorySources(IConfigurationSource config)
+        //{
+        //    // Get the logging settings from the configuration
+        //    LoggingSettings loggingSettings = LoggingSettings.GetLoggingSettings(config);
 
-            NamedElementCollection<TraceSourceData> allCategorySources = loggingSettings.TraceSources;
+        //    NamedElementCollection<TraceSourceData> allCategorySources = loggingSettings.TraceSources;
 
-            return allCategorySources;
-        }
+        //    return allCategorySources;
+        //}
 
-        private SpecialTraceSourcesData GetAllSpecialSources(IConfigurationSource config)
-        {
-            // Get the logging settings from the configuration
-            LoggingSettings loggingSettings = LoggingSettings.GetLoggingSettings(config);
+        //private SpecialTraceSourcesData GetAllSpecialSources(IConfigurationSource config)
+        //{
+        //    // Get the logging settings from the configuration
+        //    LoggingSettings loggingSettings = LoggingSettings.GetLoggingSettings(config);
 
-            SpecialTraceSourcesData allSpecialSources = loggingSettings.SpecialTraceSources;
+        //    SpecialTraceSourcesData allSpecialSources = loggingSettings.SpecialTraceSources;
 
-            return allSpecialSources;
-        }
+        //    return allSpecialSources;
+        //}
 
-        private NameTypeConfigurationElementCollection<LogFilterData, CustomLogFilterData> GetAllLogFilters(IConfigurationSource config)
-        {
-            // Get the logging settings from the configuration
-            LoggingSettings loggingSettings = LoggingSettings.GetLoggingSettings(config);
+        //private NameTypeConfigurationElementCollection<LogFilterData, CustomLogFilterData> GetAllLogFilters(IConfigurationSource config)
+        //{
+        //    // Get the logging settings from the configuration
+        //    LoggingSettings loggingSettings = LoggingSettings.GetLoggingSettings(config);
 
-            var allFilters = loggingSettings.LogFilters;
-            NameTypeConfigurationElementCollection<LogFilterData, CustomLogFilterData> allFilters2 = loggingSettings.LogFilters;
+        //    var allFilters = loggingSettings.LogFilters;
+        //    NameTypeConfigurationElementCollection<LogFilterData, CustomLogFilterData> allFilters2 = loggingSettings.LogFilters;
 
-            return allFilters;
-        }
+        //    return allFilters;
+        //}
 
-        private NameTypeConfigurationElementCollection<FormatterData, CustomFormatterData> GetAllFormaters(IConfigurationSource config)
-        {
-            // Get the logging settings from the configuration
-            LoggingSettings loggingSettings = LoggingSettings.GetLoggingSettings(config);
+        //private NameTypeConfigurationElementCollection<FormatterData, CustomFormatterData> GetAllFormaters(IConfigurationSource config)
+        //{
+        //    // Get the logging settings from the configuration
+        //    LoggingSettings loggingSettings = LoggingSettings.GetLoggingSettings(config);
 
-            var allFormatters = loggingSettings.Formatters;
-            NameTypeConfigurationElementCollection<FormatterData, CustomFormatterData> allFormatters2 = loggingSettings.Formatters;
+        //    var allFormatters = loggingSettings.Formatters;
+        //    NameTypeConfigurationElementCollection<FormatterData, CustomFormatterData> allFormatters2 = loggingSettings.Formatters;
 
-            return allFormatters2;
-        }
+        //    return allFormatters2;
+        //}
 
         #region Learn Methods
 
