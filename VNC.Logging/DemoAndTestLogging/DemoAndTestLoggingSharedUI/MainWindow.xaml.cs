@@ -11,8 +11,6 @@ using Microsoft.Practices.EnterpriseLibrary.Common.Configuration;
 using Microsoft.Practices.EnterpriseLibrary.Logging;
 using Microsoft.Practices.EnterpriseLibrary.Logging.Configuration;
 
-//using Microsoft.Practices.EnterpriseLibrary.Data;
-
 using VNC;
 using VNC.Logging;
 using VNC.Logging.TraceListeners;
@@ -92,9 +90,6 @@ namespace DemoAndTestLoggingSharedUI
 
         private void btnListCategorySources(object sender, RoutedEventArgs e)
         {
-            // Load the configuration source
-            //IConfigurationSource config = ConfigurationSourceFactory.Create();
-
             Log.INFO("*** CategorySources(TraceSources) ***", LOG_APPNAME, 0);
 
             foreach (TraceSourceData categorySource in Helpers.GetAllCategorySources())
@@ -117,9 +112,6 @@ namespace DemoAndTestLoggingSharedUI
 
         private void btnListSpecialSources(object sender, RoutedEventArgs e)
         {
-            // Load the configuration source
-            //IConfigurationSource config = ConfigurationSourceFactory.Create();
-
             Log.INFO("*** AllEvents Listeners ***", LOG_APPNAME);
             DisplayListeners(Helpers.GetAllSpecialSources().AllEventsTraceSource.TraceListeners);
 
@@ -132,9 +124,7 @@ namespace DemoAndTestLoggingSharedUI
 
         private void btnListListeners(object sender, RoutedEventArgs e)
         {
-            //IConfigurationSource config = ConfigurationSourceFactory.Create();
-
-            Log.INFO("*** TraceListeners ***", LOG_APPNAME, 0);
+            Log.INFO("*** TraceListeners ***", LOG_APPNAME);
 
             foreach (TraceListenerData listener in Helpers.GetAllListeners())
             {
@@ -144,17 +134,6 @@ namespace DemoAndTestLoggingSharedUI
 
         private void btnListFormatters(object sender, RoutedEventArgs e)
         {
-            // Load the configuration source
-            //IConfigurationSource config = ConfigurationSourceFactory.Create();
-
-            //// Get the logging settings from the configuration
-            //LoggingSettings loggingSettings = LoggingSettings.GetLoggingSettings(config);
-
-            //var allFormatters = loggingSettings.Formatters;
-            //NameTypeConfigurationElementCollection<FormatterData, CustomFormatterData> allFormatters2 = loggingSettings.Formatters;
-
-            //var lvf = allFormatters2.Where(f => f.Name == "LiveView Formatter").FirstOrDefault();
-
             Log.INFO("Formatters", LOG_APPNAME, 0);
 
             foreach (TextFormatterData formatter in Helpers.GetAllFormatters())
@@ -239,10 +218,6 @@ namespace DemoAndTestLoggingSharedUI
             {
                 Log.ERROR(ex, LOG_APPNAME);
             }
-
-            //}
-
-            Log.INFO("Exit", LOG_APPNAME, 0);
         }
 
         private void btnRemoveListener(object sender, RoutedEventArgs e)
@@ -327,8 +302,6 @@ namespace DemoAndTestLoggingSharedUI
             //RemoveSpecialSourcesAllEventsListener(listenerToRemove);
             //RemoveSpecialSourcesNotProcessedListener(listenerToRemove);
             //RemoveSpecialSourcesErrorsListener(listenerToRemove);
-
-            Log.INFO("Exit", LOG_APPNAME, 0);
         }
 
 #endregion
@@ -359,44 +332,9 @@ namespace DemoAndTestLoggingSharedUI
 
         #endregion
 
-        //private void RemoveListener(string traceSourceName, string listenerName)
-        //{
-        //    Log.INFO($"traceSourceName:>{traceSourceName}< listenerName:>{listenerName}<", LOG_APPNAME);
-
-        //    LogSource logSource = Logger.Writer.TraceSources[traceSourceName];
-        //    LogSource logSource2 = Log.LogWriter.TraceSources[traceSourceName];
-
-        //    if (logSource != null)
-        //    {
-        //        var listeners = logSource.Listeners;
-        //        List<TraceListener> listeners1 = (List<TraceListener>)logSource.Listeners;
-
-        //        Log.INFO($"Found:{listeners.Count()} listeners", LOG_APPNAME);
-
-        //        TraceListener listenerToRemove = null;
-
-        //        foreach (TraceListener listener in listeners)
-        //        {
-        //            if (listener.Name == listenerName)
-        //            {
-        //                listenerToRemove = listener;
-        //            }
-        //        }
-
-        //        if (listenerToRemove !=null)
-        //        {
-        //            Log.INFO($"Removing {listenerName} from {traceSourceName}", LOG_APPNAME);
-        //            listeners1.Remove(listenerToRemove);
-        //        }
-        //    }
-        //}
-
         private void RemoveSpecialSourcesAllEventsListener(string listenerName)
         {
             Log.INFO($"listenerName:>{listenerName}<", LOG_APPNAME);
-
-            //// Load the configuration source
-            //IConfigurationSource config = ConfigurationSourceFactory.Create();
 
             var traceSource = Helpers.GetAllSpecialSources().AllEventsTraceSource;
 
@@ -412,79 +350,27 @@ namespace DemoAndTestLoggingSharedUI
         {
             Log.INFO($"listenerName:>{listenerName}<", LOG_APPNAME);
 
-            //// Load the configuration source
-            //IConfigurationSource config = ConfigurationSourceFactory.Create();
-
             var traceSource = Helpers.GetAllSpecialSources().NotProcessedTraceSource;
 
             NamedElementCollection<TraceListenerReferenceData> listeners = traceSource.TraceListeners;
-            listeners.Remove(listenerName);
+
+            // NOTE(crhodes)
+            // This does not work .  The collection is read only.  Need to find another way to remove the listener.
+            //listeners.Remove(listenerName);
         }
 
         private void RemoveSpecialSourcesErrorsListener(string listenerName)
         {
             Log.INFO($"listenerName:>{listenerName}<", LOG_APPNAME);
 
-            //// Load the configuration source
-            //IConfigurationSource config = ConfigurationSourceFactory.Create();
-
             var traceSource = Helpers.GetAllSpecialSources().ErrorsTraceSource;
 
             NamedElementCollection<TraceListenerReferenceData> listeners = traceSource.TraceListeners;
-            listeners.Remove(listenerName);
+
+            // NOTE(crhodes)
+            // This does not work .  The collection is read only.  Need to find another way to remove the listener.
+            //listeners.Remove(listenerName);
         }
-
-        //private TraceListenerDataCollection GetAllListeners(IConfigurationSource config)
-        //{
-        //    // Get the logging settings from the configuration
-        //    LoggingSettings loggingSettings = LoggingSettings.GetLoggingSettings(config);
-
-        //    TraceListenerDataCollection allListeners = loggingSettings.TraceListeners;
-
-        //    return allListeners;
-        //}
-
-        //private NamedElementCollection<TraceSourceData> GetAllCategorySources(IConfigurationSource config)
-        //{
-        //    // Get the logging settings from the configuration
-        //    LoggingSettings loggingSettings = LoggingSettings.GetLoggingSettings(config);
-
-        //    NamedElementCollection<TraceSourceData> allCategorySources = loggingSettings.TraceSources;
-
-        //    return allCategorySources;
-        //}
-
-        //private SpecialTraceSourcesData GetAllSpecialSources(IConfigurationSource config)
-        //{
-        //    // Get the logging settings from the configuration
-        //    LoggingSettings loggingSettings = LoggingSettings.GetLoggingSettings(config);
-
-        //    SpecialTraceSourcesData allSpecialSources = loggingSettings.SpecialTraceSources;
-
-        //    return allSpecialSources;
-        //}
-
-        //private NameTypeConfigurationElementCollection<LogFilterData, CustomLogFilterData> GetAllLogFilters(IConfigurationSource config)
-        //{
-        //    // Get the logging settings from the configuration
-        //    LoggingSettings loggingSettings = LoggingSettings.GetLoggingSettings(config);
-
-        //    var allFilters = loggingSettings.LogFilters;
-        //    NameTypeConfigurationElementCollection<LogFilterData, CustomLogFilterData> allFilters2 = loggingSettings.LogFilters;
-
-        //    return allFilters;
-        //}
-
-        //private NameTypeConfigurationElementCollection<FormatterData, CustomFormatterData> GetAllFormaters(IConfigurationSource config)
-        //{
-        //    // Get the logging settings from the configuration
-        //    LoggingSettings loggingSettings = LoggingSettings.GetLoggingSettings(config);
-
-        //    var allFormatters = loggingSettings.Formatters;
-        //    NameTypeConfigurationElementCollection<FormatterData, CustomFormatterData> allFormatters2 = loggingSettings.Formatters;
-
-        //    return allFormatters2;
-        //}
 
         #region Learn Methods
 
@@ -523,8 +409,6 @@ namespace DemoAndTestLoggingSharedUI
 
             Console.WriteLine($"Full Path: {fullPath}");
             Console.WriteLine($"File Name: {fileName}");
-
-
         }
 
         private void Learn2()
