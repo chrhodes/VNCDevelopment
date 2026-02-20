@@ -128,13 +128,21 @@ namespace VNC
             // and gets all the filters, formatters, and traceListeners
             // and sets the Logger Writer
 
-            Logger.SetLogWriter(logWriterFactory.Create());
+            _logWriter = logWriterFactory.Create();
+            Logger.SetLogWriter(_logWriter);
 
             Int64 frequency = Stopwatch.Frequency;
             // 10,000,000 ticks per second, so this is 100 nanoseconds per tick.  So this is 0.1 microseconds.
 
             Double duration = GetDuration(startTicks);
         }
+
+        private static LogWriter _logWriter;
+        public static LogWriter LogWriter
+        {
+            get => _logWriter;
+            private set => _logWriter = value;
+        }   
 
         #region Public Write Methods
 

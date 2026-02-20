@@ -1,4 +1,4 @@
-﻿namespace DemoLoggingSimple
+﻿namespace DemoAndTestLoggingNFSimple
 {
     internal class Common : VNC.Core.Common
     {

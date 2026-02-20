@@ -9,14 +9,14 @@
 
     <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug'">
         <!-- Uncoment next line to switch to ProjectReference(s) -->
-         <!--<DefineConstants>$(DefineConstants);VNCPROJECTREF</DefineConstants>--> 
+         <DefineConstants>$(DefineConstants);VNCPROJECTREF</DefineConstants> 
     </PropertyGroup>
 
     <Choose>
         <When Condition="'$(DefineConstants.Contains(VNCPROJECTREF))'">
             <ItemGroup>
-                <ProjectReference Include="..\..\VNC.Core\VNC.Core.csproj" />
-                <ProjectReference Include="..\VNC.Logging.TraceListeners\SignalRListener\VNC.Logging.TraceListeners.SignalRListener.csproj" />
+                <ProjectReference Include="..\..\..\VNC.Core\VNC.Core.csproj" />
+                <ProjectReference Include="..\..\VNC.Logging.TraceListeners\SignalRListener\VNC.Logging.TraceListeners.SignalRListener.csproj" />
             </ItemGroup>        
         </When>
         <When Condition="'!$(DefineConstants.Contains(VNCPROJECTREF))'">
@@ -28,7 +28,7 @@
     </Choose>
 
     <ItemGroup>
-      <ProjectReference Include="..\DemoAndTestLoggingShared\DemoAndTestLoggingShared.csproj" />
+      <ProjectReference Include="..\DemoAndTestLoggingSharedUI\DemoAndTestLoggingSharedUI.csproj" />
     </ItemGroup>
 
 </Project>

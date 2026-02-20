@@ -16,7 +16,7 @@ using Microsoft.Practices.EnterpriseLibrary.Logging.Configuration;
 using VNC;
 using VNC.Logging.TraceListeners;
 
-namespace DemoAndTestLoggingShared
+namespace DemoAndTestLoggingSharedUI
 {
     public partial class MainWindow : Window
     {
@@ -98,7 +98,7 @@ namespace DemoAndTestLoggingShared
 
             foreach (TraceSourceData categorySource in GetAllCategorySources(config))
             {
-                Log.INFO($"Name:{categorySource.Name}", LOG_APPNAME);
+                Log.INFO($" - {categorySource.Name}", LOG_APPNAME);
 
                 DisplayListeners(categorySource.TraceListeners);
             }
@@ -149,7 +149,7 @@ namespace DemoAndTestLoggingShared
 
             foreach (TraceListenerData listener in GetAllListeners(config))
             {
-                Log.INFO($"  {listener.Name}", LOG_APPNAME);
+                Log.INFO($" - {listener.Name}", LOG_APPNAME);
             }
         }
 
@@ -176,19 +176,6 @@ namespace DemoAndTestLoggingShared
 
         private void btnAddListener(object sender, RoutedEventArgs e)
         {
-            Log.INFO("Enter", LOG_APPNAME, 0);
-
-            // TODO(crhodes)
-            // Need a more robust way to identify the listener to remove.  This is just for demo purposes.
-            // "General" is the default category for logging.  What happens if not in app.config?
-
-            //LogSource logSource = Logger.Writer.TraceSources["DemoAndTestLogging"];
-
-            //if (logSource != null)
-            //{
-            //    var listeners = logSource.Listeners;
-            //    List<TraceListener> listeners1 = (List<TraceListener>)logSource.Listeners;
-
             try
             {
                 // NOTE(crhodes)
@@ -246,7 +233,12 @@ namespace DemoAndTestLoggingShared
                     LogSource logSource1 = Logger.Writer.TraceSources[categorySource.Name];
                     List<TraceListener> listeners2 = (List<TraceListener>)logSource1.Listeners;
 
-                    listeners2.Add(listenerToAdd);
+                    var existingListener = listeners2.Where(l => l.Name == listenerToAdd.Name).FirstOrDefault();
+
+                    if (!listeners2.Any(l => l.Name == listenerToAdd.Name))
+                    {
+                        listeners2.Add(listenerToAdd);
+                    }
                 }
 
                 //listeners1.Add(listenerToAdd);
@@ -263,8 +255,6 @@ namespace DemoAndTestLoggingShared
 
         private void btnRemoveListener(object sender, RoutedEventArgs e)
         {
-            Log.INFO("Enter", LOG_APPNAME, 0);
-
             // TODO(crhodes)
             // Need a more robust way to identify the listener to remove.  This is just for demo purposes.
             // "General" is the default category for logging.  What happens if not in app.config?
@@ -286,7 +276,7 @@ namespace DemoAndTestLoggingShared
             //                    else if (listener.Name == "SignalRCoreListener")
             //                    {
             //                        Log.INFO($"Found {listener.Name}", LOG_APPNAME);
-            //                        listernerToRemove = listener;
+            //                        listenerToRemove = listener;
             //                        // NOTE(crhodes)
             //                        // Can't remove listener from collection while enumerating it.
             //                        // Need to save it and remove after enumeration.
@@ -309,47 +299,40 @@ namespace DemoAndTestLoggingShared
             //                }
             //            }
 
+            string listenerToRemove;
+#if NET481
+            listenerToRemove = "SignalRListener";
+#else
+            listenerToRemove = "SignalRCoreListener";
+#endif
             IConfigurationSource config = ConfigurationSourceFactory.Create();
 
             foreach (TraceSourceData categorySource in GetAllCategorySources(config))
             {
                 foreach (TraceListenerReferenceData listener in categorySource.TraceListeners)
                 {
-                    //TraceListenerReferenceData listenerToRemove = null;
-
-                    if (listener.Name == "Rolling FlatFile TraceListener")
+                    if (listener.Name == listenerToRemove)
                     {
-                        Log.INFO($"Found {listener.Name}", LOG_APPNAME);
-                    }
-#if NET481
-                    else if (listener.Name == "SignalRListener")
-#else
-                    else if (listener.Name == "SignalRCoreListener")
-#endif
-                    {
-                        Log.INFO($"Found {listener.Name}", LOG_APPNAME);
+                        Log.INFO($"Found {listener.Name} to remove", LOG_APPNAME);
 
-                        //listenerToRemove = listener;
-                        // NOTE(crhodes)
-                        // Can't remove listener from collection while enumerating it.
-                        // Need to save it and remove after enumeration.
-                        //listeners1.Remove(listener);
-                        // NOTE(crhodes)
-                        // Can't do this.  Read Only
-                        //categorySource.TraceListeners.Remove(listener.Name);
                         RemoveListener(categorySource.Name, listener.Name);
                     }
                     else
                     {
-                        Log.INFO($"Unexpected listener {listener.Name}", LOG_APPNAME);
+                        Log.INFO($"Found {listener.Name}", LOG_APPNAME);
                     }
                 }
-
-                //this didn't stop logging'
-                //listener.Close();
-                //Log.INFO($"{listener.Name} is closed", LOG_APPNAME);
-                //Console.WriteLine($"Listener Name: {listener.Name}, Type: {listener.GetType().FullName}");
             }
+
+            // TODO(crhodes)
+            // Need a RemoveAllEventsTraceSourceListener,
+            // RemoveNotProcessedTraceSourceListener,
+            // RemoveErrorsTraceSourceListener
+            // Have not figured out how to do this yet.
+
+            //RemoveSpecialSourcesAllEventsListener(listenerToRemove);
+            //RemoveSpecialSourcesNotProcessedListener(listenerToRemove);
+            //RemoveSpecialSourcesErrorsListener(listenerToRemove);
 
             Log.INFO("Exit", LOG_APPNAME, 0);
         }
@@ -372,23 +355,23 @@ namespace DemoAndTestLoggingShared
 
         #region Private Methods
 
-        private static void DisplayListeners(IEnumerable<TraceListener> listeners)
-        {
-            foreach (TraceListener listener in listeners)
-            {
-                Log.INFO($"Found {listener.Name}", LOG_APPNAME);
-                foreach (var attribute in listener.Attributes)
-                {
-                    Log.INFO($"Attribute {attribute}", LOG_APPNAME);
-                }
-            }
-        }
+        //private static void DisplayListeners(IEnumerable<TraceListener> listeners)
+        //{
+        //    foreach (TraceListener listener in listeners)
+        //    {
+        //        Log.INFO($"Found {listener.Name}", LOG_APPNAME);
+        //        foreach (var attribute in listener.Attributes)
+        //        {
+        //            Log.INFO($"Attribute {attribute}", LOG_APPNAME);
+        //        }
+        //    }
+        //}
 
         private static void DisplayListeners(NamedElementCollection<TraceListenerReferenceData> listeners)
         {
             foreach (TraceListenerReferenceData listener in listeners)
             {
-                Log.INFO($"Found {listener.Name}", LOG_APPNAME);
+                Log.INFO($"   - listener:{listener.Name}", LOG_APPNAME);
             }
         }
 
@@ -396,12 +379,17 @@ namespace DemoAndTestLoggingShared
 
         private void RemoveListener(string traceSourceName, string listenerName)
         {
+            Log.INFO($"traceSourceName:>{traceSourceName}< listenerName:>{listenerName}<", LOG_APPNAME);
+
             LogSource logSource = Logger.Writer.TraceSources[traceSourceName];
+            LogSource logSource2 = Log.LogWriter.TraceSources[traceSourceName];
 
             if (logSource != null)
             {
                 var listeners = logSource.Listeners;
                 List<TraceListener> listeners1 = (List<TraceListener>)logSource.Listeners;
+
+                Log.INFO($"Found:{listeners.Count()} listeners", LOG_APPNAME);
 
                 TraceListener listenerToRemove = null;
 
@@ -419,7 +407,50 @@ namespace DemoAndTestLoggingShared
                     listeners1.Remove(listenerToRemove);
                 }
             }
-        } 
+        }
+
+        private void RemoveSpecialSourcesAllEventsListener(string listenerName)
+        {
+            Log.INFO($"listenerName:>{listenerName}<", LOG_APPNAME);
+
+            // Load the configuration source
+            IConfigurationSource config = ConfigurationSourceFactory.Create();
+
+            var traceSource = GetAllSpecialSources(config).AllEventsTraceSource;
+
+            NamedElementCollection<TraceListenerReferenceData> listeners = traceSource.TraceListeners;
+
+            // NOTE(crhodes)
+            // This does not work .  The collection is read only.  Need to find another way to remove the listener.
+            //listeners.Remove(listenerName);
+        }
+
+
+        private void RemoveSpecialSourcesNotProcessedListener(string listenerName)
+        {
+            Log.INFO($"listenerName:>{listenerName}<", LOG_APPNAME);
+
+            // Load the configuration source
+            IConfigurationSource config = ConfigurationSourceFactory.Create();
+
+            var traceSource = GetAllSpecialSources(config).NotProcessedTraceSource;
+
+            NamedElementCollection<TraceListenerReferenceData> listeners = traceSource.TraceListeners;
+            listeners.Remove(listenerName);
+        }
+
+        private void RemoveSpecialSourcesErrorsListener(string listenerName)
+        {
+            Log.INFO($"listenerName:>{listenerName}<", LOG_APPNAME);
+
+            // Load the configuration source
+            IConfigurationSource config = ConfigurationSourceFactory.Create();
+
+            var traceSource = GetAllSpecialSources(config).ErrorsTraceSource;
+
+            NamedElementCollection<TraceListenerReferenceData> listeners = traceSource.TraceListeners;
+            listeners.Remove(listenerName);
+        }
 
         private TraceListenerDataCollection GetAllListeners(IConfigurationSource config)
         {
@@ -473,7 +504,9 @@ namespace DemoAndTestLoggingShared
             return allFormatters2;
         }
 
-       private void Learn1()
+        #region Learn Methods
+
+        private void Learn1()
         {
             Log.INFO("Good Everything", LOG_APPNAME, 0);
             //this throws exception -  not set exception.
@@ -579,7 +612,13 @@ namespace DemoAndTestLoggingShared
         private void Learn4()
         {
             LoggingConfiguration config = new LoggingConfiguration();
+            
+            var lw = Log.LogWriter;
+
             var foo = 1;
+
         }
+
+        #endregion
     }
 }

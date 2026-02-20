@@ -14,14 +14,14 @@
     <Choose>
         <When Condition="'$(DefineConstants.Contains(VNCPROJECTREF))' And '$(TargetFramework)'=='net481'">
             <ItemGroup>
-                <ProjectReference Include="..\VNC.Logging\VNC.Logging.csproj" />
-                <ProjectReference Include="..\VNC.Logging.TraceListeners\SignalRListener\VNC.Logging.TraceListeners.SignalRListener.csproj" />
+                <ProjectReference Include="..\..\VNC.Logging\VNC.Logging.csproj" />
+                <ProjectReference Include="..\..\VNC.Logging.TraceListeners\SignalRListener\VNC.Logging.TraceListeners.SignalRListener.csproj" />
             </ItemGroup>
         </When>
         <When Condition="'$(DefineConstants.Contains(VNCPROJECTREF))' And '$(TargetFramework)'=='net8.0-windows'">
             <ItemGroup>
-                <ProjectReference Include="..\VNC.Logging\VNC.Logging.csproj" />
-                <ProjectReference Include="..\VNC.Logging.TraceListeners\SignalRCoreListener\VNC.Logging.TraceListeners.SignalRCoreListener.csproj" />
+                <ProjectReference Include="..\..\VNC.Logging\VNC.Logging.csproj" />
+                <ProjectReference Include="..\..\VNC.Logging.TraceListeners\SignalRCoreListener\VNC.Logging.TraceListeners.SignalRCoreListener.csproj" />
             </ItemGroup>
         </When>
         

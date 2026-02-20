@@ -8,7 +8,7 @@ using System.Windows;
 
 using VNC;
 
-namespace DemoLoggingSimple
+namespace DemoAndTestLoggingNFSimple
 {
     /// <summary>
     /// Interaction logic for App.xaml

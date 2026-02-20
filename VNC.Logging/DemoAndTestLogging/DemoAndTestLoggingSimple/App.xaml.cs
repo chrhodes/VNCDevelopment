@@ -2,7 +2,7 @@
 
 using VNC.Core;
 
-namespace DemoLoggingSimple
+namespace DemoAndTestLoggingSimple
 {
     /// <summary>
     /// Interaction logic for App.xaml

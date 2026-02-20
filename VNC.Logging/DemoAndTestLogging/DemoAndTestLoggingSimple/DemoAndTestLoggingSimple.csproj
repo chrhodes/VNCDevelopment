@@ -15,8 +15,8 @@
     <Choose>
         <When Condition="'$(DefineConstants.Contains(VNCPROJECTREF))'">
             <ItemGroup>
-                <ProjectReference Include="..\..\VNC.Core\VNC.Core.csproj" />
-                <ProjectReference Include="..\VNC.Logging.TraceListeners\SignalRCoreListener\VNC.Logging.TraceListeners.SignalRCoreListener.csproj" />
+                <ProjectReference Include="..\..\..\VNC.Core\VNC.Core.csproj" />
+                <ProjectReference Include="..\..\VNC.Logging.TraceListeners\SignalRCoreListener\VNC.Logging.TraceListeners.SignalRCoreListener.csproj" />
             </ItemGroup>  
         </When>
         <When Condition="'!$(DefineConstants.Contains(VNCPROJECTREF))'">
@@ -32,7 +32,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\DemoAndTestLoggingShared\DemoAndTestLoggingShared.csproj" />
+        <ProjectReference Include="..\DemoAndTestLoggingSharedUI\DemoAndTestLoggingSharedUI.csproj" />
     </ItemGroup>    
 
 </Project>
