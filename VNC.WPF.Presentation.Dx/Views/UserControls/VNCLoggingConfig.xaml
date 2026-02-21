@@ -195,7 +195,7 @@
 
                 </dxlc:LayoutGroup>
 
-                <dxlc:LayoutGroup Orientation="Vertical" HorizontalAlignment="Left">
+                <dxlc:LayoutGroup Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Stretch">
 
                     <dxlc:LayoutGroup Orientation="Horizontal" VerticalAlignment="Stretch">
 

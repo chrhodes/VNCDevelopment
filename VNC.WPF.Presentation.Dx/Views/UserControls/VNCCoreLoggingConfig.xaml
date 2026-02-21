@@ -164,7 +164,7 @@
                         EditValueChanged="ceArch01C_EditValueChanged" />
 
                     <!--EventHandler-->
-                    <dxlc:LayoutGroup View="Group" Orientation="Vertical" >
+                    <dxlc:LayoutGroup View="Group" Orientation="Vertical" VerticalAlignment="Top" >
 
                         <dxe:CheckEdit x:Name="ceArch02C"
                             Style="{StaticResource uiLoggingFilterCheckEdit}"
@@ -203,7 +203,7 @@
 
                 </dxlc:LayoutGroup>
 
-                <dxlc:LayoutGroup Orientation="Vertical" VerticalAlignment="Stretch">
+                <dxlc:LayoutGroup Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Stretch">
 
                     <dxlc:LayoutGroup Orientation="Horizontal" HorizontalAlignment="Stretch" >
 
