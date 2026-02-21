@@ -15,7 +15,6 @@
         <Nullable>enable</Nullable>
         <ImplicitUsings>disable</ImplicitUsings>
         <SatelliteResourceLanguages>en-US</SatelliteResourceLanguages>
-        <Configurations>Debug;Release;Debug481;Release481</Configurations>
     </PropertyGroup>
 
     <!-- This is for NuGet Packages -->
@@ -88,7 +87,7 @@
         </When>
         <When Condition="'!$(DefineConstants.Contains(VNCPROJECTREF))'">
             <ItemGroup>
-                <PackageReference Include="VNC.Core" Version="3.2.0" />
+                <PackageReference Include="VNC.Core" Version="3.3.0" />
             </ItemGroup>
         </When>
     </Choose>-->
@@ -97,25 +96,13 @@
     <!--Only run for one TargetFramework.  No need to run twice. Update TargetFramework as needed.-->
 
     <Target Name="MyBeforeBuild" BeforeTargets="BeforeBuild" Condition="'$(TargetFramework)'=='net8.0-windows'">
-        <!--<Message Text="*** Target BeforeBuild *** ProjectDir $(ProjectDir) ProjectFileName $(ProjectFileName)" Importance="high" />
-        <Message Text="*** Target BeforeBuild *** TargetFramework $(TargetFramework) TargetName $(TargetName) TargetPath $(TargetPath) Target $(Target)" Importance="high" />
-        <Message Text="*** Target BeforeBuild *** MSBuildThisFile $(MSBuildThisFile) MSBuildThisFileFullPath $(MSBuildThisFileFullPath) MSBuildProjectDirectory $(MSBuildProjectDirectory)" Importance="high" />
-        <Message Text="*** Target BeforeBuild *** MSBuildProjectDirectory $(MSBuildProjectDirectory)" Importance="high" />
-        <Message Text="*** Target BeforeBuild *** Package $(Package) PackageName $(PackageName) PackageVersion $(PackageVersion)" Importance="high" />
-        <Message Text="*** Target BeforeBuild *** AssemblyName $(AssemblyName) OutDir $(OutDir)" Importance="high" />-->
         <Exec Command="powershell.exe -File B:\bin\PowerShell\Update-MSBuildFileVersion.ps1 $(MSBuildThisFileFullPath)" />
     </Target>
 
     <!--This deploys a new NuGet package-->
 
     <Target Name="MyPack" AfterTargets="Pack" Condition="'$(Configuration)'=='Release'">
-        <!--<Message Text="*** Target Pack *** ProjectDir $(ProjectDir) ProjectFileName $(ProjectFileName)" Importance="high" />
-        <Message Text="*** Target Pack *** TargetFramework $(TargetFramework) TargetName $(TargetName) TargetPath $(TargetPath) Target $(Target)" Importance="high" />
-        <Message Text="*** Target Pack *** MSBuildThisFile $(MSBuildThisFile) MSBuildThisFileFullPath $(MSBuildThisFileFullPath) MSBuildProjectDirectory $(MSBuildProjectDirectory)" Importance="high" />
-        <Message Text="*** Target Pack *** MSBuildProjectDirectory $(MSBuildProjectDirectory)" Importance="high" />
-        <Message Text="*** Target Pack *** Package $(Package) PackageName $(PackageName) PackageVersion $(PackageVersion)" Importance="high" />
-        <Message Text="*** Target Pack *** AssemblyName $(AssemblyName) OutDir $(OutDir)" Importance="high" />-->
-        <Exec Command="powershell.exe -File B:\bin\PowerShell\Update-VNCNuGetPackage.ps1 $(MSBuildProjectDirectory) $(AssemblyName) $(PackageVersion) -v" />
+        <Exec Command="powershell.exe -File B:\bin\PowerShell\Update-VNCNuGetPackage.ps1 $(MSBuildProjectDirectory) $(AssemblyName) $(PackageVersion)" />
     </Target>
 
 </Project>
