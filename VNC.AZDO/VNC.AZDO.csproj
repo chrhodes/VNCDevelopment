@@ -8,7 +8,7 @@
         <VersionPrefix>3.3.0</VersionPrefix>
         <VersionSuffix>Release</VersionSuffix>
         <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
-        <FileVersion>2026.02.23</FileVersion>
+        <FileVersion>2026.02.26</FileVersion>
         <Description>AZDO Helpers</Description>
         <LangVersion>12.0</LangVersion>
         <Nullable>enable</Nullable>
