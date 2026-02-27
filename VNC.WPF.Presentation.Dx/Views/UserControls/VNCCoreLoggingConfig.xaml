@@ -155,13 +155,22 @@
                     Background="#FF707070">
 
                     <!--Event-->
-                    <dxe:CheckEdit x:Name="ceArch01C"
-                        Style="{StaticResource uiLoggingFilterCheckEdit}"
-                        Content="{Binding LoggingUIConfig.Arch01.Label}"
-                        Foreground="{Binding LoggingUIConfig.Arch01.LabelColor, Converter={StaticResource ColorToBrushConverter}}"
-                        ToolTip="{Binding LoggingUIConfig.Arch01.ToolTip}" 
-                        IsChecked="False"                                   
-                        EditValueChanged="ceArch01C_EditValueChanged" />
+                    <dxlc:LayoutGroup View="Group" Orientation="Vertical" VerticalAlignment="Top" >
+                        <dxe:CheckEdit x:Name="ceArch01C"
+                            Style="{StaticResource uiLoggingFilterCheckEdit}"
+                            Content="{Binding LoggingUIConfig.Arch01.Label}"
+                            Foreground="{Binding LoggingUIConfig.Arch01.LabelColor, Converter={StaticResource ColorToBrushConverter}}"
+                            ToolTip="{Binding LoggingUIConfig.Arch01.ToolTip}" 
+                            IsChecked="False"                                   
+                            EditValueChanged="ceArch01C_EditValueChanged" />
+                        <dxe:CheckEdit x:Name="ceArch101C"
+                            Style="{StaticResource uiLoggingFilterCheckEdit}"
+                            Content="{Binding LoggingUIConfig.Arch101.Label}"
+                            Foreground="{Binding LoggingUIConfig.Arch101.LabelColor, Converter={StaticResource ColorToBrushConverter}}"
+                            ToolTip="{Binding LoggingUIConfig.Arch101.ToolTip}" 
+                            IsChecked="False"                                   
+                            EditValueChanged="ceArch101C_EditValueChanged" />
+                    </dxlc:LayoutGroup>
 
                     <!--EventHandler-->
                     <dxlc:LayoutGroup View="Group" Orientation="Vertical" VerticalAlignment="Top" >

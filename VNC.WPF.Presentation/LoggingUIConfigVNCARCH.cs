@@ -15,7 +15,9 @@ namespace VNC.WPF.Presentation
             Info00 = new LoggingLevel { Label = "Info00", ToolTip = "Info00 / APPLICATION_START / APPLICATION_END / 100" };
 
             Arch00 = new LoggingLevel { Label = "CONSTRUCTOR", LabelColor = Color.Plum, Color = Color.Plum, ToolTip = "CONSTRUCTOR / Arch00 / 9000" };
+
             Arch01 = new LoggingLevel { Label = "EVENT", LabelColor = Color.FromArgb(255, 255, 0), Color = Color.FromArgb(255, 255, 0), ToolTip = "EVENT / Arch01 / 9001" };
+            Arch101 = new LoggingLevel { Label = "EVENT_LOW", LabelColor = Color.FromArgb(255, 255, 0), Color = Color.FromArgb(255, 255, 0), ToolTip = "EVENT_LOW / Arch101 / 9101" };
 
             Arch02 = new LoggingLevel { Label = "EVENT_HANDLER", LabelColor = Color.Red, Color = Color.Red, ToolTip = "EVENT_HANDLER / Arch02 / 9002" };
             Arch102 = new LoggingLevel { Label = "EVENT_HANDLER_LOW", LabelColor = Color.Red, Color = Color.Red, ToolTip = "EVENT_HANDLER_LOW / Arch102 / 9102" };

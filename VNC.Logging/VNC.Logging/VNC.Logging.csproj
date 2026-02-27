@@ -96,8 +96,6 @@
         <!-- <DefineConstants>$(DefineConstants);VNCPROJECTREF</DefineConstants> -->
     </PropertyGroup>
 
-    <PropertyGroup Condition="'$(Configuration)'=='Debug481'" />
-
     <Choose>
         <When Condition="'$(DefineConstants.Contains(VNCPROJECTREF))'">
             <ItemGroup>

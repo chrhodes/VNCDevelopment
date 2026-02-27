@@ -196,7 +196,7 @@ namespace VNC.Logging
 
         private static void RemoveListener(string traceSourceName, string listenerName)
         {
-            //Log.INFO($"traceSourceName:>{traceSourceName}< listenerName:>{listenerName}<", LOG_APPNAME);
+            //Log.INFO($"traceSourceName:>{traceSourceName}< listenerName:>{listenerName}<", LOG_CATEGORY);
 
             LogSource logSource = Logger.Writer.TraceSources[traceSourceName];
             //LogSource logSource2 = Log.LogWriter.TraceSources[traceSourceName];
@@ -206,7 +206,7 @@ namespace VNC.Logging
                 var listeners = logSource.Listeners;
                 List<TraceListener> listeners1 = (List<TraceListener>)logSource.Listeners;
 
-                //Log.INFO($"Found:{listeners.Count()} listeners", LOG_APPNAME);
+                //Log.INFO($"Found:{listeners.Count()} listeners", LOG_CATEGORY);
 
                 TraceListener listenerToRemove = null;
 
@@ -220,7 +220,7 @@ namespace VNC.Logging
 
                 if (listenerToRemove != null)
                 {
-                    //Log.INFO($"Removing {listenerName} from {traceSourceName}", LOG_APPNAME);
+                    //Log.INFO($"Removing {listenerName} from {traceSourceName}", LOG_CATEGORY);
                     listeners1.Remove(listenerToRemove);
                 }
             }

@@ -3925,6 +3925,121 @@ namespace VNC
 
         #endregion
 
+		#region EVENT_LOW
+
+        // This is a light weight call
+        // MethodInfo is not used, so we use "<unknown>" for class, method, and callingAssembly names.
+
+        [DebuggerStepThrough]
+        public static long EVENT_LOWLight(string message, string applicationCategory)
+        {
+            InternalWrite(message, TraceEventType.Verbose, applicationCategory, LoggingPriority.EVENT_LOW,
+                          "<unknown>", "<unknown>", "<unknown>", false);
+
+            return Stopwatch.GetTimestamp();
+        }
+
+        [DebuggerStepThrough]
+        public static long EVENT_LOW(string message, string applicationCategory)
+        {
+            MethodBase method = new StackFrame(1).GetMethod();
+
+            InternalWrite(message, TraceEventType.Verbose, applicationCategory, LoggingPriority.EVENT_LOW,
+                          method.ReflectedType.Name, method.Name, Assembly.GetCallingAssembly().GetName().Name, false);
+
+            return Stopwatch.GetTimestamp();
+        }
+
+        [DebuggerStepThrough]
+        public static long EVENT_LOW(string message, string applicationCategory, 
+                                             int EventId)
+        {
+            MethodBase method = new StackFrame(1).GetMethod();
+
+            InternalWrite(message, TraceEventType.Verbose, applicationCategory, LoggingPriority.EVENT_LOW,
+                          method.ReflectedType.Name, method.Name, Assembly.GetCallingAssembly().GetName().Name, false,
+                          EventId);
+
+            return Stopwatch.GetTimestamp();
+        }
+
+        [DebuggerStepThrough]
+        public static long EVENT_LOW(string message, string applicationCategory, 
+                                             Dictionary<string, string> props)
+        {
+            MethodBase method = new StackFrame(1).GetMethod();
+
+            InternalWrite(message, TraceEventType.Verbose, applicationCategory, LoggingPriority.EVENT_LOW,
+                          method.ReflectedType.Name, method.Name, Assembly.GetCallingAssembly().GetName().Name, false, 
+                          props);
+            return Stopwatch.GetTimestamp();
+        }
+
+        [DebuggerStepThrough]
+        public static long EVENT_LOW(string message, string applicationCategory, 
+                                             int EventId, Dictionary<string, string> props)
+        {
+            MethodBase method = new StackFrame(1).GetMethod();
+
+            InternalWrite(message, TraceEventType.Verbose, applicationCategory, LoggingPriority.EVENT_LOW,
+                method.ReflectedType.Name, method.Name, Assembly.GetCallingAssembly().GetName().Name, false, 
+                EventId, props);
+            return Stopwatch.GetTimestamp();
+        }
+
+        [DebuggerStepThrough]
+        public static long EVENT_LOW(string message, string applicationCategory, 
+                                             long startTicks, MethodBase method = null)
+        {
+            if (method == null) method = new StackFrame(1).GetMethod();
+
+            InternalWrite(message, TraceEventType.Verbose, applicationCategory, LoggingPriority.EVENT_LOW,
+                          method.ReflectedType.Name, method.Name, Assembly.GetCallingAssembly().GetName().Name, false, 
+                          startTicks);
+
+            return Stopwatch.GetTimestamp();
+        }
+
+        [DebuggerStepThrough]
+        public static long EVENT_LOW(string message, string applicationCategory, 
+                                             int EventId, long startTicks)
+        {
+            MethodBase method = new StackFrame(1).GetMethod();
+
+            InternalWrite(message, TraceEventType.Verbose, applicationCategory, LoggingPriority.EVENT_LOW,
+                          method.ReflectedType.Name, method.Name, Assembly.GetCallingAssembly().GetName().Name, false, 
+                          EventId, startTicks);
+
+            return Stopwatch.GetTimestamp();
+        }
+
+        [DebuggerStepThrough]
+        public static long EVENT_LOW(string message, string applicationCategory, 
+                                             Dictionary<string, string> props, long startTicks)
+        {
+            MethodBase method = new StackFrame(1).GetMethod();
+
+            InternalWrite(message, TraceEventType.Verbose, applicationCategory, LoggingPriority.EVENT_LOW,
+                          method.ReflectedType.Name, method.Name, Assembly.GetCallingAssembly().GetName().Name, false, 
+                          props, startTicks);
+
+            return Stopwatch.GetTimestamp();
+        }
+
+        [DebuggerStepThrough]
+        public static long EVENT_LOW(string message, string applicationCategory, int EventId, Dictionary<string, string> props, long startTicks)
+        {
+            MethodBase method = new StackFrame(1).GetMethod();
+
+            InternalWrite(message, TraceEventType.Verbose, applicationCategory, LoggingPriority.EVENT_LOW,
+                          method.ReflectedType.Name, method.Name, Assembly.GetCallingAssembly().GetName().Name, false, 
+                          EventId, props, startTicks);
+
+            return Stopwatch.GetTimestamp();
+        }
+
+        #endregion
+
 		#region EVENT_HANDLER
 
         // This is a light weight call

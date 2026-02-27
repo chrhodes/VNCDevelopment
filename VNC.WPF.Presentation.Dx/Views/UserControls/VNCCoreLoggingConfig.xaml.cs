@@ -179,7 +179,7 @@ namespace VNC.WPF.Presentation.Dx.Views
 
         private void ceArch101C_EditValueChanged(object sender, DevExpress.Xpf.Editors.EditValueChangedEventArgs e)
         {
-            Common.VNCCoreLogging.Arch101 = (Boolean)e.NewValue;
+            Common.VNCCoreLogging.EventLow = (Boolean)e.NewValue;
         }
 
         private void ceArch102C_EditValueChanged(object sender, DevExpress.Xpf.Editors.EditValueChangedEventArgs e)
@@ -317,7 +317,7 @@ namespace VNC.WPF.Presentation.Dx.Views
             ceArch18C.IsChecked = Common.VNCCoreLogging.ViewModel;
 
             //ceArch100C.IsChecked = Common.VNCCoreLogging.Arch100;
-            //ceArch101C.IsChecked = Common.VNCCoreLogging.Arch101;
+            ceArch101C.IsChecked = Common.VNCCoreLogging.EventLow;
             ceArch102C.IsChecked = Common.VNCCoreLogging.EventHandlerLow;
             ceArch103C.IsChecked = Common.VNCCoreLogging.ApplicationInitializeLow;
             //ceArch104C.IsChecked = Common.VNCCoreLogging.Arch104;

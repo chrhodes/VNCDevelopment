@@ -9,7 +9,7 @@
         <VersionPrefix>1.0.0</VersionPrefix>
         <VersionSuffix>development</VersionSuffix>
         <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
-        <FileVersion>2026.02.23</FileVersion>
+        <FileVersion>2026.02.26</FileVersion>
         <Description>describe assembly</Description>
         <LangVersion>12.0</LangVersion>
         <Nullable>enable</Nullable>
@@ -108,6 +108,12 @@
   <ItemGroup>
     <!-- Workaround for https://github.com/dotnet/wpf/issues/2648#issuecomment-635674683 -->
     <Reference Include="System.Web" />
+  </ItemGroup>
+    
+  <ItemGroup>
+    <Compile Update="Presentation\Views\ViewB.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
 
     <ItemGroup>

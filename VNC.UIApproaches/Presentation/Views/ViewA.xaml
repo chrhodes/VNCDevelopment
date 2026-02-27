@@ -1,0 +1,13 @@
+﻿<UserControl x:Class="VNC.UIApproaches.Presentation.Views.ViewA"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:prism="http://prismlibrary.com/"
+    Background="LightGray">
+    <StackPanel >
+        <TextBlock Text="ViewA" FontSize="32" 
+                   HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <TextBlock Text="Has ContentControl prism:RegionManager.RegionName=&quot;ChildRegion&quot; below" FontSize="16" 
+                   HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <ContentControl prism:RegionManager.RegionName="ChildRegion" Margin="15" />
+    </StackPanel>
+</UserControl>

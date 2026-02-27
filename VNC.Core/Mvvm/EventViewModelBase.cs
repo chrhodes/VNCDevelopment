@@ -31,6 +31,8 @@ namespace VNC.Core.Mvvm
 
         #region Fields & Properties (none)
 
+
+
         #endregion
 
         #region Event Handlers
@@ -94,30 +96,26 @@ namespace VNC.Core.Mvvm
 
         public virtual void PublishDeveloperMode(Boolean developerMode)
         {
-
             Int64 startTicks = 0;
-            if (Common.VNCCoreLogging.Event) startTicks = Log.EVENT("Enter", Common.LOG_CATEGORY);
+            if (Common.VNCCoreLogging.EventLow) startTicks = Log.EVENT_LOW("Enter", Common.LOG_CATEGORY);
 
             var evt = EventAggregator.GetEvent<DeveloperModeEvent>();
             evt.Publish(developerMode);
             //EventAggregator.GetEvent<DeveloperModeEvent>().Publish(developerMode);
 
-            if (Common.VNCCoreLogging.Event) Log.EVENT("Exit", Common.LOG_CATEGORY, startTicks);
-
+            if (Common.VNCCoreLogging.EventLow) Log.EVENT_LOW("Exit", Common.LOG_CATEGORY, startTicks);
         }
 
         public virtual void PublishStatusMessage(string message)
         {
-
             Int64 startTicks = 0;
-            if (Common.VNCCoreLogging.Event) startTicks = Log.EVENT("Enter", Common.LOG_CATEGORY);
+            if (Common.VNCCoreLogging.EventLow) startTicks = Log.EVENT_LOW("Enter", Common.LOG_CATEGORY);
 
             var evt = EventAggregator.GetEvent<StatusMessageEvent>();
             evt.Publish(message);
             //EventAggregator.GetEvent<StatusMessageEvent>().Publish(message);
 
-            if (Common.VNCCoreLogging.Event) Log.EVENT("Exit", Common.LOG_CATEGORY, startTicks);
-
+            if (Common.VNCCoreLogging.EventLow) Log.EVENT_LOW("Exit", Common.LOG_CATEGORY, startTicks);
         }
 
         #endregion
