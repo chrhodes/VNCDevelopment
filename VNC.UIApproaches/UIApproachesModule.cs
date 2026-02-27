@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 
 using Prism.Events;
 using Prism.Ioc;
@@ -25,8 +26,11 @@ namespace VNC.UIApproaches
             Int64 startTicks = 0;
             if (Common.VNCLogging.Constructor) startTicks = Log.CONSTRUCTOR("Enter", Common.LOG_CATEGORY);
 
-            _regionManager = regionManager;
             Common.EventAggregator = eventAggregator;
+            _regionManager = regionManager;
+
+            var regions = _regionManager.Regions;
+            var rc = regions.Count();
 
             if (Common.VNCLogging.Constructor) Log.CONSTRUCTOR("Exit", Common.LOG_CATEGORY, startTicks);
         }
@@ -38,82 +42,9 @@ namespace VNC.UIApproaches
             Int64 startTicks = 0;
             if (Common.VNCLogging.ModuleInitialize) startTicks = Log.MODULE_INITIALIZE("Enter", Common.LOG_CATEGORY);
 
-            // TODO(crhodes)
-            // Maybe the Ribbon, Main, StatusBar should be moved back to App.xaml.cs
-            // and the App Specific stuff left here
-
-            // TODO(crhodes)
-            // This is where you pick the style of what gets loaded in the Shell.
-
-            // Simple Ribbon
-
-            //containerRegistry.RegisterSingleton<IRibbonViewModel, RibbonSimpleViewModel>();
-            //containerRegistry.RegisterSingleton<IRibbon, RibbonSimple>();
-
-            // Full Ribbon
-
-            //containerRegistry.RegisterSingleton<IRibbonViewModel, RibbonViewModel>();
-            //containerRegistry.RegisterSingleton<IRibbon, Ribbon>();
-
-            // Pick one of these for the MainRegion
-
-            // TODO(crhodes)
-            // Learn how to dynamically switch this while application running
-
-            //containerRegistry.Register<IMain, Main>();
-            //containerRegistry.Register<IMain, MainDxLayoutControl>();
-            //containerRegistry.Register<IMain, MainDxDockLayoutManager>();
-
-            // NOTE(crhodes)
-            // Note sure why the above works as have not registered a ViewModel.
-            // Why does MainDxLayoutControl(MainDxLayoutControlViewModel viewModel) get called.
-            //
-            // Oh, I see.
-            // MainDxLayoutControl(MainDxLayoutControlViewModel viewModel)
-            // Does not need DI as the ViewModel is a TYPE
-
-            //containerRegistry.RegisterSingleton<IStatusBarViewModel, StatusBarViewModel>();
-            //containerRegistry.RegisterSingleton<StatusBar, StatusBar>();
-
-#if VNCEF
-            // NOTE(crhodes)
-            // Registering CombinedNavigation as SingleTon solves the two copies problem
-
-            containerRegistry.RegisterSingleton<ICombinedMainViewModel, CombinedMainViewModel>();
-            containerRegistry.RegisterSingleton<ICombinedMain, CombinedMain>();
-
-            containerRegistry.RegisterSingleton<ICombinedNavigationViewModel, CombinedNavigationViewModel>();
-            containerRegistry.RegisterSingleton<ICombinedNavigation, CombinedNavigation>();
-
-            // NOTE(crhodes)
-            // Seems like these belong in Module
-
-            containerRegistry.Register<IDetailViewModel, DetailViewModel>();
-            containerRegistry.RegisterSingleton<IDetail, Detail>();
-
-            containerRegistry.RegisterSingleton<IDataService, DataService>();
-            containerRegistry.RegisterSingleton<ILookupDataService, LookupDataService>();
-#endif
-
-            // // NOTE(crhodes)
-            // // Can register a type
-
-            // containerRegistry.Register<ViewA>();
-            // containerRegistry.Register<ViewB>();
-            // containerRegistry.Register<ViewC>();
-            // containerRegistry.Register<ViewD>();
-
-            // // NOTE(crhodes)
-            // // Can register a type against an Interface.
-            // // See OnInitialized, infra
-
-            // containerRegistry.Register<IViewABCD, ViewABCD>();
-
-            // // NOTE(crhodes)
-            // // If do not register as Singleton, get a ViewABCDViewModel for each View above
-            // containerRegistry.RegisterSingleton<IViewABCDViewModel, ViewABCDViewModel>();
-            // //containerRegistry.Register<IViewABCDViewModel, ViewABCDViewModel>();
-
+            var regions = _regionManager.Regions;
+            var rc = regions.Count();
+            
             containerRegistry.Register<IUILaunchApproachesViewModel, UILaunchApproachesViewModel>();
             containerRegistry.Register<UILaunchApproaches>();
 
@@ -247,15 +178,7 @@ namespace VNC.UIApproaches
             containerRegistry.RegisterForNavigation<StepB, StepABCDEViewModel>("uistepb");
             containerRegistry.RegisterForNavigation<StepC, StepABCDEViewModel>("uistepc");
             containerRegistry.RegisterForNavigation<StepD, StepABCDEViewModel>("uistepd");
-            containerRegistry.RegisterForNavigation<StepE, StepABCDEViewModel>("uistepe");
-
-            //containerRegistry.RegisterForNavigation<DetailMVA, DetailMVViewModel>("uicatdetaila");
-            //containerRegistry.RegisterForNavigation<DetailMVB, DetailMVViewModel>("uicatdetailb");
-            //containerRegistry.RegisterForNavigation<DetailMVC, DetailMVViewModel>("uicatdetailc");
-            //containerRegistry.RegisterForNavigation<DetailMVD, DetailMVViewModel>("uicatdetaild");
-            //containerRegistry.RegisterForNavigation<DetailMVE, DetailMVViewModel>("uicatdetaile");
-
-            //containerRegistry.RegisterSingleton<ICatDetailMV, CatDetailMVA>();            
+            containerRegistry.RegisterForNavigation<StepE, StepABCDEViewModel>("uistepe");       
 
             if (Common.VNCLogging.ModuleInitialize) Log.MODULE_INITIALIZE("Exit", Common.LOG_CATEGORY, startTicks);
         }
@@ -267,51 +190,14 @@ namespace VNC.UIApproaches
             Int64 startTicks = 0;
             if (Common.VNCLogging.ModuleInitialize) startTicks = Log.MODULE_INITIALIZE("Enter", Common.LOG_CATEGORY);
 
+            var regions = _regionManager.Regions;
+            var rc = regions.Count();
+
             // NOTE(crhodes)
             // using typeof(TYPE) calls constructor
             // using typeof(ITYPE) resolves type (see RegisterTypes)
-            // but only wires viewmodel if IViewModel is used
+            // but only wires ViewModel if IViewModel is used
 
-            // HACK(crhodes)
-            // Save the current RegionManager so we can use it in other places that do not get passed it
-
-            //Common.DefaultRegionManager = _regionManager;
-            //var rc = _regionManager.Regions.Count();
-
-            // NOTE(crhodes)
-            // RegisterViewWithRegion is ViewDiscovery
-            // Options are ViewInjection or Navigation
-
-            //_regionManager.RegisterViewWithRegion(RegionNames.RibbonRegion, typeof(IRibbon));
-            //_regionManager.RegisterViewWithRegion(RegionNames.MainRegion, typeof(IMain));
-            //_regionManager.RegisterViewWithRegion(RegionNames.StatusBarRegion, typeof(StatusBar));
-
-            //_regionManager.RegisterViewWithRegion(RegionNames.VNCLoggingConfigRegion, typeof(VNC.WPF.Presentation.Dx.Views.VNCLoggingConfig));
-            //_regionManager.RegisterViewWithRegion(RegionNames.VNCCoreLoggingConfigRegion, typeof(VNC.WPF.Presentation.Dx.Views.VNCCoreLoggingConfig));
-
-#if VNCEF
-            // This loads CombinedMain into the IMain configured
-            // in RegisterTypes (MainDxLayout or MainDxDocLayoutManager), supra
-
-            _regionManager.RegisterViewWithRegion(RegionNames.CombinedMainRegion, typeof(ICombinedMain));
-
-            _regionManager.RegisterViewWithRegion(RegionNames.CombinedNavigationRegion, typeof(ICombinedNavigation));
-
-#endif
-            // // This is for Main
-
-            // _regionManager.RegisterViewWithRegion(RegionNames.ContentRegion, typeof(ViewA));
-
-            // // Can register a type
-
-            // _regionManager.RegisterViewWithRegion(RegionNames.ViewARegion, typeof(ViewA));
-            // _regionManager.RegisterViewWithRegion(RegionNames.ViewBRegion, typeof(ViewB));
-            // _regionManager.RegisterViewWithRegion(RegionNames.ViewCRegion, typeof(ViewC));
-            // _regionManager.RegisterViewWithRegion(RegionNames.ViewDRegion, typeof(ViewD));
-
-            // // Can register an interface.  See registerTypes Infra
-
-            // _regionManager.RegisterViewWithRegion(RegionNames.ViewABCDRegion, typeof(IViewABCD));
 
             _regionManager.RegisterViewWithRegion(RegionNames.UILaunchApproaches, typeof(UILaunchApproaches));
 
@@ -319,8 +205,6 @@ namespace VNC.UIApproaches
             _regionManager.RegisterViewWithRegion(RegionNames.ViewDiscovery, typeof(ViewDiscovery));
             _regionManager.RegisterViewWithRegion(RegionNames.RegionNavigation, typeof(RegionNavigation));
             _regionManager.RegisterViewWithRegion(RegionNames.MultiStepProcess, typeof(MultiStepProcess));
-
-            //_regionManager.RegisterViewWithRegion(RegionNames.MultiStepProcessViewMV, typeof(CatDetailMVA));
 
             //var ok = _regionManager.Regions.ContainsRegionWithName(RegionNames.MultiStepProcessViewMV);
 
