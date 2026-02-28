@@ -45,7 +45,7 @@ namespace VNC.WPF.Presentation.Dx.Views
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
-                Log.ERROR(ex, "ERRORS");
+                Log.ERROR(ex, Common.LOG_ERROR);
             }
             if (Common.VNCCoreLogging.Constructor) Log.CONSTRUCTOR("Exit", Common.LOG_CATEGORY, startTicks);
         }
@@ -66,7 +66,7 @@ namespace VNC.WPF.Presentation.Dx.Views
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
-                Log.ERROR(ex, "ERRORS");
+                Log.ERROR(ex, Common.LOG_ERROR);
             }
             if (Common.VNCCoreLogging.Constructor) Log.CONSTRUCTOR("Exit", Common.LOG_CATEGORY, startTicks);
         }
@@ -94,7 +94,7 @@ namespace VNC.WPF.Presentation.Dx.Views
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
-                Log.ERROR(ex, "ERRORS");
+                Log.ERROR(ex, Common.LOG_ERROR);
             }
 
             if (Common.VNCCoreLogging.Constructor) Log.CONSTRUCTOR("Exit", Common.LOG_CATEGORY, startTicks);
@@ -122,7 +122,7 @@ namespace VNC.WPF.Presentation.Dx.Views
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
-                Log.ERROR(ex, "ERRORS");
+                Log.ERROR(ex, Common.LOG_ERROR);
             }
 
             if (Common.VNCCoreLogging.Constructor) Log.CONSTRUCTOR("Exit", Common.LOG_CATEGORY, startTicks);

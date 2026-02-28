@@ -19,8 +19,9 @@ namespace VNC.Core
         public static Information InformationApplicationCore { get; set; } = new Information();
         public static Information InformationVNCCore { get; set; } = new Information();
 
-        public const string APPNAME = "VNCCore";
+        //public const string APPNAME = "VNCCore";
         public const string LOG_CATEGORY = "VNCCore";
+        public const string LOG_ERROR = "ERROR";
 
         public static VNCLoggingConfig VNCLogging = new VNCLoggingConfig();
         public static VNCLoggingConfig VNCCoreLogging = new VNCLoggingConfig();

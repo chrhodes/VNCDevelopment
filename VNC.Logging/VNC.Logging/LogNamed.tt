@@ -85,6 +85,7 @@ namespace VNC
             //"CONSTRUCTOR", // Special handling for CONSTRUCTOR - Infra
 
             "EVENT",
+            "EVENT_LOW",
             "EVENT_HANDLER",
             "EVENT_HANDLER_LOW",
             "APPLICATION_INITIALIZE",

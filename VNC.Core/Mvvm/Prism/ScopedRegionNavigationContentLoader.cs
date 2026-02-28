@@ -16,7 +16,7 @@ namespace VNC.Core.Mvvm.Prism
     /// </summary>
     public class ScopedRegionNavigationContentLoader : IRegionNavigationContentLoader
     {
-        private readonly IServiceLocator serviceLocator;
+        private readonly IServiceLocator _serviceLocator;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RegionNavigationContentLoader"/> class with a service locator.
@@ -24,7 +24,10 @@ namespace VNC.Core.Mvvm.Prism
         /// <param name="serviceLocator">The service locator.</param>
         public ScopedRegionNavigationContentLoader(IServiceLocator serviceLocator)
         {
-            this.serviceLocator = serviceLocator;
+            Int64 startTicks = 0;
+            if (Common.VNCCoreLogging.Constructor) startTicks = Log.CONSTRUCTOR("Enter", Common.LOG_CATEGORY);
+
+            this._serviceLocator = serviceLocator;
         }
 
         /// <summary>
@@ -42,10 +45,17 @@ namespace VNC.Core.Mvvm.Prism
         /// <exception cref="ArgumentException">when a new view cannot be created for the navigation request.</exception>
         public object LoadContent(IRegion region, NavigationContext navigationContext)
         {
+            Int64 startTicks = 0;
+            if (Common.VNCLogging.Presentation) startTicks = Log.PRESENTATION($"Enter " +
+                $"region >{region.Name}< navigationContext >{navigationContext.Uri}<", Common.LOG_CATEGORY);
+
             if (region == null) throw new ArgumentNullException("region");
             if (navigationContext == null) throw new ArgumentNullException("navigationContext");
 
             string candidateTargetContract = this.GetContractFromNavigationContext(navigationContext);
+
+            if (Common.VNCLogging.Presentation) startTicks = Log.PRESENTATION($"" +
+                $"region >{region}< candidateTargetContract >{candidateTargetContract}<", Common.LOG_CATEGORY);
 
             var candidates = this.GetCandidatesFromRegion(region, candidateTargetContract);
 
@@ -72,25 +82,30 @@ namespace VNC.Core.Mvvm.Prism
 
             var view = acceptingCandidates.FirstOrDefault();
 
-            if (view != null)
+            if (view == null)
             {
-                return view;
+                view = this.CreateNewRegionItem(candidateTargetContract);
+
+                region.Add(view, null, CreateRegionManagerScope(view));
             }
 
-            view = this.CreateNewRegionItem(candidateTargetContract);
-
-            region.Add(view, null, CreateRegionManagerScope(view));
+            if (Common.VNCLogging.Presentation) startTicks = Log.PRESENTATION($"Exit view >{view.GetType()}<", Common.LOG_CATEGORY);
 
             return view;
         }
 
         private Boolean CreateRegionManagerScope(object view)
         {
+            Int64 startTicks = 0;
+            if (Common.VNCLogging.Presentation) startTicks = Log.PRESENTATION("$Enter view >{view.GetType()}<", Common.LOG_CATEGORY);
+
             Boolean createRegionManagerScope = false;
 
             var viewHasScopedRegions = view as ICreateRegionManagerScope;
             if (viewHasScopedRegions != null)
                 createRegionManagerScope = viewHasScopedRegions.CreateRegionManagerScope;
+
+            if (Common.VNCLogging.Presentation) Log.PRESENTATION($"Exit createRegionManagerScope >{createRegionManagerScope}<", Common.LOG_CATEGORY);
 
             return createRegionManagerScope;
         }
@@ -102,10 +117,14 @@ namespace VNC.Core.Mvvm.Prism
         /// <returns>An instance of an item to put into the <see cref="IRegion"/>.</returns>
         protected virtual object CreateNewRegionItem(string candidateTargetContract)
         {
+            Int64 startTicks = 0;
+            if (Common.VNCLogging.Presentation) startTicks = Log.PRESENTATION($"Enter candidateTargetContract >{candidateTargetContract}<", Common.LOG_CATEGORY);
+
             object newRegionItem;
+
             try
             {
-                newRegionItem = this.serviceLocator.GetInstance<object>(candidateTargetContract);
+                newRegionItem = this._serviceLocator.GetInstance<object>(candidateTargetContract);
             }
             catch (ActivationException e)
             {
@@ -113,6 +132,9 @@ namespace VNC.Core.Mvvm.Prism
                     string.Format(CultureInfo.CurrentCulture, "Cannot create navigation target", candidateTargetContract),
                     e);
             }
+
+            if (Common.VNCLogging.Presentation) startTicks = Log.PRESENTATION($"Exit newRegionItem >{newRegionItem.GetType()}<", Common.LOG_CATEGORY);
+
             return newRegionItem;
         }
 
@@ -123,10 +145,17 @@ namespace VNC.Core.Mvvm.Prism
         /// <returns>The candidate contract to seek within the <see cref="IRegion"/> and to use, if not found, when resolving from the container.</returns>
         protected virtual string GetContractFromNavigationContext(NavigationContext navigationContext)
         {
+            Int64 startTicks = 0;
+            if (Common.VNCLogging.Presentation) startTicks = Log.PRESENTATION(
+                $"Enter navigationContext.Uri >{navigationContext.Uri}<", Common.LOG_CATEGORY);
+
             if (navigationContext == null) throw new ArgumentNullException("navigationContext");
 
             var candidateTargetContract = UriParsingHelper.GetAbsolutePath(navigationContext.Uri);
             candidateTargetContract = candidateTargetContract.TrimStart('/');
+
+            if (Common.VNCLogging.Presentation) Log.PRESENTATION($"Exit candidateTargetContract >{candidateTargetContract}<", Common.LOG_CATEGORY);
+
             return candidateTargetContract;
         }
 
@@ -138,10 +167,28 @@ namespace VNC.Core.Mvvm.Prism
         /// <returns>An enumerable of candidate objects from the <see cref="IRegion"/></returns>
         protected virtual IEnumerable<object> GetCandidatesFromRegion(IRegion region, string candidateNavigationContract)
         {
-            if (region == null) throw new ArgumentNullException("region");
-            return region.Views.Where(v =>
+            Int64 startTicks = 0;
+            if (Common.VNCLogging.Presentation) startTicks = Log.PRESENTATION(
+                $"Enter region " +
+                $">{region.Name}< candidateNavigationContract >{candidateNavigationContract.GetType()}<", Common.LOG_CATEGORY);
+
+            if (region is null)
+            {
+                throw new ArgumentNullException(nameof(region));
+            }
+
+            if (string.IsNullOrEmpty(candidateNavigationContract))
+            {
+                throw new ArgumentNullException(nameof(candidateNavigationContract));
+            }
+
+            var candidates = region.Views.Where(v =>
                 string.Equals(v.GetType().Name, candidateNavigationContract, StringComparison.Ordinal) ||
                 string.Equals(v.GetType().FullName, candidateNavigationContract, StringComparison.Ordinal));
+
+            if (Common.VNCLogging.Presentation) Log.PRESENTATION($"Exit candidates >{candidates.Count()}<", Common.LOG_CATEGORY);
+
+            return candidates;
         }
     }
 }

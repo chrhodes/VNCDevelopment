@@ -14,34 +14,37 @@ namespace VNC.Core.Mvvm.Prism
 
         protected override void OnAttach()
         {
-
             Int64 startTicks = 0;
-            if (Common.VNCCoreLogging.Presentation) startTicks = Log.PRESENTATION($"Enter", Common.LOG_CATEGORY);
+            if (Common.VNCCoreLogging.Presentation) startTicks = Log.PRESENTATION($"Enter Region.Name >{Region.Name}< Region.ActiveViews >{Region.ActiveViews.Count()}<", Common.LOG_CATEGORY);
 
             // Attach to all regions.  But, can also pick and choose
 
+            //if (Region.ActiveViews.Count() > 0)
+            //{
+                foreach (var view in Region.ActiveViews)
+                {
+                    if (Common.VNCCoreLogging.Presentation) Log.PRESENTATION($"  view >{view}<",
+                        Common.LOG_CATEGORY);
+                }
 
-            if (Region.ActiveViews.Count() > 0)
-            if (Common.VNCCoreLogging.Presentation) Log.PRESENTATION($"Region.ActiveViews {Region.ActiveViews.Count()} {Region.ActiveViews.First()}", Common.LOG_CATEGORY);
+            //}
 
             Region.ActiveViews.CollectionChanged += ActiveViews_CollectionChanged;
-
 
             if (Common.VNCCoreLogging.Presentation) Log.PRESENTATION($"Exit", Common.LOG_CATEGORY, startTicks);
 
         }
 
-        void ActiveViews_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        void ActiveViews_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-
             Int64 startTicks = 0;
-            if (Common.VNCCoreLogging.Presentation) startTicks = Log.PRESENTATION($"Enter", Common.LOG_CATEGORY);
+            if (Common.VNCCoreLogging.Presentation) startTicks = Log.PRESENTATION($"Enter e.Action >{e.Action}<", Common.LOG_CATEGORY);
 
             if (e.Action == NotifyCollectionChangedAction.Add)
             {
                 foreach (var item in e.NewItems)
                 {
-                    if (Common.VNCCoreLogging.Presentation) startTicks = Log.PRESENTATION($"{item.GetType()}", Common.LOG_CATEGORY);
+                    if (Common.VNCCoreLogging.Presentation) startTicks = Log.PRESENTATION($"Add >{item.GetType()}<", Common.LOG_CATEGORY);
 
                     IRegionManager regionManager = Region.RegionManager;
 
@@ -65,23 +68,19 @@ namespace VNC.Core.Mvvm.Prism
             {
                 foreach (var item in e.OldItems)
                 {
-                    if (Common.VNCCoreLogging.Presentation) startTicks = Log.PRESENTATION($"{item.GetType()}", Common.LOG_CATEGORY);
+                    if (Common.VNCCoreLogging.Presentation) startTicks = Log.PRESENTATION($"Remove >{item.GetType()}<", Common.LOG_CATEGORY);
 
                     InvokeOnRegionManagerAwareElement(item, x => x.RegionManager = null);
                 }
             }
 
-
             if (Common.VNCCoreLogging.Presentation) Log.PRESENTATION($"Exit", Common.LOG_CATEGORY, startTicks);
-
         }
 
         static void InvokeOnRegionManagerAwareElement(object item, Action<IRegionManagerAware> invocation)
         {
-
             Int64 startTicks = 0;
             if (Common.VNCCoreLogging.Presentation) startTicks = Log.PRESENTATION($"Enter {item.GetType()}", Common.LOG_CATEGORY);
-
 
             // Want to support View and/or ViewModel first approaches
 
@@ -139,7 +138,6 @@ namespace VNC.Core.Mvvm.Prism
             }
 
             if (Common.VNCCoreLogging.Presentation) Log.PRESENTATION($"Exit", Common.LOG_CATEGORY, startTicks);
-
         }
     }
 }

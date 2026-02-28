@@ -36,6 +36,7 @@ namespace VNC.Core
         public Boolean Constructor { get; set; }
         public Boolean Core { get; set; }
         public Boolean Event { get; set; }
+        public Boolean EventLow { get; set; }
         public Boolean EventHandler { get; set; }
         public Boolean EventHandlerLow { get; set; }
         public Boolean Infrastructure { get; set; }
@@ -61,7 +62,7 @@ namespace VNC.Core
         public Boolean Arch19 { get; set; }
 
         public Boolean Arch100 { get; set; }
-        public Boolean Arch101 { get; set; }
+        //public Boolean Arch101 { get; set; }
         public Boolean Arch104 { get; set; }
         public Boolean Arch105 { get; set; }
         public Boolean Arch106 { get; set; }

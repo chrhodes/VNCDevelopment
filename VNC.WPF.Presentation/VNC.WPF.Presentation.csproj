@@ -9,7 +9,7 @@
         <VersionPrefix>3.3.0</VersionPrefix>
         <VersionSuffix>Release</VersionSuffix>
         <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
-        <FileVersion>2026.02.20</FileVersion>
+        <FileVersion>2026.02.26</FileVersion>
         <Description>WPF Helpers</Description>
         <LangVersion>12.0</LangVersion>
         <Nullable>enable</Nullable>
@@ -98,7 +98,7 @@
     <!--This deploys a new NuGet package-->
 
     <Target Name="MyPack" AfterTargets="Pack" Condition="'$(Configuration)'=='Release'">
-        <Exec Command="powershell.exe -File B:\bin\PowerShell\Update-VNCNuGetPackage.ps1 $(MSBuildProjectDirectory) $(AssemblyName) $(PackageVersion)" />
+        <Exec Command="powershell.exe -File B:\bin\PowerShell\Update-VNCNuGetPackage.ps1 $(MSBuildProjectDirectory) $(AssemblyName) $(PackageVersion) -v" />
     </Target>
 
 </Project>

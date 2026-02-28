@@ -16,6 +16,9 @@ namespace VNC.Core.Mvvm.Prism
 
         public ShellService(IUnityContainer container, IRegionManager regionManager)
         {
+            Int64 startTicks = 0;
+            if (Common.VNCCoreLogging.Constructor) startTicks = Log.CONSTRUCTOR("Enter", Common.LOG_CATEGORY);
+
             _regionManager = regionManager;
             _container = container;
         }

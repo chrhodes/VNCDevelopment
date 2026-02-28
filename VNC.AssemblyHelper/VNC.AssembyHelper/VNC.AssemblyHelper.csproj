@@ -97,15 +97,16 @@
     </Choose>-->    
 
     <!--This updates the file version to the current date.-->
-
-    <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-        <Exec Command="powershell.exe -File &quot;$(ProjectDir)\Execute-PreBuild.ps1&quot; $(ProjectFileName)" />
+    <!--Only run for one TargetFramework.  No need to run twice. Update TargetFramework as needed.-->
+    
+    <Target Name="MyBeforeBuild" BeforeTargets="BeforeBuild" Condition="'$(TargetFramework)'=='net8.0-windows'">
+        <Exec Command="powershell.exe -File B:\bin\PowerShell\Update-MSBuildFileVersion.ps1 $(MSBuildThisFileFullPath)" />
     </Target>
     
-    <!--This updates any existing VNC NuGet package.-->
-
-    <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(Configuration)'=='Release'">
-        <Exec Command="powershell.exe -File &quot;$(ProjectDir)\Execute-PostBuild.ps1&quot;  $(ProjectFileName) $(TargetName) $(PackageVersion)" />
-    </Target>  
+    <!--This deploys a new NuGet package-->
+    
+    <Target Name="MyPack" AfterTargets="Pack" Condition="'$(Configuration)'=='Release'">
+        <Exec Command="powershell.exe -File B:\bin\PowerShell\Update-VNCNuGetPackage.ps1 $(MSBuildProjectDirectory) $(AssemblyName) $(PackageVersion) -v" />
+    </Target>
     
 </Project>
